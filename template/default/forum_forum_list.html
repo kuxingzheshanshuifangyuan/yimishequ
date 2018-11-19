@@ -1,0 +1,554 @@
+{extend name="index_base" /}
+{block name="seo"}
+	<title>{$sort_title}</title>
+	<!--<meta name="keywords" content="2222222222222222222222">-->
+	<meta name="description" content="$sort_title">
+{/block}
+{block name="css"}
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/communication_region.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+{/block}
+{block name="body"}
+<body>
+	<div class="userInfoBottom">
+		<p class="crumbs"> 
+			<a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> > 
+			<a href="#">口子交流</a> > <a href="#">口子推荐</a> > <a href="#">啊啊啊</a>
+		</p>
+		<div class="userInfoBottomLeft indexItem">
+			<div class="userInfoBottomLeftTop">
+
+				<!-- <div class="subject-title-con">
+					<span class="subject-title">{$sort_title}</span>
+					<span>今日发帖：{$today_count}</span>
+					<span>|</span>
+					<span>累计发帖：{$cate_count}</span>
+				</div> -->
+
+
+				<div class="subject-con">
+					<span>全部主题：</span>
+					<div>
+						<a href="javascript:(void)"><span>主题一主题一主题一主题一</span> </a>
+						<a href="javascript:(void)"><span>主题一主题一主题一主题一</span> </a>
+						<a href="javascript:(void)"><span>主题一主题一主题一主题一</span> </a>
+						<a href="javascript:(void)"><span>主题一主题一主题一主题一</span> </a>
+						<a href="javascript:(void)"><span>主题一主题一主题一主题一</span> </a>
+						<a href="javascript:(void)"><span>主题一主题一主题一主题一</span> </a>
+						<a href="javascript:(void)"><span>主题一主题一主题一主题一</span> </a>
+						<a href="javascript:(void)"><span>主题一主题一主题一主题一</span> </a>
+					</div>
+				</div>
+			</div>
+			<div class="userInfoBottomLeftMid">
+
+				<div class="post-filter">
+					<span>推荐</span>
+					<span>最新</span>
+				</div>
+				<!-- <form class="layui-form" style="float: left;">
+					<div class="layui-inline">
+					  <label class="layui-form-label lable">筛选：</label>
+					  <div class="layui-input-inline">
+						<select name="topic" lay-filter="setTopic">
+						  <option value="">全部主题</option>
+							{foreach $topic as $v}
+							<option value="{$v.id}">{$v.title_ch}</option>
+							{/foreach}
+						</select>
+					  </div>
+					</div>
+					<div class="layui-inline" style="margin-top: -15px;">
+					  <div class="layui-input-inline">
+						<select name="time_range" lay-filter="setTimeRange">
+						  <option value="">全部时间</option>
+							<option value="1" {if condition="$Think.get.time_range eq 1"}selected{/if}>一天</option>
+							<option value="2" {if condition="$Think.get.time_range eq 2"}selected{/if}>两天</option>
+							<option value="3" {if condition="$Think.get.time_range eq 3"}selected{/if}>一周</option>
+							<option value="4" {if condition="$Think.get.time_range eq 4"}selected{/if}>一月</option>
+							<option value="5" {if condition="$Think.get.time_range eq 5"}selected{/if}>三月</option>
+						</select>
+					  </div>
+					</div>
+					<div class="layui-inline">
+					  <label class="layui-form-label lable">排序：</label>
+					  <div class="layui-input-inline">
+						<select name="time_order" lay-filter="setTimeOrder">
+						  <option value="">发布时间</option>
+							<option value="reply" {if condition="$Think.get.time_order eq 'reply' "}selected{/if}>回复</option>
+							<option value="visit" {if condition="$Think.get.time_order eq 'visit' "}selected{/if}>查看</option>
+						</select>
+					  </div>
+					</div>
+				</form> -->
+
+				<div class="tabs3">
+					<span {empty name="$Think.get.type"} class="tab3_selected" {/empty}>全部</span> /
+					<span {if condition="$Think.get.type eq 'hot' "} class="tab3_selected" {/if}>热门</span> /
+					<span  {if condition="$Think.get.type eq 'choice' "} class="tab3_selected" {/if}>精华</span>
+				</div>
+			</div>
+
+
+			
+			<div class="state-container">
+				{foreach $data_list as $v}
+				<div class="state clearfix">
+					{if condition="$v.pic"}
+					<a href="{:url('detail',['id'=>$v['id']])}"  class="noteNotewrap" target="_blank">
+						<div>
+							<img class="noteNote" src="{$v.pic}">
+						</div>
+					</a>
+					{/if}
+					<div class="stateRight">
+						<div class="stateItem2 clearfix">
+							<p id="" >
+								{if condition="$v.settop eq 1"}<span class="stick">【置顶】</span>{/if}
+								<a href="{:url('detail',['id'=>$v['id']])}" target="_blank"><span class="contentName">{$v.title}</span>
+								{if condition="$v.hot"}<img src="__PUBLIC__forum/img/userInfo/hot.png"/>{/if}
+								{if condition="$v.praise"}<img src="__PUBLIC__forum/img/userInfo/zan.png"/>{/if}
+								{if condition="$v.new"}<img src="__PUBLIC__forum/img/userInfo/new.png"/>{/if}
+								{if condition="$v.pic"}<img src="__PUBLIC__forum/img/communication_region/pic.png"/>{/if}
+								</a>
+							</p>
+						</div>
+						<div class="stateItem3 clearfix">
+							<p>{$v.content}</p>
+						</div>
+
+						<div class="stateItem4 clearfix">
+							<span class="stateItem4Left"><img src="{$v.userhead}"/>{$v.username} <span class="separator">|</span> {$v.create_time|date="Y/m/d",###}</span>
+							<div class="stateItem4Right">
+								<span id="">
+									<img src="__PUBLIC__forum/img/userInfo/view.png"/>{$v.view}
+								</span>
+								<span id="">
+									<img src="__PUBLIC__forum/img/userInfo/reply.png"/>{$v.reply}
+								</span>
+								<span id="">
+									<img src="__PUBLIC__forum/img/userInfo/zan_.png"/>{$v.praise}
+								</span>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				{/foreach}
+
+
+
+				<div class="paginationCon_">
+						<span class="demo"></span>
+						<div class="m-style M-box2">{$page}</div>
+				</div>
+			</div>
+
+			
+
+
+		</div>
+
+
+		<div class="" style="float: left;width: 301px;margin-left: 14px;">
+			{if condition="$Think.session.userid eq ''"}
+			<div class="commit" onclick="goToLogin()">
+				<img src="__PUBLIC__forum/img/communication_region/发布新帖.png"/>
+				发布新帖
+			</div>
+			{else /}
+			<a href="{:url('add',['tid'=>request()->param('forumcate')])}">
+				<div class="commit">
+					<img src="__PUBLIC__forum/img/communication_region/发布新帖.png"/>
+					发布新帖
+				</div>
+			</a>
+			{/if}
+			<div class="userInfoBottomRight indexItem">
+
+				<div class="comTitle">
+					交流区推荐
+				</div>
+				<div class="followBot">
+					{notempty name="forum"}
+						{volist name="forum" id="forum_list"}
+							<ul>
+								<!--<div class="tabs">-->
+									<a href="{:url('Forum/forum_list',['forumcate'=>$forum_list['id']])}"><li class="commArea">{$forum_list['name']} <span>（{$forum_list['forum_num']}）</span></li></a>
+								<!--</div>-->
+							</ul>
+						{/volist}
+					{else /}
+						<ul>
+							<li>小编暂时没有推荐的交流区呦！</li>
+						</ul>
+					{/notempty}
+				</div>
+			</div>
+			<div class="officialNote indexItem">
+				<div class="comTitle">
+					官方通知
+				</div>
+				<div class="officialNoteCon">
+					{$notice.content}
+				</div>
+			</div>
+
+			<div class="recommend indexItem">
+				<div class="comTitle">
+					小编推荐
+				</div>
+				<div class="recommendCon-new">
+					<img src="__PUBLIC__forum/img/index/574x335.png" alt="小编推荐">
+					<p>热门帖子热门帖子热门帖子热门帖子
+							热门帖子热门帖子热门帖子热门帖热门帖子热门帖子热门帖子热门帖子
+							热门帖子热门帖子热门帖子热门帖...热门帖子热门帖子热门帖子热门帖子
+							热门帖子热门帖子热门帖子热门帖...
+					</p>
+				</div>
+			</div>
+			<div class="recommend indexItem">
+					<div class="comTitle">
+						今日热议
+					</div>
+					<div class="recommendCon-new">
+						<img src="__PUBLIC__forum/img/index/574x335.png" alt="小编推荐">
+						<p>热门帖子热门帖子热门帖子热门帖子
+								热门帖子热门帖子热门帖子热门帖热门帖子热门帖子热门帖子热门帖子
+								热门帖子热门帖子热门帖子热门帖...热门帖子热门帖子热门帖子热门帖子
+								热门帖子热门帖子热门帖子热门帖...
+						</p>
+					</div>
+					<div class="recommendCon-new">
+						<img src="__PUBLIC__forum/img/index/574x335.png" alt="小编推荐">
+						<p>热门帖子热门帖子热门帖子热门帖子
+								热门帖子热门帖子热门帖子热门帖热门帖子热门帖子热门帖子热门帖子
+								热门帖子热门帖子热门帖子热门帖...热门帖子热门帖子热门帖子热门帖子
+								热门帖子热门帖子热门帖子热门帖...
+						</p>
+					</div>
+					<div class="recommendCon-new">
+						<img src="__PUBLIC__forum/img/index/574x335.png" alt="小编推荐">
+						<p>热门帖子热门帖子热门帖子热门帖子
+								热门帖子热门帖子热门帖子热门帖热门帖子热门帖子热门帖子热门帖子
+								热门帖子热门帖子热门帖子热门帖...热门帖子热门帖子热门帖子热门帖子
+								热门帖子热门帖子热门帖子热门帖...
+						</p>
+					</div>
+				</div>
+
+			<div class="recommend indexItem">
+					<div class="comTitle">
+						小编推荐
+					</div>
+					<div class="recommendCon">
+						{notempty name="recommend"}
+							<ul>
+									{volist name="recommend" id="val"}
+									<li><a href="{:url('Forum/detail',['id'=>$val['id']])}" >{$val['title']}</a> </li>
+									{/volist}
+									{else /}
+									<li>小编暂时没有推荐的帖子呦！</li>
+							</ul>
+						{/notempty}
+					</div>
+				</div>
+		</div>
+
+	</div>
+
+	<!--密码登录-->
+	<div class="loginPage" style="display: none;">
+		<!--<form method="post" action="" class="layui-form">
+			<input type="text" name="account" class="username" value="" placeholder="请输入手机号码" style="background: url(__PUBLIC__forum/img/login/账号拷贝2.png) no-repeat 16px; width: 100%;"  autocomplete="off"/>
+			<input type="password" name="password" class="rpfdetapass pass" value="" placeholder="请输入密码" style="background: url(__PUBLIC__forum/img/login/密码拷贝.png) no-repeat 16px; width: 100%; margin-bottom: 10px;"  autocomplete="off"/>
+			<div class="loginTip clearfix">
+				<div class="layui-input-block" style="margin-left:5px; float: left;">
+				  <input type="checkbox" name="rememb" lay-skin="primary" title="记住密码" value="1">
+				</div>
+				<a href="javascript:void(0)" style="float: right;" onclick="codeLoginBtn()">验证码登录</a>
+			</div>
+			<div class="loginBtn" lay-submit="" lay-filter="login">
+				登录
+			</div>
+		</form>-->
+
+
+		<form method="post" action="" class="layui-form">
+			<div class="LoginUser clearfix">
+				<div class="InputImg">
+					<img src="__PUBLIC__forum/img/login/账号拷贝2.png"/>
+				</div>
+				<input type="text" class="username" name="account"
+					   placeholder="请输入手机号码" value="" autocomplete="off">
+			</div>
+			<!--<input type="text" name="account" class="username" value="" placeholder="会员账号 / 邮箱 / 手机号码" autocomplete="off"/>-->
+			<div class="LoginUser clearfix">
+				<div class="InputImg">
+					<img src="__PUBLIC__forum/img/login/密码拷贝.png"/>
+				</div>
+				<input type="password" class="rpfdetapass pass" name="password"
+				   placeholder="请输入密码" value=""  autocomplete="off">
+			</div>
+			<!--<input type="password" name="password" class="rpfdetapass pass" value="" placeholder="请输入密码" style="background: url() no-repeat 16px; width: 100%; margin-bottom: 10px;"  autocomplete="off"/>-->
+			<div class="loginTip clearfix">
+				<div class="layui-input-block" style="margin-left:5px; float: left;">
+				  <input type="checkbox" name="rememb" lay-skin="primary" title="记住密码" value="1">
+				</div>
+				<!--<a href="javascript:void(0)" style="float: right;" onclick="codeLoginBtn()">验证码登录</a>-->
+			</div>
+			<div class="loginBtn" lay-submit="" lay-filter="login">
+				登录
+			</div>
+		</form>
+<!--			暂时注释掉其他登录方式   改回来时，需要将弹出框高度改为427-->
+		<!--<div class="otherLogin">
+			<span>其他登录：</span>
+			<img src="__PUBLIC__forum/img/index/qq.png"/>
+			<img src="__PUBLIC__forum/img/index/wechat.png"/>
+		</div>-->
+	</div>
+
+	<!--验证码登录-->
+	<div class="codeLogin" style="display: none;">
+		<form action="" method="post" class="layui-form">
+			<div style="height: 103px;position: relative;">
+				<div class="LoginUser clearfix">
+					<div class="InputImg">
+						<img src="__PUBLIC__forum/img/login/账号拷贝2.png" />
+					</div>
+					<input type="text" class="cms-login-phone" name="account" placeholder="请输入手机号码" value="" autocomplete="off">
+				</div>
+				<!--<input type="text" name="username" class="emPhone username" value="" placeholder="会员账号 / 邮箱 / 手机号码" style="background: url() no-repeat 16px;"  autocomplete="off"/>-->
+				<div class="LoginUser clearfix">
+					<div class="InputImg">
+						<img src="__PUBLIC__forum/img/login/code.png" />
+					</div>
+					<input type="text" class="rpfcode cms-login-code" placeholder="请输入验证码" name="code" value="" autocomplete="off">
+					<input type="button" class="mainGetCode" onclick="sendMessage($('.cms-login-phone'),$('.cms-login-code'),this,60)"
+						   value="获取验证码"></input>
+				</div>
+			</div>
+			<div class="loginTip clearfix">
+				<!--<p id="" style="float: left;margin: 0 0 0 10px;">
+                    收不到验证码？<span>获取语音验证码</span>
+                </p>-->
+				<a href="javascript:void(0)" style="float: right;margin-right: 10px;" onclick="passLogin()">密码登录</a>
+			</div>
+			<div class="loginBtn" lay-submit="" lay-filter="sms_login">
+				登录
+			</div>
+		</form>
+
+
+		<!--暂时注释掉其他登录方式   改回来时，需要将弹出框高度改为427-->
+		<!--<div class="otherLogin">
+            <span>其他登录：</span>
+            <img src="__PUBLIC__forum/img/index/qq.png"/>
+            <img src="__PUBLIC__forum/img/index/wechat.png"/>
+        </div>-->
+	</div>
+	<!--忘记密码-->
+	<!--<div class="forgetPass" style="display: none;">
+
+		<form action="" method="post" class="layui-form" style="height: 210px;">
+			<input type="text" name="account" class="username forPhone_" placeholder="会员账号 / 邮箱 / 手机号码" value="" style="background: url(__PUBLIC__forum/img/login/账号拷贝2.png) no-repeat 16px;" />
+			<input type="text" name="code" class="forCode code" value="" placeholder="请输入验证码" style="background: url(__PUBLIC__forum/img/login/code.png) no-repeat 16px;" />
+			<input type="button" class="getCode" onclick="sendMessage($('.forPhone_'),$('.forCode'),this,10)" value="获取验证码"></input>
+			<input type="password" name="newPass" class="forPass" value="" placeholder="请输入新的密码" style="background: url(__PUBLIC__forum/img/login/密码拷贝.png) no-repeat 16px;" />
+			<!--<div class="getCode">获取验证码</div>
+		</form>
+		<div class="loginBtn forLoginBtn" lay-submit="" lay-filter="recoveredPass" >
+			登录
+		</div>
+		<div class="otherLogin">
+			<span>其他登录：</span>
+			<img src="__PUBLIC__forum/img/index/qq.png"/>
+			<img src="__PUBLIC__forum/img/index/wechat.png"/>
+		</div>
+	</div>-->
+</body>
+<script src="__PUBLIC__forum/js/jquery/1.9.1/jquery.min.js"></script>
+<script src="__PUBLIC__forum/layui/layui.all.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+
+
+<script type="text/javascript">
+//	layui.use(['element','form'], function(){
+//		var $ = layui.jquery
+//		,element = layui.element
+//		,form = layui.form;
+//	});
+
+	$(function(){
+
+	    var topic = "{$Request.param.topic??''}";
+	    var time_range = "{$Request.param.time_range??''}";
+	    var time_order = "{$Request.param.time_order??''}";
+	    var type = "{$Request.param.type??''}";
+	    var forumcate = "{$Request.param.forumcate??''}";
+	    var url = '';
+
+        layui.use(['element','form'], function(){
+            var $ = layui.jquery
+                ,element = layui.element
+                ,form = layui.form;
+
+            form.on('select(setTopic)', function (data) {
+                topic = data.value;
+                location_href();
+
+            });
+
+            form.on('select(setTimeRange)', function (data) {
+                time_range = data.value;
+                location_href();
+            });
+
+            form.on('select(setTimeOrder)', function (data) {
+                time_order = data.value;
+                location_href();
+            })
+
+            form.on('submit(sms_login)', function (data) {
+                // loading = layer.load(2, {
+                //     shade: [0.2,'#000']
+                // });
+                var param = data.field;
+                $.post('{:url("Login/sms_login")}', param, function (data) {
+                    if (data.error_code === 0) {
+
+                        layer.msg(data.msg, {
+                            icon: 1,
+                            time: 1500
+                        }, function () {
+                            location.reload();
+                        });
+                    } else {
+                        // layer.close(loading);
+                        layer.msg(data.msg, {
+                            icon: 2,
+                            anim: 6,
+                            time: 1000
+                        });
+                    }
+                });
+                return false;
+            });
+
+        });
+
+
+        var form = layui.form;
+        form.on('select(test)', function(data){
+            console.log(data);
+        });
+
+		function location_href(){
+            url = "{:url('forum_list')}" +'?forumcate='+forumcate;
+            if(topic){
+                url += '&topic=' + topic;
+			}
+			if(time_range){
+                url += '&time_range=' + time_range;
+			}
+			if(time_order){
+                url += '&time_order=' + time_order;
+			}
+			if(type){
+                url += '&type=' + type;
+			}
+			window.location.href = url;
+		}
+
+
+		$(".tabs3 span,.tabs span").click(function(){
+		    if(this.innerHTML == '热门'){
+                type = 'hot';
+			}
+			if(this.innerHTML == '精华'){
+                type = 'choice';
+			}
+			if(this.innerHTML == '全部'){
+                type = '';
+			}
+			$(this).addClass('tab3_selected');   
+			$(this).siblings().removeClass('tab3_selected');
+            location_href();
+		});
+
+		
+		$(".contentName").click(function(){
+//			window.parent.goPage(this,'communication_region/communicationContent.html',2750);
+		})
+	})
+	//	点击登录 默认密码登录
+	function goToLogin(){
+	    layer.open({
+	        type:1,
+	        content:$(".loginPage"),
+	        title:'登录',
+	        skin:'login',
+	        area: ['612px', '370px'],
+	        resize:false,
+	        cancel: function(index, layero){
+	            $(".loginPage").hide()
+	        }
+	    })
+	}
+	//	从密码登录页面验证码登录
+	function codeLoginBtn(){
+		layer.close(layer.index);
+		$(".loginPage").hide();
+
+		layer.open({
+			type:1,
+			skin:'login',
+			content:$(".codeLogin"),
+			title:'登录',
+			area: ['612px', '370px'],
+			resize:false,
+			cancel: function(index, layero){
+				$(".codeLogin").hide()
+			}
+		})
+	}
+	//	从验证码登录页面  点击密码登录
+	function passLogin(){
+		layer.close(layer.index);
+		$(".codeLogin").hide();
+		layer.open({
+			type:1,
+			skin:'login',
+			content:$(".loginPage"),
+			title:'登录',
+			area: ['612px', '370px'],
+			resize:false,
+			cancel: function(index, layero){
+				$(".loginPage").hide()
+			}
+		})
+	}
+	//	忘记密码
+	function forgetPsss(){
+		layer.close(layer.index);
+		$(".loginPage").hide();
+		layer.open({
+			type:1,
+			skin:'login',
+			content:$(".forgetPass"),
+			title:'重置密码',
+			area: ['612px', '460px'],
+			resize:false,
+			cancel: function(index, layero){
+				$(".forgetPass").hide()
+			}
+		})
+	}
+</script>
+
+{/block}

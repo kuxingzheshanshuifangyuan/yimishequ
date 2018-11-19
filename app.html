@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+    
+</body>
+    <script>
+        if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) { //判断iPhone|iPad|iPod|iOS
+
+    　　    window.location.href ="https://itunes.apple.com/cn/app/id1435566947?mt=18";
+
+        } else if (/(Android)/i.test(navigator.userAgent)) { //判断Android
+
+        　　window.location.href ="http://a.app.qq.com/o/simple.jsp?pkgname=com.yimiclub.www";
+        } else { //pc
+        　　window.location.href ="/webapp";
+        }
+
+    </script>
+</html>

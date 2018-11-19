@@ -1,0 +1,1190 @@
+{extend name="index_base" /}
+{block name="seo"}
+<title>{$site_config['site_title']}|{$site_config['seo_title']}</title>
+<meta name="keywords" content="{$site_config['seo_keyword']}">
+<meta name="description" content="{$site_config['seo_description']}">
+<link rel="stylesheet" href="__PUBLIC__forum/css/jigsaw.css">
+<link rel="stylesheet" type="text/css" href="../../public/forum/css/index.css" />
+{/block}
+{block name="body"}
+
+<body>
+    <div class="contentWrap clearfix">
+        <div class="content_1">
+            <div class="content_1_left indexItem">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        {volist name="banner" id="banner_list"}
+                        <div class="swiper-slide">
+                            <a href="{$banner_list['url']}" target="_blank"><img src="__ROOT__/{$banner_list['img']}"
+                                    alt="轮播图" /></a>
+                        </div>
+                        {/volist}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
+            <div class="content_1_mid ">
+                {volist name="ad" id="ad_list"}
+                <div class="content_1_mid_item indexItem">
+                    <a href="{$ad_list['link']}" target="_blank">
+                        <img src="__ROOT__/{$ad_list['img']}" />
+                        <span id="">{$ad_list['dec']}</span>
+                    </a>
+                </div>
+                {/volist}
+
+            </div>
+            <!--最新-->
+            <div class="content_2_new indexItem">
+                <div class="title">
+                    <img src="__PUBLIC__forum/img/index/new.png" />
+                    <span>最新</span>
+                    <!--<a href="{:url('Forum/forum_list')}">更多 ></a>-->
+                </div>
+
+                <ul class="indexUl">
+                    {foreach $newest as $v}
+                    <li class="clearfix"><a href="{:url('Forum/detail',['id'=>$v['id']])}" target="_blank">{$v.title}</a>
+                        <span class="time-dot">{$v.create_time|date='Y/m/d',###}</span></li>
+                    {/foreach}
+                </ul>
+            </div>
+            <!--最热-->
+            <div class="content_2_hot indexItem">
+                <div class="title">
+                    <img src="__PUBLIC__forum/img/index/hot.png" />
+                    <span>最热</span>
+                    <!--<a href="{:url('Forum/forum_list')}"> 更多 ></a>-->
+                </div>
+
+                <ul class="indexUl">
+                    {foreach $hot as $v}
+                    <li class="clearfix"><a href="{:url('Forum/detail',['id'=>$v['id']])}" target="_blank">{$v.title}</a>
+                        <span>{$v.create_time|date='Y/m/d',###}</span></li>
+                    {/foreach}
+                </ul>
+
+            </div>
+            <!--快捷方式-->
+            <div class="shortcut indexItem">
+                {volist name="app" id="app_list"}
+                <div class="shortcutItem">
+                    <a href="{$app_list['url']}" target="_blank">
+                        <img src="__ROOT__/{$app_list['img']}" />
+                        <p><a href="JavaScript:void(0)">{$app_list['dec']}</a></p>
+                    </a>
+                </div>
+                {/volist}
+            </div>
+
+            <!--精品推荐-->
+            <div class="content_2_new indexItem ">
+                <div class="title">
+                    <img src="__PUBLIC__forum/img/index/dio.png" />
+                    <span>精品推荐</span>
+                    <a href="{:url('Forum/forum_list',['forumcate'=>16])}" target="_blank">更多 ></a>
+                </div>
+                <ul class="indexUl">
+                    {foreach $recommend as $v}
+                    <li><a href="{:url('Forum/detail',['id'=>$v['id']])}" target="_blank">{$v.title}</a>
+                        <span>{$v.create_time|date='Y/m/d',###}</span></li>
+                    {/foreach}
+                </ul>
+            </div>
+            <!--热点资讯-->
+            <div class="content_2_hot indexItem ">
+                <div class="title">
+                    <img src="__PUBLIC__forum/img/index/hotInfo.png" />
+                    <span>热点资讯</span>
+                    <a href="{:url('Forum/forum_list',['forumcate'=>17])}" target="_blank">更多 ></a>
+                </div>
+                <ul class="indexUl">
+                    {foreach $HotNews as $v}
+                    <li><a href="{:url('Forum/detail',['id'=>$v['id']])}" target="_blank">{$v.title}</a>
+                        <span>{$v.create_time|date='Y/m/d',###}</span></li>
+                    {/foreach}
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <!--教程-->
+            <div class="course indexItem ">
+
+                <div class="rpfcourse title">
+                    <img src="__PUBLIC__forum/img/index/course.png" />
+                    <span>下款教程</span>
+                    <a href="{:url('Forum/forum_list',['forumcate'=>19])}" target="_blank">更多 ></a>
+                </div>
+                {foreach $DownTutorial as $v}
+                <a href="{:url('index/forum/detail',['id'=>$v['id']])}" target="_blank">
+                    <div class="courseItem">
+                        <img src="{$v.pic}" alt="教程图片" />
+                        <p>{$v.title}</p>
+                    </div>
+                </a>
+                {/foreach}
+            </div>
+            <div class="clear"></div>
+            <!--银行卡-->
+            <!--<div class="backwrap clearfix">-->
+            <!--<div class="back">-->
+            <!--<img src="" alt="" />-->
+            <!--<p>鹏飞卡</p>-->
+            <!--</div>-->
+            <!--<div class="back">-->
+            <!--<img src="" alt="" />-->
+            <!--<p>鹏飞卡</p>-->
+            <!--</div>-->
+            <!--<div class="back">-->
+            <!--<img src="" alt="" />-->
+            <!--<p>鹏飞卡</p>-->
+            <!--</div>-->
+            <!--<div class="back">-->
+            <!--<img src="" alt="" />-->
+            <!--<p>鹏飞卡</p>-->
+            <!--</div>-->
+            <!--<div class="back">-->
+            <!--<img src="" alt="" />-->
+            <!--<p>鹏飞卡</p>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--链接-->
+            <div class="link indexItem ">
+                <div class="title rpfcourse">
+                    <img src="__PUBLIC__forum/img/index/link.png" />
+                    <span>友情链接</span>
+                </div>
+
+                <div class="link-container">
+                    {volist name="link" id="link_list"}
+                    <div class="linkItem">
+                        <a href="{$link_list['url']}" class="clearfix" target="_blank">
+                            <img src="__ROOT__/{$link_list['link_img']}" />
+                            <div class="linkItemzi">
+                                <p class="conName">{$link_list['link_ch']}</p>
+                                <p class="conEnName">{$link_list['link_en']}</p>
+                            </div>
+                        </a>
+                    </div>
+                    {/volist}
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!--<div class="content_2">
+
+
+    </div>-->
+
+        <div class="content_3">
+            <!-- 登录注册 -->
+            {if condition="$Think.session.userid eq ''"}
+            <div class="content_1_rig indexItem">
+                <ul class="tabTitle">
+                    <li class="tab-this">登录</li>
+                    <li>注册</li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <!--登录-->
+                    <div class="tab-item tab-show">
+                        <form method="post" id="login">
+                            <div class="LoginUser clearfix">
+                                <div class="InputImg">
+                                    <img src="__PUBLIC__forum/img/login/user.png" />
+                                </div>
+                                <input type="text" class="username" name="account" placeholder="请输入手机号码" value="{$Think.cookie.rememb['account']}"
+                                    autocomplete="off">
+                            </div>
+                            <div class="LoginUser clearfix">
+                                <div class="InputImg">
+                                    <img src="__PUBLIC__forum/img/login/pass.png" />
+                                </div>
+                                <input type="password" class="rpfpass" name="password" placeholder="请输入密码" value="{$Think.cookie.rememb['password']}"
+                                    autocomplete="off">
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" name="rememb" id="remPass" value="1" {if condition="$Think.cookie.rememb"
+                                    }checked {/if}> <label for="remPass">记住密码 </label>
+
+                                <label style="float: right;" onclick="forgetPass()">忘记密码？</label>
+                            </div>
+
+                            <button type="button" class="sub" id="submit_login">登录</button>
+                            <div class="form-group" style="margin: 14px 0;">
+                                <span id="">
+                                    还没账号？ <a style="color: #ff5d3e;" href="javascript:void(0)" onclick="goRegister()">立即注册</a>
+                                </span>
+                            </div>
+
+                            <!--暂时注释其他登录方式-->
+                            <!--<hr/>-->
+                            <!--<div class="form-group" style="margin: -5px 0;">
+                    <span id="">其他登录方式：</span>
+                    <img class="loginIcon" src="__PUBLIC__forum/img/index/qq.png"/>
+                    <a href="{:url('wechat')}" target="_blank"><img class="loginIcon" src="__PUBLIC__forum/img/index/wechat.png"/></a>
+                </div>-->
+                        </form>
+                    </div>
+                    <!--使用手机注册-->
+                    <div class="tab-item">
+                        <form method="post" class="layui-form" style="position: relative;">
+                            <div class="LoginUser clearfix">
+                                <div class="InputImg">
+                                    <img src="__PUBLIC__forum/img/login/user.png" />
+                                </div>
+                                <input type="text" id="regPhone" class="username regPhone" lay-verify="phone" name="mobile" placeholder="请输入手机号码"
+                                    autocomplete="off">
+                            </div>
+                            <div class="LoginUser clearfix">
+                                <div class="InputImg">
+                                    <img src="__PUBLIC__forum/img/login/pass.png" />
+                                </div>
+                                <input type="password" class="rpfpass" id="rpfpass" lay-verify="pass" placeholder="请输入密码" name="password"
+                                    autocomplete="off">
+                            </div>
+
+                            <!-- <span class="useEmail" onclick="useEmail()">或使用邮箱注册</span> -->
+
+                            <div class="LoginUser clearfix">
+                                <div class="InputImg">
+                                    <img src="__PUBLIC__forum/img/login/code.png" />
+                                </div>
+                                <input type="text" class="rpfcode regCode" id="verificationCode" placeholder="请输入验证码"
+                                    name="code" autocomplete="off">
+                                <input type="button" class="mainGetCode" data-method="verification" value="获取验证码" id="mainGetCode">
+                            </div>
+
+
+
+                            <div class="" style="margin: -20px 0 10px 0;">
+                                <!--<a style="cursor: pointer;">收不到验证码？<a>-->
+                            </div>
+                            <button type="button" class="sub" lay-submit="" lay-filter="register">注册</button>
+                            <div class="form-group" style="margin: 14px 0;">
+                                <span id="">
+                                    已有账号？ <a style="color: #ff5d3e;" href="javascript:void(0)" onclick="goLogin()">去登录</a>
+                                </span>
+                            </div>
+                            <!--<hr/>
+                <div class="form-group" style="margin: -5px 0;">
+                    <span id="">其他登录方式：</span>
+                    <img class="loginIcon" src="__PUBLIC__forum/img/index/qq.png"/>
+                    <a href="{:url('wechat')}" target="_blank"><img class="loginIcon" src="__PUBLIC__forum/img/index/wechat.png"/></a>
+                </div>-->
+                        </form>
+                    </div>
+                    <!--使用邮箱注册-->
+                    <div class="tab-item">
+                        <form class="">
+                            <input type="text" class="username" placeholder="请输入手机号码" style="background: url(__PUBLIC__forum/img/login/user.png) no-repeat 16px;">
+                            <span class="usePhone" onclick="usePhone()">或使用手机号注册</span>
+
+                            <input type="text" class="pass" placeholder="请输入密码" style="background: url(__PUBLIC__forum/img/login/pass.png) no-repeat 16px;margin-top: -6px;">
+                            <!--<input type="text" class="code" placeholder="请输入验证码" style="background: url(../static/img/login/验证码.png) no-repeat 16px; width: 172px;">-->
+
+                            <div id="verifiCode1"></div>
+
+                            <input id="check-btn1" class="verify-btn" value="确定" type="hidden" />
+
+                            <button type="button" class="btn btn-lg btn-block sub" style="margin-top: 36px;" onclick="emailReg()">注册
+                            </button>
+                            <div class="form-group" style="margin: 14px 0;">
+                                <span id="">
+                                    已有账号？ <a style="color: #ff5d3e;" href="javascript:void(0)" onclick="goLogin()">去登录</a>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {/if}
+
+            <!--防止已登录之后，初始化验证码时浏览器报错-->
+            <div id="verifiCode1" style="display: none;"></div>
+
+            {if condition="$Think.session.userid neq ''"}
+            <!--任务-->
+            <div class="mission indexItem">
+                <!--<div class="title_">-->
+                <!--<span>新手任务</span>-->
+                <!--</div>-->
+                <!--<div class="newbieTask">-->
+                <!--{notempty name="newbieTask"}-->
+                <!--{volist name="newbieTask" id="new_list"}-->
+                <!--{if condition="$new_list.taskStatus eq 0"}-->
+                <!--<div class="newbieTaskItem">-->
+                <!--{$new_list['task_name']}-->
+                <!--<span class="missionBtn"><a href="{$new_list['link']}">{$new_list['task_dec']}</a></span>-->
+                <!--</div>-->
+                <!--{/if}-->
+                <!--{/volist}-->
+                <!--{/notempty}-->
+                <!--</div>-->
+                <div class="title_">
+                    <span>每日任务</span>
+                    <a href="{:url('user/daily_tasks')}">全部任务 ></a>
+                </div>
+                <div class="dayTask">
+                    {empty name="$sign_exist"}
+                    <div class="newbieTaskItem">
+                        签到<span class="tip">(+20积分)</span>
+                        <span class="missionBtn" id="sign">签到</span>
+                    </div>
+                    {/empty}
+                    {notempty name="day_task"}
+                    {volist name="day_task" id="day_list"}
+                    <div class="newbieTaskItem">
+                        {$day_list['task_name']}
+                        <span class="tip">(+{$day_list['task_point']}积分)</span>
+                        <span class="missionBtn_">{$day_list.taskNumber}/{$day_list['task_per']}</span>
+                    </div>
+                    {/volist}
+                    {/notempty}
+                </div>
+            </div>
+            
+            {/if}
+            <!-- 官方通知 -->
+            <div class="mission indexItem">
+                <div class="title_">
+                    <span>官方通知</span>
+                </div>
+                <div class="dayTask">
+                    内容内容内容内容内容内容内容内容
+                    内容内容内容内容内容内容内容内容
+                    内容内容内容内容内容内容内容内容
+                    内容内容内容内容内容内容内容内容
+                </div>
+            </div>
+            
+            <!-- 免费推荐贷款口子 / 成功案例-->
+            <div class="case indexItem ">
+                <div class="title_">
+                    <span>免费推荐贷款口子</span>
+                </div>
+                <div class="recommend">
+                    <form class="layui-form" id="editData">
+                        
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <select name="topic" lay-filter="setTopic">
+                                    <option value="">1000~5000</option>
+                                    <option value="1">2000~5000</option>
+                                    <option value="2">3000~5000</option>
+                                    <option value="3">4000~5000</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入手机号码"  class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item clearfix">
+                            <div class="layui-input-inline">
+                                <select name="provid" id="provid" lay-filter="provid">
+                                    <option value="">省份</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select name="cityid" id="cityid" lay-filter="cityid">
+                                    <option value="">地级市</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="text" name="title" required  lay-verify="required" placeholder="请输入真实姓名"  class="layui-input">
+                            </div>
+                        </div>
+                        <button type="button" class="rpfsub sub" onclick="recommendSearch()">提交</button>
+                    </form>
+                </div>
+                <div class="title_">
+                    <span>成功案例</span>
+                </div>
+                <!--{volist name="demo" id="demo_list"}
+                    <div class="caseItem">
+                        <div class="caseItemTop">
+                            {$demo_list['name']}
+                            <span class="caseItemBtn">成功借款</span>
+                        </div>
+                        <div class="caseItemBot">
+                            {$demo_list['phone']}
+                            <span class="caseItemMoney">{$demo_list['money']}元</span>
+                        </div>
+                    </div>
+                    {/volist}-->
+
+
+                <div id="demo" style="overflow:hidden;height:310px;">
+                    <ul class="mingdan" id="holder" style="padding: 0 15px;">
+                        {volist name="demo" id="demo_list"}
+                        <li>
+                            <div class="caseItem">
+                                <div class="caseItemTop">
+                                    {$demo_list['name']}
+                                    <span class="caseItemBtn">成功借款</span>
+                                </div>
+                                <div class="caseItemBot">
+                                    {$demo_list['phone']}
+                                    <span class="caseItemMoney">{$demo_list['money']}元</span>
+                                </div>
+                            </div>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
+
+                <div class="caseBotBtnContent clearfix">
+                    <a href="{:url('index/forum/supermarket')}" target="_blank">
+                        <div class="caseBotBtn">
+                            申请贷款
+                        </div>
+                    </a>
+                    <!-- <div class="caseBotBtn" >
+                        <a href="JavaScript:void(0)">办信用卡</a>
+                    </div> -->
+
+                </div>
+            </div>
+            <!--网黑查询-->
+            <div class="search indexItem ">
+                <div class="title_">
+                    <span>网黑查询</span>
+                </div>
+                <form class="bs-example bs-example-form" role="form">
+                    <div class="LoginUser clearfix">
+                        <div class="InputImg">
+                            <img src="__PUBLIC__forum/img/index/search/个人333.png"/>
+                        </div>
+                        <input type="text" class="boInput trueName username" name="trueName"
+                            placeholder="请输入真实姓名"  autocomplete="off">
+                    </div>
+                    <div class="LoginUser clearfix">
+                        <div class="InputImg">
+                            <img src="__PUBLIC__forum/img/index/search/身份证号333.png"/>
+                        </div>
+                        <input type="text" class="bboInput IDNum username" name="IDNum"
+                            placeholder="请输入身份证号"  autocomplete="off">
+                    </div>
+                    <div class="LoginUser clearfix">
+                        <div class="InputImg">
+                            <img src="__PUBLIC__forum/img/index/search/手机333.png"/>
+                        </div>
+                        <input type="text" class="boInput IDNum username" name="phone"
+                            placeholder="请输入手机号码"  autocomplete="off">
+                    </div>
+
+                    <div class="searchSelect">
+                        <p id="">
+                            请选择查询项：
+                        </p>
+                        <div class="searchSelectcont">
+                            <div class="searchItem">
+                                <div class="searchItemIcon"
+                                    style="background: url(__PUBLIC__forum/img/index/search/基础征信.png) no-repeat;opacity:1;"></div>
+                                <span id="top">基础征信</span>
+                                <span id="bot">150米米</span>
+                            </div>
+                            <div class="searchItem">
+                                <div class="searchItemIcon" onclick="chooseWHa(this,100,'网贷人品')"
+                                    style="background: url(__PUBLIC__forum/img/index/search/征信评级.png) no-repeat;"></div>
+                                <span id="top">网贷人品</span>
+                                <span id="bot">100米米</span>
+                            </div>
+                            <div class="searchItem">
+                                <div class="searchItemIcon" onclick="chooseWHb(this,100,'多头借贷')"
+                                    style="background: url(__PUBLIC__forum/img/index/search/民间借贷.png) no-repeat;"></div>
+                                <span id="top">多头借贷</span>
+                                <span id="bot">100米米</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="rpfsub sub" onclick="searchWH()">查询 <span class="subTip">（需支付150米米）</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--米米支付弹出框-->
+    <div id="miPay" style="display: none;">
+        <div class="sexrchWHCon">
+            <p class="WHa">待支付项：<span id="">网黑查询--<span></span>查询</span></p>
+            <p class="WHb">待支付米米：<span id="miMoney"></span>米米</p>
+            <p class="WHc">使用<span id="" onclick="otherPayBtn()">其他方式支付</span></p>
+            <div class="confirmPay" onclick="confirmPayWH()">
+                确认支付
+            </div>
+        </div>
+    </div>
+
+    <!--网黑查询支付弹出框-->
+    <div id="sexrchWH" style="display: none;">
+        <div class="sexrchWHCon_">
+            <p class="WHa_">待支付项：<span id="">网黑查询--<span></span>查询</span></p>
+            <p class="WHb_">待支付金额：<span id="">15</span>元</p>
+            <p class="WHc_">请选择支付方式：<span id="">使用 <span onclick="miPayBtn()">米米支付</span></span></p>
+
+            <div class="layui-tab layui-tab-card myTabCard">
+                <ul class="layui-tab-title myTabTitle">
+                    <li class="layui-this">
+                        <img src="__PUBLIC__forum/img/charge/微信.png" />
+                        微信支付
+                    </li>
+                    <li>
+                        <img src="__PUBLIC__forum/img/charge/支付宝.png" />
+                        支付宝支付
+                    </li>
+                    <li></li>
+                </ul>
+                <div class="layui-tab-content myTabContent">
+                    <div class="layui-tab-item myTabItem layui-show">
+                        <img src="__PUBLIC__forum/img/charge/二维码.png" />
+                        <div class="chargeText">
+                            微信扫一扫支付
+                        </div>
+                    </div>
+                    <div class="layui-tab-item myTabItem">
+                        <img src="__PUBLIC__forum/img/charge/二维码.png" />
+                        <div class="chargeText">
+                            支付宝扫一扫支付
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chargeTip">
+            扫码支付即表示阅读并同意《一米社区授权协议》
+        </div>
+    </div>
+
+
+    <!--忘记密码弹出框-->
+    <div class="forgetPass" style="display: none;">
+        <form method="post" action="" class="layui-form">
+            <div class="LoginUser clearfix">
+                <div class="InputImg">
+                    <img src="__PUBLIC__forum/img/login/user.png" />
+                </div>
+                <input type="text" class="forPhone___ username" name="account" placeholder="手机号码" value="" autocomplete="off">
+            </div>
+            <!--<input type="text" name="account" class="forPhone__ username" placeholder="手机号码" value=""
+               style="background: url(__PUBLIC__forum/img/login/user.png) no-repeat 16px;"/>-->
+            <!--<input type="text" name="code" class="code forCode_" value="" placeholder="请输入验证码"
+               style="background: url(__PUBLIC__forum/img/login/code.png) no-repeat 16px;"/>-->
+
+            <div class="LoginUser clearfix">
+                <div class="InputImg">
+                    <img src="__PUBLIC__forum/img/login/code.png" />
+                </div>
+                <input type="text" class="rpfcode regCode forCode_" placeholder="请输入验证码" name="code" autocomplete="off">
+                <input type="button" class="get-code-btn" onclick="sendMessage($('.forPhone___'),$('.forCode_'),this,60)"
+                    value="获取验证码">
+            </div>
+
+            <div class="LoginUser clearfix">
+                <div class="InputImg">
+                    <img src="__PUBLIC__forum/img/login/pass.png" />
+                </div>
+                <input type="password" class="rpfpass " placeholder="请输入新的密码" name="newPass" autocomplete="off">
+            </div>
+
+            <div class="loginBtn forLoginBtn" lay-submit="" lay-filter="recoveredPass">
+                确定
+            </div>
+        </form>
+
+        <!--暂时注释 改回来时，需要去footer页面找到弹出方法，将其中的高度改为470-->
+        <!--<div class="otherLogin">
+        <span>其他登录：</span>
+        <img src="__PUBLIC__forum/img/index/qq.png"/>
+        <img src="__PUBLIC__forum/img/index/wechat.png"/>
+    </div>-->
+    </div>
+
+
+    <!--充值弹出框-->
+    <div class="charge" style="display: none">
+        <div class="chargeTitle">
+            请选择充值套餐：
+        </div>
+        <div class="chargeBot">
+            <div class="chargeItem">
+                <img class="chargeItemImg" src="__PUBLIC__forum/img/charge/金币1.png" />
+                <div class="chargeItemBot">
+                    <img class="chargeItemBotImg" src="__PUBLIC__forum/img/charge/对号.png" />
+                    <span>1元</span>
+                    <span>10米米</span>
+                </div>
+            </div>
+            <div class="chargeItem">
+                <img class="chargeItemImg" src="__PUBLIC__forum/img/charge/金币2.png" />
+                <div class="chargeItemBot">
+                    <img class="chargeItemBotImg" src="__PUBLIC__forum/img/charge/对号.png" />
+                    <span>10元</span>
+                    <span>120米米</span>
+                </div>
+            </div>
+            <div class="chargeItem">
+                <img class="chargeItemImg" src="__PUBLIC__forum/img/charge/金币3.png" />
+                <div class="chargeItemBot">
+                    <img class="chargeItemBotImg" src="__PUBLIC__forum/img/charge/对号.png" />
+                    <span>10元</span>
+                    <span>120米米</span>
+                </div>
+            </div>
+            <div class="chargeItem">
+                <img class="chargeItemImg" src="__PUBLIC__forum/img/charge/金币4.png" />
+                <div class="chargeItemBot">
+                    <img class="chargeItemBotImg" src="__PUBLIC__forum/img/charge/对号.png" />
+                    <span>10元</span>
+                    <span>120米米</span>
+                </div>
+            </div>
+            <div class="chargeItem">
+                <img class="chargeItemImg" src="__PUBLIC__forum/img/charge/金币5.png" />
+                <div class="chargeItemBot">
+                    <img class="chargeItemBotImg" src="__PUBLIC__forum/img/charge/对号.png" />
+                    <span>10元</span>
+                    <span>120米米</span>
+                </div>
+            </div>
+            <div class="chargeItem">
+                <img class="chargeItemImg" src="__PUBLIC__forum/img/charge/钱袋1.png" />
+                <div class="chargeItemBot">
+                    <img class="chargeItemBotImg" src="__PUBLIC__forum/img/charge/对号.png" />
+                    <span>10元</span>
+                    <span>120米米</span>
+                </div>
+            </div>
+            <div class="chargeItem">
+                <img class="chargeItemImg" src="__PUBLIC__forum/img/charge/钱袋2.png" />
+                <div class="chargeItemBot">
+                    <img class="chargeItemBotImg" src="__PUBLIC__forum/img/charge/对号.png" />
+                    <span>10元</span>
+                    <span>120米米</span>
+                </div>
+            </div>
+            <div class="chargeItem">
+                <div class="custom">
+                    自定义
+                </div>
+                <div class="chargeItemBot">
+                    <img class="chargeItemBotImg" src="__PUBLIC__forum/img/charge/对号.png" />
+                    <span>10元</span>
+                    <span>120米米</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="chargeTitle">
+            请选择支付方式：
+        </div>
+
+        <div class="layui-tab layui-tab-card">
+            <ul class="layui-tab-title">
+                <li class="layui-this">
+                    <img src="__PUBLIC__forum/img/charge/微信.png" />
+                    微信支付
+                </li>
+                <li>
+                    <img src="__PUBLIC__forum/img/charge/支付宝.png" />
+                    支付宝支付
+                </li>
+                <li></li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <img src="__PUBLIC__forum/img/charge/二维码.png" />
+                    <div class="chargeText">
+                        微信扫一扫支付
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <img src="__PUBLIC__forum/img/charge/二维码.png" />
+                    <div class="chargeText">
+                        支付宝扫一扫支付
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chargeTip">
+            扫码支付即表示阅读并同意《一米社区授权协议》
+        </div>
+    </div>
+    <!--查询成功-->
+    <div class="searchWHSucc" style="display: none;">
+        <p class="succA">查询成功！</p>
+        <!-- <p>请扫描二维码，关注“一米圈子”</p> -->
+        <img src="__PUBLIC__forum/img/index/searchWHSuccCode.png" />
+        <p>微信扫一扫查看</p>
+    </div>
+    <!-- 推荐成功 -->
+    <div class="recommendSucc" style="display: none;">
+        <p class="recomd-title">为您推荐以下贷款产品</p>
+        <div class="recommend-item">
+            <div>
+                <img src="__PUBLIC__forum/img/loanSupermarket/你来花.png" alt="">
+                <p>快速花</p>
+                <div>
+                    <p>贷款额度：<span>1000-3000</span></p>
+                    <p>产品描述：<span>无需抵押, 快速审核</span></p>
+                    <p>费用：<span>利率12%-36%</span></p>
+                    <p>申请人数：<span>1222222222人</span></p>
+                </div>
+                <button>申请贷款</button>
+            </div>
+            <div>
+                <img src="__PUBLIC__forum/img/loanSupermarket/你来花.png" alt="">
+                <p>快速花</p>
+                <div>
+                    <p>贷款额度：<span>1000 - 3000</span></p>
+                    <p>产品描述：<span>无需抵押, 快速审核</span></p>
+                    <p>费用：<span>利率12%-36%</span></p>
+                    <p>申请人数：<span>1222222222人</span></p>
+                </div>
+                <button>申请贷款</button>
+            </div>
+            <div>
+                <img src="__PUBLIC__forum/img/loanSupermarket/你来花.png" alt="">
+                <p>快速花</p>
+                <div>
+                    <p>贷款额度：<span>1000-3000</span></p>
+                    <p>产品描述：<span>无需抵押, 快速审核</span></p>
+                    <p>费用：<span>利率12%-36%</span></p>
+                    <p>申请人数：<span>1222222222人</span></p>
+                </div>
+                <button>申请贷款</button>
+            </div>
+                
+        </div>
+    </div>
+
+
+    <div id="containerlyl" style="display: none">
+        <!--<input value="admin" readonly/>
+    <input type="password" value="1234567890" readonly/>-->
+        <div id="captcha" style="position: relative"></div>
+        <div id="msg"></div>
+    </div>
+
+
+    <!--密码登录-->
+    <div class="loginPage" style="display: none;">
+        <form method="post" action="" class="layui-form">
+            <div class="LoginUser clearfix">
+                <div class="InputImg">
+                    <img src="__PUBLIC__forum/img/login/账号拷贝2.png" />
+                </div>
+                <input type="text" class="username" name="account" placeholder="请输入手机号码" value="" autocomplete="off">
+            </div>
+            <!--<input type="text" name="account" class="username" value="" placeholder="会员账号 / 邮箱 / 手机号码" autocomplete="off"/>-->
+            <div class="LoginUser clearfix">
+                <div class="InputImg">
+                    <img src="__PUBLIC__forum/img/login/密码拷贝.png" />
+                </div>
+                <input type="password" class="rpfdetapass pass" name="password" placeholder="请输入密码" value=""
+                    autocomplete="off">
+            </div>
+            <!--<input type="password" name="password" class="rpfdetapass pass" value="" placeholder="请输入密码" style="background: url() no-repeat 16px; width: 100%; margin-bottom: 10px;"  autocomplete="off"/>-->
+            <div class="loginTip clearfix">
+                <div class="layui-input-block" style="margin-left:5px; float: left;">
+                    <input type="checkbox" name="rememb" lay-skin="primary" title="记住密码" value="1">
+                </div>
+                <a href="javascript:void(0)" style="float: right;" onclick="codeLoginBtn()">验证码登录</a>
+            </div>
+            <div class="loginBtn" lay-submit="" lay-filter="login">
+                登录
+            </div>
+        </form>
+        <!--<div class="otherLogin">
+            <span>其他登录：</span>
+            <img src="__PUBLIC__forum/img/index/qq.png"/>
+            <img src="__PUBLIC__forum/img/index/wechat.png"/>
+        </div>-->
+    </div>
+
+    <!--验证码登录-->
+    <div class="codeLogin" style="display: none;">
+        <form action="" method="post" class="layui-form">
+            <div style="height: 103px;position: relative;">
+                <div class="LoginUser clearfix">
+                    <div class="InputImg">
+                        <img src="__PUBLIC__forum/img/login/账号拷贝2.png" />
+                    </div>
+                    <input type="text" class="cms-login-phone" name="account" placeholder="请输入手机号码" value="" autocomplete="off">
+                </div>
+                <!--<input type="text" name="username" class="emPhone username" value="" placeholder="会员账号 / 邮箱 / 手机号码" style="background: url() no-repeat 16px;"  autocomplete="off"/>-->
+                <div class="LoginUser clearfix">
+                    <div class="InputImg">
+                        <img src="__PUBLIC__forum/img/login/code.png" />
+                    </div>
+                    <input type="text" class="rpfcode cms-login-code" placeholder="请输入验证码" name="code" value="" autocomplete="off">
+                    <input type="button" class="mainGetCode" onclick="sendMessage($('.cms-login-phone'),$('.cms-login-code'),this,60)"
+                           value="获取验证码"></input>
+                </div>
+            </div>
+            <div class="loginTip clearfix">
+                <!--<p id="" style="float: left;margin: 0 0 0 10px;">
+                    收不到验证码？<span>获取语音验证码</span>
+                </p>-->
+                <a href="javascript:void(0)" style="float: right;margin-right: 10px;" onclick="passLogin()">密码登录</a>
+            </div>
+            <div class="loginBtn" lay-submit="" lay-filter="sms_login">
+                登录
+            </div>
+        </form>
+
+
+        <!--暂时注释掉其他登录方式   改回来时，需要将弹出框高度改为427-->
+        <!--<div class="otherLogin">
+            <span>其他登录：</span>
+            <img src="__PUBLIC__forum/img/index/qq.png"/>
+            <img src="__PUBLIC__forum/img/index/wechat.png"/>
+        </div>-->
+    </div>
+
+
+
+</body>
+<script src="__PUBLIC__forum/js/jquery/1.9.1/jquery.min.js"></script>
+<script src="__PUBLIC__forum/swiper/swiper.min.js"></script>
+<script src="__PUBLIC__forum/layui/layui.all.js"></script>
+<script src="__PUBLIC__forum/verify/verify.js"></script>
+<script src="__PUBLIC__forum/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__forum/js/jigsaw.js"></script>
+
+<script src="__PUBLIC__forum/pickArea/data.js"></script>
+<script src="__PUBLIC__forum/pickArea/province.js"></script>
+<script>
+    var areaDefault = {
+        s1: 'provid',
+        s2: 'cityid',
+        s3: 'areaid',
+        v1: null,
+        v2: null,
+        v3: null
+    };
+    //点击登录
+    $('#submit_login').click(function (data) {
+
+        if (!check_login()) {
+            return false;
+        }
+        loading = layer.load(2, {
+            shade: [0.2, '#000']
+        });
+        var param = $('#login').serialize();
+        $.post('{:url("index/login")}', param, function (data) {
+            if (data.code == 1) {
+                layer.close(loading);
+                layer.msg(data.msg, {
+                    icon: 1,
+                    time: 1000
+                }, function () {
+                    location.href = '{:url("index/index")}';
+                });
+            } else {
+                layer.close(loading);
+                layer.msg(data.msg, {
+                    icon: 2,
+                    anim: 6,
+                    time: 1000
+                });
+                // $('#captcha').attr('src',"{:url('index/captcha')}?"+Math.random());
+            }
+        });
+    });
+
+    //图形验证码
+    $('#verifiCode1').codeVerify({
+        type: 1,
+        width: '112px',
+        height: '40px',
+        fontSize: '26px',
+        codeLength: 4,
+        btnId: 'check-btn1',
+        ready: function () {},
+        success: function () {
+            codeStatus = true;
+        },
+        error: function () {
+            codeStatus = false;
+        }
+    });
+
+    //检查登录信息
+    function check_login() {
+        if (!$("input[name='account']").val()) {
+            layer.msg('账号不能为空', {
+                icon: 2,
+                anim: 6,
+                time: 1000
+            });
+            return false;
+        }
+
+        if (!$("input[name='password']").val()) {
+            layer.msg('密码不能为空', {
+                icon: 2,
+                anim: 6,
+                time: 1000
+            });
+            return false;
+        }
+        return true;
+    }
+
+    //轮播图
+    var swiper = new Swiper('.swiper-container', {
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        loop: true,
+        autoplay: {
+            disableOnInteraction: false,
+        },
+    });
+</script>
+
+<script>
+    layui.use(['element', 'form'], function () {
+        var form = layui.form;
+
+        form.on('submit(register)', function (data) {
+            // loading = layer.load(2, {
+            //     shade: [0.2,'#000']
+            // });
+            var param = data.field;
+            $.post('{:url("Login/register")}', param, function (data) {
+                if (data.code == 1) {
+
+                    layer.msg(data.msg, {
+                        icon: 1,
+                        time: 1500
+                    }, function () {
+                        location.reload();
+                    });
+                } else {
+                    // layer.close(loading);
+                    layer.msg(data.msg, {
+                        icon: 2,
+                        anim: 6,
+                        time: 1000
+                    });
+                }
+            });
+            return false;
+        });
+
+        form.on('submit(sms_login)', function (data) {
+            // loading = layer.load(2, {
+            //     shade: [0.2,'#000']
+            // });
+            var param = data.field;
+            $.post('{:url("Login/sms_login")}', param, function (data) {
+                if (data.error_code === 0) {
+
+                    layer.msg(data.msg, {
+                        icon: 1,
+                        time: 1500
+                    }, function () {
+                        location.reload();
+                    });
+                } else {
+                    // layer.close(loading);
+                    layer.msg(data.msg, {
+                        icon: 2,
+                        anim: 6,
+                        time: 1000
+                    });
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+<script>
+    //	签到
+    $('#sign').on('click', function () {
+        $.get("{:url('user/sign')}", {}, function (data) {
+            if (data.code == 1) {
+                $('#sign').text('已完成');
+                $('#sign').unbind('click');
+                layer.msg(data.msg, {
+                    icon: 1,
+                    time: 1500
+                });
+            } else {
+                layer.msg(data.msg, {
+                    icon: 2,
+                    time: 1500
+                });
+            }
+        }, 'json')
+    });
+
+    function AutoScroll(obj) {
+        $(obj).find("ul:first").animate({
+            marginTop: "-77px"
+        }, 1000, function () {
+            $(this).css({
+                marginTop: "0px"
+            }).find("li:first").appendTo(this);
+        });
+    }
+    $(document).ready(function () {
+        setInterval('AutoScroll("#demo")', 2000)
+    });
+
+    //	密码登录
+    function goToLogin() {
+        layer.open({
+            type: 1,
+            content: $(".loginPage"),
+            title: '登录',
+            skin: 'login',
+            area: ['612px', '370px'],
+            resize: false,
+            cancel: function (index, layero) {
+                $(".loginPage").hide()
+            }
+        })
+    }
+
+    //	验证码登录
+    function codeLoginBtn() {
+        layer.close(layer.index);
+        $(".loginPage").hide();
+
+        layer.open({
+            type: 1,
+            skin: 'login',
+            content: $(".codeLogin"),
+            title: '登录',
+            area: ['612px', '370px'],
+            resize: false,
+            cancel: function (index, layero) {
+                $(".codeLogin").hide()
+            }
+        })
+    }
+    //	密码登录
+    function passLogin() {
+        layer.close(layer.index);
+        $(".codeLogin").hide();
+        layer.open({
+            type: 1,
+            skin: 'login',
+            content: $(".loginPage"),
+            title: '登录',
+            area: ['612px', '370px'],
+            resize: false,
+            cancel: function (index, layero) {
+                $(".loginPage").hide()
+            }
+        })
+    }
+    //	忘记密码
+    function forgetPsss() {
+        layer.close(layer.index);
+        $(".loginPage").hide();
+        layer.open({
+            type: 1,
+            skin: 'login',
+            content: $(".forgetPass"),
+            title: '重置密码',
+            area: ['612px', '460px'],
+            resize: false,
+            cancel: function (index, layero) {
+                $(".forgetPass").hide()
+            }
+        })
+    }
+</script>
+<style>
+    body .bg .layui-layer-title {
+        background: #fff;
+        border: none;
+    }
+</style>
+<script>
+    // 当点击获取验证码时显示模态框
+    layui.use('layer', function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery,
+            layer = layui.layer; //独立版的layer无需执行这一句
+
+        //触发事件
+        var active = {
+            // 点击回复帖子
+            verification: function () {
+                var that = this;
+                //多窗口模式，层叠置顶
+                layer.open({
+                    type: 1 //此处以iframe举例
+                        ,
+                    title: '请完成安全验证'
+                        // ,skin: 'bg'
+                        ,
+                    area: ['436px', '302px'],
+                    content: $('#containerlyl'),
+                    cancel: function () {
+                        $('#captcha').html('')
+                    }
+                });
+            },
+
+
+        };
+
+        $('#mainGetCode').on('click', function () {
+
+            $('#captcha').show()
+            if ($('#regPhone').val() == "") {
+                layer.msg("请输入手机号", {
+                    icon: 0
+                })
+                return
+            }
+            if (!(/^1[3|4|5|7|8][0-9]\d{4,8}$/.test($('#regPhone').val()))) {
+                layer.msg("请输入正确的手机号", {
+                    icon: 0
+                })
+                return
+            }
+            // if ($("#rpfpass").val() == "") {
+            //     layer.msg('密码不能为空', {icon: 2, anim: 6, time: 1000});
+            //     return false;
+            // }
+            jigsaw.init(document.getElementById('captcha'), function () {
+                $('#captcha').html('');
+                // document.getElementById('msg').innerHTML = '登录成功！'
+                sendMessage($('.regPhone'), $('.regCode'), $('#mainGetCode'), 60)
+                setInterval(function () {
+                    $('#layui-layer3').hide();
+                    layer.closeAll()
+                    $('#containerlyl').html('').hide()
+                    $('#captcha').hide()
+                }, 1000)
+            })
+            var othis = $(this),
+                method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+            // $('#drag').drag();
+        });
+
+    });
+</script>
+{/block}

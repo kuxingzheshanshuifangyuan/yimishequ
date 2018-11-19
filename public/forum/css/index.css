@@ -1,0 +1,51 @@
+input[type="checkbox"]+label::before {
+	content: "\a0";
+	display: inline-block;
+	/* vertical-align: 2px; */
+	width: 15px;
+	height: 15px;
+	margin-right: 10px;
+	border-radius: 3px;
+	background-color: #fff;
+	text-indent: 1.5px;
+	line-height: 13px;
+	border: 1px solid #d6d6d6;
+}
+
+
+/*选中时的样子*/
+
+input[type="checkbox"]:checked+label::before {
+	content: "\2714";
+	background-color: #ff4c4d;
+	color: #fff;
+	border: 1px solid #ff4c4d;
+}
+
+
+/*将原来的框剪切*/
+
+input[type="checkbox"] {
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+}
+
+
+/*鼠标移上去时*/
+
+input[type="checkbox"]:hover+label::before {
+	border: 1px solid #ff4c4d;
+}
+
+
+/*禁止使用时*/
+
+input[type="checkbox"]:disabled+label::before {
+	background-color: gray;
+	box-shadow: none;
+	color: #555;
+}
+
+.checkbox label {
+	padding-left: 0px !important;
+}

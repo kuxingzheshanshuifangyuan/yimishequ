@@ -1,0 +1,117 @@
+// 我的任务
+#my-task-tab{
+  >div{
+    >a >div{
+      background: url(../img/userInfo/tabs-img.png) no-repeat center;
+    }
+  }
+
+  
+  >div:nth-child(1){
+    >a >div{
+      width:18px;
+      height:20px;
+      background-position:-126px -37px;
+    }
+  }
+  >div:nth-child(2){
+    >a >div{
+      width:18px;
+      height:20px;
+      background-position:-34px -37px;
+    }
+  }
+  >div:nth-child(3){
+    >a >div{
+      width:18px;
+      height:20px;
+      background-position:-80px -37px;
+    }
+  }
+}
+
+
+.user-task{
+  .task-item{
+    width: 864px;
+    height: 88px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    button{
+      width: 120px;
+      height: 40px;
+      border-radius: 5px;
+      font-size: 16px;
+      line-height: 40px;
+      border: none;
+    }
+    .completed-info{
+      background-color: #f6f6f6;
+      color: #a1a1a1;
+    }
+    .uncompleted-info{
+      background-image: linear-gradient(90deg, 
+        #ff1481 0%, 
+        #ff5d3e 100%), 
+      linear-gradient(
+        #f6f6f6, 
+        #f6f6f6);
+      color: #ffffff;
+    }
+    .red-col{
+      color: #ff4a50 !important;
+    }
+    >div{
+      height: 100%;
+      float: left;
+      
+    }
+    >div:nth-child(1){
+      padding: 7px 30px;
+      width: 37%;
+      p:nth-child(1){
+        color: #535353;
+        font-size: 18px;
+        .separator{
+          margin: 0 10px;
+          color: #a1a1a1;
+        }
+        .sentiment{
+          font-size: 14px;
+          color: #a1a1a1;
+          span{
+            display: inline-block;
+            max-width: 90px;
+            color:#ff4a50;   
+            overflow: hidden;
+            white-space:nowrap;
+            text-overflow: ellipsis;     
+            vertical-align: middle;  
+          }
+        }
+      }
+      p:nth-child(2){
+        
+        font-size: 14px;
+        color: #999999;
+      }
+    }
+    .task-point-info{
+      width: 33%;
+      text-align: center;
+      color: #999999;
+      font-size: 16px;
+      line-height: 88px;
+    }
+    .task-res{
+      color: #a1a1a1;
+      font-size: 16px;
+      text-align: center;
+      line-height: 88px;
+      width: 20%;
+      float: right;
+    }
+
+  }
+}

@@ -1,0 +1,534 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+<style>
+	.on{
+		display: block !important;
+	}
+	.mobile{
+		display: none;
+	}
+	.rpf-active{
+		color: red;
+	}
+</style>
+	<body class="YwxgTabbody">
+		<header class="mui-bar mui-bar-nav ">
+			<a href="javascript:;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="history"></a>
+			<h1 id="title" class="mui-title">与我相关</h1>
+		</header>
+		<div id="slider" class="TabWrap">
+			<div class="TabWrap_top" id="segmented">
+				<div class="TabWrap_top_Back">
+					<a class="TabWrap_top_Backa" href="" id="myTieZ" data-num='1'>
+						我的帖子
+					</a>
+					<a class="TabWrap_top_Backa" href="" id="myHuiF" data-num='2'>
+						我的回复
+					</a>
+					<a class="TabWrap_top_Backa" href="" id="myXX" data-num='3'>
+						消息
+					</a>
+					<!--<a class="mui-control-item" href="#item4mobile">
+						关注/收藏
+					</a>-->
+				</div>
+			</div>
+
+			<div class="TabWrap_bottom">
+				<div id="item1mobile" class="mobile" data-num='1'>
+					<ul class=" homeNewest">
+						<!-- 我的帖子 -->
+					</ul>
+					<p class="prompt2" style="text-align: center;line-height: 30px;">到底了</p>
+				</div>
+
+				<div id="item2mobile" class="mobile" data-num='2'>
+					<ul class=" homeNewest">
+						<!-- 我的回复 -->
+
+					</ul>
+					<p class="prompt2" style="text-align: center;line-height: 30px;">到底了</p>
+				</div>
+				<div id="item3mobile" class=" mobile" data-num='3'>
+					<ul class="homeNewest">
+						<!-- 消息 -->
+
+					</ul>
+					<p class="prompt2" style="text-align: center;line-height: 30px;background:none">到底了</p>
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>
+<script>
+
+//==============================================================
+// 在缓存拿出usertoken
+
+var usertoken = window.localStorage.getItem('usertoken');
+var pageNum = 1;
+function GetRequest() {
+                var url = location.search; //获取url中"?"符后的字串
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.substr(1);
+                    strs = str.split("&");
+                    for (var i = 0; i < strs.length; i++) {
+                        theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+                    }
+                }
+                return theRequest;
+            }
+            var a=GetRequest();
+var index_1 = a.dataNum;
+
+
+//与我相关  我的帖子
+
+//我的帖子 封装
+function myTiez(usertoken,pageNum){
+	mui.ajax('http://www.1miclub.com/api/User/myForum', {
+		    data: {
+		    	token:usertoken,
+		    	page:1
+		    },
+		    dataType: 'jsonp',
+		    type: 'post',
+		    timeout: 10000,
+		    success: function(data) {
+		    	data = JSON.parse(data)
+		    	var OneHtml = '';
+		    	if(data.error_code === 0){
+		    		for(var i=0;i<data.data.forumList.length;i++){
+		    			var picHtml = data.data.forumList[i].pic;
+						if(picHtml){
+							picHtml = '<img class="mui-media-object mui-pull-right HomeList_img" src="'+PicUrl+data.data.forumList[i].pic+'">';
+						}else{
+							picHtml = '';
+						}
+			    		OneHtml += '<li class="mui-table-view-cell mui-media HomeList" mytiezid='+data.data.forumList[i].id+'>'+
+							        '<a href="javascript:;">'+
+							            picHtml+
+							            '<div class="mui-media-body">'+
+							                '<div class="HomeList_pOne">'+
+							                	data.data.forumList[i].title+
+							                '</div>'+
+							                '<p class="mui-ellipsis HomeList_pTwo">'+
+							                	'<img src="'+PicUrl+data.data.forumList[i].userhead+'"/>'+
+							                	'<span>'+data.data.forumList[i].username+'</span>'+
+							                	'<span>|</span>'+
+							                	'<span>'+HoMiSe(data.data.forumList[i].create_time)+'</span>'+
+							                	'<span>'+data.data.forumList[i].view+'阅读</span>'+
+							                '</p>'+
+							            '</div>'+
+							        '</a>'+
+							    '</li>'
+
+			    	}
+		    		$('#item1mobile .homeNewest').html(OneHtml)
+		    	}
+		    },
+		    error: function() {
+		        mui.toast('失败');
+		    },
+		    complete:function(){
+
+		    	$(".TabWrap_top_Backa[data-num = "+index_1+"]").addClass('rpf-active');
+		    	$(".mobile[data-num = "+index_1+"]").addClass('on');
+
+		    }
+		});
+}
+var pageb = 1;
+//我的帖子 封装  回调
+function tiezi(usertoken,pageNum){
+	var _this = this;
+	usertoken = window.localStorage.getItem('usertoken');
+	pageb += 1;
+	mui.ajax('http://www.1miclub.com/api/User/myForum', {
+		    data: {
+		    	token:usertoken,
+		    	page:pageb
+		    },
+		    dataType: 'jsonp',
+		    type: 'post',
+		    timeout: 10000,
+		    success: function(data) {
+		    	data = JSON.parse(data)
+		    	var OneHtml = '';
+		    	if(data.error_code === 0){
+		    		for(var i=0;i<data.data.forumList.length;i++){
+		    			var picHtml = data.data.forumList[i].pic;
+						if(picHtml){
+							picHtml = '<img class="mui-media-object mui-pull-right HomeList_img" src="'+PicUrl+data.data.forumList[i].pic+'">';
+						}else{
+							picHtml = '';
+						}
+			    		OneHtml += '<li class="mui-table-view-cell mui-media HomeList" mytiezid='+data.data.forumList[i].id+'>'+
+							        '<a href="javascript:;">'+
+							            picHtml+
+							            '<div class="mui-media-body">'+
+							                '<div class="HomeList_pOne">'+
+							                	data.data.forumList[i].title+
+							                '</div>'+
+							                '<p class="mui-ellipsis HomeList_pTwo">'+
+							                	'<img src="'+PicUrl+data.data.forumList[i].userhead+'"/>'+
+							                	'<span>'+data.data.forumList[i].username+'</span>'+
+							                	'<span>|</span>'+
+							                	'<span>'+HoMiSe(data.data.forumList[i].create_time)+'</span>'+
+							                	'<span>'+data.data.forumList[i].view+'阅读</span>'+
+							                '</p>'+
+							            '</div>'+
+							        '</a>'+
+							    '</li>'
+
+			    	}
+
+		    		$('#item2mobile .homeNewest').append(OneHtml)
+
+		    	}
+		    },
+		    error: function() {
+		        mui.toast('失败');
+		    },
+		    complete:function(){
+
+		    	$(".TabWrap_top_Backa[data-num = "+index_1+"]").addClass('rpf-active');
+		    	$(".mobile[data-num = "+index_1+"]").addClass('on');
+
+		    }
+		});
+}
+//我的回复 封装
+function myHuiF(usertoken,page){
+	mui.ajax('http://www.1miclub.com/api/User/replyInfo', {
+		    data: {
+				token:usertoken,
+				page:1
+		    },
+		    dataType: 'jsonp',
+		    type: 'post',
+		    timeout: 10000,
+		    success: function(data) {
+		    	data = JSON.parse(data)
+		    	var OneHtml = '';
+		    	if(data.error_code === 0){
+		    		for(var i=0;i<data.data.userCommentList.length;i++){
+		    			var picHtml = data.data.userCommentList[i].pic;
+						if(picHtml){
+							picHtml = '<img class="mui-media-object mui-pull-right HomeList_img" src="'+PicUrl+data.data.userCommentList[i].pic+'">';
+						}else{
+							picHtml = '';
+						}
+			    		OneHtml += '<li class="mui-table-view-cell">'+
+										'<p class="Hf_cont">回复 <span>@'+data.data.userCommentList[i].username+'</span>：'+data.data.userCommentList[i].reply_content+'</p>'+
+										'<div class="cont_cont" huifid="'+data.data.userCommentList[i].fid+'">'+
+											'<a href="javascript:;">'+
+									           picHtml+
+									            '<div class="mui-media-body">'+
+									                '<div class="HomeList_pOne">'+
+									                	data.data.userCommentList[i].title+
+									                '</div>'+
+									                '<p class="mui-ellipsis HomeList_pTwo">'+
+									                	'<img src="'+PicUrl+data.data.userCommentList[i].userhead+'"/>'+
+									                	'<span>'+data.data.userCommentList[i].username+'</span>'+
+//									                	'<span>|</span>'+
+									                	'<span>'+HoMiSe(data.data.userCommentList[i].create_time)+'</span>'+
+									                '</p>'+
+									            '</div>'+
+									        '</a>'+
+										'</div>'+
+									'</li>'
+
+			    	}
+		    		$('#item2mobile .homeNewest').html(OneHtml)
+//					gotoTop();
+//					$('.TabWrap_bottom').scrollTop(200);
+					var _offset =  sessionStorage.getItem('myPageScroll')
+					console.log("高度 ===== "+ _offset)
+					$(document).scrollTop(_offset);
+
+		    	}
+		    },
+		    error: function() {
+		        mui.toast('失败');
+		    },
+		    complete:function(){
+		    	$(".TabWrap_top_Backa[data-num = "+index_1+"]").addClass('rpf-active');
+		    	$(".mobile[data-num = "+index_1+"]").addClass('on');
+
+		    }
+
+		});
+
+}
+//我的回复   回调
+function huifu(usertoken,page){
+	var _this = this;
+	usertoken = window.localStorage.getItem('usertoken');
+	pageNum += 1;
+	mui.ajax('http://www.1miclub.com/api/User/replyInfo', {
+		    data: {
+				token:usertoken,
+				page:pageNum
+		    },
+		    dataType: 'jsonp',
+		    type: 'post',
+		    timeout: 10000,
+		    success: function(data) {
+		    	data = JSON.parse(data)
+		    	var OneHtml = '';
+		    	if(data.error_code === 0){
+		    		for(var i=0;i<data.data.userCommentList.length;i++){
+		    			var picHtml = data.data.userCommentList[i].pic;
+						if(picHtml){
+							picHtml = '<img class="mui-media-object mui-pull-right HomeList_img" src="'+PicUrl+data.data.userCommentList[i].pic+'">';
+						}else{
+							picHtml = '';
+						}
+			    		OneHtml += '<li class="mui-table-view-cell">'+
+										'<p class="Hf_cont">回复 <span>@'+data.data.userCommentList[i].username+'</span>：'+data.data.userCommentList[i].reply_content+'</p>'+
+										'<div class="cont_cont" huifid="'+data.data.userCommentList[i].id+'">'+
+											'<a href="javascript:;">'+
+									           picHtml+
+									            '<div class="mui-media-body">'+
+									                '<div class="HomeList_pOne">'+
+									                	data.data.userCommentList[i].title+
+									                '</div>'+
+									                '<p class="mui-ellipsis HomeList_pTwo">'+
+									                	'<img src="'+PicUrl+data.data.userCommentList[i].userhead+'"/>'+
+									                	'<span>'+data.data.userCommentList[i].username+'</span>'+
+									                	'<span>|</span>'+
+									                	'<span>'+HoMiSe(data.data.userCommentList[i].create_time)+'</span>'+
+									                '</p>'+
+									            '</div>'+
+									        '</a>'+
+										'</div>'+
+									'</li>'
+
+			    	}
+		    		$('#item2mobile .homeNewest').append(OneHtml)
+					gotoTop();
+
+		    	}
+		    },
+		    error: function() {
+		        mui.toast('失败');
+		    },
+		    complete:function(){
+		    	$(".TabWrap_top_Backa[data-num = "+index_1+"]").addClass('rpf-active');
+		    	$(".mobile[data-num = "+index_1+"]").addClass('on');
+
+		    }
+
+		});
+
+}
+//消息 封装
+function myXX(usertoken,pageNum){
+	mui.ajax('http://www.1miclub.com/api/User/myMessages', {
+	    data: {
+	    	token:usertoken,
+	    	time	: new Date().getTime(),
+	    	page:1
+
+	    },
+	    dataType: 'jsonp',
+	    type: 'post',
+	    timeout: 10000,
+	    success: function(data) {
+	    	data = JSON.parse(data)
+	    	var OneHtml = '';
+	    	if(data.error_code === 0){
+
+
+	    		for(var i=0;i<data.data.messageList.data.length;i++){
+
+//	    			判断回复类型
+	    			if(data.data.messageList.data[i].type == "1"){
+	    				OneHtml += '<p><span>系统消息：</span> <span class="XxTiez">'+data.data.messageList.data[i].content+'</span></p>'
+	    			}else if(data.data.messageList.data[i].type == "2"){
+						OneHtml += '<p><span>'+data.data.messageList.data[i].username+'</span> 回复了您的帖子 <span class="XxTiez" XxTiezid="'+data.data.messageList.data[i].fid+'">'+data.data.messageList.data[i].title+'</span></p>'
+	    			}else{
+	    				OneHtml += '<p><span>'+data.data.messageList.data[i].username+'</span> 回复了帖子<span class="XxTiez" XxTiezid="'+data.data.messageList.data[i].fid+'">'+data.data.messageList.data[i].title+'</span>中您的评论</p>'
+	    			}
+
+		    	}
+
+	    		$('#item3mobile .homeNewest').html(OneHtml)
+
+	    	}
+	    },
+	    error: function() {
+	        mui.toast('失败');
+	    },
+	    complete:function(){
+
+		    	$(".TabWrap_top_Backa[data-num = "+index_1+"]").addClass('rpf-active');
+		    	$(".mobile[data-num = "+index_1+"]").addClass('on');
+
+		    }
+	});
+}
+//消息 封装  回调
+var pageN = 1;
+function xiaoxi(usertoken,page){
+	var _this = this;
+	usertoken = window.localStorage.getItem('usertoken');
+	pageN += 1;
+	mui.ajax('http://www.1miclub.com/api/User/myMessages', {
+	    data: {
+	    	token:usertoken,
+	    	time	: new Date().getTime(),
+	    	page:pageN
+	    },
+	    dataType: 'jsonp',
+	    type: 'post',
+	    timeout: 10000,
+	    success: function(data) {
+	    	data = JSON.parse(data)
+	    	var OneHtml = '';
+	    	if(data.error_code === 0){
+
+
+	    		for(var i=0;i<data.data.messageList.data.length;i++){
+
+//	    			判断回复类型
+	    			if(data.data.messageList.data[i].type == "1"){
+	    				OneHtml += '<p><span>系统消息：</span> <span class="XxTiez">'+data.data.messageList.data[i].content+'</span></p>'
+	    			}else if(data.data.messageList.data[i].type == "2"){
+						OneHtml += '<p><span>'+data.data.messageList.data[i].username+'</span> 回复了您的帖子 <span class="XxTiez" XxTiezid="'+data.data.messageList.data[i].fid+'">'+data.data.messageList.data[i].title+'</span></p>'
+	    			}else{
+	    				OneHtml += '<p><span>'+data.data.messageList.data[i].username+'</span> 回复了帖子<span class="XxTiez" XxTiezid="'+data.data.messageList.data[i].fid+'">'+data.data.messageList.data[i].title+'</span>中您的评论</p>'
+	    			}
+
+		    	}
+
+	    		$('#item3mobile .homeNewest').append(OneHtml)
+
+	    	}
+	    },
+	    error: function() {
+	        mui.toast('失败');
+	    },
+	    complete:function(){
+
+		    	$(".TabWrap_top_Backa[data-num = "+index_1+"]").addClass('rpf-active');
+		    	$(".mobile[data-num = "+index_1+"]").addClass('on');
+
+		    }
+	});
+}
+	//我的帖子
+	var pageID = sessionStorage.getItem('page');
+
+	if(pageID){
+		index_1 = pageID;
+	}
+
+	if(index_1 == 1){
+		myTiez(usertoken,pageNum)
+	}else if(index_1 == 2){
+		myHuiF(usertoken,pageNum)
+	}else if(index_1 == 3){
+		myXX(usertoken,pageNum)
+	}
+	sessionStorage.removeItem('page')
+
+
+
+//	上拉刷新
+    $(window).scroll(function(){
+        // scroll at bottom
+        if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+            // load data
+            huifu()
+            xiaoxi()
+            tiezi()
+            $('.prompt2').html('到底了！')
+        }
+    });
+
+//	将页面滚动距离保存起来
+	function pageToTop(){
+		var scroll = mui('.mui-scroll-wrapper').scroll();
+	}
+//	拿到页面高度并跳到该高度下
+	function gotoTop(){
+		var _offset =  sessionStorage.getItem('myPageScroll')
+		console.log("高度 = "+ _offset)
+		$(document).scrollTop(_offset);
+		
+	}
+
+
+//	帖子
+    mui(".YwxgTabbody").on('tap','#myTieZ',function(){
+    	myTiez(usertoken,pageNum)
+    	sessionStorage.setItem("page",1)
+    })
+	mui(".YwxgTabbody").on('tap','#item1mobile .homeNewest li',function(){
+		var forum_contid = $(this).attr('mytiezid');
+	  window.localStorage.setItem("forum_contid",forum_contid)
+
+	  pageToTop();
+	  window.location.href = 'exchange_One_details.html?forum_contid='+forum_contid;
+	})
+
+
+	//我的回复
+	mui(".YwxgTabbody").on('tap','#myHuiF',function(){
+		myHuiF(usertoken,pageNum)
+		sessionStorage.setItem("page",2)
+	})
+
+	mui(".YwxgTabbody").on('tap','#item2mobile li .cont_cont',function(){
+		var forum_contid = $(this).attr('huifid');
+	  window.localStorage.setItem("forum_contid",forum_contid)
+	  pageToTop();
+	  window.location.href = 'exchange_One_details.html?forum_contid='+forum_contid;
+	})
+
+
+
+	//消息
+	mui(".YwxgTabbody").on('tap','#myXX',function(){
+		myXX(usertoken,pageNum)
+		sessionStorage.setItem("page",3)
+	})
+
+	mui(".YwxgTabbody").on('tap','.XxTiez',function(){
+		var forum_contid = $(this).attr('XxTiezid');
+	  window.localStorage.setItem("forum_contid",forum_contid)
+	  window.location.href = 'exchange_One_details.html?forum_contid='+forum_contid;
+	  pageToTop();
+	})
+
+
+
+
+	$(document).ready(function() {
+	 	mui(".YwxgTabbody").on('tap','.TabWrap_top_Back a',function(){
+			 index_1 = $(this).index() + 1;
+	 		$(this).addClass('rpf-active').siblings().removeClass('rpf-active');
+        $(".mobile").eq($(".TabWrap_top_Back a").index(this)).addClass("on").siblings().removeClass('on');
+
+    });
+ });
+</script>

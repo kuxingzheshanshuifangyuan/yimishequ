@@ -1,0 +1,122 @@
+{extend name="base" /}
+{block name="body"}
+<div class="admin-main">
+    <div class="layui-field-box layui-form">
+         <a href="{:url('admin/usergrade/add')}" class="layui-btn layui-btn-small" id="add">
+             <i class="layui-icon">&#xe608;</i> 添加会员等级
+         </a>
+         <table class="layui-table admin-table">
+              <thead>
+                   <tr>
+                       <th style="width: 30px;text-align: center">ID</th>
+                       <th style="text-align: center">名称</th>
+                       <th style="text-align: center">积分</th>
+                       <th style="text-align: center">升级米币</th>
+                       <th style="text-align: center">精华帖数量</th>
+                       <th style="text-align: center">热门帖数量</th>
+                       <th style="text-align: center">是否邀请好友</th>
+                       <th style="text-align: center">状态</th>
+                       <th style="text-align: center">自主购买</th>
+                       <th style="text-align: center">操作</th>
+                   </tr>
+              </thead>
+              <tbody>
+                   {foreach name="auth_group_list" item="vo"}
+                        <tr>
+                            <td style="text-align: center">{$vo.id}</td>
+                            <td style="text-align: center">{$vo.name}</td>
+                            <td style="text-align: center">{$vo.score}</td>
+                            <td style="text-align: center">{$vo.money}</td>
+                            <td style="text-align: center">{$vo.choice}</td>
+                            <td style="text-align: center">{$vo.hot}</td>
+                            <td style="text-align: center">{empty name="$vo.is_friend"}否{else /}是{/empty}</td>
+                            <td style="text-align: center">
+                                <input type="checkbox" name="status" lay-skin="switch" lay-text="开启|关闭" lay-filter="switchTest" value="{$vo['id']}" {php}echo $vo['is_default']==1 ? 'checked' : '';{/php}>
+                            </td>
+                            <td style="text-align: center">
+                                <input type="checkbox" name="status" lay-skin="switch" lay-text="允许|禁止" lay-filter="switchBuy" value="{$vo['id']}" {php}echo $vo['is_self_buy']==1 ? 'checked' : '';{/php}>
+                            </td>
+                            <td style="text-align: center">
+                                <a href="{:url('admin/usergrade/edit',['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <a href="javascript:;" data-id="{$vo.id}" data-url="{:url('admin/usergrade/delete',array('id'=>$vo['id']))}" data-opt="del"  class="elementdel layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                            </td>
+                        </tr>
+                   {/foreach}
+              </tbody>
+         </table>
+    </div>
+</div>
+{/block}
+{block name="js"}
+    <script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+    <script type="text/javascript">
+
+        //状态 默认
+        layui.use(['form'],function(){
+            var form = layui.form(),jq = layui.jquery;
+
+            // jq('.btable-paged').eq(1).hide();
+            var status=0;
+
+            form.on('switch(switchTest)', function(data){
+                loading = layer.load(2, {shade: [0.2,'#000']});
+
+                if(data.elem.checked){
+                    status=1;
+                }else{
+                    status=0;
+                }
+
+                var url="{:url('admin/usergrade/updatestatus')}?id="+data.value+'&status='+status;
+
+                jq.get(url,function(data){
+
+                    if(data.code == 200){
+                        layer.close(loading);
+                        layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                            location.reload(true);
+                        });
+                    }else{
+                        layer.close(loading);
+                        layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                    }
+                });
+                return false;
+            });
+
+        })
+
+        //是否允许自主购买
+        layui.use(['form'],function(){
+            var form = layui.form(),jq = layui.jquery;
+
+            //jq('.btable-paged').eq(1).hide();
+            var status=0;
+            form.on('switch(switchBuy)', function(data){
+                loading = layer.load(2, {shade: [0.2,'#000']});
+
+                if(data.elem.checked){
+                    status=1;
+                }else{
+                    status=0;
+                }
+
+                var url="{:url('admin/usergrade/updatebuy')}?id="+data.value+'&status='+status ;
+
+                jq.get(url,function(data){
+
+                    if(data.code == 200){
+                        layer.close(loading);
+                        layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                            location.reload(true);
+                        });
+                    }else{
+                        layer.close(loading);
+                        layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                    }
+                });
+                return false;
+            });
+        })
+    </script>
+{/block}

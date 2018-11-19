@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="__PUBLIC__forum/invite/css/mui.min.css" rel="stylesheet" />
+		<link href="__PUBLIC__forum/invite/css/style.css" rel="stylesheet" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			.mui-input-group label {
+				width: 22%;
+			}
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+			}
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			.mui-btn {
+				padding: 10px;
+			}
+
+		</style>
+	</head>
+
+	<body class="inviregbody">
+		<!--<header class="mui-bar mui-bar-nav">-->
+			<!--<a class="mui-action-back mui-icon "></a>-->
+			<!--<h1 class="mui-title">一米社区</h1>-->
+		<!--</header>-->
+
+		<div class="LoginTop" style="padding-top: 0">
+			<img src="__PUBLIC__forum/invite/images/loginbanner.png" alt="">
+		</div>
+		<p class="introduce">理性 包容 开放的行业交流社区</p>
+		<div class="mui-content regCont">
+			<form id='login-form' class="mui-input-group LoginForm" action="{:url('index/Login/register')}">
+				<div class="mui-input-row LoginForm-list">
+					<label><img src="__PUBLIC__forum/invite/images/zhanghao.png" alt="" /></label>
+					<input id='regaccount' type="text" class="mui-input-clear mui-input" placeholder="请输入手机号">
+				</div>
+				<div class="passWrap">
+					<div class="mui-input-row LoginForm-list">
+						<label><img src="__PUBLIC__forum/invite/images/dun.png" alt="" /></label>
+						<input id='regYzm' type="text" class="mui-input-clear mui-input" placeholder="请输入验证码">
+					</div>
+					<!--<div class="getYzm" id="reggetYzm">
+							获取验证码
+					</div>-->
+					<input type="button" class="getYzm" id="reggetYzm" value="获取验证码" />
+				</div>
+				<div class="mui-input-row LoginForm-list">
+					<label><img src="__PUBLIC__forum/invite/images/pass.png" alt="" /></label>
+					<input id='regpassword' type="password" class="mui-input-clear mui-input" placeholder="设置6~16位长度的密码">
+				</div>
+				<input type="hidden" name="tid" value="{:request()->param('tid')}" id="hiddenTid">
+				
+			</form>
+			<div class="mui-content-padded LoginBtn">
+				<button id='inviReg' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+			</div>
+		</div>
+		<script src="__PUBLIC__forum/invite/js/md5.js"></script>
+		<script src="__PUBLIC__forum/invite/js/jquery-3.2.1.min.js"></script>
+		<script src="__PUBLIC__forum/invite/js/mui.min.js"></script>
+		<script src="__PUBLIC__forum/invite/js/inviReg.js"></script>
+	</body>
+
+</html>

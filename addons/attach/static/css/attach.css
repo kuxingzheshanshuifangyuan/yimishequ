@@ -1,0 +1,31 @@
+#attachname {
+    position:relative;
+    width: 100%;
+    text-align:center;
+    bottom: 0;
+    left: 0;
+   
+    overflow: hidden;
+    z-index: 50;
+    margin-bottom:5px;
+    border-radius:3px;
+}
+
+.layui-form-item .percentage{
+position:absolute;
+	background:#5FB878;
+	width:0%;
+	left: 0px;
+    top: 0px;
+height:38px;
+}
+.layui-form-item .text{
+	z-index:999;
+	left: 0px;
+    top: 0px;
+	position:absolute;
+	text-align:center;
+	width:350px;
+height:38px;
+line-height:38px;
+}

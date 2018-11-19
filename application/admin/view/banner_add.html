@@ -1,0 +1,51 @@
+{extend name="base" /}
+{block name="body"}
+
+<!--tab标签-->
+<div class="layui-tab layui-tab-brief">
+
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form form-container" method="post" action="{:url('banner/save')}"  enctype="multipart/form-data" >
+                <div class="layui-form-item">
+                    <label class="layui-form-label">序号</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="order" required  lay-verify="required" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">图片</label>
+                    <div class="layui-input-block">
+                        <input type="file" name="file" >
+                        <span style="color:#666">建议尺寸559*356，支持jpg、png、gif，最大不能超过50KB</span>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">图片链接</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="url" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">轮播图描述</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="dec" style="margin-top:10px;" class="layui-input"/>
+                    </div>
+                </div>
+                <div class="btable-paged" >
+                    <div class="layui-main">
+                        <div class="formbtngroup">
+                            <input type="submit"  value="添加" class="layui-btn " style="width: 70px;"/>
+                            <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/formadd.js"></script>
+{/block}

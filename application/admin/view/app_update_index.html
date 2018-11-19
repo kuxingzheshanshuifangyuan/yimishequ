@@ -1,0 +1,58 @@
+{extend name="base" /}
+{block name="css"}
+<link rel="stylesheet" href="__ADMIN__/css/form.css">
+{/block}
+{block name="body"}
+<div class="admin-main layui-form">
+    <div class="layui-field-box">
+        <div class="layui-box-searchber">
+            <a href='{:url("app_update/add")}' class="layui-btn layui-btn-small" id="add"><i class="layui-icon"></i>添加渠道</a>
+        </div>
+        <hr>
+        <table class="layui-table admin-table">
+            <thead>
+                <tr>
+                    <th style="text-align: center">ID</th>
+                    <th style="text-align: center">渠道名称</th>
+                    <th style="text-align: center">当前版本</th>
+                    <th style="text-align: center">描述</th>
+                    <!--<th style="text-align: center">更新次数</th>-->
+                    <th style="text-align: center">最近更新时间</th>
+                    <!--<th style="text-align: center">添加时间</th>-->
+                    <!--<th style="text-align: center">马甲包</th>-->
+                    <!--<th style="text-align: center">更新模式</th>-->
+                    <!--<th style="text-align: center">状态</th>-->
+                    <th style="text-align: center">操作</th>
+                </tr>
+            </thead>
+            <tbody id="content">
+                {notempty name="dataList"}
+                    {volist name="dataList" id="val"}
+                        <tr>
+                            <td style="text-align: center">{$val.id}</td>
+                            <td style="text-align: center">{$val.name}</td>
+                            <td style="text-align: center">{$val.version}</td>
+                            <td style="text-align: center">{$val.description}</td>
+                            <!--<td style="text-align: center">1</td>-->
+                            <td style="text-align: center">{$val.update_time|date="Y-m-d H:i:s",###}</td>
+                            <!--<td style="text-align: center">{$val.create_time|date="Y-m-d H:i:s",###}</td>-->
+                            <!--<td style="text-align: center">-->
+                                <!--<input type="checkbox" name="status" lay-skin="switch" lay-text="启用|禁用" lay-filter="switchTest"  value="{$val['id']}" {php}echo $val['status']==1 ? 'checked' : '';{/php}>-->
+                            <!--</td>-->
+                            <td style="text-align: center">
+                                <a href='{:url("app_update/push",["id"=>$val.id])}' class="layui-btn layui-btn-normal layui-btn-mini" title="编辑">发布新版</a>
+                                <!--<a href="javascript:;" data-id="{$val.id}" data-url='{:url("app_update/delete",["id"=>$val.id])}' data-opt="del" class="elementdel layui-btn layui-btn-danger layui-btn-mini" title="删除">删除</a>-->
+                            </td>
+                        </tr>
+                    {/volist}
+                {/notempty}
+            </tbody>
+        </table>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+{/block}

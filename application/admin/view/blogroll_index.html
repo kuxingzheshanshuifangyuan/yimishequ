@@ -1,0 +1,96 @@
+{extend name="base" /}
+{block name="body"}
+
+<div class="admin-main">
+    <div class="layui-field-box layui-form">
+        <a href="{:url('blogroll/add')}" class="layui-btn layui-btn-small" id="add">
+            <i class="layui-icon">&#xe608;</i> 添加友情链接
+        </a>
+        <table class="layui-table admin-table">
+            <thead>
+                <tr>
+                    <th style="text-align: center">ID</th>
+                    <th style="text-align: center">排序</th>
+                    <th style="text-align: center">链接(中文)名称</th>
+                    <th style="text-align: center">链接(英文)名称</th>
+                    <th style="text-align: center">图片</th>
+                    <th style="text-align: center">友情链接</th>
+                    <th style="text-align: center">添加时间</th>
+                    <th style="text-align: center">更新时间</th>
+                    <th style="text-align: center">状态</th>
+                    <th style="text-align: center">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {volist name="blogroll" id="val"}
+                    <tr>
+                        <td style="text-align: center">{$val['id']}</td>
+                        <td style="text-align: center">{$val['sort']}</td>
+                        <td style="text-align: center">{$val['link_ch']}</td>
+                        <td style="text-align: center">{$val['link_en']}</td>
+                        <td style="text-align: center">
+                            <img src="__ROOT__/{$val['link_img']}" alt="" style="width: 70px;height:70px" />
+                        </td>
+                        <td style="text-align: center">{$val['url']}</td>
+                        <td style="text-align: center">{$val['create_time']|date="Y-m-d H:i:s",###}</td>
+                        <td style="text-align: center">{$val['update_time']|date="Y-m-d H:i:s",###}</td>
+                        <td style="text-align: center">
+                            <input type="checkbox" name="status" lay-skin="switch" lay-text="启用|禁用" lay-filter="switchTest"  value="{$val['id']}" {php}echo $val['status']==1 ? 'checked' : '';{/php}>
+                        </td>
+                        <td style="text-align: center">
+                            <a href='{:url("blogroll/edit",["id"=>$val["id"]])}' class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                            <a href="javascript:;" data-id="{$val.id}" data-url="{:url('admin/blogroll/delete',['id'=>$val['id']])}" data-opt="del"  class="elementdel layui-btn layui-btn-danger layui-btn-mini " title="删除">删除</a>
+                        </td>
+                    </tr>
+                {/volist}
+            </tbody>
+        </table>
+    </div>
+    <div style="margin-right: 30px">
+        {$page}
+    </div>
+</div>
+
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+{/block}
+{block name="script"}
+<script>
+    layui.use(['form'],function(){
+        var form = layui.form()
+            ,jq = layui.jquery;
+
+        //jq('.btable-paged').eq(1).hide();
+        var status=0;
+        form.on('switch(switchTest)', function(data){
+            loading = layer.load(2, {
+                shade: [0.2,'#000']
+            });
+            if(data.elem.checked){
+                status=1;
+            }else{
+                status=0;
+            }
+            var url="{:url('admin/blogroll/updatestatus')}?id="+data.value+'&status='+status ;
+
+            jq.get(url,function(data){
+
+                if(data.code == 200){
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        //  location.reload();
+                    });
+                }else{
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+            return false;
+        });
+
+    })
+
+</script>
+{/block}

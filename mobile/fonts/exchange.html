@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			/** { touch-action: none; }*/
+			.title {
+				padding: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+				background-color: #fff;
+			}
+			.mui-slider-group{
+				margin-bottom: 50px;
+			}
+			.mui-control-content{
+				/*background: red !important;*/
+				/*border: 2px solid red;*/
+				/*padding-bottom: 50px;*/
+			}
+			.mui-scroll-wrapper{
+				overflow: auto !important;
+			}
+			.mui-slider .mui-slider-group .mui-slider-item{
+				width: auto !important;
+			}
+			.tab_btn_con{
+				height: 50px;
+				position: fixed;
+				z-index: 999;
+				background: #fff;
+				line-height: 50px;
+				width: 100%;
+			}
+			.tab_btn{
+				height: 100%;
+				white-space: nowrap;
+				overflow: scroll;
+				width: 100%;
+			}
+			.tab_btn a{
+				margin: 0 10px;
+				color: #333;
+			    font-size: 16px;
+			}
+			.tab_btn .mui-active{
+				color: red !important;
+				position: relative;
+			}
+			.tab_btn .mui-active::after{
+                    content: '·';
+                    font-size: 30px;
+                    position: absolute;
+                    top: 1px;
+                    left: 43%;
+                }
+			.exchangerBody .TabWrap .TabWrap_bottom .homeNewest .HomeList .HomeList_pOne{
+				color: #333;
+			}
+			.no-fourm{
+				font-size: 16px;
+				text-align: center;
+			}
+			
+		</style>
+	</head>
+
+	<body class="exchangerBody">
+		<div id="slider" class="TabWrap" style="overflow: auto;">
+
+			<!--<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted TabWrap_top">
+			    <div class="mui-scroll tab_btn">
+			    </div>
+			</div>-->
+			<div class="tab_btn_con">
+				<div class="tab_btn">
+				</div>
+			</div>
+			<div class="mui-slider-group TabWrap_bottom mui-content mui-scroll-wrapper" id="pullrefresh">
+				<div id="contentAll" class="mui-slider-item mui-control-content mui-active mui-scroll">
+
+					<ul class="mui-table-view homeNewest" style="display: none;">
+					    <li class="mui-table-view-cell">
+					        <a class="mui-navigate" herf="">
+					        	<span class="homeNewest_zuixin">置顶</span>
+					        </a>
+					    </li>
+					    <div class="homeNewestZd">
+
+					    </div>
+					</ul>
+
+					<ul class="mui-table-view homeNewest">
+						<div class="homeNewestList">
+
+						</div>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--<div class="nogengduo">
+			<p>没有更多了</p>
+		</div>-->
+		<div class="Fbxt">
+			<img src="../images/fatie.png"  />
+		</div>
+		<nav class="mui-bar mui-bar-tab rpfNav" >
+			<a id="defaultTab" class="mui-tab-item home">
+				<span class=""><img src="../images/tab1hei.png" alt="" /></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item mui-active exchange">
+				<span class=""><img src="../images/tab2.png" alt="" /></span>
+				<span class="mui-tab-label">交流区</span>
+			</a>
+			<a class="mui-tab-item superMarket coatHid" >
+				<span class=""><img src="../images/tab3hei.png" alt="" /></span>
+				<span class="mui-tab-label">超市</span>
+			</a>
+			<a class="mui-tab-item my" >
+				<span class=""><img src="../images/tab4hei.png" alt="" /></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		<div id="share" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#">拍照或录像</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#">选取现有的</a>
+				</li>
+			</ul>
+			
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#picture"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/exchange.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

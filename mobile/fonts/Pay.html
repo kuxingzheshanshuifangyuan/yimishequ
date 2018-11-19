@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body class="paybody">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">充值</h1>
+		</header>
+		<div class="payStat">
+			<span class="PayRecord">消费明细</span>
+			<p class="Mbshuliang">9999999</p>
+			<p class="Mbzi">米币余额（米币）</p>
+			<div class="MbXfYe">
+				<div class="MbXfYe_list">
+					<p>8888</p>
+					<p>累计收益（米币）</p>
+				</div>
+				<div class="MbXfYe_list" style="border-left:1px solid #ffa7a0">
+					<p>8888</p>
+					<p>累计收益（米币）</p>
+				</div>
+			</div>
+		</div>
+		<div class="Paytaocan">
+			<h4>请选择充值套餐:</h4>
+			<div class="Paytaocan_wrap mui-clearfix">
+				<div class="Paytaocan_wrap_List Actborder">
+					<div class="Paytaocan_wrap_List_back">
+						<p class="Mb">10米米</p>
+						<p>售价：1.00元</p>
+					</div>
+					<img src="../images/payczgou.png" class="payczgou"/>
+				</div>
+				<div class="Paytaocan_wrap_List">
+					<img src="../images/paytj.png" class="paytj"/>
+					<div class="Paytaocan_wrap_List_back">
+						<p class="Mb">10米米</p>
+						<p>售价：1.00元</p>
+					</div>
+					<img src="../images/payczgou.png" class="payczgou"/>
+				</div>
+				<div class="Paytaocan_wrap_List">
+					<div class="Paytaocan_wrap_List_back">
+						<p class="Mb">10米米</p>
+						<p>售价：1.00元</p>
+					</div>
+					<img src="../images/payczgou.png" class="payczgou"/>
+				</div>
+				<div class="Paytaocan_wrap_List">
+					<div class="Paytaocan_wrap_List_back">
+						<p class="Mb">10米米</p>
+						<p>售价：1.00元</p>
+					</div>
+					<img src="../images/payczgou.png" class="payczgou"/>
+				</div>
+				<div class="Paytaocan_wrap_List">
+					<div class="Paytaocan_wrap_List_back">
+						<p class="Mb">10米米</p>
+						<p>售价：1.00元</p>
+					</div>
+					<img src="../images/payczgou.png" class="payczgou"/>
+				</div>
+				<div class="Paytaocan_wrap_List">
+					<div class="Paytaocan_wrap_List_back">
+						<p class="Mb">10米米</p>
+						<p>售价：1.00元</p>
+					</div>
+					<img src="../images/payczgou.png" class="payczgou"/>
+				</div>
+				<div class="Paytaocan_wrap_List">
+					<div class="Paytaocan_wrap_List_back">
+						<p class="Mb">10米米</p>
+						<p>售价：1.00元</p>
+					</div>
+					<img src="../images/payczgou.png" class="payczgou"/>
+				</div>
+			</div>
+		</div>
+		<input type="button" class="QrPay" value="确认付款"/>
+		<p class="biaozhu">选择并支付即表示阅读并同意<a href="javascript:;">《一米社区授权协议》</a></p>
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			$('.Paytaocan .Paytaocan_wrap .Paytaocan_wrap_List .payczgou').hide();
+			$('.Paytaocan .Paytaocan_wrap .Paytaocan_wrap_List:nth-of-type(1) .payczgou').show();
+			mui(".paybody").on('tap','.Paytaocan_wrap_List',function(){
+				$(this).addClass('Actborder').siblings().removeClass('Actborder');
+				$(this).find('.payczgou').show().parent().siblings().find('.payczgou').hide()
+			})
+			
+			
+			mui(".paybody").on('tap','.PayRecord',function(){
+			  mui.openWindow({
+					url:'PayRecord.html',
+					id:'PayRecord.html',
+				});
+			})
+			mui.init()
+		</script>
+	</body>
+
+</html>

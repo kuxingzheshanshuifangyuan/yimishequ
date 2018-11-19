@@ -1,0 +1,140 @@
+body{
+	background:#e91a5f;
+		
+}
+.mui-bar-nav{
+	background: #ff5d3e;
+	box-shadow: none;
+}
+.mui-bar-nav a,.mui-bar-nav h1{
+	color: #fff;
+}
+.signin-content{
+	/*height: 500px;*/
+	margin-top: 0.8rem;
+	width: 100%;
+	padding: 0.5rem 0;
+	background-image: linear-gradient(180deg, 
+		#ff5d3e 0%, 
+		#e91a5f 100%), 
+	linear-gradient(
+		#ffffff, 
+		#ffffff);
+	background-blend-mode: normal, 
+		normal;
+}
+.calendar-top{
+	height: 3.42rem;
+	width: 90%;
+	margin: 0 auto;
+	background: #fff;
+	border-radius: 10px;
+	display: flex;
+	flex-direction:column ;
+	justify-content: center;
+}
+.sign-text{
+	display: flex;
+}
+.sign-text div{
+	flex: 1;
+	text-align: center;
+}
+.sign-text div p:first-child{
+	color: rgba(0, 0, 0, 0.7);
+	font-size: 0.28rem;
+    opacity: 0.7;
+}
+.sign-text div p:last-child{
+	color: #303030;
+	font-size: 0.4rem;
+}
+.sign-btn{
+	width: 5.43rem;
+	height: 1rem;
+	/*text-align: center;*/
+	/*line-height: 1rem;*/
+	color: #fff;
+	margin: 0 auto;
+	border-radius: 10px;
+	font-size: 0.34rem;
+    margin-top: 0.3rem;
+	background-image: linear-gradient(90deg, 
+		#ff1481 0%, 
+		#ff5d3e 100%), 
+	linear-gradient(
+		#ffffff, 
+		#ffffff);
+	background-blend-mode: normal, 
+		normal;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sign-btn img{
+	width: 0.52rem;
+	height: 0.52rem;
+    margin-right: 0.2rem;
+}
+.calendar{
+    height: 8rem;
+    width: 90%;
+    margin: 0.74rem auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 20px 0px -7px rgba(255, 255, 255, 0.4);
+}
+.link{
+    width: 85%;
+    margin: -.4rem auto;
+}
+.linkL,.linkR{
+	width: 0.57rem;
+	height: 1.23rem;
+	background: url(../images/2.0/calender-link.png) center center no-repeat;
+	background-size: 50% 90%;
+	float: left;
+}
+.linkR{
+	float: right;
+}
+.sign-tip{
+	padding: 0 0.5rem;
+}
+.sign-tip-text{
+	color: #9e9d9d;
+	font-size: 0.26rem;
+	vertical-align: sub;
+}
+.sign-tip-text span{
+	color: rgb(102,102,102);
+}
+.sign-tip-text span span{
+	color: #ff4a50;
+	font-size: 0.36rem;
+}
+.receive-now{
+	border: none;
+	float: right;
+	display: inline-block;
+    width: 1.96rem;
+    height: 0.58rem;
+    text-align: center;
+    line-height: 0.58rem;
+    color: #fff;
+    margin: 0 auto;
+    border-radius: 5px;
+    font-size: 0.26rem;
+    background-image: linear-gradient(90deg, 
+ #ff1481 0%, 
+ #ff5d3e 100%), 
+ linear-gradient(
+ #ffffff, 
+ #ffffff);
+    background-blend-mode: normal, 
+ normal;
+}
+.receive-now-no{
+	background: #e5e5e5;
+}

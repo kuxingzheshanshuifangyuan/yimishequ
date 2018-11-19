@@ -1,0 +1,29 @@
+<div class="admin-main">
+<div class="layui-field-box layui-form">
+	<table class="layui-table admin-table">
+  <thead>
+    <tr>
+     
+                        {volist name="listKey" id="vo"}
+				<th>{$vo}</th>
+			{/volist}
+                        <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+ 
+      	{volist name="list" id="lv" key="vo"}
+                    <tr>
+                   
+                        
+			{volist name="listKey" id="lk"}
+			
+				<td>{$lv[$key]}</td>
+			{/volist}
+        <td></td>
+      </tr>
+    {/volist}
+  </tbody>
+</table>
+</div>
+</div>

@@ -1,0 +1,199 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>一米社区-用户组</title>
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo_1.css" />
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+
+  <style>
+    .select-this >a >div{
+      background-position:-325px -13px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="contentWrap clearfix">
+
+
+    <div class="user-content">
+      <p class="crumbs">
+        <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+        <a href="#">设置</a> > <a href="#">用户组</a>
+      </p>
+
+      <div class="user-left">
+        <div>
+          <div class="">
+            <a href="{:url('edit_head')}">
+              <div></div>
+              <p>修改头像</p>
+            </a>
+          </div>
+
+          <div class="">
+            <a href="{:url('edit')}">
+              <div></div>
+              <p>个人资料</p>
+            </a>
+          </div>
+
+          <div class="">
+            <a href="{:url('point_info')}">
+              <div></div>
+              <p>积分</p>
+            </a>
+          </div>
+
+          <div class="">
+            <a href="{:url('money_info')}">
+              <div></div>
+              <p>米币</p>
+            </a>
+          </div>
+          <div class="select-this">
+            <a href="javascript:void(0)">
+              <div></div>
+              <p>用户组</p>
+            </a>
+          </div>
+          <div class="">
+            <a href="{:url('password')}">
+              <div></div>
+              <p>密码安全</p>
+            </a>
+          </div>
+          <div class="">
+            <a href="{:url('cooperation')}">
+              <div></div>
+              <p>商务合作</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-right grade">
+        <div class="grade">
+          <div class="set-tab">
+            <div class="set-tab-top">
+              <span class="tab-seclet">我的用户组</span>
+              <span>我的权限</span>
+            </div>
+
+            <div class="set-tab-content">
+              <!-- 第一个选项卡 -->
+              <div class="tab-content-show">
+
+                <div class="point-title">
+                  <i class="my-grade"></i>
+                  我的用户组：<span class="my-grade-info">{$user_data.grade_name}</span>
+                  <i></i>
+                  我的米币：<span>{$user_data['money']}</span>
+                </div>
+
+                <p class="rule-title grade-title"> <i></i> 用户组升级规则</p>
+                <p class="grade-info">用户拥有一定积分并且完成相应的等级任务，我们将自动将您升级至更高级的用户组。</p>
+                
+
+                <p class="rule-title grade-title2"> <i></i> 用户组升级体系</p>
+                <table class="layui-table" lay-skin="line" >
+                    <thead>
+                      <tr>
+                          <th>等级</th>
+                          <th>积分</th>
+                          <th>精华帖数量</th>
+                          <th>热门帖数量</th>
+                          <th>邀请好友</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {foreach $gradeList as $val}
+                      <tr>
+                        <td>{$val.name}</td>
+                        <td>{$val.score}</td>
+                        <td>{$val.choice}</td>
+                        <td>{$val.hot}</td>
+                        {if condition="$val.is_friend"}<td class="redColor">&#10004</td>{else/}<td></td>{/if}
+                      </tr>
+                      {/foreach}
+                      <!--<tr>-->
+                        <!--<td>见习米</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>10</td>-->
+                        <!--<td>10</td>-->
+                        <!--<td class="redColor">&#10004</td>-->
+                      <!--</tr>-->
+                      <!--<tr>-->
+                        <!--<td>见习米</td>-->
+                        <!--<td>0</td>-->
+                        <!--<td>10</td>-->
+                        <!--<td>10</td>-->
+                        <!--<td class="redColor">&#10004</td>-->
+                      <!--</tr>-->
+                    </tbody>
+                </table>
+              </div>
+
+              <!-- 第二个选项卡 -->
+              <div>
+                <div class="permissions">
+                  <div class="no-info">
+                    <div>
+
+                    </div>
+                    <p>用户组对应的权限正在完善，请耐心等待。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- <div class="paginationCon">
+          <div class="m-style M-box2"></div>
+      </div> -->
+    </div>
+
+
+  </div>
+</body>
+
+</html>
+
+<script src="__PUBLIC__forum/js/tab.js"></script>
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+
+<script type="text/javascript">
+tabSelect()
+  $(function () {
+    $('.M-box2').pagination({
+      totalData: 100,
+      showData: 5,
+      coping: true,
+      homePage: '首页',
+      prevContent: '上一页',
+      nextContent: "下一页",
+      endPage: '末页',
+      keepShowPN: true,
+      count: 1
+    });
+  })
+</script>
+<script>
+
+
+
+</script>
+{/block}

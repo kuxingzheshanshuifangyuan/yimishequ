@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>修改签名</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet"/>
+		<link rel="stylesheet" type="text/css" href="../css/setUserInfo.css"/>
+	</head>
+	
+	<body class="Settingbody">
+		<header class="mui-bar mui-bar-nav ">
+			<a href="javascript:;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="history"></a>
+			<h1 id="title" class="mui-title">修改签名</h1>
+		</header>
+		
+		<div class="gap"></div>
+		<div class="setUserInfo">
+		   	<form action="" method="post" class="">
+		   		<textarea name="sign" id="sign" maxlength="40" placeholder="请输入签名内容"></textarea>
+		   		<span class="text-num_"><span>0</span>.40</span>
+		   	</form>
+		   	<div class="submit">确定</div>
+		</div>
+	   	
+	   	
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/setting.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init({
+			    beforeback: function() {
+			　　　　 //获得父页面的webview
+			        var list = plus.webview.currentWebview().opener();
+			　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+			        mui.fire(list, 'refresh');
+			        //返回true,继续页面关闭逻辑
+			        return true;
+			    }
+			});
+
+			
+			
+			$('.setUserInfo textarea').on('input propertychange keydown change', function() {  
+			    var self = this;
+		        $('.text-num_ span').text($(self).val().length)
+		        if($(self).val().length == 40){
+		        	mui.toast("昵称最多为40个字")
+		        }
+			}); 
+			
+			mui('body').on('tap', '.submit', function() {
+				var sign = $('#sign').val();
+
+				if(sign == "") {
+					mui.toast("请输入签名内容")
+					$('#sign').focus();
+				} else {
+					$('#sign').blur();
+					console.log(sign)
+					updateUserDescription();
+				}
+			})
+
+			function updateUserDescription() {
+				var sign = $('#sign').val();
+				mui.ajax('http://www.1miclub.com/api/User/updateUserDescription.html', {
+					data: {
+						token: usertoken,
+						description: sign
+					},
+					dataType: 'jsonp',
+					type: 'post',
+					success: function(data) {
+						
+						data = JSON.parse(data);
+						mui.toast("修改成功！")
+						mui.back();
+					},
+					error: function() {
+						mui.toast('失败');
+					}
+				});
+			}
+			initUserInfo()
+			function initUserInfo(){
+				mui.ajax('http://www.1miclub.com/api/User/UserInfo', {
+				    data: {
+				    	token: usertoken
+				    },
+				    dataType: 'jsonp',
+				    type: 'post',
+				    timeout: 10000,
+				    success: function(data) {
+			    	
+				  		data = JSON.parse(data)
+				    	if(data.error_code == 0){
+				    		console.log(data)
+			    			var sign = $('#sign').val(data.data.description);
+				    	}
+			    	
+				    },
+				    error: function() {
+				        mui.toast('失败');
+				    }
+				});
+			}
+		</script>
+	</body>
+
+</html>

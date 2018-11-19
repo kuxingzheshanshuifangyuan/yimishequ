@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="__PUBLIC__forum/invite/css/mui.min.css" rel="stylesheet" />
+		<link href="__PUBLIC__forum/invite/css/style.css" rel="stylesheet" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			.mui-input-group label {
+				width: 22%;
+			}
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+			}
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			.mui-btn {
+				padding: 10px;
+			}
+
+		</style>
+	</head>
+
+	<body class="inviregbody">
+		<!--<header class="mui-bar mui-bar-nav">-->
+			<!--<a class="mui-action-back mui-icon"></a>-->
+			<!--<h1 class="mui-title">一米社区</h1>-->
+		<!--</header>-->
+
+		<div class="LoginTop" style="padding-top: 0">
+			<img src="__PUBLIC__forum/invite/images/loginbanner.png" alt="">
+		</div>
+		<p class="introduce dowloadIntroduce">理性 包容 开放的行业交流社区</p>
+		<button class="donwoadBtn" id="ios">苹果IOS版本&nbsp;&nbsp;APP&nbsp;&nbsp;Store</button>
+		<button class="donwoadBtn" id="an">安卓版本&nbsp;&nbsp;Android&nbsp;&nbsp;Market</button>
+		
+		<script src="__PUBLIC__forum/invite/js/jquery-3.2.1.min.js"></script>
+		<script src="__PUBLIC__forum/invite/js/lib/rem.js"></script>
+	</body>
+
+</html>
+<script>
+	$('.donwoadBtn').click(function(){
+		window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.yimiclub.www'
+	})
+</script>

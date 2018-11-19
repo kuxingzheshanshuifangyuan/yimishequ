@@ -1,0 +1,107 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+<!--/*Garylew writing*/-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>一米社区-我的帖子</title>
+    <script src="__PUBLIC__js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__css/article.css">
+    <link rel="stylesheet" href="__PUBLIC__css/icon.css">
+</head>
+
+<body>
+    <div class="crumbs" style="margin: 0 auto ">
+        <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+        <a href="#">帖子</a> >
+        <a href="#">我的帖子</a> >
+        <a href="#">全部帖子</a>
+    </div>
+    <section>
+        <ul class="article_left">
+            <li class="article_menu articleHot"><i class="icon icon-huifu01"></i> <a href="#">我的帖子</a></li>
+            <li class="article_menu"><i class="icon icon-huifu02-1"></i><a href="{:url('user/my_reply')}">我的回复</a></li>
+            <li class="article_menu"><i class="icon icon-huifu03-1"></i> <a href="{:url('user/my_collect')}">我的收藏</a></li>
+        </ul>
+        <div class="article_right">
+            <ul class="articleTip_list">
+                <li class="articleTip_list_hot"><i></i>全部帖子</li>
+                <!--<li><i></i>热门帖子</li>-->
+                <!--<li><i></i>我的精华</li>-->
+                <!--<li><i></i>最新发表</li>-->
+            </ul>
+
+
+            <div class="article_project">
+                {if condition="$data_list"}
+                <ul>
+                    {foreach $data_list as $val}
+                    <li class="article_tittle">
+                        <h1><a href="{:url('forum/detail',['id'=>$val['id']])}">{$val.title}</a></h1>
+                        {if condition="$val.hot"}<img src="__PUBLIC__forum/img/userInfo/hot.png" alt="" width="15px" height="20px">{/if}
+                        {if condition="$val.praise"}<img src="__PUBLIC__forum/img/userInfo/zan.png" alt="" width="20px" height="20px">{/if}
+                        {if condition="$val.new"}<img src="__PUBLIC__forum/img/userInfo/new.png" alt="" width="20px" height="20px">{/if}
+                        {if condition="$val.pic"}<img src="__PUBLIC__forum/img/communication_region/pic.png" alt="" width="20px" height="20px">{/if}
+
+                        <p>{$val.description|html_entity_decode|strip_tags}</p>
+                        <div class="tittle_left">
+                            <p class="tittle_time">{$val.create_time|date="Y/m/d H:i",###}</p>
+                            <a class="tittle_top" href="#">{$val.cate_name}</a>
+                            <div class="tittle_menu">菜单
+                                <ul data-state="0">
+                                    <li class="tittle_edit"><a href="{:url('forum/edit',['id'=>$val['id']])}">编辑</a></li>
+                                    <li class="tittle_del">删除</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tittle_right">
+                            <p><img width="14px" height="14px" class="tittle_zang" src="__PUBLIC__forum/img/userInfo/zan_.png">{$val.praise}</p>
+                            <p><img width="14px" height="14px" class="tittle_huifu" src="__PUBLIC__forum/img/userInfo/reply.png">{$val.reply}</p>
+                            <p><img width="17px" height="14px" class="tittle_look" src="__PUBLIC__forum/img/userInfo/view.png">{$val.view}</p>
+                        </div>
+                    </li>
+                    {/foreach}
+
+                    <div class="paginationCon" style="text-align:center;margin: 20px auto">
+                        <div class="m-style M-box2" style="display: inline-block">{$page}</div>
+                    </div>
+                </ul>
+                {else/}
+                <div class="articleTip_null" data-state="0"><i>暂时没有内容哦</i></div>
+                {/if}
+            </div>
+        </div>
+        <script>
+            // if ($('.articleTip_null').data('state') == '0') {
+            //     $('.articleTip_null').hide();
+            // }
+            $(function () {
+                // $(".article_left").on("click", "li", function () {
+                //     $('.articleHot').removeClass('articleHot');
+                //     $(this).addClass('articleHot');
+                // });
+                $(".articleTip_list").on("click", "li", function () {
+                    $('.articleTip_list_hot').removeClass('articleTip_list_hot');
+                    $(this).addClass('articleTip_list_hot');
+                });
+                $('.tittle_left').on('click', '.tittle_menu', function () {
+                    if($(this).children('ul').data('state')=='0'){
+                        $('.tittle_menu ul').data('state','0');
+                        $('.tittle_menu ul').hide();
+                        $(this).children('ul').toggle();
+                        $(this).children('ul').data('state','1');
+                    }else {
+                        $(this).children('ul').toggle();
+                    }
+                });
+                $('.tittle_left').on('mouseout', '.tittle_menu', function () {
+                    $(this).hide(500);
+                })
+            })
+        </script>
+    </section>
+</body>
+
+</html>
+{/block}

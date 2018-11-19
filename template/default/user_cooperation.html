@@ -1,0 +1,128 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>一米社区-商务合作</title>
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo_1.css" />
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+
+  <style>
+    .select-this >a >div{
+      background-position:-219px -13px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="contentWrap clearfix">
+
+
+    <div class="user-content">
+      <p class="crumbs">
+        <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+        <a href="#">设置</a> > <a href="#">商务合作</a>
+      </p>
+
+      <div class="user-left">
+        <div>
+          <div class="">
+            <a href="{:url('edit_head')}">
+              <div></div>
+              <p>修改头像</p>
+            </a>
+          </div>
+
+          <div class="">
+            <a href="{:url('edit')}">
+              <div></div>
+              <p>个人资料</p>
+            </a>
+          </div>
+
+          <div class="">
+            <a href="{:url('point_info')}">
+              <div></div>
+              <p>积分</p>
+            </a>
+          </div>
+
+          <div class="">
+            <a href="{:url('money_info')}">
+              <div></div>
+              <p>米币</p>
+            </a>
+          </div>
+          <div class="">
+            <a href="{:url('grade')}">
+              <div></div>
+              <p>用户组</p>
+            </a>
+          </div>
+          <div class="">
+            <a href="{:url('password')}">
+              <div></div>
+              <p>密码安全</p>
+            </a>
+          </div>
+          <div class="select-this">
+            <a href="javascript:void(0)">
+              <div></div>
+              <p>商务合作</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    <div class="user-right">
+      <div class="business">
+        <p><i></i><span>公司名称：</span>山西晟盾信息科技有限公司</p>
+        <p><i></i><span>商务合作微信：</span>wm714944757</p>
+        <p><i></i><span>商务合作邮箱：</span>yimiclub@qq.com</p>
+      </div>
+    </div>
+
+
+
+
+    <!-- <div class="paginationCon">
+          <div class="m-style M-box2"></div>
+      </div> -->
+  </div>
+
+
+  </div>
+</body>
+
+</html>
+
+
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+    $('.M-box2').pagination({
+      totalData: 100,
+      showData: 5,
+      coping: true,
+      homePage: '首页',
+      prevContent: '上一页',
+      nextContent: "下一页",
+      endPage: '末页',
+      keepShowPN: true,
+      count: 1
+    });
+  })
+</script>
+<script>
+
+
+
+</script>
+{/block}

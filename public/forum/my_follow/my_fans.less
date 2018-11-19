@@ -1,0 +1,196 @@
+.lyl_follow{
+    width:100%;
+    height:44px;
+    background: linear-gradient(to right, #ff1481, #ff5d3e);
+    border-radius: 5px;
+    padding-left: 26px;
+    line-height: 44px;
+    color:#fff;
+    font-size: 16px;
+}
+// 关注列表
+.lyl_follow_list{
+    margin-top:16px;
+    margin-bottom: 20px;
+    li{
+        height:67px;
+        line-height: 67px;
+        border-bottom:1px solid #eaeaea;
+        // 头像、名称、大米师
+        .lyl_infor{
+            width:390px;
+            // 头像
+            .lyl_head{
+                width: 54px;
+                height: 54px;
+                img{
+                    width:100%;
+                    height:100%;
+                }
+            }
+            .lyl_name{
+                font-size: 14px;
+                color:#424242;
+                margin-left: 26px;
+                width: 200px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .lyl_money{
+                width:57px;
+                height:20px;
+                border: 1px solid #ff187e;
+                border-radius: 10px;
+                text-align: center;
+                line-height: 20px;
+                font-size: 14px;
+                color:#ff5d3e;
+                margin-top:23px;
+                cursor: pointer;
+            }
+        }
+        // 签名、菜单
+        .lyl_autograph{
+            width:366px;
+            font-size: 14px;
+            line-height: 67px;
+            >p{
+                float: left;
+                width:240px;
+                color:#868686;
+                margin:0;
+                width: 200px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .lyl_menu_box{
+                float: right;
+                position: relative;
+                >span{
+                    display: inline-block;
+                    width:91px;
+                    line-height: 67px;
+                    text-align: center;
+                    color:#ff4a50;
+                    cursor: pointer;
+                }
+                .lyl_menu{
+                    display: none;
+                    position: absolute;
+                    top:65px;
+                    z-index: 99;
+                    background:#fff;
+                    border:1px solid #eee;
+                    >li{
+                        width:91px;
+                        height:45px;
+                        color:#333;
+                        text-align: center;
+                        line-height: 45px;
+                        cursor: pointer;
+                        &:hover{
+                            color:#fff;
+                            background:linear-gradient(to right, #ff177e, #ff5d3e);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
+// 私信弹框
+.sendMsg-container{
+    text-align: center;
+    p{
+        color: #515151;
+        font-size: 22px;
+        margin: 20px 0;
+    }
+    div{
+        width: 296px;
+        margin: 0 auto;
+        textarea{
+            padding: 10px;
+            width: 100%;
+            border-radius: 10px;
+            border: solid 1px #cccccc;
+            font-size: 16px;
+        }
+
+        textarea::-webkit-textarea-placeholder{
+            font-size: 16px;
+            color: #b4b4b4;
+        }
+        textarea::-moz-placeholder{
+            font-size: 16px;
+            color: #b4b4b4;
+        }
+        textarea::-ms-textarea-placeholder{
+            font-size: 16px;
+            color: #b4b4b4;
+        }
+
+        button{
+            width: 200px;
+            height: 44px;
+            background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%), linear-gradient(#f6f6f6, #f6f6f6);
+            background-blend-mode: normal, normal;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            margin-top:15px;
+            font-size: 18px;
+        }
+    }
+}
+
+// 取消关注确认框
+.lxr-demo{
+    width:460px;
+    height:251px;
+    background:#fff;
+    .layui-layer-title{
+        font-size: 20px;
+        color:#424242;
+        text-align: center;
+        padding:0;
+    }
+    .layui-layer-content{
+        font-size: 20px;
+        color:#424242;
+        text-align: center;
+        margin-top:35px;
+        line-height: 50px;
+        height:110px !important;
+    }
+    .layui-layer-btn{
+        .layui-layer-btn0{
+            width:120px;
+            height:40px;
+            text-align: center;
+            line-height: 40px;
+            font-size: 20px;
+            color:#fff;
+            background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%), linear-gradient(#f6f6f6, #f6f6f6);
+            border:0 !important;
+            border-radius: 5px;
+            margin-right:115px;
+            &:hover{
+                color:#fff !important;
+            }
+        }
+        .layui-layer-btn1{
+            width:120px;
+            height:40px;
+            text-align: center;
+            line-height: 40px;
+            font-size: 20px;
+            color:#424242;
+            border:1px solid #cccccc;
+            border-radius: 5px;
+        }
+    }
+}

@@ -1,0 +1,13 @@
+      <div class="fly-tab fly-tab-index">
+        <span>
+          <a href="{:url('index/index')}">全部</a>
+      
+          <a href="{:url('index/choice')}">精帖</a>
+          <a href="{:url('user/topic')}">我的帖</a>
+        </span>
+        <form action="{:url('index/search')}" class="fly-search">
+        <button style="position: absolute;right: 0;top: 0px;border: 0px solid #fff;" type="submit"><i class="iconfont icon-sousuo"></i></button>
+          <input autocomplete="off" placeholder="搜索" type="text" name="ks" value="<?php echo input('ks');?>" required lay-verify="required" class="layui-input">
+        </form>
+        <a href="{:url('forum/add')}" class="layui-btn jie-add">发布帖子</a>
+      </div>

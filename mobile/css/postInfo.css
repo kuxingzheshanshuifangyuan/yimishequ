@@ -1,0 +1,452 @@
+#pullrefresh{
+	padding-bottom: 50px;
+ }
+.mui-pull{
+	display: block !important;
+}
+.noComm{
+	text-align: center;
+    line-height: 32px;
+}
+.details_cont p img{
+	max-width: 100%;
+}
+.iconfont{
+	font-size: 40px;
+}
+.weixin,.friendnews{
+	color: #0fd11b;
+}
+.qq{
+	color: #578fff;
+}
+.qqkongjian{
+	color: #ffc436;
+}
+
+.customInput{
+	width: 100% !important;
+	z-index: 99;
+	color: #333;
+	
+	
+    line-height: 21px;
+    height: 100% !important; 
+    margin-bottom: 0px !important; 
+    padding: 0px !important; 
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 3px;
+    /* outline: 0; */
+    /* background-color: #fff; */
+    /* -webkit-appearance: none; */
+    color: red;
+}
+
+/*作者信息*/
+.author-info{
+	display: flex;
+	align-items: center;
+	height: 1.36rem;
+	padding-left: 0.2rem;
+	margin-top: 1rem;
+	border-bottom: 1px dotted #c5c5c5;
+}
+.author-info img{
+	width: 0.9rem;
+	height: 0.9rem;
+	border-radius: 50%;
+}
+.author-info .author{
+	display: flex;
+	flex-direction: column;
+    margin-top: 0.2rem;
+    padding-left: 0.2rem;
+}
+.author-info .author div{
+	flex: 1;
+	
+}
+.author-info .author div:first-child{
+	color: #242424;
+	font-size: 0.3rem;
+	margin-bottom: 0.1rem;
+}
+.author-info .author div:nth-child(2) p{
+	color: #888888;
+	font-size: 0.24rem;
+}
+.au-level{
+	display: inline-block;
+	background: #4880ff;
+	color: #fff;
+	font-size: 0.2rem;
+	border-radius: 4px;
+    padding: 0 0.1rem;
+    margin: 0 0.2rem;
+    vertical-align: middle;
+}
+
+
+/*帖子信息*/
+.post-info{
+	padding: 0.2rem 0.25rem;
+}
+.post-info .post-title{
+	color: #242424;
+	font-size: 0.34rem;
+	padding-top: 0.27rem;
+}
+
+.post-tip{
+	display: flex;
+    align-items: center;
+}
+.post-tip span:nth-child(2){
+	flex: 50%;
+}
+.syboml{
+	color: #fd5353;
+	font-size: 0.24rem;
+	margin-right: 0.3rem;
+}
+
+.post-tip-item{
+	display: inline-block;
+	width: 1rem;
+	height: 0.3rem;
+	color: #888888;
+	font-size: 0.24rem;
+	padding-left: 0.4rem;
+	margin:0 0.15rem;
+	/*border: 1px solid red;*/
+}
+.post-tip-item:nth-child(1){
+	margin-left: 0;
+	background: url(../images/2.0/pinlunxiangqing-top-liulan.png) left 80% no-repeat;
+	background-size: 40% 85%;
+}
+.post-tip-item:nth-child(2){
+	background: url(../images/2.0/pinlunxiangqing-top-dianzan.png) left 80% no-repeat;
+	background-size: 35% 100%;
+}
+.post-tip-item:nth-child(3){
+	background: url(../images/2.0/pinlunxiangqing-top-liuyan.png) left 80% no-repeat;
+	background-size: 33% 90%;
+}
+
+.post-type{
+	float: right;
+	display: inline-block;
+	color: rgb(255,150,0);
+	font-size: 0.22rem;
+	padding: 0 0.1rem;
+	border: 1px solid rgb(255,150,0);
+	border-radius: 20px;
+}
+.post-content{
+	margin-top: 0.6rem;
+}
+.post-content p{
+	color: #4f4f4f;
+	font-size: 0.26rem;
+}
+.post-intro{
+	text-align: center;
+	color: #4F4F4F;
+	font-size: 0.2rem;
+}
+
+.reward-btn{
+	width: 2.8rem;
+	height: 0.8rem;
+	border-radius: 40px;
+    background: -webkit-linear-gradient(left, #ff1481, #ff5a40);
+    color: #fff;
+    text-align: center;
+    line-height: 0.8rem;
+    margin: 0.7rem auto 0;
+}
+.reward-num{
+	text-align: center;
+    margin: 0.1rem 0;
+}
+
+.post-action{
+	display: flex;
+}
+.post-action a{
+	flex: 1;
+}
+.post-action a div{
+	height: 0.66rem;
+	color: #242424;
+	padding: 0.3rem 0 0 1rem;
+	font-size: 0.26rem;
+}
+.post-action a:nth-child(1)  div{
+	background: url(../images/2.0/pinlunxiangqing-zhuanfa.png) 15% center no-repeat;
+	background-size: 32% 100%;
+}
+.post-action a:nth-child(2) div{
+	background: url(../images/2.0/pinlunxiangqing-shoucang-2.png) 15% center no-repeat;
+	background-size: 32% 100%;
+}
+.post-action a:nth-child(3) div{
+	background: url(../images/2.0/pinlunxiangqing-dianzang2.png) 15% center no-repeat;
+	background-size: 32% 100%;
+}
+
+
+/*打赏页面*/
+.reward-back{
+	width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.reward-content{
+	width: 5.46rem;
+	height: 8rem;
+	background: #fff;
+	border-radius: 10px;
+	position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.reward-top{
+	width: 100%;
+	height: 2.25rem;
+	background: -webkit-linear-gradient(left, #ff1481, #ff5a40);
+	padding-top: 0.4rem;
+    border-radius: 10px 10px 0 0;
+}
+.reward-top img{
+	display: block;
+	margin: 0 auto;
+	width: 0.8rem;
+	height: 0.8rem;
+	border-radius: 50%;
+}
+
+.reward-top .reward-username{
+	color: #fff;
+	text-align: center;
+	font-size: 0.3rem;
+	margin: 0.1rem auto 0.1rem;
+	max-width: 70%;
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+}
+.reward-top p{
+	margin: 0 auto;
+	max-width: 70%;
+	color: #ffe0e1;
+	text-align: center;
+	font-size: 0.24rem;
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow: ellipsis;
+}
+
+.reward-my{
+	font-size: 0.28rem;
+	color: rgb(99,99,99);
+	text-align: center;
+    margin: 0.16rem 0 0.11rem;
+}
+.reward-my span{
+	color: rgb(255,74,80);
+}
+
+.reward-container{
+	display: flex;
+	padding: 0 0.3rem;
+	 flex-wrap: wrap;
+	 align-content: flex-start;
+	 height: 2.5rem;
+}
+.reward-item{
+	width: 1.45rem;
+	height: 0.6rem;
+	background: url(../images/2.0/dashang-2.png) center center no-repeat;
+	background-size: 100% 100%;
+	text-align: center;
+	color: #fff;
+	font-size: 0.26rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+	margin: 0.15rem 0.08rem;
+}
+.reward-item-active{
+	background: url(../images/2.0/dashang-1.png) center center no-repeat;
+	background-size: 100% 100%;
+}
+.reward-sub{
+	width: 3.4rem;
+	height: 0.7rem;
+	border-radius: 35px;
+	margin: 0.6rem auto 0.2rem;
+	background: -webkit-linear-gradient(left, #ff1481, #ff5a40);
+	color: #fff;
+	text-align: center;
+	line-height: 0.7rem;
+}
+.reward-hint{
+	text-align: center;
+	color: #b4b4b4;
+	font-size: 0.24rem;
+}
+.reward-item-custom{
+	background: url(../images/2.0/dashang-3.png) center center no-repeat;
+	background-size: 100% 100%;
+	color: #e1e1e1;
+	border-radius: 0;
+}
+.reward-item-custom:before,.reward-item-custom:after{
+	content: "";
+}
+.reward-close{
+	width: 0.76rem;
+	height: 0.76rem;
+	background: url(../images/2.0/dashang--guanbi.png) center center no-repeat;
+	background-size: 100% 100%;
+    margin: 0.5rem auto;
+    /*position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2rem;
+    margin: auto;*/	
+}
+
+.placeholder:after{
+    content: '说点什么...';
+    color: #c6c6c6;
+}
+
+
+
+
+/*评论*/
+.comment-content{
+	width: 100%;
+	/*height: 200px;*/
+	background: #fff;
+	margin-top: 0.24rem;
+	padding: 0.2rem 0.24rem;
+}
+.comment-title{
+	color: #242424;	
+	font-size: 0.24;
+	border-left: 2px solid rgb(255,20,129);
+    line-height: 0.2rem;
+    padding-left: 0.08rem;
+    margin: 0.2rem 0;
+}
+.comment-line{
+	color: #c5c5c5;
+	overflow: hidden;
+	margin: 0;
+}
+.comment-line:after{
+	content: "·······························································································";
+	font-size: 0.4rem;
+}
+.comment-item{
+	display: flex;
+	flex-direction: column;
+}
+.comment-item:last-child .comment-line{
+	display: none;
+}
+.comment-top{
+	display: flex;
+	align-items: center;
+}
+.comment-top img{
+	display: block;
+	/*width: 0.68rem;
+	height: 0.68rem;*/
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+.comment-autor{
+	flex: 95%;
+	display: flex;
+	flex-direction: column;
+	margin-left: 0.2rem;
+}
+.comment-autor p{
+	margin: 0;
+	color: #242424;
+	font-size: 0.24rem;
+}
+.comment-time{
+	color: #888888 !important;
+	font-size: 0.22rem !important;
+}
+.comment-parse{
+	line-height: 100%;
+	text-align: center;
+	padding: 0.15rem 0 0 0.5rem;
+	flex: 5%;
+	background: url(../images/2.0/pinlunxiangqing-pinlun-dianzan--0.png) left center no-repeat;
+	background-size: 0.34rem 0.31rem;
+	color: #888888;
+	font-size: 0.24rem;
+}
+.master{
+    display: inline-block;
+    background: #ffb200;
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 0.1rem;
+    font-size: 0.2rem;
+    line-height: 0.34rem;
+    vertical-align: baseline;
+    margin-left: 0.12rem;
+}
+.comment-text{
+	flex: 1;
+	display: flex;
+	margin-top: 0.1rem;
+}
+.comment-text p{
+	flex: 1;
+	color: #4f4f4f;
+	font-size: 0.26rem;
+	margin: 0 0 0 0.2rem;
+}
+.comment-floor{
+	display: inline-block;
+    color: #fff;
+    border-radius: 3px;
+    padding: 0 0.1rem;
+    font-size: 0.22rem;
+    vertical-align: baseline;
+    margin-top: 0.05rem;
+    margin-left: 0.1rem;
+    background: #a2a2a2;
+    
+    height: 0.28rem;
+    line-height: 0.29rem;
+}
+.comment-sofa{
+	background: #ec404a;
+}
+.comment-bench{
+	background: #5893ed;
+}
+.comment-fl{
+	background: #76b244;
+}

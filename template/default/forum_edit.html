@@ -1,0 +1,511 @@
+{extend name="index_base" /}
+{block name="seo"}
+<title>发表帖子|{$site_config['site_title']}|{$site_config['seo_title']}</title>
+<meta name="keywords" content="{$site_config['seo_keyword']}">
+<meta name="description" content="{$site_config['seo_description']}">
+{/block}
+{block name="css"}
+<link rel="stylesheet" href="__PUBLIC__/wangEditor/css/wangEditor.min.css">
+<link rel="stylesheet" href="/template/default/res/css/global.css">
+{/block}
+{block name="body"}
+<body>
+    <div class="main layui-clear">
+        <div class="fly-panel" >
+            <h2 class="page-title">修改帖子</h2>
+
+            <div class="layui-form layui-form-pane" style="    margin-left: 40px;">
+                <form method="post" class="layui-form">
+                    <input type="hidden" name="id" value="{$tptc.id}">
+                    <div class="layui-form-item">
+                        <div class="layui-inline" style="width: 80%;display: inline-block;">
+                            <label for="L_title" class="layui-form-label myLable">版块</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" value="{$forumcate_name}" readonly class="layui-input myInput">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-block" style="width: 80%;">
+                            <label class="layui-form-label myLable">主题</label>
+                            <div class="layui-input-block myInput">
+                                <select name="topic" id="TopicSelect">
+                                    {volist name="topic" id="vo"}
+                                        {if condition="$vo['id']==$tptc['topic']"}
+                                            <option value="{$vo.id}" selected>{$vo.title_ch}</option>
+                                        {else /}
+                                            <option value="{$vo.id}">{$vo.title_ch}</option>
+                                        {/if}
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-block" style="width: 80%;display: inline-block;">
+                            <label for="L_title" class="layui-form-label myLable">标题</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="title" value="{$tptc.title}" maxlength="30" required lay-verify="required|titlea|titleb" autocomplete="off" class="layui-input myInput fourmTitle">
+                            </div>
+                        </div>
+                        <span class="titleWords">还可输入<span> 30 </span> 个字</span>
+                    </div>
+
+                    {:hook('forumaddfee')}
+                    <div class="layui-form-item layui-form-text" style="padding-right: 40px;">
+                        <div class="layui-input-block">
+                            <textarea id="textarea" name="content" style="height:400px;width: 100%;border-radius: 10px;">{:html_entity_decode($tptc.content)}</textarea>
+                        </div>
+                        <!--<label for="L_content" class="layui-form-label" style="top: -2px;">内容</label>-->
+                    </div>
+                    {:hook('forumaddattach')}
+
+                    <div class="tpt_item">
+                        <input type="hidden" name="keywords" value="">
+                        <div id="tpt_sel" class="tpt_sels" >
+                            <span style="margin: 5px 0 20px 0;float: left;" class="lableSpan"></span>
+                            <div class="layui-form-item" style="margin: 20px 0;">
+                                <label class="layui-form-label myLable">标签</label>
+                                <div class="layui-input-block">
+                                    <input id="tpt_input" type="text" value="" autocomplete="off" placeholder="请填写帖子标签（选填，不超过10个字）" class="layui-input myInput" style="width: 400px;float: left;margin-right: 20px;">
+                                    <div class="addLable" id="tpt_btn">添加</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tpt_pre" class="tpt_pres cl" style="margin: 20px 0;">
+                            <span id="" style="font-size: 18px;color: #424242;">
+                                可选标签：
+                            </span>
+                        {volist name="tagss" id="tag"}
+                        {if condition="$tag neq ''"}
+                        <a href="javascript:;" class="lables">{$tag}</a>
+                        {/if}
+                        {/volist}
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="subFourm" lay-submit="forum_edit" lay-filter="forum_edit">
+                            修改
+                        </div>
+                        <!--<div class="saveDraft" >-->
+                            <!--保存草稿-->
+                        <!--</div>-->
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="__PUBLIC__/wangEditor/js/wangEditor.min.js"></script>
+<script type="text/javascript">
+
+    $(function() {
+//		标题字数限制
+        $('.fourmTitle').on('input propertychange keydown change', function() {
+            var self = this;
+            var maxWords = 30
+            setTimeout(function() {
+                var resWords = maxWords - $(self).val().length
+                $(".titleWords span").text(resWords);
+            })
+        });
+
+
+        $('#tpt_input').keydown(function(e) {
+            if (e.which === 13) {
+                $("#tpt_btn").click();
+                e.preventDefault();
+                return false;
+            }
+        });
+        $("#tpt_sel").on('click', 'a>em', function() {
+            var name = "keywords";
+            var tag = $(this).parent().text();
+            $(this).parent().remove();
+            var tags = new Array();
+            $("#tpt_sel").find('a').each(function() {
+                tags.push($(this).text());
+            });
+            $("input[name=" + name + "]").val(tags.join(","));
+            $("#tpt_pre a:contains('" + tag + "')").removeClass("selected");
+        });
+        $("#tpt_btn").click(function() {
+            var name = "keywords";
+            var tags = $.trim($("input[name=" + name + "]").val());
+            if (tags !== "") {
+                tags = tags.split(",");
+            } else {
+                tags = new Array();
+            }
+            var tag = $.trim($("#tpt_input").val());
+            if (tag !== '' && $.inArray(tag, tags) === -1) {
+                tags.push(tag);
+                $("#tpt_pre a:contains('" + tag + "')").addClass("selected");
+            }
+            $("#tpt_sel").children('span').empty();
+            $.each(tags, function(k, v) {
+                $("#tpt_sel").children('span').append('<a href="javascript:;">' + v + '<em><img src="__PUBLIC__/images/close.png"/></em></a>');
+            });
+            $("input[name=" + name + "]").val(tags.join(","));
+            $("#tpt_input").val('');
+        });
+        $("#tpt_pre").on('click', 'a:not(.selected)', function() {
+            var name = "keywords";
+            var tags = $.trim($("input[name=" + name + "]").val());
+            if (tags !== "") {
+                tags = tags.split(",");
+            } else {
+                tags = new Array();
+            }
+            var tag = $.trim($(this).text());
+            if (tag !== '' && $.inArray(tag, tags) === -1) {
+                tags.push(tag);
+            }
+            $("#tpt_sel").children('span').empty();
+            $.each(tags, function(k, v) {
+                $("#tpt_sel").children('span').append('<a href="javascript:;">' + v + '<em><img src="__PUBLIC__/images/close.png"/></em></a>');
+            });
+            $("input[name=" + name + "]").val(tags.join(","));
+            $(this).addClass('selected');
+        });
+    });
+
+</script>
+<script type="text/javascript">
+
+    var editor = new wangEditor('textarea');
+
+    $.get('{:url("index/getemotion")}',function (data){
+
+        editor.config.uploadImgUrl = '{:url("index/forum/doUploadPic")}';
+        editor.config.uploadImgFileName = 'FileName';
+        var emotiondata;
+        emotiondata=data;
+        emotiondata = JSON.parse(emotiondata);
+        editor.config.emotions =emotiondata;
+        editor.config.menus = $.map(wangEditor.config.menus, function(item, key) {
+            if (item === 'eraser') {
+                return null;
+            }
+            if (item === 'mp4v') {
+                return null;
+            }
+            if (item === 'video') {
+                return null;
+            }
+            if (item === 'location') {
+                return null;
+            }
+            return item;
+        });
+        
+        editor.config.menus = [
+	    'head',  // 标题
+	    'bold',  // 粗体
+	    'fontSize',  // 字号
+	    'fontName',  // 字体
+	    'italic',  // 斜体
+	    'underline',  // 下划线
+	    'strikeThrough',  // 删除线
+	    'fontsize',
+	    'forecolor',
+	    'backColor',  // 背景颜色
+	    'link',  // 插入链接
+	    'list',  // 列表
+	    'justify',  // 对齐方式
+	    'quote',  // 引用
+	    'emotion',
+	    'table',  // 表格
+	    'img',  // 插入图片
+	    'video',  // 插入视频
+	    'code',  // 插入代码
+	    'undo',  // 撤销
+	    'redo',  // 重复
+	    'fullscreen',
+	]
+	editor.config.colors = {
+        '#880000': '暗红色',
+        '#800080': '紫色',
+        '#ff0000': '红色',
+        '#000000': '黑色',
+        '#00FF00': '绿色',
+        '#0000FF': '蓝色',
+        '#FFFF00': '黄色',
+        '#00FFFF': '天蓝色',
+        '#C0C0C0': '灰色',
+        '#99CCCC': '青绿色',
+        '#3300CC': '深蓝色',
+        '#990000': '姨妈红',
+    };
+    
+    
+    editor.config.emotions = {
+	    // 支持多组表情
+	
+	    // 第一组，id叫做 'default' 
+	    'weibo': {
+	        title: '表情',  // 组名称
+	        data:  [{
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ac/smilea_thumb.gif",
+				        value : "[呵呵]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0b/tootha_thumb.gif",
+				        value : "[嘻嘻]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6a/laugh.gif",
+				        value : "[哈哈]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/14/tza_thumb.gif",
+				        value : "[可爱]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/af/kl_thumb.gif",
+				        value : "[可怜]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/a0/kbsa_thumb.gif",
+				        value : "[挖鼻屎]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f4/cj_thumb.gif",
+				        value : "[吃惊]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/shamea_thumb.gif",
+				        value : "[害羞]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c3/zy_thumb.gif",
+				        value : "[挤眼]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/29/bz_thumb.gif",
+				        value : "[闭嘴]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/71/bs2_thumb.gif",
+				        value : "[鄙视]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6d/lovea_thumb.gif",
+				        value : "[爱你]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/9d/sada_thumb.gif",
+				        value : "[泪]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/19/heia_thumb.gif",
+				        value : "[偷笑]"
+				    },{
+						icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif",
+				        value : "[草泥马]"
+				    },{
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/8f/qq_thumb.gif",
+				        value : "[亲亲]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/b6/sb_thumb.gif",
+				        value : "[生病]"
+				    },{
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif",
+				        value : "[囧]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/58/mb_thumb.gif",
+				        value : "[太开心]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/17/ldln_thumb.gif",
+				        value : "[懒得理你]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/98/yhh_thumb.gif",
+				        value : "[右哼哼]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6d/zhh_thumb.gif",
+				        value : "[左哼哼]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/a6/x_thumb.gif",
+				        value : "[嘘]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/af/cry.gif",
+				        value : "[衰]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/73/wq_thumb.gif",
+				        value : "[委屈]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/9e/t_thumb.gif",
+				        value : "[吐]"
+				    },{
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f3/k_thumb.gif",
+				        value : "[打哈欠]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/27/bba_thumb.gif",
+				        value : "[抱抱]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7c/angrya_thumb.gif",
+				        value : "[怒]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/5c/yw_thumb.gif",
+				        value : "[疑问]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/a5/cza_thumb.gif",
+				        value : "[馋嘴]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/88_thumb.gif",
+				        value : "[拜拜]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/e9/sk_thumb.gif",
+				        value : "[思考]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/24/sweata_thumb.gif",
+				        value : "[汗]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7f/sleepya_thumb.gif",
+				        value : "[困]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6b/sleepa_thumb.gif",
+				        value : "[睡觉]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/90/money_thumb.gif",
+				        value : "[钱]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0c/sw_thumb.gif",
+				        value : "[失望]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/40/cool_thumb.gif",
+				        value : "[酷]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/8c/hsa_thumb.gif",
+				        value : "[花心]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/49/hatea_thumb.gif",
+				        value : "[哼]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/36/gza_thumb.gif",
+				        value : "[鼓掌]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d9/dizzya_thumb.gif",
+				        value : "[晕]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/1a/bs_thumb.gif",
+				        value : "[悲伤]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/62/crazya_thumb.gif",
+				        value : "[抓狂]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/91/h_thumb.gif",
+				        value : "[黑线]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6d/yx_thumb.gif",
+				        value : "[阴险]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/nm_thumb.gif",
+				        value : "[怒骂]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/40/hearta_thumb.gif",
+				        value : "[心]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ea/unheart.gif",
+				        value : "[伤心]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/58/pig.gif",
+				        value : "[猪头]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d6/ok_thumb.gif",
+				        value : "[ok]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d9/ye_thumb.gif",
+				        value : "[耶]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c7/no_thumb.gif",
+				        value : "[不要]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif",
+				        value : "[赞]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/40/come_thumb.gif",
+				        value : "[来]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d8/sad_thumb.gif",
+				        value : "[弱]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/91/lazu_thumb.gif",
+				        value : "[蜡烛]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif",
+				        value : "[神马]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif",
+				        value : "[浮云]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif",
+				        value : "[给力]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif",
+				        value : "[围观]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif",
+				        value : "[威武]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif",
+				        value : "[熊猫]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/81/rabbit_thumb.gif",
+				        value : "[兔子]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/otm_thumb.gif",
+				        value : "[奥特曼]"
+				    }]
+	    }
+	};
+	  // 字号
+    editor.config.fontsizes = {
+        // 格式：'value': 'title'
+        1: '10px',
+        2: '13px',
+        3: '16px',
+        4: '19px',
+        5: '22px',
+        6: '25px',
+        7: '28px'
+    };
+        editor.config.pasteText = false;
+        editor.create();
+    });
+
+    //emotiondata = JSON.parse(emotiondata);
+
+</script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form
+            ,jq = layui.jquery;
+
+        form.verify({
+            titlea: function(value){
+                if(value.length < 5){
+                    return '标题必须大于5个字';
+                }
+            }
+            ,titleb: function(value){
+                if(value.length > 32){
+                    return '标题必须小于32个字';
+                }
+            }
+        });
+
+        form.on('submit(forum_edit)', function(data){
+//		    loading = layer.load(2, {shade: [0.2,'#000']});
+            //  data.filed.content=jq('#textarea').val();
+            var param = data.field;
+
+            $.post('{:url("forum/edit")}',param,function(data){
+                if(data.code == 200){
+//			        layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        location.href ='{:url("index/index")}';
+                    });
+                }else{
+//			        layer.close(loading);
+                    layer.msg(data.msg, {icon: 0, anim: 6, time: 1000});
+                }
+            },'json');
+            return false;
+        });
+
+    })
+</script>
+{/block}

@@ -1,0 +1,61 @@
+{extend name="base" /}
+{block name="body"}
+
+<div class="fly-panel fly-panel-user">
+    <div class="tpt—admin">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>修改轮播图</legend>
+        </fieldset>
+
+        <form class="layui-form" method="post" action="{:url('banner/updateBanner')}" enctype="multipart/form-data">
+            <div class="layui-form-item">
+                <label class="layui-form-label">序号</label>
+                <div class="layui-input-inline">
+                    <input type="text" placeholder="例如:1" name="order" style="margin-top:10px;" value="{$update_banner['order']}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">轮播图片</label>
+                <div class="layui-input-inline">
+                    <input type="file" name="file" style="margin-top:10px;" />
+                    <img src="__ROOT__/{$update_banner['img']}" alt="" style="width:100px;height:60px;margin-top:14px" />
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图片链接</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="url" style="margin-top:10px;" value="{$update_banner['url']}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">轮播图描述</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="dec" style="margin-top:10px;" value="{$update_banner['dec']}" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">轮播图标识</label>
+                <div class="layui-input-inline">
+                    {if condition="$update_banner['flag']==1"}
+                        <input type="radio" name="flag" value="1" title="轮播"  checked>
+                        <input type="radio" name="flag" value="0" title="广告">
+                    {else /}
+                        <input type="radio" name="flag" value="1" title="轮播"  >
+                        <input type="radio" name="flag" value="0" title="广告" checked>
+                    {/if}
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="hidden" name="id" value="{$update_banner['id']}" />
+                    <input type="submit"  value="修改" class="layui-btn " style="width: 70px;"/>
+                    <!--  <button class="layui-btn " lay-submit="" lay-filter="banner_add">添加</button>-->
+                    <button class="layui-btn layui-btn-primary" onclick="history.go(-1)">返回</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+{/block}

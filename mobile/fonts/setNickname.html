@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>修改昵称</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/setUserInfo.css" />
+	</head>
+
+	<body class="Settingbody">
+		<header class="mui-bar mui-bar-nav ">
+			<a href="javascript:;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="history"></a>
+			<h1 id="title" class="mui-title">修改昵称</h1>
+		</header>
+
+		<div class="gap"></div>
+		<div class="setUserInfo">
+			<form action="" method="post" class="">
+				<input type="text" value="" id="nickName" name="nickName" placeholder="请输入昵称" maxlength="10" />
+				<span class="text-num"><span>0</span>.10</span>
+			</form>
+			<p>* 昵称只可以设置一次，请谨慎操作</p>
+			<div class="submit">确定</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/lib/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/setting.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			
+			mui.init({
+			    beforeback: function() {
+			　　　　 //获得父页面的webview
+			        var list = plus.webview.currentWebview().opener();
+			　　　　 //触发父页面的自定义事件(refresh),从而进行刷新
+			        mui.fire(list, 'refresh');
+			        //返回true,继续页面关闭逻辑
+			        return true;
+			    }
+			});
+			
+			$('.setUserInfo input').on('input propertychange keydown change', function() {
+				var self = this;
+				$('.text-num span').text($(self).val().length)
+				if($(self).val().length == 10) {
+					mui.toast("昵称最多为10个字")
+				}
+			});
+			mui('body').on('tap', '.submit', function() {
+				var nickName = $('#nickName').val();
+
+				if(nickName == "") {
+					mui.toast("请输入昵称")
+					$('#nickName').focus();
+				} else {
+					$('#nickName').blur();
+					console.log(nickName)
+					updateUserName();
+				}
+			})
+
+			function updateUserName() {
+				var nickName = $('#nickName').val();
+				mui.ajax('http://www.1miclub.com/api/User/updateUserName.html', {
+					data: {
+						token: usertoken,
+						username: nickName
+					},
+					dataType: 'jsonp',
+					type: 'post',
+					success: function(data) {
+						data = JSON.parse(data);
+						console.log(data);
+//						window.localStorage.setItem("setNamed",true);
+						mui.toast("修改成功！");
+						
+						mui.back();
+					},
+					error: function() {
+						mui.toast('修改失败');
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

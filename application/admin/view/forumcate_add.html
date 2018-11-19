@@ -1,0 +1,136 @@
+{extend name="base" /}
+{block name="body"}
+    <!--tab标签-->
+    <div class="layui-tab-brief">
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form form-container" method="post" data-url="{:url('admin/forumcate/save')}" localtion-url="{:url('forumcate/index')}">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">排序</label>
+                        <div class="layui-input-inline">
+                            <input type="number" name="sort" placeholder="仅限整数" autocomplete="off" class="layui-input" value="1">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">版块名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="name" required lay-verify="required" placeholder="必填内容" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="width: 300px;">
+                        <label class="layui-form-label">所属版块</label>
+                        <div class="layui-input-block">
+                            <select name="tid">
+                                <option value="0">顶级版块</option>
+                                {volist name="category_level_list" id="vo"}
+                                    <option value="{$vo.id}">{neq name="vo.level" value="1"}|{php}for($i=1;$i<$vo['level'];$i++){echo ' --';}{/php}{/neq}{$vo.name}</option>
+                                {/volist}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">所属类型</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="type" value="1" title="帖子" checked="">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">版块图片</label>
+                        <div class="layui-input-inline">
+                            <input type="file" name="file" class="layui-upload-file" id="image" style="float: left;">
+                            <input type="text" name="pic" class="layui-input" style="position: absolute;left: 111px;top: 0px;width: 500px;">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">关键词</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="keywords" placeholder="关键词请用|隔开" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div id="tpt_sel" class="tpt_sels" style="margin-top:20px;">
+                            <div class="layui-form-item" style="margin-bottom:20px;">
+                                <label class="layui-form-label">推荐版块</label>
+                                <div class="layui-input-block">
+                                    {volist name="forumcate" id="forumcate_list"}
+                                        <input type="checkbox" value="{$forumcate_list['id']}" name="recommend[{$forumcate_list['id']}]" style="margin-left:10px" title="{$forumcate_list['name']}" />
+                                    {/volist}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div id="tpt_sel" class="tpt_sels" style="margin-top:20px;">
+                            <div class="layui-form-item" style="margin-bottom:20px;">
+                                <label class="layui-form-label">所属会员等级</label>
+                                <div class="layui-input-block">
+                                    {volist name="usergrade" id="usergrade_list"}
+                                    <input type="checkbox" value="{$usergrade_list['id']}" name="usergrade[{$usergrade_list['id']}]" style="margin-left:10px" title="{$usergrade_list['name']}" />
+                                    {/volist}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">帖子封面</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="status" value="1" title="允许" checked="checked">
+                            <input type="radio" name="status" value="0" title="禁止">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">描述</label>
+                        <div class="layui-input-block">
+                            <textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">版块链接</label>
+                        <div class="layui-input-block">
+                            <textarea name="url" placeholder="请输入链接" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="btable-paged" >
+				        <div class="layui-main">
+                            <div class="formbtngroup">
+                                <button  class="layui-btn layui-btn-small" lay-submit="" lay-filter="formadd">添加</button>
+                                <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/formadd.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+{/block}
+{block name="script"}
+<script>
+layui.use(['form', 'upload'],function(){
+  var form = layui.form()
+  ,jq = layui.jquery;
+  
+  layui.upload({
+    url: '{:url("upload/upimage")}'
+    ,elem:'#image'
+    ,before: function(input){
+      loading = layer.load(2, {
+        shade: [0.2,'#000']
+      });
+    }
+    ,success: function(res){
+      layer.close(loading);
+      jq('input[name=pic]').val(res.path);
+      layer.msg(res.msg, {icon: 1, time: 1000});
+    }
+  }); 
+
+})
+</script>
+
+
+{/block}

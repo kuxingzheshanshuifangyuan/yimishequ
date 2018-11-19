@@ -1,0 +1,99 @@
+{extend name="base" /}
+{block name="css"}
+<link rel="stylesheet" href="__ADMIN__/css/form.css">
+{/block}
+{block name="body"}
+<div class="admin-main layui-form">
+    <div class="layui-field-box">
+        <div class="layui-box-searchber">
+            <a href="{:url('app/add')}" class="layui-btn layui-btn-small" id="add"><i class="layui-icon"></i>添加App</a>
+        </div>
+        <hr>
+        <table class="layui-table admin-table">
+            <thead>
+            <tr>
+                <th style="text-align: center">ID</th>
+                <th style="text-align: center">App图片</th>
+                <th style="text-align: center">图片序号</th>
+                <th style="text-align: center">图片链接</th>
+                <th style="text-align: center">App描述</th>
+                <th style="text-align: center">App添加时间</th>
+                <th style="text-align: center">最后修改时间</th>
+                <th style="text-align: center">状态</th>
+                <th style="text-align: center">操作</th>
+            </tr>
+            </thead>
+            <tbody id="content">
+                {notempty name="app"}
+                    {volist name="app" id="app_list"}
+                        <tr>
+                            <td style="text-align: center">{$app_list['id']}</td>
+                            <td style="text-align: center"><img style="width:70px;height:70px" src="__ROOT__/{$app_list['img']}" alt=""></td>
+                            <td style="text-align: center">{$app_list['order']}</td>
+                            <td style="text-align: center">{$app_list['url']}</td>
+                            <td style="text-align: center">{$app_list['dec'] ? $app_list['dec'] : '暂无描述'}</td>
+                            <td style="text-align: center">{$app_list['create_time']|date="Y-m-d H:i:s",###}</td>
+                            <td style="text-align: center">{$app_list['update_time']|date="Y-m-d H:i:s",###}</td>
+                            <td style="text-align: center">
+                                <input type="checkbox" name="status" lay-skin="switch" lay-text="启用|禁用" lay-filter="switchTest"  value="{$app_list['id']}" {php}echo $app_list['status']==1 ? 'checked' : '';{/php}>
+                            </td>
+                            <td style="text-align: center">
+                                <a class="layui-btn layui-btn-normal layui-btn-mini" href='{:url("app/edit",["id"=>$app_list["id"]])}' title="修改">修改</a>
+                                <a href="javascript:;" data-id="{$app_list.id}" data-url="{:url('admin/app/delete',['id'=>$app_list['id']])}" data-opt="del"  class="elementdel layui-btn layui-btn-danger layui-btn-mini " title="删除">删除</a>
+                            </td>
+                        </tr>
+                    {/volist}
+                {else /}
+                    <tr>
+                        <td>没有相关数据</td>
+                    </tr>
+                {/notempty}
+            </tbody>
+        </table>
+    </div>
+    <div style="margin-right: 30px">
+        {$page}
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+<script>
+    //app状态
+    layui.use(['form'],function(){
+        var form = layui.form()
+            ,jq = layui.jquery;
+
+        //jq('.btable-paged').eq(1).hide();
+        var status=0;
+        form.on('switch(switchTest)', function(data){
+            loading = layer.load(2, {
+                shade: [0.2,'#000']
+            });
+            if(data.elem.checked){
+                status=1;
+            }else{
+                status=0;
+            }
+            var url="{:url('admin/app/updatestatus')}?id="+data.value+'&status='+status ;
+
+            jq.get(url,function(data){
+
+                if(data.code == 200){
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        //  location.reload();
+                    });
+                }else{
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+            return false;
+        });
+
+    })
+</script>
+{/block}

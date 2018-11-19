@@ -1,0 +1,128 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>搜索</title>
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/loanSupermarket.css" />
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/communication_region.css" />
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/swiper/swiper.min.css" />
+  <!--<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/bootstrap-3.3.7/dist/css/bootstrap.min.css"/>-->
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/filter/style.css" />
+
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+  <style>
+    .header{
+      background: none;
+    }
+    .mainTop, .mainBtm{
+      display: none;
+    }
+    .search-container{
+      min-height: 900px;
+    }
+    .search-logo{
+      margin-top: 250px !important;
+    }
+    .footer{
+      margin-top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <div class="contentWrap clearfix"> -->
+
+  <div class=" rpfcontent_2 clearfix search-container">
+    <div class="search-top">
+      <div class="search-tool">
+        <a href="{:url('index/index/index')}">返回论坛</a>
+        <!--<span>-->
+          <!--<a href="#">昵称</a>-->
+          <!--<a href="#" onclick="showTool()">快捷导航 > </a>-->
+          <!--<ul class="navTool">-->
+            <!--<li>-->
+              <!--<a href="#">帖子</a>-->
+            <!--</li>-->
+            <!--<li>-->
+              <!--<a href="#">收藏</a>-->
+            <!--</li>-->
+            <!--<li>-->
+              <!--<a href="#">好友</a>-->
+            <!--</li>-->
+            <!--<li>-->
+              <!--<a href="#">任务</a>-->
+            <!--</li>-->
+          <!--</ul>-->
+          <!--<a href="#">设置</a>-->
+          <!--<a href="#">退出</a>-->
+        <!--</span>-->
+      </div>
+
+      <img class="search-logo" src="__PUBLIC__forum/img/home/yimilogo.png" alt="logo">
+      <div class="search-input">
+        <input type="text" placeholder="搜点什么吧!" id="content">
+        <div class="search-btn">
+          <img src="__PUBLIC__forum/img/home/sousuo.png" alt="搜索">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+</body>
+
+</html>
+
+
+<!--<script src="__PUBLIC__forum/js/jquery/1.9.1/jquery.min.js"></script>-->
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/swiper/swiper.min.js"></script>
+<!--<script src="__PUBLIC__forum/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>-->
+<script src="__PUBLIC__forum/filter/script.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+
+
+<script type="text/javascript">
+  var flag = false;
+  function showTool() {
+    if (!flag) {
+      $('.navTool').show();
+      flag = !flag
+    } else {
+      $('.navTool').hide();
+      flag = !flag
+    }
+  }
+
+  $('.search-btn').click(function () {
+      content = $('#content').val();
+
+      if(!content){
+          layer.msg('请输入要搜索的内容');
+          return false;
+      }
+      // alert(content);
+      // return false;
+      window.location.href = "{:url('search_list')}"+'?content='+content;
+  });
+
+  $('#content').keydown(function(e){
+      if (e.keyCode == 13) {
+          content = $('#content').val();
+
+          if(!content){
+              layer.msg('请输入要搜索的内容');
+              return false;
+          }
+
+          window.location.href = "{:url('search_list')}"+'?content='+content;
+      }
+  });
+
+</script>
+{/block}

@@ -1,0 +1,73 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+<!--/*Garylew writing*/-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>一米社区-我的回复</title>
+    <script src="__PUBLIC__js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo_1.css"/>
+    <link rel="stylesheet" href="__PUBLIC__css/article.css">
+    <link rel="stylesheet" href="__PUBLIC__css/icon.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+
+</head>
+
+<body>
+    <div class="crumbs" style="margin: 0 auto ">
+        <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+        <a href="#">帖子</a> >
+        <a href="#">我的回复</a>
+    </div>
+    <section>
+        <ul class="article_left">
+            <li class="article_menu"><i class="icon icon-huifu01-1"></i> <a href="{:url('user/my_article')}">我的帖子</a></li>
+            <li class="article_menu articleHot"><i class="icon icon-huifu02"></i><a href="{:url('user/my_reply')}">我的回复</a></li>
+            <li class="article_menu"><i class="icon icon-huifu03-1"></i> <a href="{:url('user/my_collect')}">我的收藏</a></li>
+        </ul>
+        <div class="article_right2">
+            <ul class="articleTip_list2">
+                <li class="articleTip_list_hot">帖子标题</li>
+                <div class="articleTip_list_right">
+                    <div class="tittle_plate">所属板块</div>
+                    <div class="tittle_Publisher">发帖人</div>
+                    <div class="tittle_lasttime">发表时间</div>
+                </div>
+            </ul>
+            <div class="article_project2">
+                <ul>
+                    {foreach $data_list as $val}
+                    <li class="article_tittle2">
+                        <h1 class="addmargin"><a href="{:url('forum/detail',['id'=>$val['forum_id']])}">{$val.title}</a></h1>
+                        {if condition="$val.hot"}<img class="addmargin" src="__PUBLIC__forum/img/userInfo/hot.png" alt="" width="15px" height="21px">{/if}
+                        {if condition="$val.praise"}<img class="addmargin" src="__PUBLIC__forum/img/userInfo/zan.png" alt="" width="19px" height="20px">{/if}
+                        {if condition="$val.new"}<img class="addmargin" src="__PUBLIC__forum/img/userInfo/new.png" alt="" width="18px" height="18px">{/if}
+                        <div class="tittle_right2 addmargin">
+                            <p class="tittle_time2">{$val.create_time|date="Y/m/d",###}</p>
+                            <div class="tittle_menu2">{$val.username}</div>
+                            <a class="tittle_top3" href="#">{$val.cate_name}</a>
+                        </div>
+                        <p><i class="tittle_point"></i>{$val.content|html_entity_decode|strip_tags}</p>
+
+                    </li>
+                    {/foreach}
+
+                    <div class="paginationCon" style="text-align:center;margin: 40px auto">
+                        <div class="m-style M-box2" style="display: inline-block">{$page}</div>
+                    </div>
+                </ul>
+                <div class="articleTip_null" data-state="0"><i>暂时没有内容哦</i></div>
+            </div>
+        </div>
+        <script>
+            if ($('.articleTip_null').data('state') == '0') {
+                $('.articleTip_null').hide();
+            }
+
+        </script>
+    </section>
+</body>
+
+</html>
+{/block}

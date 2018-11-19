@@ -1,0 +1,38 @@
+{extend name="base" /}
+
+{block name="body"}
+<!--tab标签-->
+<div class="layui-tab-brief">
+
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form form-container" method="post" action="{:url('give_reward/save')}" >
+                <div class="layui-form-item">
+                    <label class="layui-form-label">序号</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="order" required lay-verify="required" placeholder="请输入整数" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">米币数</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="money" required lay-verify="required" placeholder="请输入整数 例如：10" class="layui-input">
+                    </div>
+                </div>
+                <div class="btable-paged" >
+                    <div class="layui-main">
+                        <div class="formbtngroup">
+                            <input type="submit" class="layui-btn layui-btn-small"  value="添加">
+                            <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+{/block}

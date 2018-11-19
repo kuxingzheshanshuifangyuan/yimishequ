@@ -1,0 +1,1423 @@
+{extend name="index_base" /}
+{block name="seo"}
+	<title>{$forum_data.title}</title>
+	<meta name="keywords" content="{$forum_data.keywords}">
+	<meta name="description" content="{:strip_tags(html_entity_decode($forum_data.description))}">
+{/block}
+{block name="css"}
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/communication_region.css?v=14"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/layui/css/layui.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+	<link rel="stylesheet" href="__PUBLIC__/wangEditor/css/wangEditor.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/galpop/jquery.galpop.css">
+{/block}
+{block name="body"}
+	<body>
+		<div class="userInfoBottom">
+			<p class="crumbs"> <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> > <a href="#">交流区</a> > <a href="#">热门口子</a> > <a href="#">帖子名字帖子名字</a> </p>
+			{if condition="$Request.param.page eq 1 || empty($Request.param.page) "}
+			<div class="userInfoBottomLeft indexItem">
+
+				{if condition="$forum_data.settop"}<img class="toTop" src="__PUBLIC__forum/img/communication_region/top.png"/>{/if}
+
+		    	<div class="state_">
+		    		<div class="stateItem2">
+		    			<p>
+		    				{$forum_data.title}
+							{if condition="$forum_data.hot"}<img class="detail-icon" src="__PUBLIC__forum/img/userInfo/hot.png"/>{/if}
+							{if condition="$forum_data.praise"}<img class="detail-icon" src="__PUBLIC__forum/img/userInfo/zan.png"/>{/if}
+							{if condition="$forum_data.new"}<img class="detail-icon" src="__PUBLIC__forum/img/userInfo/new.png"/>{/if}
+							{if condition="$forum_data.pic"}<img class="detail-icon" src="__PUBLIC__forum/img/communication_region/pic.png"/>{/if}
+		    			</p>
+		    		</div>
+
+		    		<div class="stateItem4">
+		    			<div class="stateItem4Left_">
+		    				<span id="">
+		    					<img src="__PUBLIC__forum/img/userInfo/view.png"/>{$forum_data.view}
+		    				</span>
+		    				<span id="">
+		    					<img src="__PUBLIC__forum/img/userInfo/reply.png"/>{$forum_data.reply}
+		    				</span>
+		    				<span id="">
+		    					<img src="__PUBLIC__forum/img/userInfo/zan_.png"/>{$forum_data.praise}
+		    				</span>
+		    			</div>
+		    			<span class="stateItem4Right_"><img class="authorHeader" src="__ROOT__{$forum_data.userhead}"/>{$forum_data.username} | {$forum_data.create_time_text}</span>
+		    		</div>
+		    	</div>
+
+		    	<div class="articleTip">
+		    		<span >原创文章</span>
+		    		<span>板块：<span>{$forum_data.name}</span></span>
+		    		<span>最新回复：<span>{empty name="$forum_data.reply"}暂无回复{else/}{$forum_data.reply_time}{/empty}</span></span>
+					{empty name="$Request.param.cid"}
+					<a href="{:url('detail',['cid'=>$forum_data['uid'],'id'=>$id])}"><span>只看该作者</span></a>
+					{else/}
+					<a href="{:url('detail',['id'=>$id])}"><span>显示全部楼层</span></a>
+					{/empty}
+
+					{if condition="$Think.session.userid eq $forum_data.uid "}
+					<a class="detail-edit" href='{:url("forum/edit",["id"=>$id])}'><span>编辑</span></a>
+					{/if}
+		    	</div>
+
+
+		    	<div class="articleContent">
+
+	    			{:html_entity_decode($forum_data.content)}
+	    			
+	    			
+					<div class="articleBottom">
+					本主题由  {$forum_data.username}  于  {$forum_data.create_time|date="Y/m/d H:i",###}  分享
+					</div>
+
+					{if condition="$Think.session.userid neq ''"}
+						{if condition="$Think.session.userid eq $forum_data.uid"}
+
+							<div class="exceptional_" >
+								不能打赏自己
+							</div>
+						{else/}
+							<div class="exceptional exceptional-demo login">
+								打赏作者
+							</div>
+						{/if}
+					{else/}
+						<div class="exceptional exceptional-demo notlog">
+						打赏作者
+						</div>
+					{/if}
+
+					{if condition="$Think.session.userid neq ''"}
+					<div class="exceptionalContent" style="display: none;">
+						<div class="hidethis">
+							×
+						</div>
+						<div class="exceptionalContentTop">
+						<img src="{$forum_data.userhead}"/>
+						<div class="" style="float: left;    margin: 5px 0 0 17px;    line-height: 24px;">
+						<span class="exceptionalName">{$forum_data.username}</span>
+						<span class="exceptionalTip"></span>
+						</div>
+						</div>
+
+
+						<div class="myCoin">
+						<span>我的米币：<span>{$user_data.money} </span>米币</span>
+						</div>
+						<div class="excepCoin">
+						<span>打赏米币：<span id="rewardSum">10</span>米币</span>
+						</div>
+						<div class="coins">
+							{volist name="give_reward" id="reward_val"}
+								<div class="coinsItem"><span>{$reward_val.money}</span>米币</div>
+							{/volist}
+						</div>
+
+						<div class="excepSubmit" onclick="excepSubmit()">
+						打赏作者
+						</div>
+						<div class="excepSubmitBot">
+						打赏是表示鼓励而对内容的无偿赠与
+						</div>
+					</div>
+					{/if}
+
+
+					<div class="excepters">
+					<span>{$forum_data.reward_sum}</span>人打赏
+						<div class="exceptersContent" >
+							<img src="__PUBLIC__forum/img/communication_region/最新打赏.png"/>
+							{foreach $giveRrewardList as $v}
+							<img src="{$v.userhead}"/>
+							{/foreach}
+						</div>
+					</div>
+
+	    			<div class="edit">
+	    				<div class="" style="    margin: 0 auto;width: 375px;height: 50px;">
+
+							{if condition="$Think.session.userid eq ''"}
+								<div class="editItem" style="background: #c093ea;" onclick="goToLogin()">
+									<img src="__PUBLIC__forum/img/communication_region/share.png"/>
+									分享<span id="collect_num">{$forum_data.collect}</span>
+								</div>
+								<div class="editItem"  onclick="goToLogin()">
+									<img src="__PUBLIC__forum/img/communication_region/collcect.png"/>
+									收藏<span id="collect_num">{$forum_data.collect}</span>
+								</div>
+								<div class="editItem" style="background: #ffb200;" onclick="goToLogin()">
+									<img src="__PUBLIC__forum/img/communication_region/praise.png"/>
+									赞<span id="praise_num">{$forum_data.praise}</span>
+								</div>
+								<!-- <div class="editItem" style="background: #00b091;" onclick="goToLogin()">
+									<img src="__PUBLIC__forum/img/communication_region/trample.png"/>
+									踩<span id="trample_num">{$forum_data.trample}</span>
+								</div> -->
+							{else /}
+								
+								<div class="editItem" style="background: #c093ea;">
+									<img src="__PUBLIC__forum/img/communication_region/share.png"/>
+									分享<span id="collect_num">{$forum_data.collect}</span>
+								</div>
+								<div class="editItem" id="collect">
+									<img src="__PUBLIC__forum/img/communication_region/collcect.png"/>
+									收藏<span id="collect_num">{$forum_data.collect}</span>
+								</div>
+								<div class="editItem Gzan" style="background: #ffb200;" id="praise">
+									<img src="__PUBLIC__forum/img/communication_region/praise.png"/>
+									赞<span id="praise_num">{$forum_data.praise}</span>
+								</div>
+								<!-- <div class="editItem Gcai" style="background: #00b091;" id="trample">
+									<img src="__PUBLIC__forum/img/communication_region/trample.png"/>
+									踩<span id="trample_num">{$forum_data.trample}</span>
+								</div> -->
+							{/if}
+
+	    				</div>
+	    			</div>
+		    	</div>
+			</div>
+			{/if}
+
+
+			{foreach $comment as $key => $v}
+			<div class="comments indexItem" uid="">
+				<div class="commentsTop">
+					<span class="commentsTitle"><img class="authorHeader" src="__ROOT__{$v.userhead}"/><span class="author" title="{$v.username}">{$v.username}</span></span>
+					<span class="commentsTitleRight">
+						<a href="javascript:(void)">只看该作者</a>
+						{switch name="$v.level"}
+						{case value="1"}<span class="sofa">沙发 </span>{/case}
+						{case value="2"}<span class="bench">板凳 </span>{/case}
+						{case value="3"}<span class="floor">地板 </span>{/case}
+						{default /}<span>{$v.level}楼 </span>
+						{/switch}
+					</span>
+				</div>
+				<p class="commentsContent">
+					{$v.content}
+				</p>
+
+				{notempty name="$v.parent"}
+				<p class="commentsForSb">
+					<span >{$v.parent.username}：</span>
+					{$v.parent.content}
+				</p>
+				{/notempty}
+				<div class="commentsBottom" cid="{$v.id}">
+					<span class="commentsReply" data-method2="setbottom"><img src="__PUBLIC__forum/img/communication_region/回复-栏.png" alt="回复"/>回复</span>
+					<span class="commentsZan Gzan"><img src="__PUBLIC__forum/img/communication_region/赞--黄色.png" alt="赞"/>赞<span class="zanNum">{$v.praise}</span></span>
+					<span class="" onclick="report()"><img src="__PUBLIC__forum/img/communication_region/icon_jubao.png" alt="举报"/>举报</span>
+					<span class="report">{$v.create_time}</span>
+					<!-- <div class="posiAbso"></div> -->
+				</div>
+			</div>
+			{/foreach}
+
+
+
+			<!--分页-->
+			<div class="paginationCon">
+				<span class="demo"></span>
+				<div class="m-style M-box2">{$page}</div>
+			</div>
+
+
+
+			<!--评论编辑框-->
+			<form method="post" action="" class="layui-form" id="edit-content">
+				<div class=""></div>
+				<div class="replyText indexItem">
+					<!--<p class="replySB"></p>-->
+
+					<div class="layui-form-item layui-form-text" style="padding-right: 20px;" >
+						<div class="layui-input-block" style="margin-left: 0px;">
+							<textarea id="" class="textarea-content" name="content" style="height:165px;width: 100%;border-radius: 10px;"></textarea>
+						</div>
+					</div>
+					{if condition="$Think.session.userid eq ''"}
+					<span class="loginToReply">您需要登陆后才可以回帖 <span class="goToLogin" onclick="goToLogin()"> 去登录</span></span>
+					{else/}
+					<input type="hidden" name="fid" value="{$id}"/>
+					<!--<input type="hidden" name="tid" class="tid">-->
+					<div class="replyTextBtn" lay-submit="" lay-filter="comment_add">
+						回复帖子
+					</div>
+					{/if}
+				</div>
+			</form>
+
+			<!-- 右侧单元 -->
+			<div class="conmuniAreaRight">
+				<!-- 交友 -->
+				<div class="replyRight">
+					<div class="reply-back"></div>
+					<div class="poster-head">
+						<img src="__PUBLIC__forum/img/index/face.png" alt="用户头像">
+					</div>
+					<p class="poster-name">娇娇<span>大师米</span></p>
+					<div class="replyRightBot">
+						<div class="replyRightBotItem" onclick="goToLogin()">
+							<img src="__PUBLIC__forum/img/communication_region/icon_guanzhu.png"/>
+							关注2
+						</div>
+						<div class="replyRightBotItem Gzan" onclick="goToLogin()" >
+							<img src="__PUBLIC__forum/img/communication_region/icon_fensi.png"/>
+							粉丝2
+						</div>
+						<div class="replyRightBotItem Gcai" onclick="goToLogin()" >
+							<img src="__PUBLIC__forum/img/communication_region/icon_teizi.png"/>
+							帖子2
+						</div>
+					</div>
+
+					<div class="poster-bottom">
+						<div class="poster-btn" onclick="follow()">
+							关注
+						</div>
+						<div class="poster-btn" onclick="sendMsg()">
+							私信
+						</div>
+					</div>
+
+				</div>
+
+				<!-- 回复帖子按钮 -->
+				<div class="reply-btn indexItem">
+					<div class="replyBtn" data-method="setTop">
+						<img src="__PUBLIC__forum/img/communication_region/回复帖子.png"/>
+						回复帖子
+					</div>
+				</div>
+				<!-- 广告位 -->
+				<div class="Ad indexItem">
+					<a href="{$ad['link']}">
+						<img src="__ROOT__/{$ad['img']}" style="width:322px;height:180px" alt="">
+					</a>
+				</div>
+				<!-- 小编推荐 -->
+				<div class="recommend indexItem">
+					<div class="title_">
+						小编推荐
+					</div>
+					<div class="recommendCon">
+						{notempty name="recommend"}
+							{volist name="recommend" id="val"}
+								<ul>
+									<li><a href="{:url('Forum/detail',['id'=>$val['id']])}" >{$val['title']}</a> </li>
+								</ul>
+							{/volist}
+						{else /}
+							<ul>
+								<li>小编没有推荐的帖子呦！</li>
+							</ul>
+						{/notempty}
+					</div>
+				</div>
+				<!-- 小编推荐 -->
+				<div class="recommend indexItem">
+						<div class="title_">
+							热门帖子
+						</div>
+						<div class="recommendCon">
+							{notempty name="recommend"}
+								{volist name="recommend" id="val"}
+									<ul>
+										<li><a href="{:url('Forum/detail',['id'=>$val['id']])}" >{$val['title']}</a> </li>
+									</ul>
+								{/volist}
+							{else /}
+								<ul>
+									<li>小编没有推荐的帖子呦！</li>
+								</ul>
+							{/notempty}
+						</div>
+					</div>
+			</div>
+		</div>
+	<!--密码登录-->
+	<div class="loginPage" style="display: none;">
+		<form method="post" action="" class="layui-form">
+			<div class="LoginUser clearfix">
+				<div class="InputImg">
+					<img src="__PUBLIC__forum/img/login/账号拷贝2.png"/>
+				</div>
+				<input type="text" class="username" name="account"
+					   placeholder="请输入手机号码" value="" autocomplete="off">
+			</div>
+			<!--<input type="text" name="account" class="username" value="" placeholder="会员账号 / 邮箱 / 手机号码" autocomplete="off"/>-->
+			<div class="LoginUser clearfix">
+				<div class="InputImg">
+					<img src="__PUBLIC__forum/img/login/密码拷贝.png"/>
+				</div>
+				<input type="password" class="rpfdetapass pass" name="password" placeholder="请输入密码" value=""  autocomplete="off">
+			</div>
+			<!--<input type="password" name="password" class="rpfdetapass pass" value="" placeholder="请输入密码" style="background: url() no-repeat 16px; width: 100%; margin-bottom: 10px;"  autocomplete="off"/>-->
+			<div class="loginTip clearfix">
+				<div class="layui-input-block" style="margin-left:5px; float: left;">
+				  <input type="checkbox" name="rememb" lay-skin="primary" title="记住密码" value="1">
+				</div>
+				<!--<a href="javascript:void(0)" style="float: right;" onclick="codeLoginBtn()">验证码登录</a>-->
+			</div>
+			<div class="loginBtn" lay-submit="" lay-filter="login">
+				登录
+			</div>
+		</form>
+		<!--<div class="otherLogin">
+			<span>其他登录：</span>
+			<img src="__PUBLIC__forum/img/index/qq.png"/>
+			<img src="__PUBLIC__forum/img/index/wechat.png"/>
+		</div>-->
+	</div>
+
+	<!--验证码登录-->
+		<div class="codeLogin" style="display: none;">
+			<form action="" method="post" class="layui-form">
+				<div style="height: 103px;position: relative;">
+					<div class="LoginUser clearfix">
+						<div class="InputImg">
+							<img src="__PUBLIC__forum/img/login/账号拷贝2.png" />
+						</div>
+						<input type="text" class="cms-login-phone" name="account" placeholder="请输入手机号码" value="" autocomplete="off">
+					</div>
+					<!--<input type="text" name="username" class="emPhone username" value="" placeholder="会员账号 / 邮箱 / 手机号码" style="background: url() no-repeat 16px;"  autocomplete="off"/>-->
+					<div class="LoginUser clearfix">
+						<div class="InputImg">
+							<img src="__PUBLIC__forum/img/login/code.png" />
+						</div>
+						<input type="text" class="rpfcode cms-login-code" placeholder="请输入验证码" name="code" value="" autocomplete="off">
+						<input type="button" class="mainGetCode" onclick="sendMessage($('.cms-login-phone'),$('.cms-login-code'),this,60)"
+							   value="获取验证码"></input>
+					</div>
+				</div>
+				<div class="loginTip clearfix">
+					<!--<p id="" style="float: left;margin: 0 0 0 10px;">
+                        收不到验证码？<span>获取语音验证码</span>
+                    </p>-->
+					<a href="javascript:void(0)" style="float: right;margin-right: 10px;" onclick="passLogin()">密码登录</a>
+				</div>
+				<div class="loginBtn" lay-submit="" lay-filter="sms_login">
+					登录
+				</div>
+			</form>
+
+
+			<!--暂时注释掉其他登录方式   改回来时，需要将弹出框高度改为427-->
+			<!--<div class="otherLogin">
+                <span>其他登录：</span>
+                <img src="__PUBLIC__forum/img/index/qq.png"/>
+                <img src="__PUBLIC__forum/img/index/wechat.png"/>
+            </div>-->
+		</div>
+	<!--忘记密码-->
+	<!--<div class="forgetPass" style="display: none;">
+
+		<form action="" method="post" class="layui-form" style="height: 210px;">
+			<input type="text" name="account" class="username forPhone_" placeholder="会员账号 / 邮箱 / 手机号码" value="" style="background: url(__PUBLIC__forum/img/login/账号拷贝2.png) no-repeat 16px;"  autocomplete="off"/>
+			<input type="text" name="code" class="forCode code" value="" placeholder="请输入验证码" style="background: url(__PUBLIC__forum/img/login/code.png) no-repeat 16px;"  autocomplete="off"/>
+			<input type="button" class="getCode" onclick="sendMessage($('.forPhone_'),$('.forCode'),this,10)" value="获取验证码"></input>
+			<input type="password" name="newPass" class="forPass" value="" placeholder="请输入新的密码" style="background: url(__PUBLIC__forum/img/login/密码拷贝.png) no-repeat 16px;"  autocomplete="off"/>
+			<!--<div class="getCode">获取验证码</div>
+		</form>
+			<div class="loginBtn forLoginBtn" lay-submit="" lay-filter="recoveredPass" >
+				登录
+			</div>
+		<div class="otherLogin">
+			<span>其他登录：</span>
+			<img src="__PUBLIC__forum/img/index/qq.png"/>
+			<img src="__PUBLIC__forum/img/index/wechat.png"/>
+		</div>
+	</div>-->
+
+
+	<div class="zanCon" style="display: none;">
+		<img src="__PUBLIC__forum/img/communication_region/praise.png"/>赞 1
+	</div>
+	<!-- 版主信息 -->
+	<div class="authorHeaderCon"style="display: none;">
+		<div class="authorHeaderConTop">
+			<img src="__PUBLIC__forum/img/communication_region/22222.png"/>
+			<div class="">
+				<p class="authorTit">蘑菇面包<span> | 版主</span></p>
+				<p class="authorTip"><span>帖子：100</span> <span>积分：100</span> </p>
+			</div>
+		</div>
+		<div class="authorHeaderConBot">
+			<p><span class="aa">在线时间：34小时</span> <span>签到天数：100天</span></p>
+			<p><span class="aa">人气：341</span> <span>威望：100</span></p>
+			<div class="followBtn">
+				加关注
+			</div>
+		</div>
+	</div>
+	<!--评论编辑框  弹出框-->
+	<form method="post" action="" class="layui-form" id="layui-formrpf" style="display: none;height:290px;">
+		<div class=""></div>
+		<div class="replyText indexItem">
+			<p class="replySB" style="margin:0;margin-bottom: 10px;height: 19px; "></p>
+
+			<div class="layui-form-item layui-form-text" style="padding-right: 20px;height:198px" >
+				<div class="layui-input-block" style="margin-left: 0px;">
+					<textarea id="" class="textarea-content2" name="content" style="height:165px;width: 100%;border-radius: 10px;"></textarea>
+				</div>
+			</div>
+			{if condition="$Think.session.userid eq ''"}
+			<span class="loginToReply">您需要登陆后才可以回帖 <span class="goToLogin" onclick="goToLogin()"> 去登录</span></span>
+			{else/}
+			<input type="hidden" name="fid" value="{$id}"/>
+			<input type="hidden" name="tid"  class="tid">
+			<div class="replyTextBtn" lay-submit="" lay-filter="comment_add" style="position: absolute;left: 0;right: 0;bottom: 18px;margin: auto;width: 200px;height: 40px;line-height: 40px;text-align: center;">
+				回复帖子
+			</div>
+			{/if}
+		</div>
+	</form>
+
+	<!-- 举报弹出框 -->
+	<div class="report-container" style="display:none;">
+		<p>请选择举报原因</p>
+		<div class="report-item">
+			<div class="" data-info="恶意灌水">恶意灌水</div>
+			<div class="" data-info="广告诈骗">广告诈骗</div>
+			<div class="" data-info="淫秽色情">淫秽色情</div>
+			<div class="" data-info="辱骂他人">辱骂他人</div>
+			<div class="" data-info="其他原因">其他原因</div>
+		</div>
+		<div>
+			<button class="report-confirm">确定</button>
+			<button class="layui-layer-close">取消</button>
+		</div>
+	</div>
+	<!-- 私信弹出框 -->
+	<div class="sendMsg-container" style="display:none;">
+		<p>发送私信</p>
+		<div class="">
+			<textarea name="" id="personalMsg" rows="5" placeholder="私信内容" style="resize:none;"></textarea>
+			<button class="sendMsg-confirm" onclick="sendMsgBtn()">发送</button>
+		</div>
+	</div>
+</body>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+<script src="__PUBLIC__forum/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/wangEditor/js/wangEditor.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/galpop/jquery.galpop.min.js"></script>
+
+<script type="text/javascript">
+
+    layui.use(['element','form'], function(){
+        var $ = layui.jquery
+            ,element = layui.element
+            ,form = layui.form;
+
+
+        form.on('submit(sms_login)', function (data) {
+            // loading = layer.load(2, {
+            //     shade: [0.2,'#000']
+            // });
+            var param = data.field;
+            $.post('{:url("Login/sms_login")}', param, function (data) {
+                if (data.error_code === 0) {
+
+                    layer.msg(data.msg, {
+                        icon: 1,
+                        time: 1500
+                    }, function () {
+                        location.reload();
+                    });
+                } else {
+                    // layer.close(loading);
+                    layer.msg(data.msg, {
+                        icon: 2,
+                        anim: 6,
+                        time: 1000
+                    });
+                }
+            });
+            return false;
+        });
+
+    });
+	
+	$(function(){
+		previewPic();
+		reportSub();
+//		图片预览功能
+		function previewPic() {
+			var len = $('.articleContent p img').length;
+			var imgSrc = '';
+			for(var i=0;i<len;i++){
+				imgSrc = $('.articleContent p img:eq('+i+')').attr('src');
+				$('.articleContent p img:eq('+i+')').wrap('<a class="galpop-multiple" data-galpop-group="multiple"  href="'+imgSrc+'">');
+			}
+			$('.galpop-multiple').galpop();
+		};
+	});
+
+
+	// 举报弹窗
+    function report(){
+		layer.close(layer.index);
+		layer.open({
+			type:1,
+			skin:'searchWHsucc',
+			title:false,
+			shadeClose: true,
+			scrollbar: false,
+			area: ['450px', '500px'],
+			closeBtn: 0,
+			resize: false,
+			content:$(".report-container"),
+			cancel: function(index, layero){
+				$(".report-container").hide()
+			}
+		});
+	};
+	// 举报方法
+	function reportSub() {
+		var reportInfo = '';
+		$('.report-item div').click(function() {
+			reportInfo = $(this).attr('data-info');
+			$(this).addClass('report-item-click').siblings().removeClass('report-item-click');
+		});
+		$('.report-confirm').click(function() {
+			if(!reportInfo){
+				layer.msg('请选择举报类型！', {icon: 5});
+				return false;
+			};
+			layer.confirm('确认举报该条评论吗？【'+reportInfo+'】', {icon: 3, title:'提示'}, function(index){
+				layer.msg('举报成功【'+reportInfo+'】', {icon: 1}); 
+				layer.closeAll('page');
+			});
+		});
+	};
+	// 关注的方法
+	function follow() {
+		layer.msg('已关注！(测试)', {icon: 1}); 
+	};
+	// 私信方法
+	function sendMsg() {
+		layer.close(layer.index);
+		layer.open({
+			type:1,
+			skin:'searchWHsucc',
+			title:false,
+			shadeClose: true,
+			scrollbar: false,
+			area: ['340px', '263px'],
+			closeBtn: 0,
+			resize: false,
+			content:$(".sendMsg-container"),
+			cancel: function(index, layero){
+				$(".sendMsg-container").hide()
+			}
+		});
+	};
+	// 私信成功
+	function sendMsgBtn() {
+		let message = $('#personalMsg').val();//私信内容
+
+		if(message){
+			$('#personalMsg').val('');
+			layer.msg('发送成功！', {icon: 1});
+			layer.closeAll('page');
+		}else{
+			layer.msg('请输入私信内容！', {icon: 5});
+		};
+	};
+	
+
+
+	
+
+	var E = window.wangEditor;
+//  var editor = new E('textarea');
+	// 页面中文本编辑器
+    var textarea = document.querySelector('.textarea-content');
+	// 弹出框中文本编辑器
+	var textarea2 = document.querySelector('.textarea-content2');
+    var editor = new wangEditor(textarea);
+	var editor2 = new wangEditor(textarea2);
+	// 页面中文本编辑器
+	encapsulation(editor)
+	// 弹出框中文本编辑器
+	encapsulation(editor2)
+	// 改变回复帖子页面图片样式
+//	console.log($('.articleContent p').eq(0).html())
+	// $('.articleContent p').css('width','100%')
+	// 点击出现模态框
+	layui.use('layer', function(){ //独立版的layer无需执行这一句
+		var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+		var aaa = {if condition="$Think.session.userid neq ''"}`<div class="bjhead" style="height:42px;line-height42px;">
+						<img src="{$user_data['userhead']}" style="width:30px;height:30px;border-radius:50%;vertical-align:top;border:none;margin-top:6px;">
+						<span style="margin-left:24px;font-szie:16px;color:#515151;">{$user_data.username}</span>
+					</div>`{else /} '' {/if};
+		//触发事件
+		var active = {
+			// 点击回复帖子
+			setTop: function(){
+				var that = this;
+				//多窗口模式，层叠置顶
+				layer.open({
+					type: 1 //此处以iframe举例
+					,title:[aaa]
+					,area: ['865px', '380px']
+					,content:$('#layui-formrpf')
+				});
+			},
+			// 点击回复
+			setbottom: function(){
+				var that = this;
+				//多窗口模式，层叠置顶
+				layer.open({
+					type: 1 //此处以iframe举例
+					,title:[aaa]
+					,area: ['880px', '380px']
+					,content:$('#layui-formrpf')
+					,resize: false
+				});
+			}
+
+		};
+		if($('.replySB').html('')){
+//			console.log($('.replySB').parents('.layui-layer'));
+			$('.replySB').parents('.layui-layer').css('height','360px!important');
+		}else{
+			$('.replySB').parents('.layui-layer').css('height','380px!important');
+		}
+		$('.replyBtn').on('click', function(){
+            $(".replySB").text('');
+            $("input[name='tid']").val('');
+			var othis = $(this), method = othis.data('method');
+			active[method] ? active[method].call(this, othis) : '';
+		});
+		$('.commentsReply').on('click', function(){
+			id = $(this).parent().attr('cid');
+			$('.tid').val(id);
+			// $(this).parents('.hide').removeClass('show');
+			var author = $(this).parent().siblings('.commentsTop').children('.commentsTitle').children('.author').text();
+			$(".replySB").text('@'+author)
+			$(this).unbind('mouseleave');
+			var othis = $(this), method = othis.data('method2');
+			active[method] ? active[method].call(this, othis) : '';
+		});
+
+	});
+    {if condition="$Think.session.userid eq ''"}
+	editor.disable();//禁用编辑器
+	editor2.disable();
+	{else/}
+	editor.enable();//解除禁用编辑器
+	editor2.enable();
+	{/if}
+
+// 编辑器封装方法
+function encapsulation(editor){
+	$.get('{:url("index/getemotion")}',function (data){
+
+		editor.config.uploadImgUrl = '{:url("index/forum/doUploadPic")}';
+		editor.config.uploadImgFileName = 'FileName';
+		var emotiondata;
+		emotiondata=data;
+		emotiondata = JSON.parse(emotiondata);
+		editor.config.emotions =emotiondata;
+		editor.config.menus = $.map(wangEditor.config.menus, function(item, key) {
+			if (item === 'eraser') {
+			return null;
+			}
+			if (item === 'mp4v') {
+				return null;
+				}
+			if (item === 'video') {
+				return null;
+				}
+			if (item === 'location') {
+			return null;
+			}
+			return item;
+			});
+
+		editor.config.menus = [
+			'source',
+	        '|',
+		    'head',  // 标题
+		    'bold',  // 粗体
+		    'fontSize',  // 字号
+		    'fontName',  // 字体
+		    'italic',  // 斜体
+		    'underline',  // 下划线
+		    'strikethrough',  // 删除线
+		    'fontsize',
+		    'forecolor',
+		    '|',
+		    'unorderlist',
+       		 'orderlist',
+        	'|',
+		    'backColor',  // 背景颜色
+		    'link',  // 插入链接
+		    'list',  // 列表
+		    'justify',  // 对齐方式
+		    'quote',  // 引用
+		    'emotion',
+		    'table',  // 表格
+		    'img',  // 插入图片
+		    'video',  // 插入视频
+		    'code',  // 插入代码
+		    'undo',  // 撤销
+		    'redo',  // 重复
+		    'fullscreen',
+		]
+		editor.config.colors = {
+	        '#880000': '暗红色',
+	        '#800080': '紫色',
+	        '#ff0000': '红色',
+	        '#000000': '黑色',
+	        '#00FF00': '绿色',
+	        '#0000FF': '蓝色',
+	        '#FFFF00': '黄色',
+	        '#00FFFF': '天蓝色',
+	        '#C0C0C0': '灰色',
+	        '#99CCCC': '青绿色',
+	        '#3300CC': '深蓝色',
+	        '#990000': '姨妈红',
+
+	    };
+		editor.config.emotions = {
+		    // 支持多组表情
+
+
+		    'weibo': {
+		        title: '表情',  // 组名称
+		        data: [
+		         	{
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ac/smilea_thumb.gif",
+				        value : "[呵呵]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0b/tootha_thumb.gif",
+				        value : "[嘻嘻]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6a/laugh.gif",
+				        value : "[哈哈]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/14/tza_thumb.gif",
+				        value : "[可爱]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/af/kl_thumb.gif",
+				        value : "[可怜]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/a0/kbsa_thumb.gif",
+				        value : "[挖鼻屎]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f4/cj_thumb.gif",
+				        value : "[吃惊]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/shamea_thumb.gif",
+				        value : "[害羞]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c3/zy_thumb.gif",
+				        value : "[挤眼]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/29/bz_thumb.gif",
+				        value : "[闭嘴]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/71/bs2_thumb.gif",
+				        value : "[鄙视]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6d/lovea_thumb.gif",
+				        value : "[爱你]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/9d/sada_thumb.gif",
+				        value : "[泪]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/19/heia_thumb.gif",
+				        value : "[偷笑]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/8f/qq_thumb.gif",
+				        value : "[亲亲]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/b6/sb_thumb.gif",
+				        value : "[生病]"
+				    },{
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif",
+				        value : "[囧]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/58/mb_thumb.gif",
+				        value : "[太开心]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/17/ldln_thumb.gif",
+				        value : "[懒得理你]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/98/yhh_thumb.gif",
+				        value : "[右哼哼]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6d/zhh_thumb.gif",
+				        value : "[左哼哼]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/a6/x_thumb.gif",
+				        value : "[嘘]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/af/cry.gif",
+				        value : "[衰]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/73/wq_thumb.gif",
+				        value : "[委屈]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/9e/t_thumb.gif",
+				        value : "[吐]"
+				    },{
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f3/k_thumb.gif",
+				        value : "[打哈欠]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/27/bba_thumb.gif",
+				        value : "[抱抱]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7c/angrya_thumb.gif",
+				        value : "[怒]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/5c/yw_thumb.gif",
+				        value : "[疑问]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/a5/cza_thumb.gif",
+				        value : "[馋嘴]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/88_thumb.gif",
+				        value : "[拜拜]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/e9/sk_thumb.gif",
+				        value : "[思考]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/24/sweata_thumb.gif",
+				        value : "[汗]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7f/sleepya_thumb.gif",
+				        value : "[困]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6b/sleepa_thumb.gif",
+				        value : "[睡觉]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/90/money_thumb.gif",
+				        value : "[钱]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0c/sw_thumb.gif",
+				        value : "[失望]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/40/cool_thumb.gif",
+				        value : "[酷]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/8c/hsa_thumb.gif",
+				        value : "[花心]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/49/hatea_thumb.gif",
+				        value : "[哼]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/36/gza_thumb.gif",
+				        value : "[鼓掌]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d9/dizzya_thumb.gif",
+				        value : "[晕]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/1a/bs_thumb.gif",
+				        value : "[悲伤]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/62/crazya_thumb.gif",
+				        value : "[抓狂]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/91/h_thumb.gif",
+				        value : "[黑线]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6d/yx_thumb.gif",
+				        value : "[阴险]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/nm_thumb.gif",
+				        value : "[怒骂]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/40/hearta_thumb.gif",
+				        value : "[心]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ea/unheart.gif",
+				        value : "[伤心]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/58/pig.gif",
+				        value : "[猪头]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d6/ok_thumb.gif",
+				        value : "[ok]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d9/ye_thumb.gif",
+				        value : "[耶]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c7/no_thumb.gif",
+				        value : "[不要]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif",
+				        value : "[赞]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/40/come_thumb.gif",
+				        value : "[来]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d8/sad_thumb.gif",
+				        value : "[弱]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/91/lazu_thumb.gif",
+				        value : "[蜡烛]"
+				    },{
+					icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif",
+				        value : "[草泥马]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif",
+				        value : "[神马]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif",
+				        value : "[浮云]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif",
+				        value : "[给力]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif",
+				        value : "[围观]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif",
+				        value : "[威武]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif",
+				        value : "[熊猫]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/81/rabbit_thumb.gif",
+				        value : "[兔子]"
+				    }, {
+				        icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/otm_thumb.gif",
+				        value : "[奥特曼]"
+				    }]
+		    }
+		};
+	    // 字号
+	    editor.config.fontsizes = {
+	        // 格式：'value': 'title'
+	        1: '10px',
+	        2: '13px',
+	        3: '16px',
+	        4: '19px',
+	        5: '22px',
+	        6: '25px',
+	        7: '28px'
+	    };
+
+		editor.config.pasteText = false;
+	    editor.create();
+	});
+
+	layui.use(['element','form'], function(){
+		var $ = layui.jquery
+		,element = layui.element
+		,form = layui.form;
+
+        form.on('submit(comment_add)', function(data){
+            loading = layer.load(2, {
+                shade: [0.2,'#000']
+            });
+            var param = data.field;
+            $.post('{:url("comment/add")}',param,function(data){
+                if(data.code == 200){
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        location.reload();
+                    });
+                }else{
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+            return false;
+        });
+
+	});
+}
+//	点击赞之后的动画效果
+	function zanAnimate(dom){
+		var left;
+		var top = parseInt($(dom).position().top) - 50;
+		var left_ = parseInt($(dom).position().left) ;
+//		left?left = 470:left =
+		if(left_ != NaN){
+			left = left_
+		}else{
+			left = '430px'
+		}
+
+		$('.zanCon').css({'top':top,'left':left}).show().animate({'top':top-200},700).hide(5);
+	}
+
+	$('.replySB').on('click',function(){
+	    $(this).html('');
+		$('.tid').val('');
+	});
+
+//	评论中的回复
+	// $('.commentsReply').on('click',function(){
+    //     id = $(this).parent().attr('cid');
+	// 	$('#tid').val(id);
+	// 	// $(this).parents('.hide').removeClass('show');
+	// 	var author = $(this).parent().siblings('.commentsTop').children('.commentsTitle').children('.author').text();
+	// 	$(".replySB").text('@'+author)
+	// 	$(this).unbind('mouseleave');
+	// });
+
+	//评论中的赞
+	$(document).on('click', '.commentsZan', function(){
+    	id = $(this).parent().attr('cid');
+    	_this = $(this);
+        $.get("{:url('vote')}",{id:id,type:2,vote_type:1},function (data) {
+            if(data.code != 1){
+                layer.msg(data.msg);
+                return false
+            }
+
+            if(data.code == 1){
+                AllPraise = _this.find('.zanNum').html();
+                AllPraise ++;
+                _this.find('.zanNum').html(AllPraise);
+                zanAnimate(_this);
+                _this.unbind('mouseleave').css('color','#fb4c53').children('span').css('color','#fb4c53');
+                layer.msg(data.msg);
+            }
+        },'json');
+    });
+
+	//评论中的踩
+	$(document).on('click', '.commentsCai', function(){
+		id = $(this).parent().attr('cid');
+		_this = $(this);
+		$.get("{:url('vote')}",{id:id,type:2,vote_type:2},function (data) {
+			if(data.code != 1){
+                layer.msg(data.msg);
+                return false
+			}
+
+			if(data.code == 1){
+				AllPraise = _this.find('.caiNum').html();
+				AllPraise ++;
+				_this.find('.caiNum').html(AllPraise);
+                layer.msg(data.msg);
+                $(this).unbind('mouseleave');
+			}
+		},'json');
+	});
+
+	// $(document).on('click', '.commentsZan', function(){
+    //
+	// 	$.get("{:url('vote')}",{id:{$id},type:2,vote_type:2},function (data) {
+	// 		if(data.code != 1){
+	// 			// layer.msg('请求失败');
+	// 		}
+    //
+	// 		if(data.code == 1){
+	// 			AllPraise = $(this).find('.zanNum').html();
+	// 			AllPraise ++;
+	// 			$(this).find('.zanNum').html(AllPraise);
+	// 		}
+	// 		layer.msg(data.msg);
+	// 	},'json');
+    //
+	// 	zanAnimate($(this));
+	// 	$(this).unbind('mouseleave').css('color','#fb4c53').children('span').css('color','#fb4c53');
+    //
+	// });
+
+
+//	鼠标移动到作者头像上,出现版主信息
+// 	$('.authorHeader').hover(function(){
+// 		var top = parseInt($(this).position().top)+40;
+// 		var left = parseInt($(this).position().left);
+//
+// 		$('.authorHeaderCon').css({'top':top,'left':left}).show();
+// 	})
+// 	$('.authorHeaderCon').mouseleave(function(){
+// 		$(this).hide()
+// 	})
+	//收藏
+	$('#collect').click(function(){
+		$.get("{:url('collect')}",{id:{$id}},function (data) {
+            if(data.code != 1){
+				// layer.msg('请求失败');
+            }
+            if(data.type == 1){
+                var AllCollect = $('#collect_num').html();
+                AllCollect --;
+                if(AllCollect < 1) AllCollect = 0;
+
+                $('#collect_num').html(AllCollect);
+
+            }
+            if(data.type == 2){
+                var AllCollect = $('#collect_num').html();
+                AllCollect ++;
+                $('#collect_num').html(AllCollect);
+            }
+
+            layer.msg(data.msg);
+        },'json')
+    });
+
+	//赞
+	$('#praise').click(function () {
+		Zan();
+	});
+	$('#zand').click(function () {
+		console.log(2)
+		Zan();
+	});
+	function Zan(){
+		console.log(1)
+        $.get("{:url('vote')}",{id:{$id},type:1,vote_type:1},function (data) {
+            if(data.code != 1){
+                // layer.msg('请求失败');
+            }
+
+            if(data.code == 1){
+                AllPraise= $('#praise_num').html();
+                AllPraise ++;
+                $('#praise_num').html(AllPraise);
+                // zanAnimate($(this));
+            }
+            layer.msg(data.msg);
+        },'json')
+	}
+	//踩
+	$('#trample').click(function () {
+		Cai();
+	});
+	$('#caib').click(function () {
+        Cai();
+    });
+
+	function Cai(){
+        $.get("{:url('vote')}",{id:{$id},type:1,vote_type:2},function (data) {
+            if(data.code != 1){
+                // layer.msg('请求失败');
+            }
+
+            if(data.code == 1){
+                AllTrample= $('#trample_num').html();
+                AllTrample ++;
+                $('#trample_num').html(AllTrample);
+            }
+            layer.msg(data.msg);
+        },'json')
+	}
+	// $('#praise').click(function () {
+	// 	$.get("{:url('vote')}",{id:{$id},type:1,vote_type:1},function (data) {
+	// 		if(data.code != 1){
+	// 			// layer.msg('请求失败');
+	// 		}
+    //
+	// 		if(data.code == 1){
+	// 			AllPraise= $('#praise_num').html();
+	// 			AllPraise ++;
+	// 			$('#praise_num').html(AllPraise);
+	// 		}else{
+	// 			layer.msg(data.msg);
+	// 		}
+    //
+	// 	},'json')
+	// });
+
+
+	// $(document).on('click','#collect',function(){
+	// 	// $(this).parents('.hide').removeClass('show');
+	// 	alert($(this).text());
+    //
+	// });
+
+
+
+
+    // var ue = UE.getEditor('editor',{
+    //     toolbars: [['bold','underline','italic','forecolor','insertimage','link','blockquote','insertcode','emotion','undo','redo']],
+    //     elementPathEnabled:false,
+    //     maximumWords:500,
+    //     wordCountMsg:"还可输入{#leave}字",
+    //     readonly:true
+    // });
+//  ue.ready(function(){
+//	    UE.getEditor('editor').setContent(data.content);
+//	});
+//
+
+//	密码登录
+	function goToLogin(){
+		layer.open({
+			type:1,
+			content:$(".loginPage"),
+			title:'登录',
+			skin:'login',
+			area: ['612px', '370px'],
+			resize:false,
+			cancel: function(index, layero){
+				$(".loginPage").hide()
+			}
+		})
+	}
+//	验证码登录
+	function codeLoginBtn(){
+		layer.close(layer.index);
+		$(".loginPage").hide();
+
+		layer.open({
+			type:1,
+			skin:'login',
+			content:$(".codeLogin"),
+			title:'登录',
+			area: ['612px', '370px'],
+			resize:false,
+			cancel: function(index, layero){
+				$(".codeLogin").hide()
+			}
+		})
+	}
+//	密码登录
+	function passLogin(){
+		layer.close(layer.index);
+		$(".codeLogin").hide();
+		layer.open({
+			type:1,
+			skin:'login',
+			content:$(".loginPage"),
+			title:'登录',
+			area: ['612px', '370px'],
+			resize:false,
+			cancel: function(index, layero){
+				$(".loginPage").hide()
+			}
+		})
+	}
+//	忘记密码
+	function forgetPsss(){
+		layer.close(layer.index);
+		$(".loginPage").hide();
+		layer.open({
+			type:1,
+			skin:'login',
+			content:$(".forgetPass"),
+			title:'重置密码',
+			area: ['612px', '460px'],
+			resize:false,
+			cancel: function(index, layero){
+				$(".forgetPass").hide()
+			}
+		})
+	}
+
+	//确认打赏
+	function excepSubmit(){
+		var money = $('.coinsItemEd span').text();
+		if(money){
+			$.post("{:url('index/user/give_reward')}",{id:{$id?:0},money:money},function (data) {
+				if(data.code){
+                    $('.exceptionalContent').hide();
+                    // $(".exceptional").text("已打赏作者").addClass('exceptional_').removeClass('exceptional');
+                    layer.msg(data.msg, {time: 1500}, function () {
+                        location.reload();
+                    });
+                }else {
+                    layer.msg(data.msg, {time: 1500}, function () {
+
+                    });
+                }
+            });
+		}else{
+			layer.msg('请选择打赏金额',{icon:0});
+		}
+	}
+
+
+	$(function(){
+		$(".tabs3 span,.tabs span").click(function(){
+			$(this).addClass('tab3_selected');
+			$(this).siblings().removeClass('tab3_selected');
+		})
+
+        function PageCallback(api,jq)
+        {
+            var currentPage = api.getCurrent();
+            $.get("{:url('ajax_comment')}",{'p':currentPage,'id':1},function(data){
+				console.log(data);
+			},'json')
+
+        }
+
+
+	//		回复/点赞/踩
+	// $('.comments').mouseover(function(){
+	// 	$(this).find('.posiAbso').hide();
+	// })
+	// $('.comments').mouseout(function(){
+	// 	$(this).find('.posiAbso').show();
+	// })
+
+
+
+//	打赏详情
+	$(".exceptional").click(function(){
+
+		if($(this).hasClass('notlog')){
+//			layer.msg('请您先登录')
+//			alert('请您先登录')
+			goToLogin();
+		}
+
+
+//		if($(this).classList)
+		var left = parseInt($(this).position().left) + parseInt($(this).width())/1.75;
+		var top = parseInt($(this).position().top) - $('.exceptionalContent').height();
+
+		console.log("左："+left)
+		console.log('高：'+top)
+
+
+		$('.exceptionalContent').css({'left':left,'top':top}).show();
+	});
+
+
+	$('.hidethis').click(function(){
+		$('.exceptionalContent').hide()
+	});
+//	选择打赏金额
+	$('.coinsItem').click(function(){
+
+		$(this).addClass('coinsItemEd');
+		$(this).siblings().removeClass('coinsItemEd');
+        money = $('.coinsItemEd span').text();
+        $('#rewardSum').text(money);
+	})
+//		//已打赏用户列表
+//		$(".excepters").hover(function(){
+//			$(".exceptersContent").show();
+//		});
+
+	})
+
+
+//回复帖子固定
+
+// $(window).scroll(function(){
+// 	if($(window).scrollTop() >= 170){
+// 		$('.replyRight').css({
+// 			'position':"fixed",
+// 			'top':"0"
+// 		})
+
+// 	}else{
+// 		$('.replyRight').css({
+// 			'position':"initial"
+// 		})
+// 	}
+// })
+// $('.replyRight .replyBtn').click(function(){
+// 	$(window).scrollTop($('.replyText').offset().top)
+// })
+</script>
+{/block}

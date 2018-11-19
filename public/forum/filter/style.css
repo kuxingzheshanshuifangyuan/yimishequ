@@ -1,0 +1,135 @@
+
+
+/* select */
+
+.filterDown{
+	width: 100px;
+	height: 28px;
+	background-image: linear-gradient(90deg, 
+		#ff1481 0%, 
+		#ff5d3e 100%), 
+	linear-gradient(
+		#f7f7f7, 
+		#f7f7f7);
+	background-blend-mode: normal, 
+		normal;
+	border-radius: 14px;
+	float: right;
+	text-align: center;
+	color: #ffffff;
+	line-height: 28px;
+    margin-right: -90px;
+    cursor: pointer;
+}
+
+.filterContent{
+	border-radius: 8px;
+	border: solid 1px #e8e8e8;
+}
+
+.select {
+    padding: 0px;
+    width: 98%;
+}
+
+.select li {
+	list-style: none;
+    padding: 15px 99px;
+    /*height: 59px;*/
+}
+
+.select .select-list {
+	border-bottom: #eee 1px dashed
+}
+
+.select dl {
+	zoom: 1;
+	position: relative;
+	line-height: 24px;
+}
+dl {
+     margin-top: 0 !important; 
+     margin-bottom: 0 !important;  
+}
+.select dl:after {
+	content: " ";
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden
+}
+
+.select dt {
+    width: 100px;
+    margin-bottom: 5px;
+    position: absolute;
+    top: 0;
+    left: -78px;
+    text-align: left;
+    height: 28px;
+    line-height: 28px;
+    color: #707070;
+    font-size: 14px;
+    font-weight: normal !important;
+}
+
+.select dd {
+    float: left;
+    display: inline;
+    margin: 0px 0 5px 10px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+}
+
+.select a {
+	display: inline-block;
+    white-space: nowrap;
+    height: 28px;
+    padding: 0 10px;
+    color: #039;
+    border-radius: 2px;
+    color: #828282;
+    font-size: 14px;
+    line-height: 28px;
+    margin: 0 5px;
+}
+.select a img{
+	margin-right: 6px;
+    margin-top: -3px;
+	width: 22px;
+}
+.select a:hover {
+	color: #fff;
+	background-color: #ff4a50;
+	border-radius: 14px;
+}
+
+.select .selected a {
+	color: #fff;
+    background-color: #ff4a50;
+    height: 28px;
+    border-radius: 14px;
+    line-height: 28px;
+    font-size: 14px;
+}
+
+.select-result dt {
+	font-size: 16px;
+}
+
+.select-no {
+	color: #999
+}
+
+.select .select-result a {
+	padding-right: 20px;
+    background: #f60 url(close.png) 92% 7px no-repeat;
+	
+	height: 28px;
+	background-color: #f7f7f7;
+	border-radius: 14px;
+	color: #828282;
+	
+}
+

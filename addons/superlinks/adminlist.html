@@ -1,0 +1,143 @@
+<div class="admin-main">
+<div class="layui-field-box layui-form">
+<div class="layui-box-searchber">
+				<a href="{:addons_url('superlinks://Superlinks/add')}" class="layui-btn layui-btn-small" id="add" style="float:left">
+					<i class="layui-icon">&#xe608;</i> 添加
+				</a>
+
+				
+
+                <form class="layui-form layui-form-pane" action="{:url('Addons/adminlist',array('name'=>'superlinks'))}"  method="get"  >
+                    <div class="layui-inline">
+                        <label class="layui-form-label">名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="keyword" value="{$keyword}" placeholder="请输入链接名称" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn  layui-btn-small">搜索</button>
+                    </div>
+                </form>
+                </div>
+                <hr>
+			
+				<table class="layui-table admin-table">
+				<thead>
+                    <tr>
+                        <th style="width: 30px;">ID</th>
+                        {volist name="listKey" id="vo"}
+				<th>{$vo}</th>
+			{/volist}
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                  	{volist name="list" id="lv" key="vo"}
+                    <tr>
+                   
+                        	<td>{$lv.id}</td>
+			{volist name="listKey" id="lk"}
+			
+				<td>{$lv[$key]}</td>
+			{/volist}
+			<td>
+			
+                        				{if condition="$lv['status'] eq '启用'"}
+				<a class="elementoff layui-btn layui-btn-primary layui-btn-mini" href="javascript:;"  data-url="{:addons_url('Superlinks://Superlinks/forbidden',array('id'=>$lv['id']))}">禁用</a>
+				{else/}
+				<a class="elementoff layui-btn  layui-btn-warm layui-btn-mini" href="javascript:;"  data-url="{:addons_url('Superlinks://Superlinks/off',array('id'=>$lv['id']))}">启用</a>
+				{/if}  
+                            <a href="{:addons_url('Superlinks://Superlinks/edit',array('id'=>$lv['id']))}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                            <a href="javascript:;" data-id="{$lv['id']}" data-url="{:addons_url('Superlinks://Superlinks/del',array('id'=>$lv['id']))}" data-opt="del"  class="elementdel layui-btn layui-btn-danger layui-btn-mini ajax-delete">删除</a>
+                        </td>
+                    </tr>
+                   {/volist}
+                    </tbody>
+                </table>
+	</div>
+		
+			
+		</div>				
+<script>
+layui.use(['layer','jquery','form'],function(){
+	  var layer = layui.layer
+	  , form = layui.form()
+	  ,jq = layui.jquery;
+	  
+	  jq('.elementoff').click(function(){
+		  var url= jq(this).data('url');
+		  loading = layer.load(2, {
+		      shade: [0.2,'#000']
+		    });
+		    jq.getJSON(url,function(data){
+		    	
+			      if(data.code == 1){
+			        layer.close(loading);
+			        layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+			        
+			        	
+			        		 location.reload();
+			        	
+			          
+			        });
+			      }else{
+			        layer.close(loading);
+			        layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+			      }
+			    });
+		  
+	  });
+
+	  
+	  jq('.elementdel').click(function(){
+		  
+		//  var id= jq(this).data('id');
+		  var url= jq(this).data('url');
+		  var page= jq('.pagination li.active span').html();
+	  var length= jq('.admin-table #content tr').length;
+	 
+	  //alert(locationurl);
+	 // alert(window.location.href);
+	  layer.confirm('你确定要删除该条数据吗?', {icon: 3, title:'删除提示'}, function(index){
+			    loading = layer.load(2, {
+				      shade: [0.2,'#000']
+				    });
+			   
+				  
+				    jq.getJSON(url,function(data){
+				    	
+				      if(data.code == 1){
+				        layer.close(loading);
+				        layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+				         // 
+				        	 if(length-1>0){
+				        		 location.reload();
+				        	  }else{
+				        		  if(page>1){
+				        			  page=page-1;
+				        			  
+				        		  }
+				        		  location.href = window.location.href+'?page='+page;// '{:url("admin_user/index")}'+page;
+				        	  }
+				          
+				        });
+				      }else{
+				        layer.close(loading);
+				        layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+				      }
+				    });
+			 
+			}); 
+		  
+		  
+
+		  });
+
+
+
+
+
+		  
+	  });
+
+</script>

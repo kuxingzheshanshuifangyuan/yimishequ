@@ -1,0 +1,125 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>一米社区-黑名单</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo_1.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/my_follow/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/my_follow/blacklist.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+
+    <style>
+        .select-this > a > div {
+            background-position: -132px 0px !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="contentWrap clearfix">
+
+    <div class="user-content">
+        <p class="crumbs">
+            <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+            <a href="#">好友</a> > <a href="#">黑名单</a>
+        </p>
+
+        <div class="user-left">
+            <div>
+                <div class="">
+                    <a href="{:url('my_attention')}">
+                        <div id="lxr-icon-1"></div>
+                        <p>我的关注</p>
+                    </a>
+                </div>
+
+                <div class="">
+                    <a href="{:url('my_fans')}">
+                        <div id="lxr-icon-2"></div>
+                        <p>我的粉丝</p>
+                    </a>
+                </div>
+
+                <!-- <div class="">
+                    <a href="{:url('invite_friends')}">
+                        <div id="lxr-icon-3"></div>
+                        <p>邀请好友</p>
+                    </a>
+                </div> -->
+
+                <div class="select-this">
+                    <a href="javascript:void(0)">
+                        <div id="lxr-icon-4"></div>
+                        <p>黑名单</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="user-right">
+            <div class="lxr-black-tit">
+                加入到黑名单的用户，将会从您的粉丝列表中移除。同时，对方将不能进行任何与您相关的操作。
+            </div>
+            <div class="lxr-list-box">
+                <ul class="lxr-list">
+                    {foreach $data_list as $val}
+                    <li>
+                        <img src="{$val.userhead}" alt="">
+                        <p class="lxr-p">{$val.username}</p>
+                        <span class="lxr-span">{$val.grade_name}</span>
+                        <p>{if condition="$val.description"}{$val.description}{else/}懒得签名了懒得签名了懒得签名了...{/if}</p>
+                        <span onclick="removeBlack({$val.other_uid})">移出黑名单</span>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="paginationCon">
+        <div class="m-style M-box2"></div>
+    </div>
+</div>
+
+
+</div>
+</body>
+
+</html>
+<script src="__PUBLIC__forum/js/tab.js"></script>
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+
+
+<script type="text/javascript">
+    function removeBlack() {
+        layer.open({
+            shadeClose: true,
+            closeBtn: 0,
+            area: ['460px', '251px'],
+            skin: 'lxr-demo',
+            title: ['提示', 'font-size:20px;color:#424242;text-align:center'],
+            content: '确定把该好友移出黑名单',
+            btn: ['确认', '取消'],
+            btnAlign: 'c',
+            btn1:function (index) {
+                console.log(index)
+                layer.close(index)
+            },
+            btn2:function () {
+                console.log(3)
+            }
+        })
+    }
+</script>
+<script>
+
+
+</script>
+{/block}

@@ -1,0 +1,63 @@
+{extend name="base" /}
+{block name="body"}
+
+<!--tab标签-->
+<div class="layui-tab layui-tab-brief">
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form" method="post" action="{:url('topic/save')}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:100px">所属版块</label>
+                    <div class="layui-input-inline">
+                        <select name="p_id" lay-verify="required">
+                            <option value=""> 请选择 </option>
+                            {volist name="forumcate" id="val"}
+                                <option value="{$val['id']}">{$val['name']}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:100px">主题(中文)名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="title_ch" required lay-verify="required" placeholder="例如:最热主题" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:100px">主题(英文)名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="title_en" required lay-verify="required" placeholder="for example:Hot-Topic" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:100px">状态</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="status" value="1" title="显示"  checked>
+                        <input type="radio" name="status" value="0" title="隐藏">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:100px">排序</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="sort" value="0" required lay-verify="required" class="layui-input sort">
+                    </div>
+                </div>
+                <div class="btable-paged" >
+                    <div class="layui-main">
+                        <div class="formbtngroup">
+                            <input type="submit" class="layui-btn layui-btn-small" value="添加" >
+                            <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+
+{/block}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body class="Xtemp">
+		<header class="mui-bar mui-bar-nav ">
+			<a href="javascript:;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="history"></a>
+			<h1 id="title" class="mui-title">发布帖子</h1>
+		</header>
+		<h3 class="XzZt">选择板块和主题以便更好分类帖子</h3>
+		<div class="XtempList">
+			<p class="XtempList_title"><img src="../images/tzbk.png" class="XtempList_titleimg"/>帖子板块</p>
+			<select>
+				<option value="精品推荐">精品推荐</option>
+				<option value="热点资讯">热点资讯</option>
+				<option value="下款教程">下款教程</option>
+				<option value="闲聊灌水">闲聊灌水</option>
+			</select>
+			<img src="../images/xiala.png" class="xiala"/>
+		</div>
+		<div class="XtempList">
+			<p class="XtempList_title"><img src="../images/tzbk.png" class="XtempList_titleimg"/>帖子主题</p>
+			<select>
+				<option value="精品推荐">精品推荐</option>
+				<option value="热点资讯">热点资讯</option>
+				<option value="下款教程">下款教程</option>
+				<option value="闲聊灌水">闲聊灌水</option>
+			</select>
+			<img src="../images/xiala.png" class="xiala"/>
+		</div>
+		<input type="button" value="立即发帖" class="XtempBtn"/>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui(".Xtemp").on('tap','.XtempBtn',function(){
+				mui.openWindow({
+					url:'Issue.html',
+					id:'Issue.html',
+				});
+			})
+		</script>
+	</body>
+
+</html>

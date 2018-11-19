@@ -1,0 +1,58 @@
+{extend name="base" /}
+{block name="body"}
+
+<!--tab标签-->
+<div class="layui-tab layui-tab-brief">
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form" method="post" action="{:url('blogroll/save')}" enctype="multipart/form-data">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px">序号</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="sort" required lay-verify="required" placeholder="例如:1" class="layui-input sort">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px">链接(中文)名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="link_ch" required lay-verify="required" placeholder="例如:山西晟盾有限公司" class="layui-input link_ch">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px">链接(英文)名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="link_en" required lay-verify="required" placeholder="for example:SHANXI SHENGDUN INFORMATION" class="layui-input link_en">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 100px">友情链接(url)</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="url" required lay-verify="required" placeholder="for example:http://localhost/luntan/index.php/index/index.html" class="layui-input link_url">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">图片</label>
+                    <div class="layui-input-block">
+                        <input type="file" name="file" style="margin-top:10px;"  required lay-verify="required"/>
+                        <span style="color:#666">建议尺寸41*47，支持jpg、png、gif</span>
+                    </div>
+                </div>
+                <div class="btable-paged" >
+                    <div class="layui-main">
+                        <div class="formbtngroup">
+                            <input type="submit" class="layui-btn layui-btn-small" value="添加" >
+                            <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+
+{/block}

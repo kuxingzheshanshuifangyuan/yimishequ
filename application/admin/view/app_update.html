@@ -1,0 +1,52 @@
+{extend name="base" /}
+{block name="body"}
+
+<div class="fly-panel fly-panel-user">
+    <div class="tpt—admin">
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>添加App</legend>
+        </fieldset>
+
+        <form class="layui-form" method="post" action="{:url('app/updateApp')}" enctype="multipart/form-data">
+            <div class="layui-form-item">
+                <label class="layui-form-label">序号</label>
+                <div class="layui-input-inline">
+                    <input type="text" placeholder="例如:1" class="order" name="order" value="{$update_app['order']}" style="margin-top:10px;"/>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">App图片</label>
+                <div class="layui-input-inline">
+                    <input type="file" name="file" class="file" style="margin-top:10px;" />
+                    <img src="__ROOT__/{$update_app['img']}" style="width:70px;height:70px;margin-top: 10px" alt="">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图片链接</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="url" class="url" value="{$update_app['url']}" style="margin-top:10px;" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">App描述</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="dec" class="dec" value="{$update_app['dec']}" style="margin-top:10px;" />
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="hidden" name="id" value="{$update_app['id']}">
+                    <input type="submit"  value="修改" class="layui-btn btn" style="width: 70px;"/>
+                    <!--  <button class="layui-btn " lay-submit="" lay-filter="banner_add">添加</button>-->
+                    <button class="layui-btn layui-btn-primary" onclick="history.go(-1)">返回</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+
+{/block}

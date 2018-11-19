@@ -1,0 +1,153 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>一米社区-额外任务</title>
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo_1.css" />
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/myTask.css" />
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+
+  <style>
+    .select-this >a >div{
+      background-position:-57px -37px !important;
+    }
+    .user-right{
+      background: none !important;
+      padding: 0 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="contentWrap clearfix">
+
+
+    <div class="user-content">
+      <p class="crumbs">
+        <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+        <a href="#">任务</a> > <a href="#">额外任务</a> 
+      </p>
+
+      <div class="user-left">
+        <div id="my-task-tab">
+          
+          <div class="">
+            <a href="{:url('daily_tasks')}">
+              <div></div>
+              <p>每日任务</p>
+            </a>
+          </div>
+
+          <div class="select-this">
+            <a href="javascript:void">
+              <div></div>
+              <p>额外任务</p>
+            </a>
+          </div>
+
+          <div class="">
+            <a href="{:url('basic_tasks')}">
+              <div></div>
+              <p>基础任务</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-right">
+          <div class="user-task">
+
+            {foreach $task_list as $val}
+            <div class="task-item">
+              <div>
+                <p>{$val.task_name} <span class="separator">|</span>
+                  <span class="sentiment">人气：<span>10000+</span></span>
+                </p>
+                <p>让帖子被更多的人欣赏吧</p>
+              </div>
+              <div class="task-res red-col">+{$val.task_point}积分</div>
+            </div>
+            {/foreach}
+
+            <!--<div class="task-item">-->
+              <!--<div>-->
+                <!--<p>每日签到 <span class="separator">|</span> -->
+                  <!--<span class="sentiment">人气：<span>10000</span></span> -->
+                <!--</p>-->
+                <!--<p>今天你打卡了吗？</p>-->
+              <!--</div>-->
+
+              <!--<div class="task-res red-col">-->
+                <!--+5米币-->
+              <!--</div>-->
+            <!--</div>-->
+
+          </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</body>
+
+</html>
+
+<script src="__PUBLIC__forum/layui/layui.js"></script>
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript">
+layui.use('form', function(){
+  var form = layui.form;
+  form.on('submit(submitForm)', function(data){
+    // console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+    // console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
+    // console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+    // return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+      loading = layer.load(2, {
+          shade: [0.2,'#000']
+      });
+      var param = data.field;
+      $.post('{:url("user/setedit")}',param,function(data){
+          if(data.code == 200){
+              layer.close(loading);
+              layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                  location.href = '{:url("index/index")}';
+              });
+          }else{
+              layer.close(loading);
+              layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+          }
+      });
+      return false;
+  });
+  form.verify({
+    pass: [
+      /([a-zA-Z0-9!@#$%^&*()_?<>{}]){8,16}/
+      ,'密码长度8~16位，数字、字母、字符至少包含两种'
+    ] 
+  });   
+});
+  // $(function () {
+  //   $('.M-box2').pagination({
+  //     totalData: 100,
+  //     showData: 5,
+  //     coping: true,
+  //     homePage: '首页',
+  //     prevContent: '上一页',
+  //     nextContent: "下一页",
+  //     endPage: '末页',
+  //     keepShowPN: true,
+  //     count: 1
+  //   });
+  // })
+</script>
+<script>
+
+</script>
+{/block}

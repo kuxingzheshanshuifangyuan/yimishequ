@@ -1,0 +1,184 @@
+.lyl_follow {
+  width: 100%;
+  height: 44px;
+  background: linear-gradient(to right, #ff1481, #ff5d3e);
+  border-radius: 5px;
+  padding-left: 26px;
+  line-height: 44px;
+  color: #fff;
+  font-size: 16px;
+}
+.lyl_follow_list {
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+.lyl_follow_list li {
+  height: 67px;
+  line-height: 67px;
+  border-bottom: 1px solid #eaeaea;
+}
+.lyl_follow_list li .lyl_infor {
+  width: 390px;
+}
+.lyl_follow_list li .lyl_infor .lyl_head {
+  width: 54px;
+  height: 54px;
+}
+.lyl_follow_list li .lyl_infor .lyl_head img {
+  width: 100%;
+  height: 100%;
+}
+.lyl_follow_list li .lyl_infor .lyl_name {
+  font-size: 14px;
+  color: #424242;
+  margin-left: 26px;
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.lyl_follow_list li .lyl_infor .lyl_money {
+  width: 57px;
+  height: 20px;
+  border: 1px solid #ff187e;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 14px;
+  color: #ff5d3e;
+  margin-top: 23px;
+  cursor: pointer;
+}
+.lyl_follow_list li .lyl_autograph {
+  width: 366px;
+  font-size: 14px;
+  line-height: 67px;
+}
+.lyl_follow_list li .lyl_autograph > p {
+  float: left;
+  width: 240px;
+  color: #868686;
+  margin: 0;
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.lyl_follow_list li .lyl_autograph .lyl_menu_box {
+  float: right;
+  position: relative;
+}
+.lyl_follow_list li .lyl_autograph .lyl_menu_box > span {
+  display: inline-block;
+  width: 91px;
+  line-height: 67px;
+  text-align: center;
+  color: #ff4a50;
+  cursor: pointer;
+}
+.lyl_follow_list li .lyl_autograph .lyl_menu_box .lyl_menu {
+  display: none;
+  position: absolute;
+  top: 65px;
+  z-index: 99;
+  background: #fff;
+  border: 1px solid #eee;
+}
+.lyl_follow_list li .lyl_autograph .lyl_menu_box .lyl_menu > li {
+  width: 91px;
+  height: 45px;
+  color: #333;
+  text-align: center;
+  line-height: 45px;
+  cursor: pointer;
+}
+.lyl_follow_list li .lyl_autograph .lyl_menu_box .lyl_menu > li:hover {
+  color: #fff;
+  background: linear-gradient(to right, #ff177e, #ff5d3e);
+}
+.sendMsg-container {
+  text-align: center;
+}
+.sendMsg-container p {
+  color: #515151;
+  font-size: 22px;
+  margin: 20px 0;
+}
+.sendMsg-container div {
+  width: 296px;
+  margin: 0 auto;
+}
+.sendMsg-container div textarea {
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  border: solid 1px #cccccc;
+  font-size: 16px;
+}
+.sendMsg-container div textarea::-webkit-textarea-placeholder {
+  font-size: 16px;
+  color: #b4b4b4;
+}
+.sendMsg-container div textarea::-moz-placeholder {
+  font-size: 16px;
+  color: #b4b4b4;
+}
+.sendMsg-container div textarea::-ms-textarea-placeholder {
+  font-size: 16px;
+  color: #b4b4b4;
+}
+.sendMsg-container div button {
+  width: 200px;
+  height: 44px;
+  background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%), linear-gradient(#f6f6f6, #f6f6f6);
+  background-blend-mode: normal, normal;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  margin-top: 15px;
+  font-size: 18px;
+}
+.lxr-demo {
+  width: 460px;
+  height: 251px;
+  background: #fff;
+}
+.lxr-demo .layui-layer-title {
+  font-size: 20px;
+  color: #424242;
+  text-align: center;
+  padding: 0;
+}
+.lxr-demo .layui-layer-content {
+  font-size: 20px;
+  color: #424242;
+  text-align: center;
+  margin-top: 35px;
+  line-height: 50px;
+  height: 110px !important;
+}
+.lxr-demo .layui-layer-btn .layui-layer-btn0 {
+  width: 120px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  color: #fff;
+  background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%), linear-gradient(#f6f6f6, #f6f6f6);
+  border: 0 !important;
+  border-radius: 5px;
+  margin-right: 115px;
+}
+.lxr-demo .layui-layer-btn .layui-layer-btn0:hover {
+  color: #fff !important;
+}
+.lxr-demo .layui-layer-btn .layui-layer-btn1 {
+  width: 120px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  color: #424242;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}

@@ -1,0 +1,276 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>一米社区-个人资料</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo_1.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+
+    <style>
+        .select-this > a > div {
+            background-position:-81px -13px !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="contentWrap clearfix">
+
+
+    <div class="user-content">
+        <p class="crumbs">
+            <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+            <a href="#">设置</a> > <a href="#">个人资料</a>
+        </p>
+
+        <div class="user-left">
+            <div>
+                <div class="">
+                    <a href="{:url('edit_head')}">
+                        <div></div>
+                        <p>修改头像</p>
+                    </a>
+                </div>
+
+                <div class="select-this">
+                    <a href="javascript:void(0)">
+                        <div></div>
+                        <p>个人资料</p>
+                    </a>
+                </div>
+
+                <div class="">
+                    <a href="{:url('point_info')}">
+                        <div></div>
+                        <p>积分</p>
+                    </a>
+                </div>
+
+                <div class="">
+                    <a href="{:url('money_info')}">
+                        <div></div>
+                        <p>米币</p>
+                    </a>
+                </div>
+                <div class="">
+                    <a href="{:url('grade')}">
+                        <div></div>
+                        <p>用户组</p>
+                    </a>
+                </div>
+                <div class="">
+                    <a href="{:url('password')}">
+                        <div></div>
+                        <p>密码安全</p>
+                    </a>
+                </div>
+                <div class="">
+                    <a href="{:url('cooperation')}">
+                        <div></div>
+                        <p>商务合作</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="user-right">
+            <div class="user-info">
+
+                <div class="set-tab">
+                    <div class="set-tab-top">
+                        <span class="tab-seclet">基础资料</span>
+                        <span>账号绑定</span>
+                    </div>
+
+                    <div class="set-tab-content">
+
+                        <div class="tab-content-show">
+                            <form class="layui-form" id="editData">
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">用户名</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="username" placeholder="请输入用户名" class="layui-input"
+                                               value="{$user_data.username}">
+                                    </div>
+                                    <div class="layui-form-mid layui-word-aux">一个账户只能修改一次用户名</div>
+                                </div>
+
+                                <div class="layui-form-item layui-form-text">
+                                    <label class="layui-form-label">个性签名</label>
+                                    <div class="layui-input-inline">
+                                        <textarea placeholder="请输入内容" rows="5"  cols="70" style="resize:none;" name="description" class="layui-textarea">{$user_data.description}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">性别</label>
+                                    <div class="layui-input-inline">
+                                        <input type="radio" name="sex" value="1" title="男" {if
+                                               condition="$user_data.sex eq 1" }checked{/if}>
+                                        <input type="radio" name="sex" value="2" title="女" {if
+                                               condition="$user_data.sex eq 2" }checked{/if}>
+                                        <input type="radio" name="sex" value="3" title="保密" {if
+                                               condition="$user_data.sex eq 3" }checked{/if}>
+                                    </div>
+                                </div>
+
+                                <!--<div class="layui-form-item">-->
+                                    <!--<label class="layui-form-label">生日</label>-->
+                                    <!--<div class="layui-input-inline">-->
+                                        <!--<input type="text" class="layui-input" name="birthday" id="birthday">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">QQ</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" placeholder="请输入QQ" name="qq"
+                                               value="{$user_data.qq}">
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">E-mail</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" placeholder="请输入E-mail" name="usermail"
+                                               value="{$user_data.usermail}">
+                                    </div>
+                                </div>
+
+                                <div class="layui-form-item ">
+                                    <label class="layui-form-label">地区</label>
+                                    <div class="layui-input-inline">
+                                        <select name="provid" id="provid" lay-filter="provid">
+                                            <option value="">请选择省</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline">
+                                        <select name="cityid" id="cityid" lay-filter="cityid">
+                                            <option value="">请选择市</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline">
+                                        <select name="areaid" id="areaid">
+                                            <option value="">请选择县/区</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <button class="submitForm" lay-submit lay-filter="personInfo">保存</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- 账号绑定 -->
+                        <div class="">
+                            <div class="accountBind">
+                                <div>
+                                    <i></i>
+
+                                    <span>手机</span>
+                                    {if condition="$user_data.mobile"}
+                                    <span>{$user_data.mobile}</span>
+                                    <button class="unBind">已绑定</button>
+                                    {else/}
+                                    <span>未绑定</span>
+                                    <button class="bind">关联账号</button>
+                                    {/if}
+
+                                    <!--<button class="bind">关联账号</button>-->
+                                </div>
+                                <div>
+                                    <i></i>
+                                    <span>微信</span>
+                                    {if condition="$user_data.wechat_unionid"}
+                                    <span>{$user_data.wechat_nickname}</span>
+                                    <button class="unBind">已绑定</button>
+                                    {else/}
+                                    <span>未绑定</span>
+                                    <button class="bind">关联账号</button>
+                                    {/if}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+</body>
+
+</html>
+
+<script src="__PUBLIC__forum/js/tab.js"></script>
+<script src="__PUBLIC__forum/layui/layui.js"></script>
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/pickArea/data.js"></script>
+<script src="__PUBLIC__forum/pickArea/province.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        tabSelect();
+        var defaults = {
+            s1: 'provid',
+            s2: 'cityid',
+            s3: 'areaid',
+            v1: {$user_data.provid} ? {$user_data.provid} : 'null',
+            v2: {$user_data.cityid} ? {$user_data.cityid} : 'null',
+            v3: {$user_data.areaid} ? {$user_data.areaid} : 'null',
+        };
+    })
+    layui.use(['form', 'laydate'], function () {
+        var form = layui.form;
+        var laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#birthday'
+        });
+
+        // form.on('submit(personInfo)', function (data) {
+        //     console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+        //
+        //
+        //     return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        // });
+
+        form.on('submit(personInfo)', function(data){
+            loading = layer.load(2, {
+                shade: [0.2,'#000']
+            });
+            var param = data.field;
+            $.post('{:url("user/edit")}',param,function(data){
+                if(data.error_code === 0){
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        location.href = '{:url("user/edit")}';
+                    });
+                }else{
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<script>
+
+
+</script>
+{/block}

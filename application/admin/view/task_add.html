@@ -1,0 +1,94 @@
+{extend name="base" /}
+
+{block name="body"}
+<!--tab标签-->
+<div class="layui-tab-brief">
+
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form form-container" method="post" action="{:url('task/save')}" >
+                <div class="layui-form-item">
+                    <label class="layui-form-label">任务名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="task_name"  required lay-verify="required" placeholder="请输入任务" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">会员等级</label>
+                    <div class="layui-input-block">
+                        {volist name="usergrade" id="val"}
+                            <input type="checkbox" name="task_allow_group[{$val['id']}]" title="{$val['name']}" value="{$val['id']}">
+                        {/volist}
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">奖赏积分</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="task_point" required lay-verify="required" placeholder="积分为整数" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">奖赏米币</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="task_money" required lay-verify="required" placeholder="米币为整数" class="layui-input">
+                    </div>
+                </div>
+                <!--<div class="layui-form-item">-->
+                    <!--<label class="layui-form-label">任务间歇</label>-->
+                    <!--<div class="layui-input-inline">-->
+                        <!--<input type="text" name="task_limit" required lay-verify="required" placeholder="例如：1" class="layui-input">-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">间歇次数</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="task_per" required lay-verify="required" placeholder="例如：1" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">任务描述</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="task_dec"  placeholder="例如:签到" class="layui-input">
+                    </div>
+                </div>
+                <!--<div class="layui-form-item">
+                    <label class="layui-form-label">执行方法</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="task_action"  placeholder="例如:sign" class="layui-input">
+                    </div>
+                </div>-->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">任务类别</label>
+                    <div class="layui-input-inline">
+                        <select name="task_type" id="">
+                            <option value=""> 请选择 </option>
+                            <option value="1"> 每日任务 </option>
+                            <option value="2"> 新手任务 </option>
+                            <option value="3"> 额外任务 </option>
+                        </select>
+                    </div>
+                </div>
+            <!--    <div class="layui-form-item">
+                    <label class="layui-form-label">任务链接</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="link" class="layui-input">
+                    </div>
+                </div>-->
+                <div class="btable-paged" >
+                    <div class="layui-main">
+                        <div class="formbtngroup">
+                            <input type="submit" class="layui-btn layui-btn-small"  value="添加">
+                            <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+{/block}

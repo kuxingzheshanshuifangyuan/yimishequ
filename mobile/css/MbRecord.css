@@ -1,0 +1,223 @@
+nav{
+    width: 100%;
+    background: #fff;
+    /*margin-top: -1.4rem;*/
+    height: 0.9rem;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0.83rem;
+}
+nav div{
+    flex: 1;
+    text-align: center;
+    height: 100%;
+    line-height: 0.9rem;
+}
+nav div:nth-child(2){
+    /*border-left: 1px solid #cecece;*/
+}
+
+.tab-active{
+    color: #ff4a50;
+    border-bottom: 2px solid #fb4c53;
+}
+
+.nav-content{
+	width: 95%;
+	margin: 0 auto;
+	background: #fff;
+	border-radius: 5px;
+	margin-top: 2rem;
+	
+}
+.nav-item:nth-child(2){
+	padding: 0.3rem 0;
+	display: none;
+}
+.nav-item{
+	padding: 0.3rem 0;
+}
+.mbItem{
+	width: 100%;
+	height: 1.5rem;
+	display: flex;
+	padding: 10px;
+	align-items: center;
+}
+.mbItem .mbIcon{
+	flex: 10%;
+	text-align: center;
+}
+.mbIcon >img{
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+    vertical-align: middle;
+}
+.mbItem .mbText{
+	max-width: 50%;
+	flex: 70%;
+    margin: 0.2rem 0 0 0.2rem;
+}
+.mbText p{
+	overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+.mbText p:first-child{
+	color: #303030;
+	font-size: 0.28rem;
+}
+.mbText p:last-child{
+	color: #999999;
+	font-size: 0.24rem;
+}
+.mbItem .mbNum{
+	text-align: right;
+	flex: 25%;
+	color: rgb(153,153,153);
+	font-size: 0.24rem;
+}
+.mbNum span{
+	font-size: 0.38rem;
+}
+.mbNum >img{
+	width: 0.34rem;
+	height: 0.34rem;
+	vertical-align: text-bottom;
+}
+.mbNumAdd{
+	color: rgb(251,76,83);
+}
+.mbNumAdd:before{
+	content: "+";
+}
+.mbNumLess{
+	color: rgb(48,48,48);
+}
+.mbNumLess:before{
+	content: "-";
+}
+
+
+
+
+.mbRu-title{
+    text-align: center;
+    color: #33373e;
+    font-size: 0.28rem; 
+    letter-spacing: 0.03rem;
+    margin: 0.5rem 0;
+}
+
+.mbRu-title:before{
+    content: "";
+    display: inline-block;
+    height: 0.04rem;
+    width: 1rem;
+    background-image: linear-gradient(90deg, rgba(255,20,129,0) 0%, rgb(255,93,62) 100%), 
+    linear-gradient( #ffffff, #ffffff);
+    margin: 0 0.2rem 0.1rem 0;
+}
+.mbRu-title:after{
+    content: "";
+    display: inline-block;
+    height: 0.04rem;
+    width: 1rem;
+    background-image: linear-gradient(90deg, rgb(255,93,62) 0%, rgba(255,20,129,0) 100%), 
+    linear-gradient( #ffffff, #ffffff);
+    margin: 0 0 0.1rem 0.2rem;
+}
+
+
+.mbRu-content{
+	width: 100%;
+	/*height: ;*/
+	display: flex;
+	padding: 0 0.4rem;
+}
+.mbRu-icon1{
+	width: 0.44rem;
+	height: 0.44rem;
+	border: 1px solid red;
+}
+.mbRu-text{
+	margin-left:0.3rem ;
+}
+.mbRu-text p{
+	font-size: 0.24rem;
+	color: #999999;
+}
+.mbRu-text p:nth-child(1){
+	color: #303030;
+	font-size: 0.26rem;
+}
+
+.no-mb{
+	display: flex;                /*设置为flex布局*/
+    justify-content: center;   /*水平居中*/
+    align-items: center;  
+    flex-direction: column;
+	height: 12rem;
+	width: 100%;
+}
+.no-mb div{
+	width: 3.3rem;
+	height: 2.5rem;
+	background: url(../images/2.0/no-mb.png) center center no-repeat ;
+	background-size: 100% 100%;
+}
+.loading,.noMore{
+    color: #999999;
+    text-align: center;
+    font-size: 0.3rem;
+    padding: 0.3rem 0;
+    display: none;
+}
+.loading img{
+	vertical-align: middle;
+	margin-right: 0.2rem;
+	height: 0.4rem;
+	width: 0.4rem;
+}
+
+
+
+.mission{
+	padding: ;
+	display: flex;
+	flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+}
+.ms-item{
+	height: 1.4rem;
+	border: 1px solid #dfdfdf;
+	flex: 0 0 30.333333%;
+    box-sizing: border-box;
+    margin: 0 0.12rem 0.12rem 0;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.ms-item:nth-child(3n){
+	margin: 0;
+}
+.ms-item p{
+	flex: 1;
+    padding-top: 0.3rem;
+    margin-bottom: 0;
+    color: #303030;
+     font-size: 0.26rem;
+}
+.coin{
+    width: 100%;
+    flex: 1;
+    background: url(../images/2.0/coin.png) 0.6rem -0.001rem no-repeat;
+    background-size: 19%;
+    color: #ff4a50;
+    padding: 0rem 0 0 0.4rem;
+    font-size: 0.24rem;
+}

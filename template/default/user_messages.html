@@ -1,0 +1,239 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>一米社区-站内信</title>
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo_1.css" />
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/jianyonguserSystem_messages.css"/>
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/communication_region.css?v=14"/>
+  <style>
+    .select-this >a >div{
+      background-position: -262px 0px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="contentWrap clearfix">
+    <div class="user-content">
+      <p class="crumbs">
+        <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+        <a href="#">帖子</a> > <a href="#">站内信</a>
+      </p>
+
+      <div class="user-left">
+        <div>
+          <div class="">
+            <a href="{:url('personal_messages')}">
+              <div id="sh-icon1"></div>
+              <p>个人消息</p>
+            </a>
+          </div>
+
+          <div class="">
+            <a href="{:url('system_messages')}">
+              <div id="sh-icon2"></div>
+              <p>系统提醒</p>
+            </a>
+          </div>
+
+          <div class="select-this">
+            <a href="{:url('messages')}">
+              <div id="sh-icon3"></div>
+              <p>站内信</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-right">
+        <div class="user-info">
+            <div class="set-tab">
+                <div class="set-tab-top">
+                    <span class="tab-seclet">站内信</span>
+                </div>
+                <div class="set_tab_content">
+                    <ul>
+                        <li>
+                            <div class="set_tab_content_select"></div>
+                            <div class="set_tab_content_header"><img src="" alt=""></div>
+                            <div class="set_tab_content_Info">
+                                <div class="name margin_bot two_line_clamp"> 米有回复10086: &nbsp;您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您您好您好您好您好您好</div>
+                                <div class="set_tab_date">
+                                    <span class="sub_date">2018/06/26  15:39</span>
+                                    <a >回复</a><a  href="{:url('message_detail')}">查看</a> 
+                                    <div class="lyl_menu_box">
+                                            <span>菜单</span>
+                                            <ol class="lyl_menu">
+                                                <li class="cancle">取消关注</li>
+                                                <li class="delete">删除</li>
+                                            </ol>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="set_tab_content_select"></div>
+                            <div class="set_tab_content_header">
+                                <img src="" alt="">
+                            </div>
+                            <div class="set_tab_content_Info">
+                                <div class="name margin_bot two_line_clamp">米有回复10086: &nbsp; 您好您好您好您好您好您好您好好您好您好</div>
+                                <div class="set_tab_date">
+                                    <span class="sub_date">2018/06/26  15:39</span>
+                                    <a >回复</a><a  href="{:url('message_detail')}">查看</a> 
+                                    <div class="lyl_menu_box">
+                                            <span>菜单</span>
+                                            <ol class="lyl_menu">
+                                                <li class="cancle">取消关注</li>
+                                                <li class="delete">删除</li>
+                                            </ol>
+                                    </div> 
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- <li> -->
+                            <!-- <div class="unclick">
+                                    <div class="set_tab_content_header"></div>
+                                    <div class="set_tab_content_Info">
+                                        <div class="name">
+                                             米有10086：您好您好您好您好您好您好您好您好您好您好您好您 
+                                        </div>
+                                        <div class="set_tab_date">
+                                            2018/06/26  15:39 
+                                        </div>
+                                    </div>
+                                    <div class="lyl_menu_box">
+                                            <span>菜单</span>
+                                            <ol class="lyl_menu">
+                                                <li>取消关注</li>
+                                                <li>删除</li>
+                                            </ol>
+                                    </div> 
+                            </div> -->
+                            <!-- <div class="set_tab_content_select"></div>
+                            <div class="set_tab_content_header"></div>
+                            <div class="set_tab_content_Info">
+                                <div class="name sh-list-text">
+                                    <span>米有10086：</span>
+                                    <span>回复了您的帖子：您好您好您好您好您好您好您好您好您好您好您好您</span>
+                                </div>
+                                <div class="set_tab_date sh-list-action">
+
+                                                <span class="sub_date">2018/06/26  15:39</span>
+                                                <span >回复</span><span>查看</span><span class="dingdian">菜单</span>   
+
+                                    <span class="sub_date">2018/06/26  15:39</span>
+                                    <a href="javascript:;" onclick="sendMsg(1)">回复</a>
+
+                                    <a href="#">查看</a>
+
+                                    <a href="javascript:;" onclick="removeFun(id)">删除</a>
+
+                                    <span class="sub_date">2018/06/26  15:39</span>
+                                    <a href="javascript:;" onclick="sendMsg(1)">回复</a>
+
+                                    <a href="#">查看</a>
+
+                                    <a href="javascript:;" class="lyl_menu_box">
+                                        <span>菜单</span>
+                                        <ol class="lyl_menu">
+                                            <li>取消关注</li>
+                                            <li onclick="removeFun(this, 1)">删除</li>
+                                        </ol>
+                                    </a>
+
+                                </div>
+                            </div> -->
+                            
+                        <!-- </li> -->
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="paginationCon">
+                <div class="m-style M-box2"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="sendMsg-container" style="display: none;">
+    <p>回复</p>
+    <div class="">
+        <textarea name=""  rows="5" placeholder="回复内容" style="resize:none;"></textarea>
+        <button class="sendMsg-confirm" onclick="sendMsgBtn()">发送</button>
+    </div>
+</div>
+
+<span onclick="sendMsg()">000</span>
+
+</body>
+</html>
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+<script src="__PUBLIC__forum/layui/layui.js"></script>
+
+<script>
+$(function(){
+    $('.lyl_menu_box').hover(function(){
+        $(this).find('ol').show()
+    },function(){
+        $(this).find('ol').hide()
+    })
+})
+// 私信方法
+function sendMsg() {
+    layer.close(layer.index);
+    layer.open({
+        type:1,
+        skin:'searchWHsucc',
+        title:false,
+        shadeClose: true,
+        scrollbar: false,
+        area: ['340px', '263px'],
+        closeBtn: 0,
+        content:$(".sendMsg-container"),
+        cancel: function(index, layero){
+            $(".sendMsg-container").hide()
+        }
+    })
+}
+// 私信成功
+function sendMsgBtn() {
+    layer.msg('发送成功!', {icon: 1});
+    layer.closeAll('page');
+}
+// 删除
+function removeFun(obj, id) {
+    var $parent = $(obj).parent().parent().parent().parent().parent();
+    $parent.css({'background': 'green'}).remove();
+}
+//菜单点击
+$('.menu').click(function(e){
+ $('.unclick').display
+})
+$(function () {
+  $('.M-box2').pagination({
+    totalData: 100,
+    showData: 5,
+    coping: true,
+    homePage: '首页',
+    prevContent: '上一页',
+    nextContent: "下一页",
+    endPage: '末页',
+    keepShowPN: true,
+    count: 1
+  });
+})
+</script>
+
+{/block}

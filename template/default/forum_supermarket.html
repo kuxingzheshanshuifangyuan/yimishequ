@@ -1,0 +1,283 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>一米社区-贷款超市</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/loanSupermarket.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/swiper/swiper.min.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/bootstrap-3.3.7/dist/css/bootstrap.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/filter/style.css"/>
+
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+</head>
+<body>
+<div class="contentWrap clearfix">
+<!-- <div class="content_1 indexItem">
+    <ul class="select">
+        <li class="select-result" style="padding: 0px 99px 25px;">
+            <dl style="float: left;">
+                <dt>所有分类：</dt>
+                <dd class="select-no">暂时没有选择过滤条件</dd>
+            </dl>
+            <div class="filterDown">
+                收起筛选
+                <img src="__PUBLIC__forum/img/loanSupermarket/up.png"/>
+            </div>
+        </li>
+        <div class="filterContent" style="margin-top: 20px;">
+            <li class="select-list">
+                <dl id="select1">
+                    <dt>贷款额度：</dt>
+                    <dd class="select-all selected"><a href="javascript:void(0)">不限</a></dd>
+                    <dd><a href="javascript:void(0)">100-5000</a></dd>
+                    <dd><a href="javascript:void(0)">5000-2万</a></dd>
+                    <dd><a href="javascript:void(0)">2万-5万</a></dd>
+                    <dd><a href="javascript:void(0)">5万-10万</a></dd>
+                    <dd><a href="javascript:void(0)">10万以上</a></dd>
+                </dl>
+            </li>
+            <li class="select-list" style="height: 90px;">
+                <dl id="select2">
+                    <dt>贷款分类：</dt>
+                    <dd class="select-all selected"><a href="javascript:void(0)">不限</a></dd>
+                    <dd><a href="javascript:void(0)">私人借条</a></dd>
+                    <dd><a href="javascript:void(0)">极速下款</a></dd>
+                    <dd><a href="javascript:void(0)">黑户贷款</a></dd>
+                    <dd><a href="javascript:void(0)">白户贷款</a></dd>
+                    <dd><a href="javascript:void(0)">保单贷款</a></dd>
+                    <dd><a href="javascript:void(0)">不上征信</a></dd>
+                    <dd><a href="javascript:void(0)">大额贷款</a></dd>
+                    <dd><a href="javascript:void(0)">淘宝授权</a></dd>
+                    <dd><a href="javascript:void(0)">车房贷款</a></dd>
+                    <dd><a href="javascript:void(0)">小额贷款</a></dd>
+                    <dd><a href="javascript:void(0)">代还信用卡</a></dd>
+                    <dd><a href="javascript:void(0)">社保认证</a></dd>
+                    <dd><a href="javascript:void(0)">公积金认证</a></dd>
+                    <dd><a href="javascript:void(0)">芝麻分贷</a></dd>
+                    <dd><a href="javascript:void(0)">信用卡贷</a></dd>
+                    <dd><a href="javascript:void(0)">分期消费</a></dd>
+                    <dd><a href="javascript:void(0)">商苹果ID贷</a></dd>
+                    <dd><a href="javascript:void(0)">黑卡系列</a></dd>
+                </dl>
+            </li>
+            <li class="select-list">
+                <dl id="select3">
+                    <dt>个人资质：</dt>
+                    <dd class="select-all selected"><a href="javascript:void(0)">不限</a></dd>
+                    <dd><a href="javascript:void(0)">电商认证</a></dd>
+                    <dd><a href="javascript:void(0)">有芝麻信用分</a></dd>
+                    <dd><a href="javascript:void(0)">有公积金</a></dd>
+                    <dd><a href="javascript:void(0)">有房</a></dd>
+                    <dd><a href="javascript:void(0)">有车</a></dd>
+                </dl>
+            </li>
+        </div>
+    </ul>
+</div> -->
+
+
+<div class="content_2 rpfcontent_2 clearfix">
+    <div class="content_2Left rpfcontent_2Left clearfix">
+       
+        {foreach $data as $v}
+        <div class="content_2LeftItem indexItem" >
+            <div class="itemImg">
+                <img src="{$v.logo}" style="width:80px;"/>
+                {$v.name}
+            </div>
+            <div class="itemText">
+                <p><b>贷款额度：</b><span class="money">{$v.loan_min}-{$v.loan_max}</span></p>
+                <p><b>贷款期限：</b><span>{$v.deadline_min}-{$v.deadline_max}天</span></p>
+                <p><b>日&nbsp;利&nbsp;率&nbsp;：</b><span>{$v.interest}%</span></p>
+                <p><b>审核时长：</b><span>{$v.audit_time}分钟</span></p>
+            </div>
+            <a href="{:url('supermarket_detail',['id'=>$v['id']])}" target="_blank" class="itemBtn">
+                <!--<div class="itemBtn">-->
+                    查看详情
+                <!--</div>-->
+            </a>
+        </div>
+        {/foreach}
+		
+    </div>
+	<div class="super-loading">
+		<img src="__PUBLIC__/images/loading.gif"/>
+		<span>正在加载中...</span>
+	</div>
+	<div class="super-nomore">
+		<span>没有更多了</span>
+	</div>
+
+
+<!--暂时注释-->
+    <!--<div class="content_2Right">
+        <div class="Ad indexItem">
+            <img src="__PUBLIC__forum/img/communication_region/图层8拷贝.png"/>
+        </div>
+        <div class="forum indexItem">
+            <div class="title">
+                热门论坛版区
+            </div>
+            <div class="forumItem">
+                <img src="__PUBLIC__forum/img/loanSupermarket/工商银行讨论区.png"/>
+                <div class="forumItemText">
+                    <p>工商银行讨论区</p>
+                    <span>主题：<span>263512</span></span>
+                    <span>帖数：<span>2351312</span></span>
+                </div>
+            </div>
+            <div class="forumItem">
+                <img src="__PUBLIC__forum/img/loanSupermarket/招商银行讨论区.png"/>
+                <div class="forumItemText">
+                    <p>招商银行讨论区</p>
+                    <span>主题：<span>263512</span></span>
+                    <span>帖数：<span>2351312</span></span>
+                </div>
+            </div>
+            <div class="forumItem">
+                <img src="__PUBLIC__forum/img/loanSupermarket/交通银行讨论区.png"/>
+                <div class="forumItemText">
+                    <p>交通银行讨论区</p>
+                    <span>主题：<span>263512</span></span>
+                    <span>帖数：<span>2351312</span></span>
+                </div>
+            </div>
+            <div class="forumItem">
+                <img src="__PUBLIC__forum/img/loanSupermarket/中国银行讨论区.png"/>
+                <div class="forumItemText">
+                    <p>中国银行讨论区</p>
+                    <span>主题：<span>263512</span></span>
+                    <span>帖数：<span>2351312</span></span>
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>
+
+    <!--<div class="paginationCon">
+        <div class="m-style M-box2"></div>
+    </div>-->
+	
+</div>
+</body>
+</html>
+
+
+<!--<script src="__PUBLIC__forum/js/jquery/1.9.1/jquery.min.js"></script>-->
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/swiper/swiper.min.js"></script>
+<!--<script src="__PUBLIC__forum/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>-->
+<script src="__PUBLIC__forum/filter/script.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+
+
+<script type="text/javascript">
+
+
+var noMore = false;
+$(window).scroll(function () {
+     //已经滚动到上面的页面高度
+    var scrollTop = $(this).scrollTop();
+     //页面高度
+    var scrollHeight = $(document).height();
+       //浏览器窗口高度
+    var windowHeight = $(this).height();
+      //此处是滚动条到底部时候触发的事件，在这里写要加载的数据，或者是拉动滚动条的操作
+    if (scrollTop + windowHeight == scrollHeight) {
+    	if(!noMore){
+	        $('.super-loading').show();
+	        $('.super-nomore').hide();
+	        setTimeout(function(){
+	        	getMoreSuperItem();
+	        },500)
+    	}
+	}
+});
+	var page = 0;
+	//	加载更多方法
+	function getMoreSuperItem(){
+		page = page + 1;
+		var DcListHtml = '';
+		$.ajax({
+			url:'http://www.1miclub.com/api/Forum/supermarketList',
+			
+		    data: {page:page},
+		    dataType: 'json',
+		    type: 'post',
+		    success: function(data) {
+//		    	data = JSON.parse(data);
+		    	console.log(data)
+		    	if(data.data.msg == "1"){
+		    		noMore = true;
+		    		$('.super-loading').hide();
+		    		$('.super-nomore').show();
+		    	}else{
+			    	for(var i=0;i<data.data.data.length;i++){
+			    		DcListHtml += '<div class="content_2LeftItem indexItem" >'
+							            +'<div class="itemImg">'
+							                +'<img src="'+data.data.data[i].logo+'" style="width:80px;"/>'
+							                +data.data.data[i].name
+							            +'</div>'
+							            +'<div class="itemText">'
+							                +'<p><b>贷款额度：</b><span class="money">'+data.data.data[i].loan_min+'-'+data.data.data[i].loan_max+'</span></p>'
+							                +'<p><b>贷款期限：</b><span>'+data.data.data[i].deadline_min+'-'+data.data.data[i].deadline_max+'天</span></p>'
+							                +'<p><b>日&nbsp;利&nbsp;率&nbsp;：</b><span>'+data.data.data[i].interest+'%</span></p>'
+							                +'<p><b>审核时长：</b><span>'+data.data.data[i].audit_time+'分钟</span></p>'
+							            +'</div>'
+							            +'<a href="http://www.1miclub.com/index/forum/supermarket_detail?id='+data.data.data[i].id+'" target="_blank" class="itemBtn">'
+							             +'查看详情'
+							            +'</a>'
+							        +'</div>'
+			    	}
+			    	$('.super-loading').hide()
+			    	$('.content_2Left').append(DcListHtml);
+		    	}
+				
+		    },
+		    error: function() {
+		        mui.toast('失败');
+		    }
+		});
+	}
+	
+    $(function(){
+        var flag = true;
+        $(".filterDown").click(function(){
+//          $(".filterContent").toggle()
+            if(flag == true){
+                $(".content_1").animate({height:"58px"});
+                $(".filterDown img").attr('src','__PUBLIC__forum/img/loanSupermarket/down.png');
+                flag = false;
+            }else{
+                $(".content_1").animate({height:"300px"});
+                $(".filterDown img").attr('src','__PUBLIC__forum/img/loanSupermarket/up.png');
+                flag = true;
+            }
+        })
+        $('.M-box2').pagination({
+            totalData: 100,
+            showData: 5,
+            coping: true,
+            homePage: '首页',
+            prevContent: '上一页',
+            nextContent:"下一页",
+            endPage: '末页',
+            keepShowPN:true,
+            count:1
+        });
+        $('.filterContent dl dd').click(function(){
+            var a = $('#select1').children('.selected').text();
+            var b = $('#select2').children('.selected').text();
+            var c = $('#select3').children('.selected').text();
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        })
+    })
+</script>
+{/block}

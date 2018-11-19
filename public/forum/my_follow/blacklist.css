@@ -1,0 +1,102 @@
+.user-right .lxr-black-tit {
+  width: 832px;
+  height: 44px;
+  background: #f7f7f7;
+  font-size: 16px;
+  color: #333333;
+  padding-left: 26px;
+  border-radius: 5px;
+  line-height: 44px;
+}
+.user-right .lxr-list-box .lxr-list li {
+  width: 827px;
+  border-bottom: 1px solid #eaeaea;
+  margin-top: 5px;
+  overflow: hidden;
+}
+.user-right .lxr-list-box .lxr-list li > img {
+  width: 53px;
+  height: 53px;
+  border-radius: 50%;
+  float: left;
+  margin-top: 15px;
+  margin-right: 26px;
+}
+.user-right .lxr-list-box .lxr-list li > .lxr-p {
+  width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 60px;
+  color: #424242;
+}
+.user-right .lxr-list-box .lxr-list li > p {
+  font-size: 14px;
+  color: #868686;
+  line-height: 70px;
+  float: left;
+  width: 210px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 60px;
+}
+.user-right .lxr-list-box .lxr-list li > span {
+  font-size: 14px;
+  color: #ff4a50;
+  display: inline-block;
+  float: left;
+  margin-top: 33px;
+}
+.user-right .lxr-list-box .lxr-list li .lxr-span {
+  padding: 3px 8px;
+  border: 1px solid #ff4a50;
+  background: #fff;
+  margin-top: 31px;
+  border-radius: 10px;
+  margin-right: 65px;
+}
+.lxr-demo {
+  width: 460px;
+  height: 251px;
+  background: #fff;
+}
+.lxr-demo .layui-layer-title {
+  font-size: 20px;
+  color: #424242;
+  text-align: center;
+  padding: 0;
+}
+.lxr-demo .layui-layer-content {
+  font-size: 20px;
+  color: #424242;
+  text-align: center;
+  margin-top: 35px;
+  line-height: 50px;
+  height: 110px !important;
+}
+.lxr-demo .layui-layer-btn .layui-layer-btn0 {
+  width: 120px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  color: #fff;
+  background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%), linear-gradient(#f6f6f6, #f6f6f6);
+  border: 0 !important;
+  border-radius: 5px;
+  margin-right: 115px;
+}
+.lxr-demo .layui-layer-btn .layui-layer-btn0:hover {
+  color: #fff !important;
+}
+.lxr-demo .layui-layer-btn .layui-layer-btn1 {
+  width: 120px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  color: #424242;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}

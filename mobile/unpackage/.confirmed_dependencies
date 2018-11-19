@@ -1,0 +1,514 @@
+{
+	"main.html": {
+		"refer": [
+			"setting.html",
+			"fonts/home.html"
+		],
+		"resources": [
+			"css/mui.min.css"
+		]
+	},
+	"login.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"images/sinaweibo.png",
+			"css/mui.min.css",
+			"css/style.css",
+			"images/weixin.png",
+			"images/qq.png",
+			"js/mui.enterfocus.js",
+			"fonts/mui.ttf",
+			"images/zhanghao.png",
+			"images/loginbanner.png",
+			"images/dun.png",
+			"js/jquery-3.2.1.min.js"
+		],
+		"refer": [
+			"main.html",
+			"reg.html",
+			"unlock.html",
+			"fonts/home.html",
+			"fonts/tab-webview-main.html",
+			"PassLogin.html",
+			"share.html"
+		]
+	},
+	"setting.html": {
+		"resources": [
+			"libs/easymob-webim-sdk/easemob.im-1.0.5.js",
+			"fonts/mui.ttf",
+			"libs/easymob-webim-sdk/json2.js",
+			"libs/easymob-webim-sdk/jquery-1.11.1.js",
+			"js/mui.locker.js",
+			"js/feedback.js",
+			"css/feedback-page.css",
+			"js/feedback-page.js",
+			"libs/easymob-webim-sdk/strophe-custom-2.0.0.js",
+			"js/mui.view.js",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"reg.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"images/dun.png",
+			"images/zhanghao.png"
+		],
+		"refer": []
+	},
+	"fonts/pullrefresh_main.html": {
+		"resources": [
+			"fonts/pullrefresh_sub.html",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"fonts/pullrefresh_sub.html"
+		]
+	},
+	"fonts/pullrefresh_sub.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"fonts/tab-webview-main.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/tab-webview-subpage-about.html",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"fonts/home.html",
+			"js/jquery-3.2.1.min.js"
+		],
+		"refer": [
+			"fonts/tab-webview-subpage-contact.html",
+			"fonts/tab-webview-subpage-about.html",
+			"fonts/tab-webview-subpage-setting.html",
+			"fonts/tab-webview-subpage-chat.html",
+			"fonts/superMarket.html",
+			"fonts/my.html",
+			"fonts/exchange.html",
+			"fonts/list.html",
+			"fonts/home.html"
+		]
+	},
+	"fonts/tab-webview-subpage-about.html": {
+		"resources": [
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"fonts/home.html": {
+		"resources": [
+			"css/mui.min.css",
+			"images/banner.png",
+			"css/style.css",
+			"images/mrrw.png",
+			"images/whcx.png",
+			"images/xkjc.png",
+			"images/bysj.png",
+			"images/homeNewest.png",
+			"images/rym.png",
+			"images/tx.png",
+			"images/by.png",
+			"images/xyk4.png",
+			"images/xyk1.png",
+			"images/zuire.png",
+			"images/qir.png",
+			"images/xyk3.png",
+			"images/hd.png",
+			"images/gm.png",
+			"images/xyk2.png",
+			"images/zixun.png",
+			"images/qld.png",
+			"images/xyktu.png",
+			"images/xyk.png",
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"fonts/exchange.html",
+			"images/fatie.png"
+		],
+		"refer": [
+			"fonts/Issue.html",
+			"fonts/Xtemplate.html",
+			"login.html",
+			"fonts/my.html"
+		]
+	},
+	"fonts/exchange.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"images/ding.png",
+			"images/jing.png",
+			"images/re.png",
+			"fonts/details.html",
+			"images/rym.png",
+			"images/tx.png",
+			"fonts/aaa.html",
+			"fonts/list.html",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"fonts/exchange_details.html",
+			"fonts/exchange_One_details.html"
+		]
+	},
+	"fonts/my.html": {
+		"resources": [
+			"css/mui.min.css",
+			"images/mybanner.png",
+			"css/style.css",
+			"images/usertx.png",
+			"images/userxz.png",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"js/jquery-3.2.1.min.js",
+			"fonts/home.html"
+		],
+		"refer": [
+			"fonts/Setting.html",
+			"fonts/YwxgTab.html",
+			"fonts/task.html",
+			"fonts/Pay.html",
+			"fonts/Invitation.html",
+			"fonts/helpcenter.html",
+			"fonts/home.html"
+		]
+	},
+	"fonts/superMarket.html": {
+		"resources": [
+			"css/mui.min.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/style.css",
+			"images/by.png",
+			"images/hd.png"
+		],
+		"refer": [
+			"fonts/market_details.html"
+		]
+	},
+	"fonts/details.html": {
+		"resources": [
+			"css/mui.min.css",
+			"images/taox.png",
+			"images/huangzan.png",
+			"images/shenglve.png",
+			"images/liulan.png",
+			"css/style.css",
+			"images/dianzan.png",
+			"images/liuyan.png",
+			"images/wujx.png",
+			"images/lvxiazan.png",
+			"images/bq.png",
+			"images/zan1.png",
+			"images/shenglve2.png",
+			"images/sctp.png",
+			"images/huifu.png",
+			"images/cai1.png",
+			"js/jquery-3.2.1.min.js",
+			"images/re.png",
+			"images/jing.png",
+			"images/rym.png",
+			"fonts/list.html"
+		],
+		"refer": []
+	},
+	"fonts/aaa.html": {
+		"resources": [
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"fonts/list.html": {
+		"resources": [
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"fonts/exchange_details.html": {
+		"resources": [
+			"images/huangzan.png",
+			"images/shenglve.png",
+			"images/bq.png",
+			"images/liulan.png",
+			"images/zan1.png",
+			"images/shenglve2.png",
+			"images/sctp.png",
+			"images/wujx.png",
+			"images/lvxiazan.png",
+			"images/taox.png",
+			"js/jquery-3.2.1.min.js",
+			"images/dianzan.png",
+			"images/liuyan.png",
+			"images/huifu.png",
+			"images/cai1.png"
+		],
+		"refer": []
+	},
+	"fonts/exchange_One_details.html": {
+		"resources": [
+			"images/huangzan.png",
+			"images/shenglve.png",
+			"images/bq.png",
+			"images/liulan.png",
+			"images/zan1.png",
+			"images/shenglve2.png",
+			"images/sctp.png",
+			"images/wujx.png",
+			"images/lvxiazan.png",
+			"images/taox.png",
+			"js/jquery-3.2.1.min.js",
+			"images/dianzan.png",
+			"images/liuyan.png",
+			"images/huifu.png",
+			"images/cai1.png",
+			"css/mui.min.css",
+			"css/style.css",
+			"fonts/mui.ttf",
+			"images/re.png",
+			"images/jing.png",
+			"images/by.png",
+			"images/rym.png",
+			"js/mui.min.js",
+			"images/tx.png",
+			"css/webiaoqing.css",
+			"js/webiaoqing.js",
+			"images/img/del.png",
+			"images/img/default.gif",
+			"images/img/13.gif",
+			"images/img/3.gif",
+			"images/img/4.gif",
+			"images/img/9.gif",
+			"images/img/11.gif",
+			"images/img/10.gif",
+			"images/img/16.gif",
+			"images/img/5.gif",
+			"images/img/84.gif",
+			"images/img/18.gif",
+			"images/img/38.gif",
+			"images/img/39.gif",
+			"images/img/12.gif",
+			"images/img/19.gif",
+			"images/img/17.gif",
+			"images/img/6.gif",
+			"images/img/8.gif",
+			"images/img/15.gif",
+			"images/img/14.gif",
+			"images/img/1.gif",
+			"images/img/2.gif",
+			"images/img/0.gif"
+		],
+		"refer": []
+	},
+	"fonts/Setting.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"js/mui.min.js",
+			"images/hd.png",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"login.html"
+		]
+	},
+	"unlock.html": {
+		"resources": [
+			"js/mui.locker.js"
+		],
+		"refer": []
+	},
+	"fonts/YwxgTab.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"images/jing.png",
+			"images/by.png",
+			"images/rym.png",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"images/re.png",
+			"images/tx.png",
+			"js/jquery-3.2.1.min.js"
+		],
+		"refer": []
+	},
+	"fonts/Issue.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"images/tjtw.png",
+			"images/mask.png",
+			"js/jquery-3.2.1.min.js"
+		],
+		"refer": []
+	},
+	"fonts/Xtemplate.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"images/tzbk.png",
+			"images/xiala.png",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"fonts/Issue.html"
+		]
+	},
+	"PassLogin.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"images/sinaweibo.png",
+			"js/app.js",
+			"js/mui.enterfocus.js",
+			"images/zhanghao.png",
+			"images/dun.png",
+			"js/mui.min.js",
+			"js/jquery-3.2.1.min.js",
+			"fonts/mui.ttf",
+			"images/loginbanner.png"
+		],
+		"refer": [
+			"login.html",
+			"forget.html",
+			"fonts/tab-webview-main.html",
+			"fonts/home.html"
+		]
+	},
+	"fonts/task.html": {
+		"resources": [
+			"images/taskback.png",
+			"images/taskjd.png",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/mui.min.js"
+		],
+		"refer": []
+	},
+	"fonts/Pay.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"images/paystatback.png",
+			"images/paycz1.png",
+			"images/paycz7.png",
+			"images/paycz4.png",
+			"images/paycz3.png",
+			"images/paycz6.png",
+			"images/paycz5.png",
+			"images/paycz2.png",
+			"images/paytj.png",
+			"js/jquery-3.2.1.min.js",
+			"images/payczgou.png",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"fonts/PayRecord.html"
+		]
+	},
+	"fonts/PayRecord.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"images/shijianzhou.png",
+			"images/jiludiyi.png",
+			"js/mui.min.js"
+		],
+		"refer": []
+	},
+	"fonts/Invitation.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"images/invitback.png",
+			"css/mui.min.css",
+			"css/style.css",
+			"images/fenx2.png",
+			"images/fenx3.png",
+			"images/fenx1.png",
+			"js/jquery-3.2.1.min.js",
+			"images/nofenx.png"
+		],
+		"refer": []
+	},
+	"fonts/market_details.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"images/q2.png",
+			"images/q4.png",
+			"images/q3.png",
+			"images/q1.png",
+			"css/reset.css",
+			"images/qq(1)@2x.png",
+			"images/scErweima.png",
+			"images/pyCircle.png",
+			"images/wchatHy.png",
+			"images/zsList2.png",
+			"images/share.png",
+			"images/logo.png",
+			"images/fanyong.png",
+			"images/X@2x.png",
+			"js/jquery-3.2.1.min.js"
+		],
+		"refer": []
+	},
+	"fonts/helpcenter.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf",
+			"css/style.css",
+			"js/jquery-3.2.1.min.js",
+			"images/kefu.png"
+		],
+		"refer": [
+			"fonts/cus_ser.html"
+		]
+	},
+	"fonts/cus_ser.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"images/kfewm.png",
+			"images/kfphone.png"
+		],
+		"refer": []
+	},
+	"share.html": {
+		"resources": [
+			"css/mui.min.css",
+			"images/sharewx.png",
+			"images/sharepy.png",
+			"images/shareqq.png",
+			"js/mui.min.js"
+		],
+		"refer": []
+	},
+	"forget.html": {
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"js/app.js",
+			"js/jquery-3.2.1.min.js"
+		]
+	}
+}

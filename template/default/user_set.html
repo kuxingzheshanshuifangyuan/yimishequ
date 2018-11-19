@@ -1,0 +1,549 @@
+{extend name="index_base" /}
+{block name="seo"}
+    <title>个人资料|{$site_config['site_title']}|{$site_config['seo_title']}</title>
+    <meta name="keywords" content="{$site_config['seo_keyword']}">
+    <meta name="description" content="{$site_config['seo_description']}">
+{/block}
+{block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo.css"/>
+    <!--分页-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/uploadHeader/style.css">
+    <link rel="stylesheet" href="__PUBLIC__forum/ImgCropping/css/cropper.min.css">
+    <link rel="stylesheet" href="__PUBLIC__forum/ImgCropping/css/ImgCropping.css">
+{/block}
+{block name="body"}
+<body>
+<div class="userInfoTop" >
+    <div class="editCover">
+    </div>
+    <img src="__PUBLIC__forum/img/userInfo/userInfo.png" />
+</div>
+<div class="userInfoTop_ indexItem">
+    <div class="headImg">
+        <img src="{$user_data['userhead']}" style="width:123px;height:123px;border-radius: 50%;" />
+    </div>
+    <div class="nameItem">
+        <span class="userName">{$user_data['username']}</span>
+        {switch name="$user_data['sex']"}
+        {case value="1"}<img class="gender" src="__PUBLIC__forum/img/userInfo/man.png"/>{/case}
+        {case value="2"}<img class="gender" src="__PUBLIC__forum/img/userInfo/female.png"/>{/case}
+        {default /}
+        {/switch}
+        <span class="userPosition" style="">{$user_data['description']}</span>
+        <p>
+            <span class="userInfo">米币：</span><span class="userInfo">{$user_data['money']}</span>
+            <span> | </span>
+            <span class="userInfo">积分：</span><span class="userInfo">{$user_data['point']}</span>
+            <span> | </span>
+            <span class="userInfo">用户组：</span><span class="userInfo">{$user_data['grade_name']}</span>
+        </p>
+    </div>
+    <div class="backUser">
+        <a href='{:url("user/index",["id"=>$uid])}' style="color:#ff5d3e;text-decoration:none">返回我的主页  ></a>
+    </div>
+</div>
+<div class="userData indexItem">
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">我的资料</li>
+            <li>密码 </li>
+            <li>头像 </li>
+            <li>账号绑定</li>
+        </ul>
+        <div class="layui-tab-content">
+
+            <!--我的资料-->
+            <div class="layui-tab-item layui-show">
+                <form  class="layui-form" method="post" id="editData">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label userLable">性别</label>
+                        <div class="layui-input-block">
+                            {if condition="$tptc.sex==1"}
+                                <input type="radio" name="sex" value="1" title="男" checked>
+                                <input type="radio" name="sex" value="2" title="女">
+                                <input type="radio" name="sex" value="3" title="保密">
+                            {elseif condition="$tptc.sex==2" /}
+                                <input type="radio" name="sex" value="1" title="男" >
+                                <input type="radio" name="sex" value="2" title="女" checked>
+                                <input type="radio" name="sex" value="3" title="保密">
+                            {else /}
+                                <input type="radio" name="sex" value="1" title="男" >
+                                <input type="radio" name="sex" value="2" title="女" >
+                                <input type="radio" name="sex" value="3" title="保密" checked>
+                            {/if}
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label userLable">昵称</label>
+                        {if condition="$tptc['is_username'] eq 0"}
+                            <div class="layui-input-block">
+                                <input type="text" name="username" lay-verify="" value="{$tptc['username']}" class="layui-input userInput">
+                                <span style="color:red;margin-left: 10px;margin-top: 15px;float: left;display: block;" id="re-username">昵称只能修改一次，请谨慎修改！</span>
+                            </div>
+                        {else /}
+                            <span class="my-user-name">{$tptc['username']}</span>
+
+                        {/if}
+                    </div>
+                    <div class="layui-form-item clearfix">
+                        <label class="layui-form-label userLable">城市</label>
+                        <div class="layui-input-inline" style="margin-right: 35px;">
+                            <select name="provid" id="provid" lay-filter="provid">
+                                <option value="">请选择省</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline" style="margin-right: 35px;">
+                            <select name="cityid" id="cityid" lay-filter="cityid">
+                                <option value="">请选择市</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline" style="margin-right: 35px;">
+                            <select name="areaid" id="areaid" lay-filter="areaid">
+                                <option value="">请选择县/区</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label userLable">签名</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="description" lay-verify="" value="{$tptc.description}" class="layui-input userInput" style="width: 980px !important;">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <button class="subUserInfo" lay-filter="user_set" lay-submit>保存</button>
+                    </div>
+                </form>
+            </div>
+            <!--密码-->
+            <div class="layui-tab-item ">
+                <!--<form action="" class="layui-form" method="post">-->
+                <div class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label userLable">手机号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="userPhone" value="{$user_data['mobile']}" class="layui-input userInput userPhone" readonly />
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label userLable">验证码</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="userCode" lay-verify=""  placeholder="请输入验证码" class="layui-input userInput userCode" style="width: 300px !important;">
+                        </div>
+                        <input type="button" class="subUserInfo getUserCode" onclick="sendMessage($('.userPhone'),$('.userCode'),this,10)" value="获取验证码">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label userLable">新密码</label>
+                        <div class="layui-input-inline">
+                            <input type="password" name="newPass" lay-verify="" placeholder="请输入6~16个字符" class="layui-input userInput" style="width: 300px !important;">
+                        </div>
+                    </div>
+                    <div class="subUserInfo" lay-submit lay-filter='user_setedit'>
+                        保存
+                    </div>
+                </div>
+                <!--</form>-->
+            </div>
+            <!--头像-->
+            <div class="layui-form layui-form-pane layui-tab-item">
+                <!--<form action="" class="layui-form" method="post">-->
+                    <div class="layui-form-item">
+                        <div class="avatar-add">
+                            <p>建议尺寸168*168，支持jpg、png、gif，最大不能超过50KB</p >
+                            <img id="finalImg" src="{$user_data.userhead|getheadurl}">
+                            <button type="button" id="replaceImg" onclick="RpfNb()"><span>+</span>上传图片</button>
+                        </div>
+                    </div>
+
+                    <!--图片裁剪框 start-->
+                    <div style="display: none" class="tailoring-container">
+                        <div class="black-cloth" onclick="closeTailor(this)"></div>
+                        <div class="tailoring-content">
+                            <div class="tailoring-content-one">
+                                <label title="" for="chooseImg" class="l-btn choose-btn" style="opacity: 0;cursor: default;">
+                                    <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onchange="selectImg(this)">
+                                    选择图片
+                                </label>
+                                <div class="close-tailoring"  onclick="closeTailor(this)">×</div>
+                            </div>
+                            <div class="tailoring-content-two">
+                                <div class="tailoring-box-parcel">
+                                    <img id="tailoringImg">
+                                </div>
+                                <div class="preview-box-parcel">
+                                    <p>图片预览：</p>
+                                    <div class="square previewImg"></div>
+                                    <div class="circular previewImg"></div>
+                                </div>
+                            </div>
+                            <div class="tailoring-content-three">
+                                <button class="l-btn cropper-reset-btn">复位</button>
+                                <button class="l-btn cropper-rotate-btn">旋转</button>
+                                <button class="l-btn cropper-scaleX-btn">换向</button>
+                                <button class="l-btn sureCut" id="sureCut">确定</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <input type="hidden" name="userhead" >
+                        <button class="subUserInfo" lay-filter="user_headedit" lay-submit="">保存</button>
+                    </div>
+                <!--</form>-->
+            </div>
+            <!--账号绑定-->
+            <div class="layui-tab-item">
+                <div class="accountBind">
+                    <div class="">
+                        <img src="__PUBLIC__forum/img/userInfo/手机.png"/>
+                        <span class="bindName">手机号</span>
+                        {notempty name="$user_data['mobile']"}
+                            <span class="bindInfo">{$user_data['mobile']}</span>
+                            <div class="binded">已绑定</div>
+                        {else /}
+                            <span class="bindInfo">未绑定</span>
+                            <div class="unbind" onclick="bindingMobile()">绑定</div>
+                        {/notempty}
+                    </div>
+                    <!--<div class="">-->
+                        <!--<img src="__PUBLIC__forum/img/userInfo/wechat.png"/>-->
+                        <!--<span class="bindName">微信号</span>-->
+                        <!--{notempty name="$user_data['wechat_unionid']"}-->
+                            <!--<span class="bindInfo">{$user_data['wechat_nickname']}</span>-->
+                            <!--<div class="binded">已绑定</div>-->
+                        <!--{else /}-->
+                            <!--<span class="bindInfo">未绑定</span>-->
+                        <!--<a href="{:url('index/user/wechat')}" style="color:#fff"><div class="unbind">绑定</div></a>-->
+                        <!--{/notempty}-->
+                    <!--</div>-->
+                    <!--<div class="">-->
+                        <!--<img src="__PUBLIC__forum/img/userInfo/qq1拷贝.png"/>-->
+                        <!--<span class="bindName">QQ号</span>-->
+                        <!--{notempty name="$user_data['qq']"}-->
+                            <!--<span class="bindInfo">{$user_data['qq']}</span>-->
+                            <!--<div class="binded">已绑定</div>-->
+                        <!--{else /}-->
+                            <!--<span class="bindInfo">未绑定</span>-->
+                        <!--<a href="http://web2.qq.com/" style="color:#fff"><div class="unbind">绑定</div></a>-->
+                        <!--{/notempty}-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+<!--绑定手机号-->
+<div class="bindingMobile" style="display:none">
+    <form action="" method="post" class="layui-form" style="height: 210px;">
+        <input type="text" name="account" class="username forMobile_" placeholder="会员账号 / 邮箱 / 手机号码" value="{$user_data['mobile']}" style="background: url(__PUBLIC__forum/img/login/账号拷贝2.png) no-repeat 16px;" />
+        <input type="text" name="phone_code" class="mobileCode code" placeholder="请输入验证码" style="background: url(__PUBLIC__forum/img/login/code.png) no-repeat 16px;" />
+        <input type="button" class="getCode" onclick="sendMessage($('.forMobile_'),$('.mobileCode'),this,10)" value="获取验证码">
+
+    </form>
+    <div class="loginBtn forLoginBtn" lay-submit="" lay-filter="recoveredPass" style="margin:0 auto">
+        确定
+    </div>
+</div>
+</body>
+{/block}
+{block name="script"}
+<!--<script src="__PUBLIC__forum/layui/layui.js"></script>-->
+<!--<script src="__PUBLIC__forum/js/jquery/1.9.1/jquery.min.js"></script>-->
+<!--分页-->
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+
+<script src="__PUBLIC__forum/pickArea/data.js"></script>
+<script src="__PUBLIC__forum/pickArea/province.js"></script>
+<script src="__PUBLIC__forum/ImgCropping/js/cropper.min.js"></script>
+
+<script type="text/javascript">
+    layui.use(['element','form'], function(){
+        var $ = layui.jquery
+            ,element = layui.element;
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(userInfo)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+    });
+
+    var areaDefault = {s1: 'provid', s2: 'cityid', s3: 'areaid'};
+    areaDefault.v1 = {$tptc.provid?:''};
+    areaDefault.v2 = {$tptc.cityid?:''};
+    areaDefault.v3 = {$tptc.areaid?:''};
+
+</script>
+<!--<script type="text/javascript">-->
+
+    <!--$('.M-box2').pagination({-->
+        <!--totalData: 100,-->
+        <!--showData: 5,-->
+        <!--coping: true,-->
+        <!--homePage: '首页',-->
+        <!--prevContent: '上一页',-->
+        <!--nextContent:"下一页",-->
+        <!--endPage: '末页',-->
+        <!--keepShowPN:true,-->
+        <!--count:1-->
+    <!--});-->
+<!--</script>-->
+<!--绑定-->
+<script type="text/javascript">
+    /*绑定手机号*/
+    function bindingMobile(){
+        layer.close(layer.index);
+        layer.open({
+            type:1,
+            skin:'login',
+            content:$(".bindingMobile"),
+            title:'绑定手机号',
+            area: ['600px', '450px'],
+            resize:false,
+            cancel: function(index, layero){
+                $(".bindingMobile").hide()
+            }
+        })
+    }
+</script>
+
+<script type="text/javascript">
+    /*修改资料*/
+
+
+    layui.use(['element','upload','form'], function(){
+        var form = layui.form,
+            element = layui.element,
+            $ = layui.jquery,
+            upload = layui.upload;
+
+
+        form.on('submit(user_set)', function(data){
+            loading = layer.load(2, {
+                shade: [0.2,'#000']
+            });
+            var param = data.field;
+            $.post('{:url("user/set")}',param,function(data){
+                if(data.code == 200){
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        location.href = '{:url("user/set",["id"=>$uid])}';
+                    });
+                }else{
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+            return false;
+        });
+
+        form.on('submit(user_headedit)', function(data){
+            loading = layer.load(2, {
+                shade: [0.2,'#000']
+            });
+            imgData = $('#finalImg').attr('src');
+            // console.log(imgData);
+            // var param = data.field;
+            $.post('{:url("index/user/headedit")}',{img:imgData},function(data){
+                if(data.code == 200){
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        location.href = '{:url("user/set")}';
+                    });
+                }else{
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+            return false;
+        });
+
+        /*修改密码*/
+        form.on('submit(user_setedit)', function(data){
+            loading = layer.load(2, {
+                shade: [0.2,'#000']
+            });
+            var param = data.field;
+            $.post('{:url("user/setedit")}',param,function(data){
+                if(data.code == 200){
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        location.href = '{:url("index/index")}';
+                    });
+                }else{
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+            return false;
+        });
+
+
+        // var uploadInst = upload.render({
+        //     elem: '#image'
+        //     ,url: '{:url("upload/upimage")}'
+        //     ,ext: 'jpg|png|gif'
+        //     ,area: ['100px', '100px']
+        //     , before: function (input) {
+        //         loading = layer.load(2, {
+        //             shade: [0.2,'#000'] //0.2透明度的白色背景
+        //         });
+        //     }
+        //     , done: function (res) {
+        //         layer.close(loading);
+        //         //如果上传失败
+        //         if (res.code !== 200) {
+        //
+        //             return layer.msg('上传失败');
+        //         }
+        //         //上传成功
+        //
+        //         $('input[name=userhead]').val(res.path);
+        //         headedit.src = res.headpath;
+        //
+        //         //  headedit.src = res.info;
+        //         layer.msg(res.msg, {icon: 1, time: 1000});
+        //     }
+        //     , error: function () {
+        //         //演示失败状态，并实现重传
+        //         var demoText = $('#demoText');
+        //         demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+        //         // demoText.find('.demo-reload').on('click', function () {
+        //         //     uploadInst.upload();
+        //         // });
+        //     }
+        // });
+    });
+
+
+    $('#re-username').on('click',function(){
+        layer.prompt({title: '昵称只能修改一次，请谨慎修改！', formType: 1}, function(content, index){
+            alert(content);
+            layer.close(index);
+            // layer.prompt({title: '随便写点啥，并确认', formType: 2}, function(text, index){
+            //     layer.close(index);
+            //     layer.msg('演示完毕！您的口令：'+ pass +'<br>您最后写下了：'+text);
+            // });
+        });
+    });
+
+</script>
+
+
+<!--上传头像-->
+<script>
+
+    //弹出框水平垂直居中
+    (window.onresize = function () {
+        var win_height = $(window).height();
+        var win_width = $(window).width();
+        if (win_width <= 768){
+            $(".tailoring-content").css({
+                "top": (win_height - $(".tailoring-content").outerHeight())/2,
+                "left": 0
+            });
+        }else{
+            $(".tailoring-content").css({
+                "top": (win_height - $(".tailoring-content").outerHeight())/2,
+                "left": (win_width - $(".tailoring-content").outerWidth())/2
+            });
+        }
+    })();
+
+    //弹出图片裁剪框
+//  $("#replaceImg").on("click",function () {
+//      $(".tailoring-container").toggle();
+//  });
+    function RpfNb(){
+		// $(".tailoring-container").toggle();
+		var evt = document.createEvent("MouseEvents"); 
+			evt.initEvent("click", true, true); 
+			document.getElementById("chooseImg").dispatchEvent(evt); 
+	}
+	$('#chooseImg').click(function(){
+		selectImg(this)
+	})
+    //图像上传
+    function selectImg(file) {
+        if (!file.files || !file.files[0]){
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            var replaceSrc = evt.target.result;
+            //更换cropper的图片
+            $('#tailoringImg').cropper('replace', replaceSrc,false);//默认false，适应高度，不失真
+        }
+        reader.readAsDataURL(file.files[0]);
+        $(".tailoring-container").show();
+    }
+    //cropper图片裁剪
+    $('#tailoringImg').cropper({
+        aspectRatio: 1/1,//默认比例
+        preview: '.previewImg',//预览视图
+        guides: false,  //裁剪框的虚线(九宫格)
+        autoCropArea: 0.5,  //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+        movable: false, //是否允许移动图片
+        dragCrop: true,  //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+        movable: true,  //是否允许移动剪裁框
+        resizable: true,  //是否允许改变裁剪框的大小
+        zoomable: false,  //是否允许缩放图片大小
+        mouseWheelZoom: false,  //是否允许通过鼠标滚轮来缩放图片
+        touchDragZoom: true,  //是否允许通过触摸移动来缩放图片
+        rotatable: true,  //是否允许旋转图片
+        crop: function(e) {
+            // 输出结果数据裁剪图像。
+        }
+    });
+    //旋转
+    $(".cropper-rotate-btn").on("click",function () {
+        $('#tailoringImg').cropper("rotate", 45);
+    });
+    //复位
+    $(".cropper-reset-btn").on("click",function () {
+        $('#tailoringImg').cropper("reset");
+    });
+    //换向
+    var flagX = true;
+    $(".cropper-scaleX-btn").on("click",function () {
+        if(flagX){
+            $('#tailoringImg').cropper("scaleX", -1);
+            flagX = false;
+        }else{
+            $('#tailoringImg').cropper("scaleX", 1);
+            flagX = true;
+        }
+        flagX != flagX;
+    });
+
+    //裁剪后的处理
+    $("#sureCut").on("click",function () {
+        if ($("#tailoringImg").attr("src") == null ){
+            return false;
+        }else{
+            var cas = $('#tailoringImg').cropper('getCroppedCanvas');//获取被裁剪后的canvas
+            var base64url = cas.toDataURL('image/png'); //转换为base64地址形式
+            $("#finalImg").prop("src",base64url);//显示为图片的形式
+            //关闭裁剪框
+            $(".tailoring-container").hide();
+            // closeTailor();
+        }
+    });
+    //关闭裁剪框
+    function closeTailor() {
+        // alert(5);
+        $(".tailoring-container").hide();
+    }
+
+
+
+</script>
+{/block}

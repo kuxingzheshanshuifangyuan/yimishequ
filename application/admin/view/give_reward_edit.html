@@ -1,0 +1,39 @@
+{extend name="base" /}
+
+{block name="body"}
+<!--tab标签-->
+<div class="layui-tab-brief">
+
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form form-container" method="post" action="{:url('give_reward/update')}" >
+                <div class="layui-form-item">
+                    <label class="layui-form-label">序号</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="order" value="{$give_reward.order}" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">米币数</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="money" value="{$give_reward.money}" class="layui-input">
+                    </div>
+                </div>
+                <div class="btable-paged" >
+                    <div class="layui-main">
+                        <div class="formbtngroup">
+                            <input type="submit" class="layui-btn layui-btn-small"  value="修改">
+                            <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="{$give_reward.id}">
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+{/block}

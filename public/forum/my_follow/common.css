@@ -1,0 +1,48 @@
+#lxr-icon-1{
+    background: url(./tabs-img.png) no-repeat center;
+    width:20px;
+    height:17px;
+    background-position: -58px -71px !important;
+}
+.select-this>a>#lxr-icon-1{
+    background: url(./tabs-img.png) no-repeat center;
+    width:20px;
+    height:17px;
+    background-position: -33px -71px !important;
+}
+#lxr-icon-2{
+    background: url(./tabs-img.png) no-repeat center;
+    width:17px;
+    height:17px;
+    background-position: -108px -71px !important;
+}
+.select-this>a>#lxr-icon-2{
+    background: url(./tabs-img.png) no-repeat center;
+    width:17px;
+    height:17px;
+    background-position: -83px -71px !important;
+}
+#lxr-icon-3{
+    background: url(./tabs-img.png) no-repeat center;
+    width:17px;
+    height:15px;
+    background-position: -158px -71px !important;
+}
+.select-this>a>#lxr-icon-3{
+    background: url(./tabs-img.png) no-repeat center;
+    width:17px;
+    height:15px;
+    background-position: -133px -71px !important;
+}
+#lxr-icon-4{
+    background: url(./tabs-img.png) no-repeat center;
+    width:18px;
+    height:16px;
+    background-position: -208px -71px !important;
+}
+.select-this>a>#lxr-icon-4{
+    background: url(./tabs-img.png) no-repeat center;
+    width:18px;
+    height:16px;
+    background-position: -183px -71px !important;
+}

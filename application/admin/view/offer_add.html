@@ -1,0 +1,57 @@
+{extend name="base" /}
+
+{block name="body"}
+<link rel="stylesheet" href="__ADMIN__/wangEditor/css/wangEditor.min.css">
+<!--tab标签-->
+<div class="layui-tab-brief">
+
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form form-container" method="post" action="{:url('offer/save')}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">通知内容</label>
+                    <div class="layui-input-block">
+                        <textarea name="content" id="textarea" placeholder="请输入通知内容"  class="layui-textarea content" style="float: left"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">状态</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="status" value="1" title="启用" checked="checked">
+                        <input type="radio" name="status" value="0" title="禁用">
+                    </div>
+                </div>
+                <div class="btable-paged" >
+                    <div class="layui-main">
+                        <div class="formbtngroup">
+                            <input type="submit" class="layui-btn layui-btn-small btn" lay-submit="" lay-filter="formadd" value="添加">
+                            <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript" src="__ADMIN__/wangEditor/js/wangEditor.js"></script>
+
+<script type="text/javascript">
+    var editor = new wangEditor('textarea');
+    editor.create();
+</script>
+<script>
+    $(".btn").click(function(){
+        var content=$(".content").val();
+        if(!content){
+            layer.msg("请添加通知内容！");
+            return false;
+        }
+    })
+</script>
+{/block}

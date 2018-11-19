@@ -1,0 +1,72 @@
+{extend name="base" /}
+{block name="css"}
+  <link rel="stylesheet" href="__ADMIN__/css/form.css">
+{/block}
+{block name="body"}
+<div class="admin-main layui-form">
+<div class="layui-field-box">
+<!--<div class="layui-box-searchber">-->
+	<button class="layui-btn layui-btn-small" data-url="{:url('admin/comment/alldelete')}"  lay-submit lay-filter="alldelete">删除选中</button>
+	<form class="layui-form layui-form-pane">
+		<div class="layui-input-inline">
+			<label class="layui-form-label">身份</label>
+			<div class="layui-input-inline">
+				<select name="is_robot" lay-verify="required" class="forumcate">
+					<option value="0" >全部</option>
+					<option value="1" {if condition="$Request.param.is_robot eq 1"} selected{/if}>机器人</option>
+					<option value="2" {if condition="$Request.param.is_robot eq 2"} selected{/if}>普通用户</option>
+				</select>
+			</div>
+		</div>
+		<div class="layui-inline">
+			<input type="submit" value="搜索" class="search layui-btn" />
+		</div>
+	</form>
+	<hr>
+<!--</div>-->
+  	<table class="layui-table admin-table">
+     	<thead>
+			<tr>
+				<th width="5%" style=""><input type="checkbox" name="checkAll" lay-filter="checkAll"></th>
+				<th width="5%" align="center">ID</th>
+				<th width="30%" align="center">评论内容</th>
+				<th width="30%" align="center">所属帖子</th>
+				<th width="10%" align="center">所属会员</th>
+				<th width="10%" align="center">身份</th>
+				<th width="10%" align="center">评论时间</th>
+				<th width="10%" align="center">基本操作</th>
+			</tr>
+		</thead>
+		<tbody id="content">
+      {volist name="tptc" id="vo"}
+	  <tr>
+			<td align="center"><input type="checkbox" name="ids[{$vo.id}]" lay-filter="checkOne" value="{$vo.id}"></td>
+			<td align="center">{$vo.id}</td>
+			<td style="padding-left: 20px;"><a target="_blank" href="{:url('index/forum/detail',array('id'=>$vo.fid))}"><?php echo mb_substr(strip_tags($vo['content']), 0, 35, 'utf-8');?>...</a></td>
+			<td style="padding-left: 20px;"><a target="_blank" href="{:url('index/forum/detail',array('id'=>$vo.fid))}">{$vo.title}</a></td>
+			<td align="center">{$vo.username}</td>
+		  	<td align="center">{if condition="$vo.is_robot"}机器人{else/}普通用户{/if}</td>
+			<td align="center">{$vo.create_time}</td>
+			<td align="center">
+			<a class="elementdel layui-btn layui-btn-danger layui-btn-mini" href="javascript:;" data-id="{$vo.id}" data-url="{:url('admin/comment/delete',array('id'=>$vo['id']))}"   title="删除" >删除</a>
+
+			</td>
+      </tr>
+      {/volist}
+</tbody>
+					</table>
+				</div>
+		
+			
+		</div>
+ {/block}
+   {block name="page"}
+<div class="btable-paged" >
+<div class="layui-main">
+{$tptc->render()}
+</div>
+</div>
+   {/block}
+    {block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+ {/block}

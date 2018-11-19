@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body class="helpbody">
+		<header class="mui-bar mui-bar-nav ">
+			<a href="javascript:;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="history"></a>
+			<h1 id="title" class="mui-title">帮助中心</h1>
+		</header>
+		<!--<img src="../images/kefu.png" class="kefu"/>-->
+		<div class="helpTab">
+		    <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted helpTab_top">
+		        <a class="mui-control-item mui-active" href="#item1">常见问题</a>
+		        <a class="mui-control-item" href="#item2">贷款问题</a>
+		        <a class="mui-control-item" href="#item3">还款问题</a>
+		    </div>
+		    <div class="mui-slider-group">
+		        <div id="item1" class="mui-slider-item mui-control-content mui-active">
+		            <ul class="mui-table-view item1">
+
+		            </ul>
+		        </div>
+		        <div id="item2" class="mui-slider-item mui-control-content">
+		            <ul class="mui-table-view item2">
+		            </ul>
+		        </div>
+		        <div id="item3" class="mui-slider-item mui-control-content">
+		            <ul class="mui-table-view item3">
+		            </ul>
+		        </div>
+		    </div>
+		</div>
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			$("ul").on("click", "li", function() {
+				
+				if($(this).children('.cont').css("display") == "none") {
+					$(this).children('.cont').slideDown(300);
+				} else {
+					$(this).children('.cont').slideUp(300);
+
+				}
+			})
+			mui(".helpbody").on('tap','.kefu',function(){
+			  mui.openWindow({
+					url:'cus_ser.html',
+					id:'cus_ser.html',
+				});
+
+			})
+
+
+
+			function escapeHTML(a){
+		        a = "" + a;
+		        return a.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/src=&quot;/g,'src="http://www.baijiaqianbao.com/').replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+		    }
+			var oneHtml = '';
+			var twoHtml = '';
+			var thrHtml = '';
+			mui.ajax('http://www.1miclub.com/api/Forum/forum_common_problems', {
+			    data: {},
+			    dataType: 'jsonp',
+			    type: 'post',
+			    success: function(data) {
+			    	data = JSON.parse(data)
+			    	for(var i=0;i<data.data.data.length;i++){
+			    		var cont = data.data.data[i].content.replace(/src="/g,'src="http://www.baijiaqianbao.com');
+				    		oneHtml +=	'<li class="mui-table-view-cell">'+
+						                	(i+1)+'.'+data.data.data[i].name+
+						                	'<div class="cont">'+cont+'</div>'+
+						                '</li> '
+			    	}
+			    	$('.item1').html(oneHtml)
+			    },
+			    error: function() {
+			        mui.toast('失败');
+			    }
+			});
+			mui.ajax('http://www.1miclub.com/api/Forum/forum_loans_problems', {
+			    data: {},
+			    dataType: 'jsonp',
+			    type: 'post',
+			    success: function(data) {
+			    	data = JSON.parse(data)
+			    	for(var i=0;i<data.data.data.length;i++){
+			    		var cont = data.data.data[i].content.replace(/src="/g,'src="http://www.baijiaqianbao.com');
+				    		twoHtml +=	'<li class="mui-table-view-cell">'+
+						                	(i+1)+'.'+data.data.data[i].name+
+						                	'<div class="cont">'+cont+'</div>'+
+						                '</li> '
+			    	}
+			    	$('.item2').html(twoHtml)
+			    },
+			    error: function() {
+			        mui.toast('失败');
+			    }
+			});
+			mui.ajax('http://www.1miclub.com/api/Forum/forum_repay_problems', {
+			    data: {},
+			    dataType: 'jsonp',
+			    type: 'post',
+			    success: function(data) {
+			    	data = JSON.parse(data)
+			    	for(var i=0;i<data.data.data.length;i++){
+			    		var cont = data.data.data[i].content.replace(/src="/g,'src="http://www.baijiaqianbao.com');
+				    		thrHtml +=	'<li class="mui-table-view-cell">'+
+						                	(i+1)+'.'+data.data.data[i].name+
+						                	'<div class="cont">'+cont+'</div>'+
+						                '</li> '
+			    	}
+			    	$('.item3').html(thrHtml)
+			    },
+			    error: function() {
+			        mui.toast('失败');
+			    }
+			});
+		</script>
+	</body>
+
+</html>

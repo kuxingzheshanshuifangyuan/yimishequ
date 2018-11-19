@@ -1,0 +1,321 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>一米社区-修改头像</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo_1.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/uploadHeader/style.css">
+    <link rel="stylesheet" href="__PUBLIC__forum/ImgCropping/css/cropper.min.css">
+    <link rel="stylesheet" href="__PUBLIC__forum/ImgCropping/css/ImgCropping.css">
+    <style>
+        .select-this > a > div {
+            background-position:-35px -13px !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="contentWrap clearfix">
+
+
+    <div class="user-content">
+        <p class="crumbs">
+            <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+            <a href="#">设置</a> > <a href="#">修改头像</a>
+        </p>
+
+        <div class="user-left">
+            <div>
+                <div class="select-this">
+                    <a href="javascript:void(0)">
+                        <div></div>
+                        <p>修改头像</p>
+                    </a>
+                </div>
+
+                <div class="">
+                    <a href="{:url('edit')}">
+                        <div></div>
+                        <p>个人资料</p>
+                    </a>
+                </div>
+
+                <div class="">
+                    <a href="{:url('point_info')}">
+                        <div></div>
+                        <p>积分</p>
+                    </a>
+                </div>
+
+                <div class="">
+                    <a href="{:url('money_info')}">
+                        <div></div>
+                        <p>米币</p>
+                    </a>
+                </div>
+                <div class="">
+                    <a href="{:url('grade')}">
+                        <div></div>
+                        <p>用户组</p>
+                    </a>
+                </div>
+                <div class="">
+                    <a href="{:url('password')}">
+                        <div></div>
+                        <p>密码安全</p>
+                    </a>
+                </div>
+                <div class="">
+                    <a href="{:url('cooperation')}">
+                        <div></div>
+                        <p>商务合作</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="user-right">
+            <div class="edit-head">
+                <div class="head-title">
+                    设置我的新头像
+                </div>
+                <p>请选择一个本地照片上传编辑</p>
+
+                <div class="upHead">
+                    <div class="layui-form-item">
+                        <div class="avatar-add">
+                            <p>建议尺寸168*168，支持jpg、png、gif，最大不能超过50KB</p>
+                            <img id="finalImg" src="{$user_data.userhead}">
+
+                            <button type="button" id="replaceImg" onclick="RpfNb()"><span>+</span>上传图片</button>
+
+                        </div>
+                    </div>
+
+                    <!--图片裁剪框 start-->
+                    <div style="display: none" class="tailoring-container">
+                        <div class="black-cloth" onclick="closeTailor(this)"></div>
+                        <div class="tailoring-content">
+                            <div class="tailoring-content-one">
+                                <label title="" for="chooseImg" class="l-btn choose-btn"
+                                       style="opacity: 0;cursor: default;">
+                                    <input type="file" accept="image/jpg,image/jpeg,image/png" name="file"
+                                           id="chooseImg" class="hidden"
+                                           onchange="selectImg(this)">
+                                    选择图片
+                                </label>
+                                <div class="close-tailoring" onclick="closeTailor(this)">×</div>
+                            </div>
+                            <div class="tailoring-content-two">
+                                <div class="tailoring-box-parcel">
+                                    <img id="tailoringImg">
+                                </div>
+                                <div class="preview-box-parcel">
+                                    <p>图片预览：</p>
+                                    <div class="square previewImg"></div>
+                                    <div class="circular previewImg"></div>
+                                </div>
+                            </div>
+                            <div class="tailoring-content-three">
+                                <button class="l-btn cropper-reset-btn">复位</button>
+                                <button class="l-btn cropper-rotate-btn">旋转</button>
+                                <button class="l-btn cropper-scaleX-btn">换向</button>
+                                <button class="l-btn sureCut" id="sureCut">确定</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <input type="hidden" name="userhead">
+                        <button class="subUserInfo" lay-filter="user_headedit" lay-submit="">保存</button>
+                    </div>
+                </div>
+
+
+                <div class="head-title">
+                    当前我的头像
+                </div>
+                <p>如果您还没有设置自己的头像，系统会显示为默认头像，您需要自己上传一张新照片来作为自己的个人头像</p>
+                <div class="current-head">
+                    <img src="{$user_data.userhead}" alt="我的头像">
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="paginationCon">
+            <div class="m-style M-box2"></div>
+        </div> -->
+    </div>
+
+
+</div>
+</body>
+
+</html>
+
+
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+<script src="__PUBLIC__forum/ImgCropping/js/cropper.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.M-box2').pagination({
+            totalData: 100,
+            showData: 5,
+            coping: true,
+            homePage: '首页',
+            prevContent: '上一页',
+            nextContent: "下一页",
+            endPage: '末页',
+            keepShowPN: true,
+            count: 1
+        });
+    })
+</script>
+<script>
+
+    //弹出框水平垂直居中
+    (window.onresize = function () {
+        var win_height = $(window).height();
+        var win_width = $(window).width();
+        if (win_width <= 768) {
+            $(".tailoring-content").css({
+                "top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+                "left": 0
+            });
+        } else {
+            $(".tailoring-content").css({
+                "top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+                "left": (win_width - $(".tailoring-content").outerWidth()) / 2
+            });
+        }
+    })();
+
+    //弹出图片裁剪框
+    //  $("#replaceImg").on("click",function () {
+    //      $(".tailoring-container").toggle();
+    //  });
+    function RpfNb() {
+        // $(".tailoring-container").toggle();
+        var evt = document.createEvent("MouseEvents");
+        evt.initEvent("click", true, true);
+        document.getElementById("chooseImg").dispatchEvent(evt);
+    }
+
+    $('#chooseImg').click(function () {
+        selectImg(this)
+    })
+
+    //图像上传
+    function selectImg(file) {
+        if (!file.files || !file.files[0]) {
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            var replaceSrc = evt.target.result;
+            //更换cropper的图片
+            $('#tailoringImg').cropper('replace', replaceSrc, false);//默认false，适应高度，不失真
+        }
+        reader.readAsDataURL(file.files[0]);
+        $(".tailoring-container").show();
+    }
+
+    //cropper图片裁剪
+    $('#tailoringImg').cropper({
+        aspectRatio: 1 / 1,//默认比例
+        preview: '.previewImg',//预览视图
+        guides: false,  //裁剪框的虚线(九宫格)
+        autoCropArea: 0.5,  //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+        movable: false, //是否允许移动图片
+        dragCrop: true,  //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+        movable: true,  //是否允许移动剪裁框
+        resizable: true,  //是否允许改变裁剪框的大小
+        zoomable: false,  //是否允许缩放图片大小
+        mouseWheelZoom: false,  //是否允许通过鼠标滚轮来缩放图片
+        touchDragZoom: true,  //是否允许通过触摸移动来缩放图片
+        rotatable: true,  //是否允许旋转图片
+        crop: function (e) {
+            // 输出结果数据裁剪图像。
+        }
+    });
+    //旋转
+    $(".cropper-rotate-btn").on("click", function () {
+        $('#tailoringImg').cropper("rotate", 45);
+    });
+    //复位
+    $(".cropper-reset-btn").on("click", function () {
+        $('#tailoringImg').cropper("reset");
+    });
+    //换向
+    var flagX = true;
+    $(".cropper-scaleX-btn").on("click", function () {
+        if (flagX) {
+            $('#tailoringImg').cropper("scaleX", -1);
+            flagX = false;
+        } else {
+            $('#tailoringImg').cropper("scaleX", 1);
+            flagX = true;
+        }
+        flagX != flagX;
+    });
+
+    //裁剪后的处理
+    $("#sureCut").on("click", function () {
+        if ($("#tailoringImg").attr("src") == null) {
+            return false;
+        } else {
+            var cas = $('#tailoringImg').cropper('getCroppedCanvas');//获取被裁剪后的canvas
+            var base64url = cas.toDataURL('image/png'); //转换为base64地址形式
+            $("#finalImg").prop("src", base64url);//显示为图片的形式
+            //关闭裁剪框
+            $(".tailoring-container").hide();
+            // closeTailor();
+        }
+    });
+
+    //关闭裁剪框
+    function closeTailor() {
+        // alert(5);
+        $(".tailoring-container").hide();
+    }
+
+    layui.use(['element', 'upload', 'form'], function () {
+        var form = layui.form;
+
+        form.on('submit(user_headedit)', function (data) {
+            loading = layer.load(2, {
+                shade: [0.2, '#000']
+            });
+            imgData = $('#finalImg').attr('src');
+            // console.log(imgData);
+            // var param = data.field;
+            $.post('{:url("index/user/headedit")}', {img: imgData}, function (data) {
+                if (data.code == 200) {
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function () {
+                        location.href = '{:url("user/edit_head")}';
+                    });
+                } else {
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+            return false;
+        });
+    });
+
+
+</script>
+{/block}

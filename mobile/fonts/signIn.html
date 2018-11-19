@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>签到</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<!--<link href="../css/style.css" rel="stylesheet"/>-->
+		<link rel="stylesheet" type="text/css" href="../css/signIn.css"/>
+		<link rel="stylesheet" type="text/css" href="../js/lib/kalendae/kalendae.css"/>
+	</head>
+	
+	<body class="Settingbody" >
+		<header class="mui-bar mui-bar-nav ">
+			<a href="javascript:;" class=" mui-icon mui-icon-left-nav mui-pull-left" id="history"></a>
+			<h1 id="title" class="mui-title">签到</h1>
+		</header>
+		
+		<div class="signin-content">
+			<div class="calendar-top">
+				<div class="sign-text">
+					<div class="">
+						<p>累计签到</p>
+						<p>365天</p>
+					</div>
+					<div class="">
+						<p>积分</p>
+						<p>200</p>
+					</div>
+				</div>
+				<div class="sign-btn">
+					<img src="../images/2.0/signed.png"/>
+					已签到
+				</div>
+			</div>
+			<div class="link">
+				<div class="linkL"></div>
+				<div class="linkR"></div>
+			</div>
+			
+			
+			<div class="calendar">
+				<div class="calendar-con">
+					
+				</div>
+				
+				<div class="sign-tip">
+					<span class="sign-tip-text">本月签到全勤奖励<span> <span>50</span>米币</span></span>
+					<div class="receive-now">
+						立即领取
+					</div>
+					<!--<input type="button" name="" id="" value="立即领取" class="receive-now"/>-->
+				</div>
+			</div>
+			
+		</div>
+	   	
+	   	
+	   	
+	   	<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/lib/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../js/setting.js" type="text/javascript" charset="utf-8"></script>-->
+		
+		<script src="../js/lib/kalendae/kalendae.standalone.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("#history").click(function(){
+				mui.back()
+			})
+			var calendar = document.querySelector('.calendar-con');
+			
+			new Kalendae(calendar, {
+				months:1,
+				mode:'single',
+//				selected:Kalendae.moment().subtract({M:1})
+				blackout:['2018-09-08','2018-09-09','2018-09-10','2018-09-11','2018-09-15']
+			});
+		</script>
+	</body>
+
+</html>

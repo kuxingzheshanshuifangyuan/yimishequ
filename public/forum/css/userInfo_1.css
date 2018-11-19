@@ -1,0 +1,902 @@
+.user-content {
+  width: 100%;
+  height: 500px;
+  margin: 0 auto;
+}
+.user-content .user-index-left {
+  width: 322px;
+  float: left;
+  height: 200px;
+}
+.user-content .user-index-left .user-index-info {
+  width: 322px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding-top: 40px;
+  padding-bottom: 15px;
+}
+.user-content .user-index-left .user-index-info img {
+  border: 1px solid #dddddd;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 0 auto;
+}
+.user-content .user-index-left .user-index-info p {
+  text-align: center;
+  color: #636363;
+  font-size: 20px;
+}
+.user-content .user-index-left .user-index-info > div {
+  width: 90%;
+  margin: 15px auto;
+  text-align: center;
+}
+.user-content .user-index-left .user-index-info > div button {
+  width: 137px;
+  height: 34px;
+  border: 1px solid #ff5d3e;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  line-height: 34px;
+  font-size: 16px;
+  color: #ff5d3e;
+  padding-left: 25px;
+}
+.user-content .user-index-left .user-index-info > div button:first-child {
+  background: url(../img/communication_region/plus.png) no-repeat 30%;
+}
+.user-content .user-index-left .user-index-info > div button:last-child {
+  background: url(../img/communication_region/post.png) no-repeat 30%;
+}
+.user-content .user-index-left .user-statistics {
+  width: 322px;
+  height: 230px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-top: 17px;
+  padding: 22px 15px;
+}
+.user-content .user-index-left .user-statistics p {
+  color: #3b3b3b;
+  font-size: 18px;
+  margin: 0;
+}
+.user-content .user-index-left .user-statistics > div {
+  width: 290px;
+  height: 158px;
+  border-radius: 5px;
+  border: solid 1px #eeeeee;
+  margin: 9px auto;
+  padding: 25px 16px;
+}
+.user-content .user-index-left .user-statistics > div > div {
+  color: #636363;
+  font-size: 16px;
+  float: left;
+  min-width: 128px;
+  margin-bottom: 23px;
+}
+.user-content .user-index-left .user-statistics > div > div a i {
+  display: inline-block;
+  background: url(../img/userInfo/userInfo_1.png) no-repeat center;
+  vertical-align: text-bottom;
+  margin-right: 10px;
+}
+.user-content .user-index-left .user-statistics > div > div a span {
+  color: #c1c1c1;
+  display: inline-block;
+  width: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+.user-content .user-index-left .user-statistics > div > div:nth-child(even) {
+  float: right;
+  text-align: right;
+}
+.user-content .user-index-left .user-statistics > div > div:nth-child(1) > a > i {
+  width: 15px;
+  height: 17px;
+  background-position: -211px -298px;
+}
+.user-content .user-index-left .user-statistics > div > div:nth-child(2) > a > i {
+  width: 17px;
+  height: 17px;
+  background-position: -241px -298px;
+}
+.user-content .user-index-left .user-statistics > div > div:nth-child(4) > a > i {
+  width: 17px;
+  height: 17px;
+  background-position: -78px -298px;
+}
+.user-content .user-index-left .user-statistics > div > div:nth-child(3) > a > i {
+  width: 17px;
+  height: 17px;
+  background-position: -109px -298px;
+}
+.user-content .user-index-left .user-statistics > div > div:nth-child(5) > a > i {
+  width: 19px;
+  height: 17px;
+  background-position: -139px -298px;
+}
+.user-content .user-index-left .user-statistics > div > div:nth-child(6) > a > i {
+  width: 18px;
+  height: 17px;
+  background-position: -178px -298px;
+}
+.user-content .user-index-right {
+  margin-left: 14px;
+  width: 864px;
+  float: left;
+  height: 500px;
+}
+.user-content .user-index-right .user-title {
+  height: 55px;
+  line-height: 55px;
+  color: #ff4a50;
+  font-size: 18px;
+  border-bottom: 1px solid #eaeaea;
+  padding: 0 30px;
+}
+.user-content .user-index-right .user-title span {
+  display: inline-block;
+  height: 100%;
+  line-height: 48px;
+  border-bottom: 5px solid #ff4a50;
+}
+.user-content .user-index-right .user-title .edit-user {
+  float: right;
+  border: none;
+}
+.user-content .user-index-right .user-title .edit-user a {
+  line-height: 60px;
+  color: #ff4a50;
+}
+.user-content .user-index-right .user-info {
+  padding: 30px 40px;
+}
+.user-content .user-index-right .user-info p {
+  margin: 30px 0;
+}
+.user-content .user-index-right .user-info p span:first-child {
+  width: 66px;
+  display: inline-block;
+  text-align: right;
+  color: #424242;
+  font-size: 16px;
+  margin-right: 30px;
+}
+.user-content .user-index-right .user-info p span:last-child {
+  color: #8c8a8a;
+  font-size: 14px;
+  margin-right: 30px;
+  display: inline-block;
+  width: 420px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+.user-content .user-index-right .user-info p img {
+  margin-right: 10px;
+}
+.user-content .user-index-right .user-index-card {
+  height: 291px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+.user-content .user-index-right .user-index-fourm {
+  height: 600px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-top: 14px;
+}
+.user-content .user-index-right .no-post {
+  text-align: center;
+  width: 114px;
+  margin: 130px auto;
+  color: #424242;
+  font-size: 14px;
+}
+.user-content .user-index-right .no-post > div {
+  width: 114px;
+  height: 216px;
+  background: url(../img/userInfo/dengdai.png) no-repeat center;
+}
+.user-content .user-index-right .my-info-area-info > i {
+  display: inline-block;
+  width: 15px;
+  height: 21px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background: url(../img/userInfo/location.png) no-repeat center;
+}
+.user-content .user-left {
+  width: 322px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  float: left;
+  padding: 20px 0;
+}
+.user-content .user-left .select-this {
+  background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%);
+  box-shadow: 1.3px 1.5px 4px 0px rgba(255, 65, 88, 0.43);
+  FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ff1481, endColorStr=#ff5d3e, gradientType='1');
+}
+.user-content .user-left .select-this > a p {
+  color: #ffffff;
+}
+.user-content .user-left > div {
+  width: 290px;
+  margin: 0 auto;
+}
+.user-content .user-left > div > div {
+  width: 100%;
+  height: 44px;
+  background-color: #f6f6f6;
+  border-radius: 5px;
+  margin-bottom: 14px;
+  color: #c1c1c1;
+  text-align: center;
+  font-size: 16px;
+  line-height: 44px;
+  cursor: pointer;
+}
+.user-content .user-left > div > div > a > div {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  background: url(../img/userInfo/tabs-img.png) no-repeat center;
+}
+.user-content .user-left > div > div > a p {
+  color: #c1c1c1;
+  display: inline-block;
+  margin: 0;
+  min-width: 80px;
+}
+.user-content .user-left > div > div:last-child {
+  margin-bottom: 0;
+}
+.user-content .user-left > div > div:nth-child(1) > a > div {
+  width: 18px;
+  height: 18px;
+  background-position: -58px -13px;
+}
+.user-content .user-left > div > div:nth-child(2) > a > div {
+  width: 18px;
+  height: 12px;
+  background-position: -104px -13px;
+}
+.user-content .user-left > div > div:nth-child(3) > a > div {
+  width: 14px;
+  height: 18px;
+  background-position: -150px -13px;
+}
+.user-content .user-left > div > div:nth-child(4) > a > div {
+  width: 14px;
+  height: 15px;
+  background-position: -196px -13px;
+}
+.user-content .user-left > div > div:nth-child(5) > a > div {
+  width: 17px;
+  height: 15px;
+  background-position: -348px -13px;
+}
+.user-content .user-left > div > div:nth-child(6) > a > div {
+  width: 13px;
+  height: 18px;
+  background-position: -302px -13px;
+}
+.user-content .user-left > div > div:nth-child(7) > a > div {
+  width: 20px;
+  height: 16px;
+  background-position: -242px -13px;
+}
+.user-content .user-right {
+  width: 864px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  float: left;
+  margin-left: 14px;
+  padding: 20px;
+  min-height: 658px;
+}
+.user-content .user-right .set-tab .set-tab-top {
+  width: 832px;
+  height: 44px;
+  background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%);
+  box-shadow: 1.3px 1.5px 4px 0px rgba(255, 65, 88, 0.43);
+  border-radius: 5px;
+  color: #fffefe;
+  font-size: 16px;
+  line-height: 47px;
+  padding: 0 25px;
+  FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ff1481, endColorStr=#ff5d3e, gradientType='1');
+}
+.user-content .user-right .set-tab .set-tab-top span {
+  display: inline-block;
+  margin-right: 60px;
+  cursor: pointer;
+}
+.user-content .user-right .set-tab .set-tab-top .tab-seclet:after {
+  content: '';
+  width: 36px;
+  height: 4px;
+  background-color: #ffffff;
+  display: block;
+  margin: 0 auto;
+  margin-top: -7px;
+}
+.user-content .user-right .set-tab .set-tab-content .tab-content-show {
+  display: block ;
+}
+.user-content .user-right .set-tab .set-tab-content > div {
+  display: none;
+  padding: 20px;
+}
+.user-content .user-right .submitForm {
+  width: 120px;
+  height: 46px;
+  background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%);
+  box-shadow: 1.3px 1.5px 4px 0px rgba(255, 65, 88, 0.43);
+  border-radius: 3px;
+  color: #ffffff;
+  font-size: 16px;
+  border: none;
+  margin-left: 15px;
+  FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ff1481, endColorStr=#ff5d3e, gradientType='1');
+}
+.user-content .user-right .paginationCon {
+  text-align: center;
+  margin-top: 45px;
+}
+.user-content .user-right .paginationCon > .M-box2 {
+  display: inline-block;
+}
+.user-content .user-right .point-title {
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  background-color: #ffffff;
+  background: url(../img/userInfo/point-title-bk.png) no-repeat center;
+  background-size: 101% 103%;
+  box-shadow: 0px 8px 21px 0px rgba(167, 167, 167, 0.14);
+  border-radius: 5px;
+  border: solid 1px #e7e7e7;
+  margin: 0 auto;
+  color: #424242;
+  font-size: 18px;
+  padding: 0 20px;
+}
+.user-content .user-right .point-title i {
+  background: url(../img/userInfo/userInfo_1.png) no-repeat center;
+  display: inline-block;
+  width: 26px;
+  height: 34px;
+  background-position: -4px -78px;
+  vertical-align: sub;
+  margin: 0 10px;
+}
+.user-content .user-right .point-title span {
+  color: #ff4a50;
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 600;
+}
+.user-content .user-right .point-title .my-grade {
+  background: url(../img/userInfo/userInfo_1.png) no-repeat center;
+  display: inline-block;
+  width: 34px;
+  height: 28px;
+  background-position: -219px -78px;
+  vertical-align: sub;
+  margin: 0 10px;
+}
+.user-content .user-right .point-title .my-grade-info {
+  color: #ff4a50;
+  font-size: 24px;
+  font-style: normal;
+  margin-right: 94px;
+  font-weight: 100;
+}
+.user-content .user-right .rule-title {
+  border-bottom: 1px solid #ff4a50;
+  color: #424242;
+  font-size: 16px;
+  line-height: 30px;
+  padding-left: 15px;
+}
+.user-content .user-right .rule-title i {
+  display: inline-block;
+  vertical-align: middle;
+  background: url(../img/userInfo/userInfo_1.png) no-repeat left;
+  margin: 0 5px;
+}
+.user-content .user-right .edit-head {
+  width: 807px;
+  margin: 0 auto;
+}
+.user-content .user-right .edit-head .head-title {
+  height: 44px;
+  background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%);
+  box-shadow: 1.3px 1.5px 4px 0px rgba(255, 65, 88, 0.43);
+  border-radius: 5px;
+  color: #fffefe;
+  font-size: 18px;
+  line-height: 44px;
+  padding: 0 25px;
+  FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ff1481, endColorStr=#ff5d3e, gradientType='1');
+}
+.user-content .user-right .edit-head > p {
+  color: #424242;
+  font-size: 16px;
+  padding-left: 25px;
+  margin: 30px 0 20px 0;
+}
+.user-content .user-right .edit-head .upHead {
+  padding-left: 25px;
+}
+.user-content .user-right .edit-head .current-head {
+  padding-left: 25px;
+}
+.user-content .user-right .edit-head .current-head img {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+}
+.user-content .user-right .business p {
+  font-size: 16px;
+  color: #424242;
+  margin: 20px 0;
+}
+.user-content .user-right .business p span {
+  color: #696969;
+}
+.user-content .user-right .business p i {
+  display: inline-block;
+  vertical-align: sub;
+  margin: 0 10px;
+}
+.user-content .user-right .business p:nth-child(1) i {
+  background: url(../img/userInfo/userInfo_1.png) no-repeat left;
+  width: 30px;
+  height: 30px;
+  background-position: -93px -78px;
+}
+.user-content .user-right .business p:nth-child(2) i {
+  background: url(../img/userInfo/userInfo_1.png) no-repeat left;
+  width: 30px;
+  height: 24px;
+  background-position: -132px -78px;
+}
+.user-content .user-right .business p:nth-child(3) i {
+  background: url(../img/userInfo/userInfo_1.png) no-repeat left;
+  width: 31px;
+  height: 25px;
+  background-position: -171px -78px;
+}
+.user-content .user-right .update-password .submitForm {
+  width: 120px;
+  height: 46px;
+  background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%);
+  box-shadow: 1.3px 1.5px 4px 0px rgba(255, 65, 88, 0.43);
+  border-radius: 3px;
+  color: #ffffff;
+  font-size: 16px;
+  border: none;
+  margin-left: 15px;
+  FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ff1481, endColorStr=#ff5d3e, gradientType='1');
+}
+.user-content .user-right .update-password label {
+  font-size: 16px;
+  color: #424242;
+  opacity: 0.6;
+}
+.user-content .user-right .update-password .layui-input {
+  width: 338px;
+  height: 46px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: solid 1px #c1c1c1;
+  color: #424242;
+  font-size: 16px;
+}
+.user-content .user-right .update-password .layui-word-aux {
+  margin-left: 150px;
+  line-height: 29px;
+}
+.user-content .user-right .update-password .tip {
+  font-size: 14px;
+  color: #d8d8d8;
+  padding-left: 70px;
+}
+.user-content .user-right .update-password .tip span {
+  vertical-align: sub;
+  font-size: 16px;
+  color: #ff4a50;
+  margin: 0 5px;
+}
+.user-content .user-right .user-info #editData .layui-form-item .layui-input-inline {
+  width: auto;
+}
+.user-content .user-right .user-info #editData .layui-form-item .layui-input-inline .layui-input {
+  border-radius: 5px;
+  border: solid 1px #c1c1c1;
+  width: 338px;
+  height: 46px;
+}
+.user-content .user-right .user-info #editData .layui-form-item .layui-input-inline .layui-textarea {
+  border-radius: 5px;
+  border: solid 1px #c1c1c1;
+}
+.user-content .user-right .user-info #editData .layui-form-select .layui-input {
+  width: 190px !important;
+}
+.user-content .user-right .user-info #editData .layui-this {
+  background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%), linear-gradient(#f7f7f7, #f7f7f7);
+}
+.user-content .user-right .user-info #editData .layui-form-radio > i:hover,
+.user-content .user-right .user-info #editData .layui-form-radioed > i {
+  color: #ff5d3e;
+}
+.user-content .user-right .user-info #editData .layui-laydate .layui-this {
+  background-color: #ff5d3e!important;
+}
+.user-content .user-right .user-info #editData .layui-form-label {
+  font-size: 16px;
+  color: #9f9f9f;
+  width: 100px;
+}
+.user-content .user-right .user-info .accountBind div {
+  font-size: 18px;
+  color: #424242;
+  margin: 15px 0;
+}
+.user-content .user-right .user-info .accountBind div i {
+  display: inline-block;
+  background: url(../img/userInfo/userInfo_1.png) no-repeat center;
+  width: 60px;
+  height: 60px;
+  vertical-align: middle;
+}
+.user-content .user-right .user-info .accountBind div span {
+  margin: 0 50px;
+  display: inline-block;
+  text-align: center;
+  min-width: 150px;
+  width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+.user-content .user-right .user-info .accountBind div:nth-child(1) i {
+  background-position: -78px -158px;
+}
+.user-content .user-right .user-info .accountBind div:nth-child(2) i {
+  background-position: -4px -158px;
+}
+.user-content .user-right .user-info .accountBind button {
+  width: 120px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 16px;
+  border-radius: 3px;
+}
+.user-content .user-right .user-info .accountBind .bind {
+  background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%), linear-gradient(#f6f6f6, #f6f6f6);
+  background-blend-mode: normal, 
+            normal;
+  box-shadow: 1.3px 1.5px 4px 0px rgba(255, 65, 88, 0.43);
+  color: #ffffff;
+  border: none;
+}
+.user-content .user-right .user-info .accountBind .unBind {
+  border: solid 1px #ff4a50;
+  background: #ffffff;
+}
+.user-content .user-right .point-info .point-title {
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  background-color: #ffffff;
+  background: url(../img/userInfo/point-title-bk.png) no-repeat center;
+  background-size: 101% 103%;
+  box-shadow: 0px 8px 21px 0px rgba(167, 167, 167, 0.14);
+  border-radius: 5px;
+  border: solid 1px #e7e7e7;
+  margin: 0 auto;
+  color: #424242;
+  font-size: 18px;
+  padding: 0 20px;
+}
+.user-content .user-right .point-info .point-title i {
+  background: url(../img/userInfo/userInfo_1.png) no-repeat center;
+  display: inline-block;
+  width: 26px;
+  height: 34px;
+  background-position: -4px -78px;
+  vertical-align: sub;
+  margin: 0 10px;
+}
+.user-content .user-right .point-info .point-title span {
+  color: #ff4a50;
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 600;
+}
+.user-content .user-right .point-info .layui-table {
+  box-shadow: 0px 8px 21px 0px rgba(167, 167, 167, 0.14);
+  border-radius: 5px !important;
+  overflow: hidden;
+  border: solid 1px #e7e7e7 !important;
+}
+.user-content .user-right .point-info .layui-table thead {
+  background: #ffeded !important;
+}
+.user-content .user-right .point-info .layui-table thead tr {
+  background: none;
+  font-size: 16px !important;
+}
+.user-content .user-right .point-info .layui-table tr {
+  height: 60px !important;
+}
+.user-content .user-right .point-info .layui-table td,
+.user-content .user-right .point-info .layui-table th {
+  text-align: center;
+  color: #424242;
+}
+.user-content .user-right .point-info .layui-table .ColorRed {
+  color: #ff4a50;
+}
+.user-content .user-right .point-info .get-point-rule {
+  height: 60px;
+  background-color: #ffffff;
+  box-shadow: 0px 8px 21px 0px rgba(167, 167, 167, 0.14);
+  border-radius: 5px;
+  border: solid 1px #e7e7e7;
+  color: #424242;
+  font-size: 16px;
+  padding: 0 25px;
+  line-height: 60px;
+}
+.user-content .user-right .money-info .mbCharge {
+  margin-top: 50px;
+  height: 200px;
+}
+.user-content .user-right .money-info .mbCharge > div {
+  float: left;
+  width: 172px;
+  height: 172px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: solid 1px #c1c1c1;
+  margin-right: 32px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.user-content .user-right .money-info .mbCharge > div > div {
+  font-size: 26px;
+  text-align: center;
+}
+.user-content .user-right .money-info .mbCharge > div > div:first-child {
+  height: 108px;
+  line-height: 108px;
+}
+.user-content .user-right .money-info .mbCharge > div > div:first-child span:first-child {
+  color: #c1c1c1;
+}
+.user-content .user-right .money-info .mbCharge > div > div:first-child span:last-child {
+  color: #424242;
+  font-size: 16px;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+.user-content .user-right .money-info .mbCharge > div > div:last-child {
+  height: 64px;
+  line-height: 64px;
+  background-color: #f6f6f6;
+}
+.user-content .user-right .money-info .mbCharge > div:last-child {
+  margin-right: 0;
+}
+.user-content .user-right .money-info .mbCharge > div:last-child input {
+  width: 60px;
+  height: 40px;
+  background: #fff;
+  outline: none;
+  color: #ff4a50;
+  text-align: center;
+  font-size: 28px;
+  border: none;
+  border-bottom: 1px solid #c1c1c1;
+}
+.user-content .user-right .money-info .mbCharge > div:last-child div:last-child span {
+  display: inline-block;
+  border-bottom: 1px solid #ffffff;
+  width: 75px;
+  height: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.user-content .user-right .money-info .mbCharge .charge-selected {
+  background: url(../img/userInfo/mibichongzhi-xuanzhong.png) no-repeat center;
+  background-size: 108% 107%;
+  border: none;
+  box-shadow: 0px 2px 8.1px 0.9px rgba(255, 65, 88, 0.5);
+}
+.user-content .user-right .money-info .mbCharge .charge-selected > div:first-child span:first-child {
+  color: #ff4a50;
+}
+.user-content .user-right .money-info .mbCharge .charge-selected > div:last-child {
+  background: #ff4a50;
+  color: #ffffff;
+}
+.user-content .user-right .money-info .pay-info {
+  color: #424242;
+  font-size: 20px;
+  text-align: center;
+}
+.user-content .user-right .money-info .pay-info span {
+  font-size: 30px;
+  color: #ff4a50;
+}
+.user-content .user-right .money-info .charge-type {
+  margin: 25px 0;
+  height: 50px;
+}
+.user-content .user-right .money-info .charge-type > div {
+  width: 170px;
+  height: 50px;
+  line-height: 50px;
+  float: left;
+  border-radius: 7px;
+  text-align: center;
+  font-size: 16px;
+  color: #424242;
+  cursor: pointer;
+}
+.user-content .user-right .money-info .charge-type > div i {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.user-content .user-right .money-info .charge-type .select-pay-type1 {
+  box-shadow: 0px 2px 8.1px 0.9px rgba(40, 195, 89, 0.5);
+}
+.user-content .user-right .money-info .charge-type .select-pay-type2 {
+  box-shadow: 0px 2px 8.1px 0.9px rgba(0, 160, 233, 0.5);
+}
+.user-content .user-right .money-info .charge-type > div:first-child {
+  border: 1px solid #28c359;
+  margin-right: 50px;
+}
+.user-content .user-right .money-info .charge-type > div:first-child i {
+  width: 34px;
+  height: 27px;
+  background: url(../img/userInfo/wechatpay.png);
+}
+.user-content .user-right .money-info .charge-type > div:first-child:hover {
+  box-shadow: 0px 2px 8.1px 0.9px rgba(40, 195, 89, 0.5);
+}
+.user-content .user-right .money-info .charge-type > div:last-child {
+  border: 1px solid #00a0e9;
+}
+.user-content .user-right .money-info .charge-type > div:last-child i {
+  width: 37px;
+  height: 27px;
+  background: url(../img/userInfo/zhifubao.png);
+}
+.user-content .user-right .money-info .charge-type > div:last-child:hover {
+  box-shadow: 0px 2px 8.1px 0.9px rgba(0, 160, 233, 0.5);
+}
+.user-content .user-right .money-info .charge-code {
+  width: 240px;
+  height: 240px;
+  border: dashed 1px #cccccc;
+  margin: 0 auto;
+  position: relative;
+}
+.user-content .user-right .money-info .charge-code img {
+  position: absolute;
+  width: 215px;
+  height: 215px;
+  left: 50%;
+  top: 50%;
+  margin: -107px 0 0 -107px;
+}
+.user-content .user-right .money-info .money-rule .rule-title {
+  border-bottom: 1px solid #ff4a50;
+  color: #424242;
+  font-size: 16px;
+  line-height: 30px;
+  padding-left: 15px;
+}
+.user-content .user-right .money-info .money-rule .rule-title i {
+  display: inline-block;
+  vertical-align: middle;
+  background: url(../img/userInfo/userInfo_1.png) no-repeat left;
+  margin: 0 5px;
+}
+.user-content .user-right .money-info .money-rule .rule-title:first-child i {
+  width: 19px;
+  height: 17px;
+  background-position: -67px -126px;
+}
+.user-content .user-right .money-info .money-rule .rule-title2 {
+  margin-top: 20px;
+}
+.user-content .user-right .money-info .money-rule .rule-title2 i {
+  width: 18px;
+  height: 17px;
+  background-position: -99px -126px;
+}
+.user-content .user-right .money-info .money-rule .rule-info > div {
+  padding-left: 53px;
+  color: #424242;
+  font-size: 14px;
+}
+.user-content .user-right .money-info .money-rule .rule-info > div .info-title {
+  color: #ff4a50;
+  font-size: 16px;
+  margin: 15px 0 8px 0;
+}
+.user-content .user-right .money-info .money-rule .rule-info > div > p {
+  margin: 0;
+  padding-left: 15px;
+}
+.user-content .user-right .grade .grade-title {
+  margin-top: 30px;
+}
+.user-content .user-right .grade .grade-title i {
+  width: 16px;
+  height: 15px;
+  background-position: -162px -126px;
+}
+.user-content .user-right .grade .grade-title2 {
+  margin-top: 50px;
+}
+.user-content .user-right .grade .grade-title2 i {
+  width: 16px;
+  height: 16px;
+  background-position: -186px -126px;
+}
+.user-content .user-right .grade .grade-info {
+  color: #424242;
+  font-size: 14px;
+  padding-left: 45px;
+}
+.user-content .user-right .grade table thead tr {
+  background: #ffeded;
+}
+.user-content .user-right .grade table thead th {
+  text-align: center;
+  font-size: 16px;
+}
+.user-content .user-right .grade table tr {
+  height: 56px;
+  text-align: center;
+}
+.user-content .user-right .grade table .redColor {
+  font-size: 22px;
+  color: #ff4a50;
+}
+.user-content .user-right .grade .permissions .no-info {
+  margin: 160px auto;
+  text-align: center;
+  color: #424242;
+  font-size: 16px;
+}
+.user-content .user-right .grade .permissions .no-info div {
+  background: url('../img/userInfo/dengdai.png') no-repeat center;
+  width: 114px;
+  height: 216px;
+  margin: 0 auto;
+}

@@ -1,0 +1,134 @@
+{extend name="base" /}
+{block name="body"}
+    <!--tab标签-->
+    <div class="layui-tab-brief">
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <!--<form class="layui-form form-container" data-url="{:url('admin/user/update')}"  localtion-url="{:url('user/index')}">-->
+                <form class="layui-form form-container" action='{:url("user/update")}' method="post" enctype="multipart/form-data">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户名</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="username" value="{$user.username}" required  lay-verify="required" placeholder="请输入用户名" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">密码</label>
+                        <div class="layui-input-inline">
+                            <input type="password" name="password" value="" placeholder="（选填）如不修改则留空" class="layui-input password">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">重复密码</label>
+                        <div class="layui-input-inline">
+                            <input type="password" name="confirm_password" value="" placeholder="（选填）如不修改则留空" class="layui-input confirm_password">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">手机</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="mobile" value="{$user.mobile}" placeholder="（选填）请输入手机" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">积分</label>
+                        <div class="layui-input-inline">
+                            <input type="number" name="point" value="{$user.point}" placeholder="（选填）请输入整数" class="layui-input">
+                        </div>
+                    </div>
+                    <!--<div class="layui-form-item">
+                        <label class="layui-form-label">邮箱</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="email" value="{$user.usermail}"  placeholder="请输入邮箱" class="layui-input">
+                        </div>
+                    </div>-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">会员等级</label>
+                        <div class="layui-input-inline">
+                            <select name="usergrade" id="">
+                                {volist name="usergrade" id="val"}
+                                    {if condition="$val['id']==$user.usergrade"}
+                                        <option value="{$val['id']}" selected>{$val['name']}</option>
+                                    {else /}
+                                        <option value="{$val['id']}">{$val['name']}</option>
+                                    {/if}
+                                {/volist}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户头像</label>
+                        <div class="layui-input-inline">
+                            <input type="file" name="file" style="float: left;">
+<!--
+                            <input type="text" name="userhead" value="{$user.userhead}" class="layui-input" style="position: absolute;left: 111px;top: 0px;width: 500px;">
+-->
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户类型</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="is_robot" value="0" title="普通用户" {if condition="$user.is_robot==0"} checked="checked"{/if}>
+                            <input type="radio" name="is_robot" value="1" title="机器人" {if condition="$user.is_robot==1"} checked="checked"{/if}>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">状态</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="status" value="1" title="启用" {if condition="$user.status gt 0"} checked="checked"{/if}>
+                            <input type="radio" name="status" value="0" title="禁用" {if condition="$user.status elt 0"} checked="checked"{/if}>
+                        </div>
+                    </div>
+                    <div class="btable-paged" >
+				        <div class="layui-main">
+                            <div class="formbtngroup">
+<!--
+                                <button class="layui-btn layui-btn-small" lay-submit="" lay-filter="formadd">更新</button>
+-->
+                                <input type="submit" class="layui-btn layui-btn-small" value="修改" />
+                                <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="id" value="{$user.id}">
+                </form>
+            </div>
+        </div>
+    </div>
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/formadd.js"></script>
+<script>
+    layui.use(['form', 'upload'],function(){
+        var form = layui.form()
+            ,jq = layui.jquery;
+
+        layui.upload({
+            url: '{:url("upload/upimage")}'
+            ,elem:'#image'
+            ,before: function(input){
+                loading = layer.load(2, {
+                    shade: [0.2,'#000']
+                });
+            }
+            ,success: function(res){
+                layer.close(loading);
+                jq('input[name=userhead]').val(res.path);
+                layer.msg(res.msg, {icon: 1, time: 1000});
+            }
+        });
+
+    })
+</script>
+<script>
+    $(".btn").click(function(){
+//        layer.alert(544);
+        var password = $(".password").val();
+        var confirm_password = $(".confirm_password").val();
+        if(password !== confirm_password){
+            layer.alert('两次密码不符，重新输入');
+            return false;
+        }
+    })
+</script>
+{/block}

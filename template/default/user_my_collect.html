@@ -1,0 +1,107 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+<!--/*Garylew writing*/-->
+<head>
+    <meta charset="UTF-8">
+    <title>一米社区-我的收藏</title>
+    <script src="__PUBLIC__js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__forum/layui/layui.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__css/article.css">
+    <link rel="stylesheet" href="__PUBLIC__css/icon.css">
+</head>
+<body>
+<div class="crumbs" style="margin: 0 auto  ">
+    <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+    <a href="#">帖子</a> >
+    <a href="#">我的收藏</a> >
+    <a href="#">全部收藏</a>
+</div>
+<section>
+    <ul class="article_left">
+        <li class="article_menu"><i class="icon icon-huifu01-1"></i><a href="{:url('user/my_article')}">我的帖子</a></li>
+        <li class="article_menu"><i class="icon icon-huifu02-1"></i> <a href="{:url('user/my_reply')}">我的回复</a></li>
+        <li class="article_menu articleHot"><i class="icon icon-huifu03"></i>我的收藏</li>
+    </ul>
+    <div class="article_right">
+        <ul class="articleTip_list">
+            <li class="articleTip_list_hot"><i></i>全部收藏</li>
+            <!--<li ><i></i>热门帖子</li>-->
+            <!--<li><i></i>精华帖子</li>-->
+            <!--<li><i></i>最新收藏</li>-->
+        </ul>
+        {foreach $data_list as $val}
+        <div class="article_project">
+            <ul>
+                <li class="article_tittle">
+                    <img class="user_img" width="90px" height="90px" src="{$val.userhead}" alt="">
+                    <h1><a href="{:url('forum/detail',['id'=>$val['id']])}">{$val.title}</a></h1>
+                    {if condition="$val.hot"}<img src="__PUBLIC__forum/img/userInfo/hot.png" alt="" width="15px" height="20px">{/if}
+                    {if condition="$val.praise"}<img src="__PUBLIC__forum/img/userInfo/zan.png" alt="" width="20px" height="20px">{/if}
+                    {if condition="$val.new"}<img src="__PUBLIC__forum/img/userInfo/new.png" alt="" width="20px" height="20px">{/if}
+                    {if condition="$val.pic"}<img src="__PUBLIC__forum/img/communication_region/pic.png" alt="" width="20px" height="20px">{/if}
+
+                    <p>{$val.description|html_entity_decode|strip_tags}</p>
+                    <div class="tittle_left">
+                        <p class="tittle_time">{$val.create_time|date="Y/m/d",###}</p>
+                        <a class="tittle_top2" href="#">{$val.cate_name}</a>
+                        <div class="tittle_menu" onclick="cancel_collect({$val.id})">取消收藏
+                            <!--<ul>-->
+                                <!--<li class="tittle_edit">删除</li>-->
+                            <!--</ul>-->
+                        </div>
+                    </div>
+                    
+                </li>
+            </ul>
+            <div class="articleTip_null" data-state="0"><i>暂时没有内容哦</i></div>
+        </div>
+        {/foreach}
+    </div>
+    <script>
+        if($('.articleTip_null').data('state')=='0'){
+            $('.articleTip_null').hide();
+        }
+
+        function cancel_collect(collect_id) {
+            if(!collect_id){
+                return false;
+            }
+            
+            $.post("{:url('cancel_collect')}",{collect_id:collect_id},function (data) {
+                if (data.error_code === 0) {
+
+                    layer.msg(data.msg, {
+                        icon: 1,
+                        time: 1500
+                    }, function () {
+                        location.reload();
+                    });
+                } else {
+                    // layer.close(loading);
+                    layer.msg(data.msg, {
+                        icon: 2,
+                        anim: 6,
+                        time: 1000
+                    });
+                }
+            },'json');
+        }
+        $(function(){
+            // $(".article_left").on("click","li",function () {
+            //     $('.articleHot').removeClass('articleHot');
+            //     $(this).addClass('articleHot');
+            // });
+            $(".articleTip_list").on("click","li",function () {
+                $('.articleTip_list_hot').removeClass('articleTip_list_hot');
+                $(this).addClass('articleTip_list_hot');
+            });
+            $('.tittle_left').on('click','.tittle_menu',function () {
+                $(this).children('ul').toggle();
+            })
+        })
+    </script>
+</section>
+</body>
+</html>
+{/block}

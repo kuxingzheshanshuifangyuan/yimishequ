@@ -1,0 +1,196 @@
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/webuploader/webuploader.css">
+<link rel="stylesheet" type="text/css" href="{$static_path}/css/attach.css">
+<!--引入JS-->
+<script type="text/javascript" src="__PUBLIC__/webuploader/webuploader.js"></script>
+   
+   <div id="tpt_sel" class="tpt_sels" style="margin-top: 20px;">
+        		  <input type="hidden" name="attach" id="attachid" value="0">
+        		  <input type="hidden" name="attachext" id="attachext" value="0">
+			<span style="margin-bottom: 5px;float: left;">
+			</span>
+			<div class="layui-form-item" style="margin-bottom: 0px;">
+			<div id="picker">附件上传</div>
+			
+				<label class="layui-form-label" id="attachname" style="width:350px;">
+				<span class="text"></span>
+				<span class="percentage"></span>
+				</label>
+				<div class="layui-input-block">
+					<input id="attach_input" type="number"  value="0"  autocomplete="off" class="layui-input" style="width: 50px;float: left;margin-right: 20px;">
+					<button class="layui-btn" id="attach_btn" type="button" style="float:left;background: #393D49;">添加该附件到内容</button>
+				
+				</div> 
+			</div>
+
+			 <div  data-url="{:addons_url('attach://Attach/upload',array(),true)}"  class="label-tint" style="color:#F7B824"  id="urlfile">右侧填写附件积分，整数</div>
+			  
+			
+			 
+		</div>
+   
+   
+
+
+    
+ <script>
+			 layui.use(['form', 'upload', 'element'],function(){
+				  var form = layui.form()
+				  ,jq = layui.jquery;
+
+				  var url=jq('#urlfile').data('url');
+				  var  uploader;
+				  var uploader = WebUploader.create({
+
+					    // swf文件路径
+					    swf: "__PUBLIC__" + '/webuploader//Uploader.swf',
+					    fileNumLimit:1,
+					    // 文件接收服务端。
+					    server: url,
+					    auto:true,
+					    
+					    accept:{
+					        title: '压缩文件',
+					        extensions: "{$configext}",
+					        mimeTypes: '*/*'
+					    },
+					    fileSingleSizeLimit:50*1024*1024,
+					    // 选择文件的按钮。可选。
+					    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+					    pick: '#picker',
+					    
+					    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+					    resize: false
+					});
+	
+				  uploader.on( 'uploadProgress', function( file, percentage ) {
+					    var $percent = jq('.percentage');
+                            jq('.text').text(percentage * 100 + '%上传中');
+
+					    $percent.css( 'width', percentage * 100 + '%' );
+					});
+
+					
+				  uploader.on( 'uploadSuccess', function( file,res ) {
+				//console.log(res);	  
+if(res.code==200){
+	jq('.text').html(res.filename);
+	jq('#attachid').val(res.md5);
+	jq('#attachext').val(res.ext);
+	if(res.hasscore==1){
+		jq('#attach_input').val(res.info.score);
+		jq('#attach_input').attr('disabled','disabled');
+	}
+		//  headedit.src = res.info;
+	   layer.msg(res.msg, {icon: 1, time: 1000});
+}else{
+	
+	jq('.text').html('');
+	layer.msg(res.msg, {icon: 2, time: 2000});
+}
+
+
+					  
+					});
+
+					uploader.on( 'uploadError', function( file,reason ) {
+						jq('.text').text('上传出错');
+						
+						
+					});
+					uploader.on( 'error', function( type  ) {
+						console.log(type );
+if(type=='Q_TYPE_DENIED'){
+	layer.msg('该文件类型不允许上传', {icon: 2, time: 1000});
+}
+if(type=='F_EXCEED_SIZE'){
+	layer.msg('该文件大小已超出50M限制', {icon: 2, time: 1000});
+}						
+						
+						
+					});
+					uploader.on( 'uploadComplete', function( file ) {
+						uploader.reset();
+						var $percent = jq('.percentage');
+						$percent.css( 'width', '0%' );
+						
+					});
+					
+				  
+				  jq('#attach_btn').click(function(){
+					  var html='';
+					  var attachscore=jq('#attach_input').val();
+					
+					  var attachext=jq('#attachext').val();
+					  var attachid=jq('#attachid').val();
+					  var attachname=jq('.text').html();
+					  
+					 
+					  
+					 
+					  if(attachname==''){
+						  layer.msg('您还未上传附件', {icon: 2, time: 1000});
+					  }else{
+						  
+						  if(jq('#attach_input').attr('disabled')=='disabled'){
+							  jq('#attach_input').removeAttr('disabled');
+						  }else{
+							  layer.confirm('您确定设置该附件积分为'+attachscore+'吗？确定将不可修改。', {icon: 3, title:'提示'}, function(index){
+							  var url="{:addons_url('attach://Attach/setscore',array(),true)}";
+							  jq.post(url,{score:attachscore,md5:attachid},function(data){
+								  
+							  });
+							  layer.close(index);
+							  
+							  html="<attach id='"+attachid+"' score='"+attachscore+"' class='attach "+attachext+"icon'>"+attachname+"</attach>";
+	                        var nn='<attach id="'+attachid+'"';
+							var Cts=editor.$txt.html();
+						
+							  if(Cts.indexOf(nn) > 0 ){
+								  layer.msg('已经包含该附件，不要重复上传', {icon: 2, time: 1000});
+							  }else{
+								 
+								  var yhtml = editor.$txt.html();
+								  
+								//  editor.$txt.append(html);
+								 // 
+								 
+								// editor.destroy();
+									//jq('.textarea').val(yhtml+html);
+									editor.$txt.html(yhtml+html);
+								//	editor.undestroy();
+									jq('.text').html('');
+									jq('#attachid').val('');
+									jq('#attachext').val('');
+									jq('#attach_input').val(0);
+									form.render();
+							  
+							  }
+							  
+							  
+							  
+							  
+								});
+						
+						  
+						  
+						  
+						  
+						  
+						  
+						  
+						  
+						  
+						
+						  }
+						  
+						  
+							
+					  }
+					  
+					
+					
+				  });
+				
+			  }); 
+			 </script>
+

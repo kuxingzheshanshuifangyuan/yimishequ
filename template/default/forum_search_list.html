@@ -1,0 +1,271 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>搜索结果</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/loanSupermarket.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/communication_region.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/swiper/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/layui/css/layui.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/bootstrap-3.3.7/dist/css/bootstrap.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/filter/style.css"/>
+
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+    <style>
+        .header {
+            background: none;
+        }
+        .mainTop, .mainBtm {
+            display: none;
+        }
+        .footer{
+          margin-top: 0;
+        }
+        .paginationCon_{
+          margin: 0 auto;
+          max-width: 500px;
+          margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+  <!-- <div class="contentWrap clearfix"> -->
+      <div class=" rpfcontent_2 clearfix search-container">
+          <div class="search-top">
+              <div class="search-tool">
+                  <a href="{:url('index/index/index')}">返回论坛</a>
+                  <!--<span>-->
+                  <!--<a href="#">昵称</a>-->
+                  <!--<a href="#" onclick="showTool()">快捷导航 > </a>-->
+                  <!--<ul class="navTool">-->
+                    <!--<li>-->
+                      <!--<a href="#">帖子</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a href="#">收藏</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a href="#">好友</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a href="#">任务</a>-->
+                    <!--</li>-->
+                  <!--</ul>-->
+                  <!--<a href="#">设置</a>-->
+                  <!--<a href="#">退出</a>-->
+                <!--</span>-->
+              </div>
+
+              <img class="" src="__PUBLIC__forum/img/home/yimilogo.png" alt="logo">
+              <div class="search-input">
+                  <input type="text" placeholder="搜点什么吧!" value="{$content}" id="content">
+                  <div class="search-btn">
+                      <img src="__PUBLIC__forum/img/home/sousuo.png" alt="搜索">
+                  </div>
+              </div>
+              {if condition="$content"}
+              <p>结果：找到“{$content}”的帖子一共{$total}篇</p>
+              {/if}
+          </div>
+
+          {foreach $dataList as $v}
+          <div class="state-container">
+              <div class="state clearfix">
+                  {if condition="$v.pic"}
+                  <a href="{:url('detail',['id'=>$v['id']])}" class="noteNotewrap" target="_blank">
+                      <div>
+                          <img class="noteNote" src="{$v.pic}">
+                      </div>
+                  </a>
+                  {/if}
+                  <div class="stateRight">
+                      <div class="stateItem2 clearfix">
+                          <p id="">
+                              {if condition="$v.settop"}<span class="stick">【置顶】</span>{/if}
+                              <a href="{:url('detail',['id'=>$v['id']])}" target="_blank"><span class="contentName">{$v.title}</span>
+                                  {if condition="$v.hot"}<img src="__PUBLIC__forum/img/userInfo/hot.png"/>{/if}
+                                  <!--<img src="__PUBLIC__forum/img/userInfo/zan.png"/>-->
+                                  {if condition="$v.new"}<img src="__PUBLIC__forum/img/userInfo/new.png"/>{/if}
+                                  {if condition="$v.pic"}<img src="__PUBLIC__forum/img/communication_region/pic.png"/>{/if}
+                              </a>
+                          </p>
+                      </div>
+                      <div class="stateItem3 clearfix">
+                          <p>{$v.description}
+                          </p>
+                      </div>
+                      <div class="stateItem4 clearfix">
+                <span class="stateItem4Left"><img src="{$v.userhead}"/>{$v.username} | {$v.create_time|date="Y/m/d",###}
+                </span>
+                          <div class="stateItem4Right">
+                  <span id="">
+                    <img src="__PUBLIC__forum/img/userInfo/view.png"/>
+                    {$v.view}
+                  </span>
+                              <span id="">
+                    <img src="__PUBLIC__forum/img/userInfo/reply.png"/>
+                    {$v.reply}
+                  </span>
+                              <span id="">
+                    <img src="__PUBLIC__forum/img/userInfo/zan_.png"/>
+                    {$v.praise}
+                  </span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {/foreach}
+
+
+
+          <!-- 分页 -->
+          <div class="paginationCon_">
+              <div class="m-style M-box2">{$page}</div>
+          </div>
+      </div>
+  <!-- </div> -->
+
+</body>
+
+</html>
+
+
+
+<!--<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>-->
+<script src="__PUBLIC__forum/swiper/swiper.min.js"></script>
+<!--<script src="__PUBLIC__forum/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>-->
+<script src="__PUBLIC__forum/filter/script.js"></script>
+
+<script type="text/javascript">
+    var noMore = false;
+    $(window).scroll(function () {
+        //已经滚动到上面的页面高度
+        var scrollTop = $(this).scrollTop();
+        //页面高度
+        var scrollHeight = $(document).height();
+        //浏览器窗口高度
+        var windowHeight = $(this).height();
+        //此处是滚动条到底部时候触发的事件，在这里写要加载的数据，或者是拉动滚动条的操作
+        // if (scrollTop + windowHeight == scrollHeight) {
+        //   if (!noMore) {
+        //     $('.super-loading').show();
+        //     $('.super-nomore').hide();
+        //     setTimeout(function () {
+        //       getMoreSuperItem();
+        //     }, 500)
+        //   }
+        // }
+    });
+
+    $('.search-btn').click(function () {
+        content = $('#content').val();
+
+        if(!content){
+            layer.msg('请输入要搜索的内容');
+            return false;
+        }
+        // alert(content);
+        // return false;
+        window.location.href = "{:url('search_list')}"+'?content='+content;
+    });
+
+    $('#content').keydown(function(e){
+        if (e.keyCode == 13) {
+            content = $('#content').val();
+
+            if(!content){
+                layer.msg('请输入要搜索的内容');
+                return false;
+            }
+
+            window.location.href = "{:url('search_list')}"+'?content='+content;
+        }
+    });
+
+
+    var page = 0;
+
+    //	加载更多方法
+    function getMoreSuperItem() {
+        page = page + 1;
+        var DcListHtml = '';
+        $.ajax({
+            url: 'http://www.1miclub.com/api/Forum/supermarketList',
+            data: {
+                page: page
+            },
+            dataType: 'json',
+            type: 'post',
+            success: function (data) {
+                //		    	data = JSON.parse(data);
+                console.log(data)
+                if (data.data.msg == "1") {
+                    noMore = true;
+                    $('.super-loading').hide();
+                    $('.super-nomore').show();
+                } else {
+                    for (var i = 0; i < data.data.data.length; i++) {
+                        DcListHtml += '<div class="content_2LeftItem indexItem" >' +
+                            '<div class="itemImg">' +
+                            '<img src="' + data.data.data[i].logo + '" style="width:80px;"/>' +
+                            data.data.data[i].name +
+                            '</div>' +
+                            '<div class="itemText">' +
+                            '<p><b>贷款额度：</b><span class="money">' + data.data.data[i].loan_min + '-' + data.data.data[i].loan_max +
+                            '</span></p>' +
+                            '<p><b>贷款期限：</b><span>' + data.data.data[i].deadline_min + '-' + data.data.data[i].deadline_max +
+                            '天</span></p>' +
+                            '<p><b>日&nbsp;利&nbsp;率&nbsp;：</b><span>' + data.data.data[i].interest + '%</span></p>' +
+                            '<p><b>审核时长：</b><span>' + data.data.data[i].audit_time + '分钟</span></p>' +
+                            '</div>' +
+                            '<a href="http://www.1miclub.com/index/forum/supermarket_detail?id=' + data.data.data[i].id +
+                            '" target="_blank" class="itemBtn">' +
+                            '查看详情' +
+                            '</a>' +
+                            '</div>'
+                    }
+                    $('.super-loading').hide()
+                    $('.content_2Left').append(DcListHtml);
+                }
+
+            },
+            error: function () {
+                mui.toast('失败');
+            }
+        });
+    }
+    $(function () {
+        var flag = true;
+        // $('.M-box2').pagination({
+        //     totalData: 100,
+        //     showData: 5,
+        //     coping: true,
+        //     homePage: '首页',
+        //     prevContent: '上一页',
+        //     nextContent: "下一页",
+        //     endPage: '末页',
+        //     keepShowPN: true,
+        //     count: 1
+        // });
+    })
+    var flag = false;
+
+    function showTool() {
+        if (!flag) {
+            $('.navTool').show();
+            flag = !flag
+        } else {
+            $('.navTool').hide();
+            flag = !flag
+        }
+
+    }
+</script>
+{/block}

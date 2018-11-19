@@ -1,0 +1,264 @@
+{extend name="index_base" /}
+{block name="seo"}
+    <title>我的积分|{$site_config['site_title']}|{$site_config['seo_title']}</title>
+    <meta name="keywords" content="{$site_config['seo_keyword']}">
+    <meta name="description" content="{$site_config['seo_description']}">
+{/block}
+{block name="css"}
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo.css"/>
+    <!--分页-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+{/block}
+{block name="body"}
+<style>
+	.userInfoTitle{
+		border-bottom: none;
+	}
+	.layui-table{
+		border: none!important;
+	}
+	.layui-table td, .layui-table th{
+		text-align: center !important;
+	}
+	 .layui-table thead tr,.layui-table tbody tr{
+	 	height: 50px;
+	 }
+	 .layui-table thead th tr,.layui-table thead th{
+	 	border: none!important;
+	 }
+	 table thead tr{
+	 	border: none!important;	
+	 }
+	 .layui-table td{
+	 	border-color: #ebebeb!important;
+	 }
+	 table thead tr th:nth-of-type(1){
+	 	border-radius: 10px 0 0 10px;
+	 }
+	 table thead tr th:last-child{
+	 	border-radius: 0 10px 10px 0 ;
+	 }
+	.layui-table th{
+		font-size: 16px;
+	}
+	table tbody tr{
+		background: white!important;
+	}
+	.ColorRed{
+		color: red;
+	}
+	.title_point{
+		font-size: 23px;
+		color: red;
+	}
+</style>
+<body>
+<div class="userInfoTop" >
+    <div class="editCover">
+        <!--<span id="">
+            编辑封面照片
+        </span>-->
+    </div>
+    <img src="__PUBLIC__forum/img/userInfo/userInfo.png" />
+</div>
+
+<div class="userInfoTop_ indexItem">
+    <div class="headImg">
+        <img src="{$user_data['userhead']}" style="width:123px;height:123px;border-radius: 50%;"/>
+    </div>
+    <div class="nameItem">
+        <span class="userName">{$user_data['username']}</span>
+        {switch name="$user_data['sex']"}
+        {case value="1"}<img class="gender" src="__PUBLIC__forum/img/userInfo/man.png"/>{/case}
+        {case value="2"}<img class="gender" src="__PUBLIC__forum/img/userInfo/female.png"/>{/case}
+        {default /}
+        {/switch}
+        <span class="userPosition" style="">{$user_data['description']}</span>
+        <p>
+            <span class="userInfo">米币：</span><span class="userInfo">{$user_data['money']}</span>
+            <span> | </span>
+            <span class="userInfo" onclick="buyCredits()" style="cursor: pointer;">积分：</span><span class="userInfo">{$user_data['point']}</span>
+            <span> | </span>
+            <span class="userInfo">用户组：</span><span class="userInfo">{$user_data.grade_name}</span>
+        </p>
+    </div>
+    <a href='{:url("user/set",["id"=>$userId])}'>
+        <div class="editUserInfo" >
+            编辑个人资料
+        </div>
+    </a>
+</div>
+<div class="userInfoBottom">
+    <div class="userInfoBottomLeft indexItem">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <a href="{:url('index')}"><li>我的帖子<span style="margin-left: 5px;">{$forumCount}</span></li></a>
+                <a href="{:url('reply')}"><li>我的回复<span style="margin-left: 5px;">{$commentCount}</span></li></a>
+                <a href="{:url('message')}"><li>我的消息<span style="margin-left: 5px;">{$messageCount}</span></li></a>
+                <a href="{:url('point_record')}"><li class="layui-this">我的积分<span style="margin-left: 5px;"></span></li></a>
+                <a href="{:url('money_record')}"><li>我的米币<span style="margin-left: 5px;"></span></li></a>
+            </ul>
+            <div class="layui-tab-content">
+				<div class="userInfoTitle">
+            		我的积分：<span class="title_point">{$user_data.point}</span>
+                </div>
+                <table class="layui-table" lay-skin="line">
+                    <thead>
+                    <tr>
+                        <!--<th>操作</th>-->
+                        <th>积分变更</th>
+                        <th>详情</th>
+                        <th>时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach $dataList as $val}
+                    <tr>
+                        <!--<td>任务奖励</td>-->
+                        <td>积分<span class="ColorRed">{if condition="$val.is_reduce"}-{else/}+{/if}{$val.point}</span></td>
+                        <td>{$val.comment}</td>
+                        <td>{$val.create_time|date="Y-m-d H:i",###}</td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+                <div class="paginationCon" style="margin-top:40px">
+                    <div class="m-style">{$page}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+</div>
+
+    <!--<div class="userInfoBottomRight indexItem">
+        <div class="title_">
+            我关注的
+        </div>
+        <div class="followTop">
+            <div class="followTopLeft">
+                关注了
+                <p>0</p>
+            </div>
+            <span  style="height: 60px;border-right: 1px dashed #d8d8d8;float: left;margin-top: 15px;"></span>
+
+            <div class="followTopRight">
+                关注者
+                <p>0</p>
+            </div>
+        </div>
+        <div class="followBot">
+            <ul>
+                <li>关注的话题 <span>15</span></li>
+                <li>关注的专栏 <span>15</span></li>
+                <li>关注的问题 <span>15</span></li>
+                <li>关注的收藏夹 <span>15</span></li>
+            </ul>
+        </div>
+        <p>个人主页被浏览了<span>{$user_data['view']}</span>次</p>
+    </div>-->
+
+
+<div class="buyCredits" style="display: none;">
+
+    <div class="buyCreditsPro">
+        <img src="__PUBLIC__forum/img/userInfo/buyCredits.png"/>
+        <div class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="demo">
+            <div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
+        </div>
+
+        <p class="level">
+            <span>当前等级：</span><span class="levelText">{$user_data['grade_name']}</span>
+            <span>积分：</span><span class="levelText">{$user_data["point"]}</span>
+        </p>
+        <div class="levelInfo">
+            是否支付<span>89</span>米币升级至<span class="">2</span>级
+        </div>
+    </div>
+    <div class="">
+    </div>
+
+    <div class="site-demo-button" style="margin-top: 20px; margin-bottom: 0;">
+        <button class="layui-btn site-demo-active" data-type="setPercent">设置50%</button>
+        <button class="layui-btn site-demo-active" data-type="loading">模拟loading</button>
+    </div>
+
+</div>
+</body>
+
+<script src="__PUBLIC__forum/js/jquery/1.9.1/jquery.min.js"></script>
+<script src="__PUBLIC__forum/layui/layui.js"></script>
+<!--分页-->
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+<script type="text/javascript">
+
+    // $('.M-box2').pagination({
+    //     totalData: 100,
+    //     showData: 5,
+    //     coping: true,
+    //     homePage: '首页',
+    //     prevContent: '上一页',
+    //     nextContent:"下一页",
+    //     endPage: '末页',
+    //     keepShowPN:true,
+    //     count:1
+    // });
+    var layer;
+    layui.use(['layer'], function(){
+        var $ = layui.jquery;
+
+        layer = layui.layer;
+
+        // //触发事件
+        // var active = {
+        //     setPercent: function(){
+        //         //设置50%进度
+        //         element.progress('demo', '50%')
+        //     }
+        //     ,loading: function(othis){
+        //         var DISABLED = 'layui-btn-disabled';
+        //         if(othis.hasClass(DISABLED)) return;
+        //
+        //         //模拟loading
+        //         var n = 0, timer = setInterval(function(){
+        //             n = n + Math.random()*10|0;
+        //             if(n>100){
+        //                 n = 100;
+        //                 clearInterval(timer);
+        //                 othis.removeClass(DISABLED);
+        //             }
+        //             element.progress('demo', n+'%');
+        //         }, 300+Math.random()*1000);
+        //
+        //         othis.addClass(DISABLED);
+        //     }
+        // };
+        //
+        // $('.site-demo-active').on('click', function(){
+        //     var othis = $(this), type = $(this).data('type');
+        //     active[type] ? active[type].call(this, othis) : '';
+        // });
+
+
+    });
+    function buyCredits(){
+        layer.open({
+            type:1,
+            skin:'buyCredits',
+            content:$('.buyCredits'),
+            title:'{$user_data["username"]}  |  我的米币：{$user_data["money"]}',
+            area: ['770px', '440px'],
+            resize:false,
+            cancel: function(index, layero){
+                $(".buyCredits").hide()
+            }
+
+        })
+    }
+</script>
+{/block}
+

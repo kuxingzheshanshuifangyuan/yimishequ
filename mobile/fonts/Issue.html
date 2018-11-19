@@ -1,0 +1,422 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+
+	</head>
+
+	<body class="issusbody">
+		<header class="mui-bar mui-bar-nav ">
+			<a href="javascript:;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="history"></a>
+			<h1 id="title" class="mui-title">发布帖子</h1>
+		</header>
+		<form action="">
+			
+		
+		<!--<div class="Tjtw">
+			<img src="../images/tjtw.png"/>添加图文
+		</div>-->
+		<div class="isuue_conttitle">
+			<h5 class="isuue_cont_titleh5">
+				<select name="" id="sele1">
+					<option value="2222222">请选择帖子板块</option>
+				</select>
+				<select name="" id="sele2">
+					<option value="2222222"> </option>
+				</select>
+			</h5>
+			<input type="text" placeholder="请输入标题（不超过30字）" class="isuue_cont_titleText" maxlength="30"/>
+		</div>
+		<div class="isuue_cont_cont">
+			<div class="isuue_cont_cont_wrap">
+				<!--<h5 class="isuue_cont_titleh5">内容 </h5>-->
+				<textarea class="isuue_cont_area" placeholder="请输入帖子内容" rows="4" maxlength="10000"></textarea>
+				<div class="tpquyu">
+					<ul>
+						<li class="UpLoadImg">
+							<input type="file" accept="image/*" name="img[]" style="" />
+							<label for="filePic"><img src="../images/isuue_pic_more.png"/></label>
+						</li>
+						<!--<li><img src="../images/isuue_pic.png"/></li>
+						<li><img src="../images/isuue_pic.png"/></li>
+						<li><img src="../images/isuue_pic.png"/></li>
+						<li><img src="../images/isuue_pic.png"/></li>-->
+						
+					</ul>
+					
+					<!--<div class="smalltp">
+						
+						<div class="cha">
+							×
+						</div>
+					</div>-->
+				</div>
+				<!--<div class="isuue_cont_tjtp">
+					添加图片
+					<input type="file" accept="image/*" name="img[]" style="position: absolute;left: 0;top: 0;display: inline-block;width: 50px;height: 50px;opacity: 0;" />
+				</div>-->
+			</div>
+		</div>
+		
+		<div class="issueBtn">
+			<input type="button" value="立即发布" id="FBbtn"/>
+		</div>
+		<!--<div class="IssueMask">
+			<img src="../images/mask.png" class="dianjibianji"/>
+			<div class="MaskTjtw">
+				<img src="../images/tjtw.png"/>添加图文
+			</div>
+			<div class="Ido">
+				知道了
+			</div>
+		</div>-->
+		</form>
+		
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript">
+//			//去除移动端返回键
+//			mui.back=function(){
+//				return false;
+//			}
+			// 接受参数
+			function GetRequest() {
+				var url = location.search; //获取url中"?"符后的字串
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for (var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+					}
+				}
+				return theRequest;
+			}
+			var a=GetRequest();
+			
+			mui.init({
+                keyEventBind: {
+                    backbutton: false //很关键
+                }
+            });
+           	//安卓手机自带返回键时间
+            var page_can_close = false;
+            mui.plusReady(function() {
+                //要延迟一下
+                setTimeout(function() {
+                    plus.key.addEventListener("backbutton", function() {
+                	mui.back(); 
+                    }, false);
+                }, 10);
+            });
+            //点击左上角 后退按钮
+			document.getElementById("history").addEventListener('tap', function() {
+                mui.back(); 
+            });
+            //点击添加图文事件
+            mui(".issusbody").on('tap','.Ido',function(){
+				$('.IssueMask').hide();
+			});
+			var IssueHtml = '<div class="isuue_cont_cont_wrap">'+
+								'<h5 class="isuue_cont_titleh5">内容<span class="removeParent">×</span></h5>'+
+								'<textarea class="isuue_cont_area" placeholder="请输入帖子内容"></textarea>'+
+							'</div>';
+			mui(".issusbody").on('tap','.Tjtw',function(){
+				$('.isuue_cont_cont').append(IssueHtml)
+			});
+			mui(".issusbody").on('tap','.removeParent',function(){
+				$(this).parents('.isuue_cont_cont_wrap').remove();
+			});
+			
+			
+		//上传图片
+		var ImgLenght = 10;
+		mui(".tpquyu").on('tap','.cha',function(){
+			$(this).parents('li').remove();
+			if($("ul li").length < ImgLenght){
+				$('.UpLoadImg').show()
+			}
+		});
+		var PicUrl = 'http://www.1miclub.com/';	
+		var usertoken = window.localStorage.getItem('usertoken');
+			
+		$('input[type=file]').click(function(){
+			if($("ul li").length >= ImgLenght){
+				$('.UpLoadImg').hide();
+//				$(".tpquyu").append($("ul li").eq(0).clone(true).show());
+				mui.toast('最多可添加9张');
+				return false;
+			}else{
+				$('.UpLoadImg').show();
+			}
+		})   		
+                		
+		$('input[type=file]').change(function(){
+        var ts = $(this);
+        var objUrl = getObjectURL(ts.get(0).files[0]);
+        var formData = new FormData();
+        var fileType;
+        var square = 750;
+        var zhiliang = 10;
+        fileType = this.files[0].name.match(/\.([a-zA-Z]+)$/)[1];
+
+        if(this.files[0].size > 307200){
+            yasuo();
+        }else{
+            formData.append("img[]",this.files[0]);
+            updata();
+        }
+
+        function yasuo(){
+            var img = new Image();
+            img.onload = function(){
+                var canvas = document.createElement('canvas');
+                var context = canvas.getContext('2d');
+                var imageWidth = 0;
+                var imageHeight = 0;
+                if (this.width > this.height) {
+                    imageWidth = Math.round(square * this.width / this.height);
+                    imageHeight = square;
+                } else {
+                    imageHeight = Math.round(square * this.height / this.width);
+                    imageWidth = square;
+                }
+                canvas.width = imageWidth;
+                canvas.height = imageHeight;
+                context.drawImage(this, 0, 0, imageWidth, imageHeight);
+                objUrl = canvas.toDataURL('image/jpeg',zhiliang/10);
+                var str = objUrl.substring(22);
+                var equalIndex= str.indexOf('=');
+                if(str.indexOf('=')>0){str=str.substring(0, equalIndex);}
+                var strLength=str.length;
+                var fileLength=parseInt(strLength-(strLength/8)*2);
+                if(fileLength>307200){
+                    zhiliang--;
+                    if(zhiliang<0){formData.append("img[]",convertBase64UrlToBlob(objUrl),"file_"+Date.parse(new Date())+".jpeg");updata();return false;}
+                    yasuo();
+                }else{
+                    formData.append("img[]",convertBase64UrlToBlob(objUrl),"file_"+Date.parse(new Date())+"."+fileType);
+                    updata();
+                }
+            };
+            img.src = objUrl;
+        }
+
+        function updata(){
+            $.ajax({
+                url: "http://www.1miclub.com/api/Upload/userUpload?token="+usertoken,
+                data: formData,
+                contentType: false, 
+                processData: false,
+                cache: false,
+                type:'post',
+                dataType: 'json',
+                success: function (data) {
+                    for(var i=0;i<data.data.saved_files.length;i++){
+                    	
+//						$(".tpquyu").append('<div class="smalltp"><img src="''"><div class="cha">×</div><input type="hidden" name="img[]" value="'+data.data.saved_files[i]+'"/></div>');
+//						ts.siblings().remove();
+						ts.parents('ul').append('<li><img src="'+PicUrl+data.data.saved_files[i]+'"/><div class="cha">×</div><input class="ImgHidden" type="hidden" name="img[]" value="'+data.data.saved_files[i]+'"/></li>');
+						
+					if($(".tpquyu ul li").length >= ImgLenght){
+						$('.UpLoadImg').hide();
+		//				$(".tpquyu").append($("ul li").eq(0).clone(true).show());
+						mui.toast('最多可添加9张');
+					}else{
+						$('.UpLoadImg').show();
+					}	
+                	
+                    }
+                },
+                error:function(data){
+                    alert('上传失败')
+                }
+            });
+        }
+
+        return false;
+    });
+
+    function convertBase64UrlToBlob(urlData){
+        var arr = urlData.split(','), mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type:mime});
+    }
+
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+    
+    
+    	var packaging = window.localStorage.getItem("packaging");
+		var forumCateApi = "";
+//			packaging = 0;
+		if(packaging == '1'){
+			forumCateApi = "http://www.1miclub.com/api/Home/forumCateList";
+		}else{
+			forumCateApi = "http://www.1miclub.com/api/Forum/forumCateList";
+		}
+    
+//		初始化下拉框中的数据
+		var sele1html = '';
+		var sele2html = '';
+		mui.ajax(forumCateApi, {
+		    data: {},
+		    dataType: 'jsonp',
+		    type: 'post',
+		    timeout: 10000,
+		    success: function(data) {
+		    	data = JSON.parse(data)
+	    		var tab_btnid = a.tab_btnid;
+		    	for(var i=0;i<data.data.length;i++){
+		    		if(tab_btnid){
+		    			if(tab_btnid == data.data[i].id){
+		    				sele1html += '<option value="" selected="selected" sele1id='+data.data[i].id+'>'+data.data[i].name+'</option>';
+		    			}else{
+		    				sele1html += '<option value="" sele1id='+data.data[i].id+'>'+data.data[i].name+'</option>';
+		    			}
+		    		}else{
+		    			sele1html += '<option value="" sele1id='+data.data[i].id+'>'+data.data[i].name+'</option>';
+		    		}
+
+		    	}
+		    	
+		    	$('#sele1').html(sele1html)
+		    	Sele2();
+		    },
+		    error: function() {
+		        mui.toast('失败');
+		    }
+		});
+		
+		function Sele2(){
+			var sele1id = $('#sele1').find('option:selected').attr("sele1id");
+			  mui.ajax('http://www.1miclub.com/api/Forum/forumTopic', {
+			    data: {
+			    	id : sele1id
+			    },
+			    dataType: 'jsonp',
+			    type: 'post',
+			    timeout: 10000,
+			    success: function(data) {
+			    	data = JSON.parse(data)
+			    	$('#sele2').find('option').remove();
+			    	for(var i=0;i<data.data.length;i++){
+			    		if(!data.data == ''){
+			    			if(data.data.length == 1){
+			    				sele2html = '<option value="" sele2id='+data.data[i].id+'>'+data.data[i].title_ch+'</option>'
+			    				$('#sele2').html(sele2html)
+			    				
+			    			}else{
+			    				sele2html += '<option value="" sele2id='+data.data[i].id+'>'+data.data[i].title_ch+'</option>'
+			    				$('#sele2').html(sele2html)
+			    			}
+			    			
+			    		}else{
+			    			sele2html += '<option value=""> </option>'
+			    			$('#sele2').html(sele2html)
+			    		}
+			    		
+			    	}
+			    },
+			    error: function() {
+			        mui.toast('失败');
+			    }
+			});
+		}
+//		Sele2();
+		$(".isuue_conttitle").on('change','#sele1',function(){
+			Sele2();
+		})
+			
+			
+			
+		usertoken = window.localStorage.getItem('usertoken');
+		mui(".issusbody").on('tap','#FBbtn',function(){
+			var isuue_cont_titleText = $('.isuue_cont_titleText').val();
+			var isuue_cont_area = $('.isuue_cont_area').val();
+			var sele1id = $('#sele1').find('option:selected').attr('sele1id');
+			var sele2id = $('#sele2').find('option:selected').attr('sele2id');
+			var imgs = (function(){
+				var arr = [];
+				$(".tpquyu ul li").each(function(){
+					arr.push($(this).find(".ImgHidden").val());
+				})
+				if($(this).length <= ImgLenght -1){
+					arr.shift()
+				}else{
+					return;
+				}
+				return arr;
+			})()
+			
+			if(sele2id == undefined){
+				sele2id = '';
+			}
+			if(isuue_cont_titleText == ''){
+				mui.toast('请添加标题');
+				return false;
+			}
+			if(isuue_cont_area == ''){
+				mui.toast('请添加内容');
+				return false;
+			}
+		   mui.ajax('http://www.1miclub.com/api/Forum/addForum', {
+			    data: {
+			    	token	: 	usertoken,
+			    	cate_id	:	sele1id,
+			    	topic_id:	sele2id,
+			    	"img"	:  	imgs,
+			    	content	:	isuue_cont_area,
+			    	title	:	isuue_cont_titleText,
+			    	time	: new Date().getTime()
+			    },
+			    dataType: 'jsonp',
+			    type: 'post',
+			    timeout: 10000,
+			    success: function(data) {
+			    	data = JSON.parse(data)
+			    	
+			    	if(data.error_code === 0){
+			    		mui.openWindow({
+							url:'home.html',
+							id:'home.html',
+						});
+						$('.isuue_cont_titleText').val('');
+						$('.isuue_cont_area').val('');
+			    		$('.tpquyu ul .UpLoadImg').siblings().remove();
+			    	}else{
+			    		mui.toast(data.msg);
+			    	}
+
+			    },
+			    error: function() {
+			        mui.toast('失败');
+			    }
+			});
+		
+		})	
+			
+			
+//		 	$("#sele1").find('option:selected')
+		</script>
+	</body>
+
+</html>

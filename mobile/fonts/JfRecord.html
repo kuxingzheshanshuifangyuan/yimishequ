@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>积分详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/MbRecord.css"/>
+		<style type="text/css">
+		</style>
+	</head>
+
+	<body class="payRecord">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">积分详情</h1>
+		</header>
+		
+		
+		<nav>
+			<div class="tab tab-active">积分明细</div>
+			<div class="tab">规则说明</div>
+		</nav>
+		<div class="nav-content" id="vue-con">
+			
+			<div class="nav-item" id="pullrefresh">
+				
+				<div class="no-mb" v-if="!JFs">
+					<div class=""></div>
+					<p>现在还没有积分明细呢</p>
+				</div>
+				
+				<div class="mb-list">
+					<div class="" v-for="(item,index) in JFs"  >
+						<div class="mbItem">
+							<div class="mbText">
+								<p>{{item.comment}}</p>
+								<p>{{dates[index]}}</p>
+							</div>
+							<div class="mbNum">
+								<img src="../images/2.0/bigCoin.png"/>
+								<span v-bind:class="{mbNumLess : item.is_reduce , mbNumAdd : !item.is_reduce}">{{item.point}}</span>积分
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="loading" v-if="JFs">
+					<img src="../images/2.0/loading.gif"/>
+					<span>正在加载中...</span>
+				</div>
+				<div class="noMore" v-if="JFs">
+					<span>没有更多了</span>
+				</div>
+			</div>
+			
+			<div class="nav-item">
+				<p class="mbRu-title">每日任务</p>
+				<div class="mission">
+					<div class="ms-item">
+						<p>每日签到</p>
+						<div class="coin">
+							* 1
+						</div>
+					</div>
+					<div class="ms-item">
+						<p>评论三次帖子</p>
+						<div class="coin">
+							* 1
+						</div>
+					</div>
+					<div class="ms-item">
+						<p>发图文贴</p>
+						<div class="coin">
+							* 2
+						</div>
+					</div>
+					
+					<div class="ms-item">
+						<p>点赞帖子三次</p>
+						<div class="coin">
+							* 1
+						</div>
+					</div>
+					<div class="ms-item">
+						<p>打赏一次</p>
+						<div class="coin">
+							* 1
+						</div>
+					</div>
+					<div class="ms-item">
+						<p>分享一次帖子</p>
+						<div class="coin">
+							* 2
+						</div>
+					</div>
+				</div>
+				<p class="mbRu-title">额外任务</p>
+				<div class="mission">
+					<div class="ms-item">
+						<p>图文贴被加精</p>
+						<div class="coin">
+							* 20
+						</div>
+					</div>
+					<div class="ms-item">
+						<p>图文贴被置顶</p>
+						<div class="coin">
+							* 20
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<!--<div id="pullrefresh">
+			<div class="timelineWrap" class="">
+				<section class="timeline mui-scroll" style="">
+					<img src="../images/jiludiyi.png" class="jiludiyi" />
+					<div class="mb-content"></div>
+			    </section>
+		    </div>
+		</div>-->
+	    <script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/JFRecord.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/rem.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

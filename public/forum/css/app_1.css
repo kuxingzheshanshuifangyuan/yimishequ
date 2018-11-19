@@ -1,0 +1,240 @@
+/* 第二版新增 首页样式
+by mipengfei 2018/10/25 
+*/
+.crumbs {
+  width: 1200px;
+  height: 60px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  color: #424242;
+  font-size: 18px;
+  line-height: 60px;
+  padding: 0 30px;
+  margin: 15px 0;
+}
+.search-info {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #eeeeee;
+  margin-top: 7px;
+  border-radius: 5px;
+  position: relative;
+  padding-left: 10px;
+}
+.search-info input {
+  width: 80%;
+  float: left;
+  border: none;
+  outline: none;
+  padding-left: 0;
+  height: 100%;
+}
+.search-info img {
+  float: left;
+  margin-top: 7px;
+}
+.indexItem .recommend {
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 1px #f2f2f2 dashed ;
+  padding-bottom: 30px;
+}
+.indexItem .recommend .layui-input-block {
+  margin-left: 0;
+}
+.indexItem .recommend .layui-input-inline {
+  width: 130px;
+}
+.indexItem .recommend .layui-input-inline:last-child {
+  margin-right: 0;
+}
+.indexItem .recommend .layui-input {
+  background-color: #f6f6f6;
+  border-radius: 10px;
+  border: 1px solid #f6f6f6;
+}
+.indexItem .recommend .layui-this {
+  background: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%), linear-gradient(#ffffff, #ffffff);
+}
+.recommendSucc {
+  padding: 50px;
+}
+.recommendSucc .recomd-title {
+  text-align: center;
+  font-size: 20px;
+  color: #585858;
+}
+.recommendSucc .recomd-title:before {
+  content: "";
+  display: inline-block;
+  height: 3px;
+  width: 140px;
+  background-image: linear-gradient(90deg, rgba(255, 20, 129, 0) 0%, #ff5d3e 100%), linear-gradient(#ffffff, #ffffff);
+  margin: 0 15px 5px 0;
+}
+.recommendSucc .recomd-title:after {
+  content: "";
+  display: inline-block;
+  height: 3px;
+  width: 140px;
+  background-image: linear-gradient(90deg, #ff5d3e 0%, rgba(255, 20, 129, 0) 100%), linear-gradient(#ffffff, #ffffff);
+  margin: 0 0 5px 15px;
+}
+.recommendSucc .recommend-item {
+  display: flex;
+  justify-content: center;
+  /*水平居中*/
+  align-items: center;
+  margin-top: 58px;
+}
+.recommendSucc .recommend-item > div {
+  margin: 0 40px;
+  float: left;
+  width: 210px;
+  height: 240px;
+  text-align: center;
+}
+.recommendSucc .recommend-item > div img {
+  width: 70px;
+  height: 70px;
+  display: block;
+  margin: 0 auto;
+}
+.recommendSucc .recommend-item > div > p {
+  color: #585858;
+  font-size: 16px;
+  text-align: center;
+  margin: 20px 0 30px 0;
+  line-height: 27px;
+}
+.recommendSucc .recommend-item > div > div {
+  width: 90%;
+  margin: 0 auto;
+  text-align: left;
+}
+.recommendSucc .recommend-item > div > div p {
+  font-size: 16px;
+  color: #333333;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.recommendSucc .recommend-item > div > div p:first-child span {
+  color: #ff5e3e;
+}
+.recommendSucc .recommend-item > div button {
+  width: 137px;
+  height: 40px;
+  background-image: linear-gradient(90deg, #ff1481 0%, #ff5d3e 100%), linear-gradient(#ffffff, #ffffff);
+  background-blend-mode: normal, 
+					normal;
+  border-radius: 5px;
+  border: none;
+  margin: 0 auto;
+  color: #ffffff;
+  font-size: 18px;
+  margin-top: 35px;
+  line-height: 40px;
+}
+.search-container {
+  background: #ffffff;
+  padding: 20px 0;
+  height: auto;
+  min-height: 500px;
+}
+.search-container .state-container {
+  width: 800px;
+  margin: 0 auto;
+}
+.search-container .state-container .state {
+  border-bottom: solid 1px #eaeaea;
+}
+.search-container .search-top {
+  width: 90%;
+  margin: 0 auto;
+}
+.search-container .search-top .search-tool a {
+  margin: 0 5px;
+}
+.search-container .search-top .search-tool span {
+  float: right;
+}
+.search-container .search-top .search-tool span ul {
+  display: none;
+  width: 50px;
+  position: absolute;
+  background: #f2f2f2;
+  text-align: center;
+  margin-left: 60px;
+  margin-top: 10px;
+}
+.search-container .search-top .search-tool span ul li {
+  line-height: 26px;
+}
+.search-container .search-top .search-tool span ul li a {
+  color: #aaaaaa;
+}
+.search-container .search-top .search-tool span ul li:hover {
+  background-image: linear-gradient(68deg, #ff1481 0%, #ff5d3e 100%), linear-gradient(#eeeeee, #eeeeee);
+  background-blend-mode: normal, normal;
+}
+.search-container .search-top img {
+  display: block;
+  margin: 0 auto;
+}
+.search-container .search-top > .search-input {
+  width: 90%;
+  margin: 20px auto;
+  display: flex;
+  /*设置为flex布局*/
+  justify-content: center;
+  /*水平居中*/
+  align-items: center;
+  /*垂直居中*/
+}
+.search-container .search-top > .search-input input::-webkit-input-placeholder {
+  color: #aaaaaa;
+  font-size: 16px;
+}
+.search-container .search-top > .search-input input::-moz-placeholder {
+  color: #aaaaaa;
+  font-size: 16px;
+}
+.search-container .search-top > .search-input input::-ms-input-placeholder {
+  color: #aaaaaa;
+  font-size: 16px;
+}
+.search-container .search-top > .search-input input {
+  width: 600px;
+  height: 40px;
+  display: inline-block;
+  line-height: 24px;
+  text-align: left;
+  color: #333333;
+  font-size: 16px;
+  margin-right: 10px;
+  padding-left: 15px;
+  border-radius: 5px;
+  border: 2px solid #ff1481;
+}
+.search-container .search-top > .search-input .search-btn {
+  width: 70px;
+  height: 40px;
+  background-image: linear-gradient(68deg, #ff1481 0%, #ff5d3e 100%), linear-gradient(#eeeeee, #eeeeee);
+  background-blend-mode: normal, 
+					normal;
+  border-radius: 5px;
+  padding-top: 6px;
+  display: inline-block;
+}
+.search-container .search-top > p {
+  width: 680px;
+  height: 30px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #aaaaaa;
+  line-height: 30px;
+  padding: 0 10px;
+  margin: 10px auto;
+}

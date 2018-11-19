@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+	
+	<body class="serbody">
+		<header class="mui-bar mui-bar-nav ">
+			<a href="javascript:;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="history"></a>
+			<h1 id="title" class="mui-title">咨询客服</h1>
+		</header>
+		<h4 class="ser_h4">未能解决的问题?</h4>
+		<p class="ser_p1">扫描二维码关注公众号咨询客服</p>
+		<img src="../images/kfewm.png" class="kfewm"/>
+		<a class="bcewm" href="../images/kfewm.png" download="kfewm.jpg"/>保存二维码</a>
+		<!--<a href="kfewm.png" download="kfewm.jpg">asd</a>-->
+		<p class="ser_p2">或</p>
+		<p class="ser_p3">微信搜索 <span>一米圈子</span>公众号咨询客服</p>
+		<img src="../images/kfphone.png" class="kfphone"/>
+		<input type="button" value="已复制，去微信" class="yifuz" id="yifuz" />
+		<textarea id="WXhao"style="opacity: 0;padding: 0;margin: 0;border: none;">一米圈子</textarea>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui(".serbody").on('tap','#yifuz',function(){
+			  var Url2=document.getElementById("WXhao");
+				Url2.select(); // 选择对象
+				document.execCommand("Copy"); // 执行浏览器复制命令
+				alert("复制成功");
+			})
+		</script>
+	</body>
+
+</html>

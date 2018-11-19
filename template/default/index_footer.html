@@ -1,0 +1,715 @@
+
+<!--注册弹出框-->
+<div class="goToRegister" style="display: none;">
+    <form method="post" action="" class="layui-form">
+        <div class="LoginUser clearfix">
+            <div class="InputImg">
+                <img src="__PUBLIC__forum/img/login/user.png"/>
+            </div>
+            <input type="text" class="forPhone__ username" name="mobile" lay-verify="phone" placeholder="手机号码" value="" autocomplete="off">
+        </div>
+        <!--<input type="text" name="account" class="forPhone__ username" placeholder="手机号码" value=""
+               style="background: url(__PUBLIC__forum/img/login/user.png) no-repeat 16px;"/>-->
+        <!--<input type="text" name="code" class="code forCode_" value="" placeholder="请输入验证码"
+               style="background: url(__PUBLIC__forum/img/login/code.png) no-repeat 16px;"/>-->
+        <div class="LoginUser clearfix">
+            <div class="InputImg">
+                <img src="__PUBLIC__forum/img/login/pass.png"/>
+            </div>
+            <input type="password" class="rpfpass" lay-verify="pass" placeholder="请输入密码" name="password" autocomplete="off">
+        </div>
+
+        <div class="LoginUser clearfix">
+            <div class="InputImg">
+                <img src="__PUBLIC__forum/img/login/code.png"/>
+            </div>
+            <input type="text" class="rpfcode regCode forCode_" placeholder="请输入验证码" name="code" autocomplete="off">
+            <input type="button" class="get-code-btn" onclick="sendMessage($('.forPhone__'),$('.forCode_'),this,60)"
+                   value="获取验证码">
+        </div>
+
+
+        <div class="loginBtn forLoginBtn"  lay-submit="" lay-filter="goToRegister">
+            确定
+        </div>
+    </form>
+
+    <!--暂时注释 改回来时，需要去footer页面找到弹出方法，将其中的高度改为470-->
+    <!--<div class="otherLogin">
+        <span>其他登录：</span>
+        <img src="__PUBLIC__forum/img/index/qq.png"/>
+        <img src="__PUBLIC__forum/img/index/wechat.png"/>
+    </div>-->
+</div>
+
+
+
+
+<div class="myRight">
+    <!--<div class="rightItem">
+        <img src="__PUBLIC__forum/img/index/right/codeRight.png"/>
+        <p>一米社区App</p>
+    </div>
+    <div class="rightItem">
+        <img src="__PUBLIC__forum/img/index/right/codeRight.png"/>
+        <p>一米社区公众号</p>
+    </div>-->
+    <div class="rightItem">
+        <a href="javascript:void(0)">
+        	<img src="__PUBLIC__forum/img/index/right/qq_d.png"/>
+        </a>
+    </div>
+    <div class="rightItem">
+        <a href="javascript:void(0)"><img src="__PUBLIC__forum/img/index/right/wechat_d.png"/></a>
+    </div>
+    <div class="rightItem">
+        <a href="javascript:void(0)"><img src="__PUBLIC__forum/img/index/right/phone_d.png"/></a>
+    </div>
+    <div class="rightItem ReturnTop">
+        <a href="javascript:;"><img src="__PUBLIC__forum/img/index/right/top_d.png"/></a>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footerItem">
+        <div class="footerItemLeft">
+            <div class="footerItemLeftTop">
+                {foreach $forumcate as $key => $val}
+                    {if condition="$key == 0"}
+                        <span id=""><a href="{:url('Forum/forum_list',['forumcate'=>$val['id']])}" style="text-decoration: none">    {$val['name']}</a></span>
+                    {else /}
+                        |<span id=""><a href="{:url('Forum/forum_list',['forumcate'=>$val['id']])}" style="text-decoration: none">    {$val['name']}</a></span>
+                    {/if}
+                {/foreach}
+            </div>
+
+            <div class="footerItemLeftLeft">
+                <p style="font-size: 18px;">一米社区</p>
+                <p>
+                    一米社区是由网贷投资人自行搭建的独立第三方网贷交流论坛，为参与者、关注者提供网贷、网络借贷、P2P网贷等最新资讯及数据报告，并倾心打造理性、包容、开放的行业交流社区。
+                </p>
+            </div>
+            <div class="footerItemLeftRight">
+                <p id="">公司名称：山西晟盾信息科技有限公司</p>
+                <p id="">商务合作微信：wm714944757</p>
+                <p id="">商务合作邮箱：yimiclub@qq.com</p>
+                <p id="" class="beian">备案号：<a href="http://www.miitbeian.gov.cn" target="_blank" style="color: white;">晋ICP备16009723号-3</a></p>
+
+            </div>
+        </div>
+        <!--暂时隐藏注释-->
+        <div class="line">
+
+        </div>
+        <div class="footerItemRight">
+            <div class="footerItemRightItem">
+                <img src="http://qr.api.cli.im/qr?data=http%253A%252F%252Fwww.1miclub.com%252Fapp.html&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=260&kid=cliim&key=2e24e6bb39622b7395b630e9bb6af1b4"/>
+                <p>一米社区App</p>
+                <!--<span>贷款超市类App</span>-->
+            </div>
+            <div class="footerItemRightItem">
+                <img src="__PUBLIC__forum/img/index/right/SDmobile.png"/>
+                <p>晟盾科技</p>
+                <!--<span>山西晟盾官网</span>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	//右侧图标
+	$(".myRight img").hover(function(){
+		var imgSrc = $(this).attr('src');
+		var imgName = imgSrc.split('_d')
+		var newSrc = imgName.join('_c');
+		$(this).attr('src',newSrc);
+	},function(){
+		var imgSrc = $(this).attr('src');
+		var imgName = imgSrc.split('_c')
+		var newSrc = imgName.join('_d');
+		$(this).attr('src',newSrc);
+	})
+
+    layui.use('form', function(){
+        var form = layui.form;
+
+        form.verify({
+            pass: [
+            /([a-zA-Z0-9!@#$%^&*()_?<>{}]){8,16}/
+            ,'密码长度8~16位，数字、字母、字符至少包含两种'
+            ] 
+        }); 
+        form.on('submit(register)', function (data) {
+
+            param = data.field;
+
+            $.post('{:url("Login/register")}',param,function(data){
+                if(data.code == 1){
+
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        location.href ="{:url('index/index')}";
+                    });
+
+                }else{
+                    layer.msg(data.msg, {icon: 0, anim: 6, time: 1000});
+                }
+            });
+
+            // form.render();
+        });
+        
+
+        form.on('submit(login)', function (data) {
+
+            param = data.field;
+
+            $.post('{:url("index/login")}',param,function(data){
+                if(data.code == 1){
+
+                    layer.msg(data.msg, {icon: 1, time: 1500}, function(){
+                        location.reload();
+                    });
+
+                }else{
+                    layer.msg(data.msg, {icon: 0, anim: 6, time: 1000});
+                }
+            });
+
+            // form.render();
+        });
+
+        form.on('submit(recoveredPass)', function(data){
+            // loading = layer.load(2, {
+            //     shade: [0.2,'#000']
+            // });
+            var param = data.field;
+
+            $.post('{:url("Login/recoveredPass")}',param,function(data){
+                if(data.code == 1){
+                    // layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1500},function(){
+                        layer.closeAll();
+                    });
+
+                }else{
+                    // layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+
+            return false;
+        });
+
+        form.on('submit(goToRegister)', function(data){
+;
+            var param = data.field;
+            $.post('{:url("Login/register")}',param,function(data){
+                if(data.code == 1){
+
+                    layer.msg(data.msg, {icon: 1, time: 1500}, function(){
+                        location.reload();
+                    });
+                }else{
+                    // layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+            return false;
+        });
+
+
+        layui.use(['element','form'], function(){
+            var form = layui.form;
+
+            form.on('submit(register)', function(data){
+                // loading = layer.load(2, {
+                //     shade: [0.2,'#000']
+                // });
+                var param = data.field;
+                $.post('{:url("Login/register")}',param,function(data){
+                    if(data.code == 1){
+
+                        layer.msg(data.msg, {icon: 1, time: 1500}, function(){
+                            location.reload();
+                        });
+                    }else{
+                        // layer.close(loading);
+                        layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                    }
+                });
+                return false;
+            });
+
+
+        });
+
+        form.verify({
+            titlea: function(value){
+                if(value.length < 5){
+                    return '标题字数必须大于5';
+                }
+            }
+            ,titleb: function(value){
+                if(value.length > 80){
+                    return '标题不得大于80';
+                }
+            }
+        });
+
+    })
+
+    //  function goPage(page,height){
+    //  	$("iframe").attr({'src':page,'height':height});
+    //  }
+
+
+
+//	 layer.config({
+//	   extend: 'myskin/style.css', //加载新皮肤
+//	   skin: 'layer-ext-myskin' //一旦设定，所有弹层风格都采用此主题。
+//	 });
+    //选中
+    var oldLeft = 370;
+    function goPage(dom, page, height) {
+        var left = $(dom).position().left; //选中之后，拿到该选项的位置
+        if($(dom).hasClass('short')) {
+            oldLeft = parseInt(left) - 20;
+        } else if($(dom).hasClass('communication')){
+            oldLeft = parseInt(left) - 10;
+        }else{
+            oldLeft = left;
+        }
+        //停止动画
+        $('.optionBot_').stop();
+        //  	字体变色
+        $(dom).css('color', '#ff4a50');
+        $(dom).siblings(".optionBtn").css('color', '#636363');
+        //		跳转页面
+        $("iframe").attr({'src': page,'height': height});
+    }
+    //  鼠标移入
+    function botMoveIn(dom) {
+        var left = $(dom).position().left;
+        if($(dom).hasClass('short')) {
+            $('.optionBot_').show().animate({
+                left: (parseInt(left) - 390)
+            }, 200, 'swing')
+        } else if($(dom).hasClass('communication')){
+            $('.optionBot_').show().animate({
+                left: (parseInt(left) - 380)
+            }, 200, 'swing')
+        }else{
+            $('.optionBot_').show().animate({
+                left: (parseInt(left) - 370)
+            }, 200, 'swing')
+        }
+    }
+    //  鼠标移出
+    function botMoveOut() {
+        //蓝点回到选中的选项下
+        $('.optionBot_').show().animate({
+            left: (parseInt(oldLeft) - 370)
+        }, 200, 'swing')
+    }
+
+    $(function(){
+        $('.communication').hover(function(){
+            $(".commDown").show()
+            $('.toolDown').hide()
+            $('.faceDown').hide()
+        });
+        $(".commDown").mouseleave(function(){
+            $(this).hide()
+        })
+        $('.tool').hover(function(){
+            $(".toolDown").show();
+            $('.commDown').hide();
+            $('.faceDown').hide();
+        });
+        $(".toolDown").mouseleave(function(){
+            $(this).hide()
+        })
+        $('.myFace').hover(function(){
+            $(".faceDown").show();
+            $('.toolDown').hide();
+            $('.commDown').hide();
+        });
+        $(".faceDown").mouseleave(function(){
+            $(this).hide()
+        })
+
+
+        $(".commDownUl li").hover(function(){
+            $(this).css('color','#ff4a50').children('span').css('color','#ff4a50')
+            $(this).parent().siblings().children('li').css('color','#919191').children('span').css('color','#919191')
+        })
+
+    });
+//  选择查询网黑项
+	Array.prototype.indexOf = function(val) {
+		for (var i = 0; i < this.length; i++) {
+			if (this[i] == val) return i;
+		}
+		return -1;
+	};
+	Array.prototype.remove = function(val) {
+		var index = this.indexOf(val);
+			if (index > -1) {
+			this.splice(index, 1);
+		}
+	};
+
+	var searchWHType = ['基础征信'];
+	var searchWHPrice = 150;
+
+
+	var flaga = true;
+    function chooseWHa(dom,mis,type){
+    	if(flaga == true){
+    		flaga = false;
+    		$(dom).css('opacity','1');
+    		searchWHType.push(type);
+    		searchWHPrice = searchWHPrice + mis;
+    	}else{
+    		flaga = true;
+    		$(dom).css('opacity','0.4');
+    		searchWHType.remove(type);
+			searchWHPrice = searchWHPrice - mis;
+    	}
+    	console.log("查询类型（数组）:"+searchWHType); //查询类型（数组）
+    	console.log("需付米米（number）:"+searchWHPrice); //需付米米
+    	$('.subTip').text("（需支付"+searchWHPrice+"）米米")
+
+
+    }
+    var flagb = true;
+    function chooseWHb(dom,mis,type){
+    	if(flagb == true){
+    		flagb = false;
+    		$(dom).css('opacity','1');
+    		searchWHType.push(type);
+    		searchWHPrice = searchWHPrice + mis;
+    	}else{
+    		flagb = true;
+    		$(dom).css('opacity','0.4');
+    		searchWHType.remove(type);
+			searchWHPrice = searchWHPrice - mis;
+    	}
+
+
+    	console.log("查询类型（数组）:"+searchWHType); //查询类型（数组）
+    	console.log("需付米米（number）:"+searchWHPrice); //需付米米
+
+    	$('.subTip').text("（需支付"+searchWHPrice+"）米米")
+    }
+
+
+    //  查询网黑
+    function searchWH(){
+    	var trueName = $('.trueName').val();
+    	var IDNum = $('.IDNum').val();
+    	var phone = $('.phone').val();
+    	var trueNameReg=/^[\u0391-\uFFE5]+$/;
+    	var IDNumReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    	var phoneReg = /^0?(13[0-9]|15[012356789]|18[0236789]|14[57])[0-9]{8}$/
+
+//  	if(!trueNameReg.test(trueName)){
+//  		layer.msg("请重新输入真实姓名",{icon:0, anim: 6})
+//  	}else if(!IDNumReg.test(IDNum)){
+//  		layer.msg("请重新输入身份证号",{icon:0, anim: 6})
+//  	}else if(!phoneReg.test(phone)){
+//  		layer.msg("请重新输入手机号",{icon:0, anim: 6})
+//  	}else{
+    		layer.open({
+    			type:1,
+    			skin:'searchWH',
+    			title:'蘑菇面包  |  米米余额：200',
+    			area: ['770px', '500px'],
+    			content:$("#sexrchWH"),
+    			cancel: function(index, layero){
+    				$("#sexrchWH").hide()
+				}
+    		})
+//  	}
+    	$('.WHa_ span span').text(searchWHType);
+    	$('.WHb_ span').text(searchWHPrice);
+    	$('#miMoney').text(searchWHPrice);
+  	};
+
+//	米米支付
+	function miPayBtn(){
+		layer.close(layer.index);
+		$("#sexrchWH").hide();
+		layer.open({
+			type:1,
+			skin:'searchWH',
+			title:'蘑菇面包  |  米米余额：200',
+			area: ['450px', '320px'],
+			content:$("#miPay"),
+			cancel: function(index, layero){
+				$("#miPay").hide()
+			}
+		})
+	}
+	//其他方式
+	function otherPayBtn(){
+		layer.close(layer.index);
+		$("#miPay").hide();
+		layer.open({
+			type:1,
+			skin:'searchWH',
+			title:'蘑菇面包  |  米米余额：200',
+			area: ['770px', '500px'],
+			content:$("#sexrchWH"),
+			cancel: function(index, layero){
+				$("#sexrchWH").hide()
+			}
+		})
+	}
+	 //	忘记密码
+	function forgetPass(){
+		layer.close(layer.index);
+		layer.open({
+			skin:'forgetPass',
+			type:1,
+			content:$(".forgetPass"),
+			title:'重置密码',
+			area: ['600px', '390px'],
+			resize:false,
+			offset: '150px',
+			cancel: function(index, layero){
+				$(".forgetPass").hide()
+			}
+		})
+	}
+//	充值
+	$(".chargeBtn").click(function(){
+		layer.open({
+			type:1,
+			content:$(".charge"),
+			area: ['770px', '658px'],
+			title:'蘑菇面包  |  米米余额：200',
+			cancel: function(index, layero){
+				$(".charge").hide()
+			}
+		})
+	})
+
+
+    //	注册
+    function goToRegister(){
+        layer.close(layer.index);
+        $(".loginPage").hide();
+
+        layer.open({
+            type:1,
+            skin:'login',
+            content:$(".goToRegister"),
+            title:'注册',
+            area: ['612px', '370px'],
+            resize:false,
+            cancel: function(index, layero){
+                $(".goToRegister").hide()
+            }
+        })
+    }
+
+//	充值页面选项卡
+	$('.chargeItem').click(function(){
+		$(this).addClass('chargeItemThis');
+		$(this).children('.chargeItemBot').addClass('chargeItemBotThis');
+		$(this).children('.chargeItemBot').children('.chargeItemBotImg').addClass('chargeItemBotImgThis');
+
+		$(this).siblings().removeClass('chargeItemThis');
+		$(this).siblings().children('.chargeItemBot').removeClass('chargeItemBotThis');
+		$(this).siblings().children('.chargeItemBot').children('.chargeItemBotImg').removeClass('chargeItemBotImgThis');
+	})
+//	退出登录
+    function quit(){
+        $.get("{:url('login/logout')}",{},function(data){
+            if(data.code == 200){
+                layer.msg('退出成功',{icon:1,});
+                location.href = '{:url("index/index")}';
+            }else{
+                layer.msg('退出失败');
+            }
+        },'json');
+    };
+
+    
+
+
+// 	登录注册选项卡
+    $(".tabTitle li").click(function(){
+        $(this).addClass('tab-this');
+        $(this).siblings().removeClass('tab-this');
+        var index = $(this).index();
+
+        $('.tab-content .tab-item:eq('+index+')').show();
+        $('.tab-content .tab-item:eq('+index+')').siblings().hide()
+    });
+        //  邮箱注册上传
+    function emailReg(){
+        $('#check-btn1').click();
+        if(codeStatus == false){
+            layer.msg("验证码不匹配",{icon:0,shadeClose:true,offset: '200px'});
+            return false;
+        }else{
+            layer.msg("验证码匹配成功",{icon:1,shadeClose:true,offset: '200px'});
+        }
+    }
+     //  注册页面去登录
+    function goLogin(){
+        $(".tabTitle li:eq(0)").addClass('tab-this');
+        $(".tabTitle li:eq(0)").siblings().removeClass('tab-this');
+        $('.tab-content .tab-item:eq(0)').show();
+        $('.tab-content .tab-item:eq(0)').siblings().hide()
+    }
+    //  登录页面去注册
+    function goRegister(){
+        $(".tabTitle li:eq(1)").addClass('tab-this');
+        $(".tabTitle li:eq(1)").siblings().removeClass('tab-this');
+        $('.tab-content .tab-item:eq(1)').show();
+        $('.tab-content .tab-item:eq(1)').siblings().hide()
+    }
+    //  使用邮箱注册
+    function useEmail(){
+        $('.tab-content .tab-item:eq(2)').show();
+        $('.tab-content .tab-item:eq(2)').siblings().hide()
+    }
+    //  使用手机号注册
+    function usePhone(){
+        $('.tab-content .tab-item:eq(1)').show();
+        $('.tab-content .tab-item:eq(1)').siblings().hide()
+    }
+    //获取验证码倒计时，传入dom和倒计时时间为参数
+	function sendMessage(phoneDom,codeInput,dom,count) {
+	    if(phoneDom.val() == ""){
+	        layer.msg("请输入手机号",{icon:0})
+
+	    }else if(!(/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(phoneDom.val()))){
+
+	        layer.msg("请输入正确的手机号",{icon:0})
+
+	    }else{
+            // console.log(1)
+//	       codeInput.attr('disabled',false);
+            $.get("{:url('index/getSms')}",{phone:phoneDom.val()},function(data){
+                SmsCode = data.code;
+                console.log(data)
+                if(data.code) {
+                    codeInput.focus();
+                    var curCount = count;
+                    $(dom).attr("disabled", "true");
+                    var InterValObj = window.setInterval(function () {
+                        $(dom).val(curCount + "秒");
+                        curCount--;
+                        if (curCount == -1) {
+                            clearInterval(InterValObj);
+                            $(dom).removeAttr("disabled");
+                            $(dom).val("重新发送");
+                        }
+                    }, 1000);
+                }else{
+                    layer.msg(data.msg,{icon:0});
+                }
+            },'json');
+
+
+	    }
+	}
+//	确认查询网黑成功
+	function confirmPayWH(){
+		layer.close(layer.index);
+		$("#miPay").hide();
+		layer.open({
+			type:1,
+			skin:'searchWHsucc',
+			title:'蘑菇面包  |  米米余额：200',
+			area: ['535px', '387px'],
+			content:$(".searchWHSucc"),
+			cancel: function(index, layero){
+				$(".searchWHSucc").hide()
+			}
+		})
+    }
+    // 推荐贷款
+    function recommendSearch(){
+		layer.close(layer.index);
+		// $("#miPay").hide();
+		layer.open({
+			type:1,
+			skin:'searchWHsucc',
+			title:'查询结果',
+			area: ['1035px', '500px'],
+			content:$(".recommendSucc"),
+			cancel: function(index, layero){
+				$(".recommendSucc").hide()
+			}
+		})
+	}
+// 返回顶部
+$('.ReturnTop').hide();
+$(document).scroll(function(){
+	if($(document).scrollTop() == 0){
+		$('.ReturnTop').hide()
+	}else{
+		$('.ReturnTop').show()
+	}
+})
+$('.ReturnTop').click(function(){
+	$('html').animate({scrollTop:0},300);
+})
+
+$('.mainBtm .optionBtn').click(function(){
+	var optionBtnIndex = $(this).index()+1;
+	window.localStorage.setItem("Rpf_Navkey",optionBtnIndex)
+})
+var Rpfnum = window.localStorage.getItem("Rpf_Navkey")?window.localStorage.getItem("Rpf_Navkey"):1;
+
+//选中
+function overout(Rnum){
+	var main2L = $('.mainBtm').offset().left;
+	var first = $('.optionBtn:nth-of-type('+Rnum+')').offset().left;
+	var firstPaddL = parseInt($('.optionBtn:nth-of-type('+Rnum+')').css('padding-left'));
+	var firstWidth = ($('.optionBtn:nth-of-type('+Rnum+')').width())/2;
+	$('.optionBot_').css('left',(first-main2L+firstPaddL+firstWidth)-4 + 'px');
+	$('.optionBtn:nth-of-type('+Rnum+')').find('.optionA').css('color','red')
+ 	$('.mainBtm .optionBtn').mouseover(function(){
+		var mainL = $('.mainBtm').offset().left;
+		var thisL = $(this).offset().left;
+		var optionBtnPaddL = parseInt($(this).css('padding-left'));
+		var optionBtnWidth = ($(this).width())/2;
+		$('.optionBot_').css('left',(thisL-mainL+optionBtnPaddL+optionBtnWidth)-4 + 'px')
+		$(this).find('.optionA').css('color','red').parents('.optionBtn').siblings().find('.optionA').css('color','black')
+   })
+    $('.mainBtm').mouseout(function(){
+    	$('.optionBot_').css('left',(first-main2L+firstPaddL+firstWidth)-4 + 'px')
+    	$('.mainBtm .optionBtn:nth-of-type('+Rnum+')').find('.optionA').css('color','red').parent().siblings().find('.optionA').css('color','black')
+    });
+   window.localStorage.removeItem("Rpf_Navkey")
+}
+overout(Rpfnum);
+
+$('.unopen').on('click',function(){
+    layer.msg('暂未开放尽请期待！')
+});
+
+
+$('#search-go').click(function () {
+    content = $('#search-content').val();
+    if(content){
+        window.location.href = "{:url('forum/search_list')}"+'?content='+content;
+    }else{
+        window.location.href = "{:url('forum/search')}";
+    }
+})
+</script>
+<div style="display:none">
+    <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1274721813'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1274721813' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</div>
+
+
+</html>

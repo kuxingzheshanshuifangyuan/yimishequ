@@ -1,0 +1,312 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>一米社区-贷款超市-商品详情</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/loanSupermarket_info.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/swiper/swiper.min.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="__PUBLIC__forum/bootstrap-3.3.7/dist/css/bootstrap.min.css"/>-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/filter/style.css"/>
+
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+<style type="text/css">
+	
+	.content_1{
+		position: relative;
+	}
+	.code-content{
+        width: 200px;
+	    height: 100px;
+	    /* border: 1px solid red; */
+	    position: absolute;
+	    right: 183px;
+	    top: 35px;
+	}
+	.code-content img{
+	    float: none;
+	    width: 150px;
+	    height: 150px;
+	    display: block;
+	    margin: 0 auto;
+	}
+	.code-content p{
+		font-size: 16px;
+		font-weight: normal;	
+		text-align: center;
+	}
+</style>
+</head>
+
+
+<body>
+<div class="contentWrap clearfix">
+	<!--<div class="title2">
+	    同类产品推荐
+	</div>-->
+	<div class="content_1 indexItem">
+	    <div class="top">
+	        <img src="{$data.logo}" style="width: 80px;"/>
+	        <div class="topText">
+	            <p>{$data.name}  {if condition="$data.describe neq ''"}<span> | {$data.describe}</span>{/if}</p>
+	            <div class="topTextBot">
+	                <div class="">
+	                    <span>贷款额度：<span class="colorNum">{$data.loan_min}-{$data.loan_max}</span></span>
+	                </div>
+	                <div class="">
+	                    <span>日利率：<span class="colorNum">{$data.interest}%</span></span>
+	                </div>
+	                <div class="">
+	                    <span>贷款期限：<span class="colorNum">{$data.deadline_min}-{$data.deadline_max}天</span></span>
+	                </div>
+	                <div class="">
+	                    <span>审核时长：<span class="colorNum">{$data.audit_time}分钟</span></span>
+	                </div>
+
+	                <!--<div class="">
+	                    <span>放款速度：<span>当天放款</span></span>
+	                </div>
+
+
+              <div class="">
+	                    <span>申请人数：<span>{$data.apply_num}人</span></span>
+	                </div>-->
+	                <!--<div class="">
+	                    <span>申请条件：<span>{:implode('，',$data.apply)}</span></span>
+	                </div>-->
+	            </div>
+		            <div class="code-content">
+						<img src="http://bshare.optimix.asia/barCode?site=weixin&url={$data.android_app}" alt="">
+						<p>微信扫码，立即贷款</p>
+		            </div>
+	            
+
+	            <!--<a href="{$data.android_app}" target="_blank">-->
+	            <a href="{$data.android_app}" target="_blank" style="display: block;width:160px;">
+	                <div class="applyBtn">
+	               	申请贷款
+	                </div>
+	            </a>
+	        </div>
+	    </div>
+	</div>
+
+
+	<!--<div class="content_2 indexItem">-->
+	    <!--<div class="content_2_top">-->
+	        <!--<span class="calTitle_">贷款计算器</span>-->
+	        <!--<div class="cal">-->
+						<!--<span style="margin-right: 96px;">-->
+							<!--<span class="calTitle">贷款金额：</span>-->
+							<!--<input type="text" name="" id="" value="2000.00" class="calNum"/>-->
+							<!--元（500~20万元）-->
+						<!--</span>-->
+	            <!--<span>-->
+							<!--<span class="calTitle">贷款期限：</span>-->
+							<!--<input type="text" name="" id="" value="24" class="calNum"/>-->
+							<!--个元（3~24月）-->
+						<!--</span>-->
+	        <!--</div>-->
+	    <!--</div>-->
+	    <!--<div class="content_2_bot">-->
+	        <!--<div class="content_2_botLeft">-->
+	            <!--<div class="">-->
+	                <!--息费合计：<span class="res">70200.00 元</span>（=利息70200+贷款费用0）-->
+	            <!--</div>-->
+	            <!--<div class="">-->
+	                <!--到账金额：<span class="res">200000.00 元</span>-->
+	            <!--</div>-->
+	            <!--<div class="">-->
+	                <!--还款金额：<span class="res">200000.00 元</span>-->
+	            <!--</div>-->
+	            <!--<div class="">-->
+	                <!--逾期费用：<span class="res">200000.00 元</span>（=利息70200 * 50%）-->
+	            <!--</div>-->
+
+	        <!--</div>-->
+	        <!--<div class="content_2_botRight">-->
+	            <!--<div class="content_2_botRightTop">-->
+	                <!--<p><span>分期还款参考：</span>  借款10000元分12期还。</p>-->
+	                <!--<p>银行卡到账10000元，每月应还1019.30元。到期总还款12231.60元。</p>-->
+	            <!--</div>-->
+	            <!--<p class="note">备注：以下结果仅供参考，以实际下款情况为准</p>-->
+	        <!--</div>-->
+	    <!--</div>-->
+	<!--</div>-->
+
+	<div class="content_3 indexItem">
+
+	    <div class="content_3Top">
+	        <div class="title_ rpf_title">
+	            申请条件 | <span>Approval criteria</span>
+	        </div>
+	        <div class="clearfix" style="margin-top: 0px;margin-left: 30px; ">
+	            {foreach $data['apply'] as $v}
+	            <div class="content_3Top_item">{$v}</div>
+	            {/foreach}
+	            <!--<div class="content_3Top_item">实名手机</div>-->
+	            <!--<div class="content_3Top_item">芝麻分600+</div>-->
+	            <!--<div class="content_3Top_item">上征信</div>-->
+	            <!--<div class="content_3Top_item">不上芝麻负面</div>-->
+	        </div>
+	    </div>
+
+	    <div class="content_3Mid">
+	        <div class="title_ rpftitle rpf_title">
+	            更多信息 | <span>More information</span>
+	        </div>
+	        <div class="content_3MidItem" style="margin-left: 30px;">
+	            {if condition="$data.auditor_type neq ''"}<span>审核方式：<span>{$data.auditor_type}</span></span>{/if}
+	           	<!--<span>下款速度：<span>111111</span></span>-->
+	            {if condition="$data.account_type neq ''"}<span>到账方式：<span>{$data.account_type}</span></span>{/if}
+	            {if condition="$data.is_credit neq ''"}<span>是否上征信：<span>{$data.is_credit==1 ? '否' : '是'}</span></span>{/if}
+				<!--<span>提前还款：<span>111111</span></span>-->
+	            {if condition="$data.repayment_way neq ''"}<span>还款途径：<span>{$data.repayment_way}</span></span>{/if}
+	            <!--<span>当期提前还款：<span>{$data.ahead_type}</span></span>
+	            <span>还款方式：<span>{$data.repayment_type}</span></span>
+	            <span>全额提前还款：<span>任需支付息费</span></span>-->
+	        </div>
+	    </div>
+
+	    <div class="content_3Bot">
+	        <div class="title_ rpf_title">
+	            常见问题 | <span>Common problems</span>
+	        </div>
+	        {if condition="is_array($data.issue) && !empty($data.issue) "}
+	            {foreach $data.issue as $v}
+	            <div class="content_3BotItem" style="margin-top: 10px;margin-left: 30px;">
+	                {$v.issue}
+	                <p>{$v.answer}</p>
+	            </div>
+	            {/foreach}
+	        {else/}
+	            <div class="content_3BotItem" style="margin-top: 10px;margin-left: 30px;">
+	                <p>暂无相关数据</p>
+	            </div>
+	        {/if}
+	    </div>
+	</div>
+
+
+	<!--暂时注释-->
+	<!--<div class="recommended">
+	    <div class="content_2LeftItem indexItem" style="margin: 0;">
+	        <div class="itemImg">
+	            <img src="__PUBLIC__forum/img/loanSupermarket/你来花.png"/>
+	            你来花
+	        </div>
+	        <div class="itemText">
+	            <p>贷款额度：<span class="money">1000-3000</span></p>
+	            <p>产品描述：<span>无需抵押，快速审核</span></p>
+	            <p>费用：<span>利率12%-36%</span></p>
+	            <p>申请人数：<span>1236123人</span></p>
+	        </div>
+	        <div class="itemBtn">
+	            查看详情
+	        </div>
+	    </div>
+	    <div class="content_2LeftItem indexItem">
+	        <div class="itemImg">
+	            <img src="__PUBLIC__forum/img/loanSupermarket/你来花.png"/>
+	            你来花
+	        </div>
+	        <div class="itemText">
+	            <p>贷款额度：<span class="money">1000-3000</span></p>
+	            <p>产品描述：<span>无需抵押，快速审核</span></p>
+	            <p>费用：<span>利率12%-36%</span></p>
+	            <p>申请人数：<span>1236123人</span></p>
+	        </div>
+	        <div class="itemBtn">
+	            查看详情
+	        </div>
+	    </div>
+	    <div class="content_2LeftItem indexItem">
+	        <div class="itemImg">
+	            <img src="__PUBLIC__forum/img/loanSupermarket/你来花.png"/>
+	            你来花
+	        </div>
+	        <div class="itemText">
+	            <p>贷款额度：<span class="money">1000-3000</span></p>
+	            <p>产品描述：<span>无需抵押，快速审核</span></p>
+	            <p>费用：<span>利率12%-36%</span></p>
+	            <p>申请人数：<span>1236123人</span></p>
+	        </div>
+	        <div class="itemBtn">
+	            查看详情
+	        </div>
+	    </div>
+	    <div class="content_2LeftItem indexItem">
+	        <div class="itemImg">
+	            <img src="__PUBLIC__forum/img/loanSupermarket/你来花.png"/>
+	            你来花
+	        </div>
+	        <div class="itemText">
+	            <p>贷款额度：<span class="money">1000-3000</span></p>
+	            <p>产品描述：<span>无需抵押，快速审核</span></p>
+	            <p>费用：<span>利率12%-36%</span></p>
+	            <p>申请人数：<span>1236123人</span></p>
+	        </div>
+	        <div class="itemBtn">
+	            查看详情
+	        </div>
+	    </div>
+	</div>-->
+
+	<div class="paginationCon">
+	    <!--<div class="m-style M-box2"></div>-->
+	</div>
+</div>
+</body>
+</html>
+
+
+<!--<script src="__PUBLIC__forum/js/jquery/1.9.1/jquery.min.js"></script>-->
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/swiper/swiper.min.js"></script>
+<!--<script src="__PUBLIC__forum/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>-->
+<script src="__PUBLIC__forum/filter/script.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+
+
+<script type="text/javascript">
+    $(function(){
+        var flag = true;
+        $(".filterDown").click(function(){
+            $(".filterContent").toggle()
+            if(flag == true){
+                $(".content_1").animate({height:"150px"});
+                $(".content_2").css('height',"1370px");
+                $(".filterDown img").attr('src','__PUBLIC__forum/img/loanSupermarket/down.png');
+                flag = false;
+            }else{
+                $(".content_1").animate({height:"370px"});
+                $(".content_2").css('height',"1020px");
+                $(".filterDown img").attr('src','__PUBLIC__forum/img/loanSupermarket/up.png');
+                flag = true;
+            }
+        })
+
+
+        $('.M-box2').pagination({
+            totalData: 100,
+            showData: 5,
+            coping: true,
+            homePage: '首页',
+            prevContent: '上一页',
+            nextContent:"下一页",
+            endPage: '末页',
+            keepShowPN:true,
+            count:1
+        });
+
+        $('.itemBtn').click(function(){
+            parent.goPage(this,'loanSupermarket/info.html',1640)
+
+        })
+    })
+</script>
+{/block}

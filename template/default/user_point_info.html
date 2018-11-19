@@ -1,0 +1,224 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>一米社区-积分</title>
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo_1.css" />
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+
+  <style>
+    .select-this >a >div{
+      background-position:-127px -13px !important;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <div class="contentWrap clearfix">
+
+
+    <div class="user-content">
+      <p class="crumbs">
+        <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+        <a href="#">设置</a> > <a href="#">积分</a>
+      </p>
+
+      <div class="user-left">
+        <div>
+          <div class="">
+            <a href="{:url('edit_head')}">
+              <div></div>
+              <p>修改头像</p>
+            </a>
+          </div>
+
+          <div class="">
+            <a href="{:url('edit')}">
+              <div></div>
+              <p>个人资料</p>
+            </a>
+          </div>
+
+          <div class="select-this">
+            <a href="javascript:void(0)">
+              <div></div>
+              <p>积分</p>
+            </a>
+          </div>
+
+          <div class="">
+            <a href="{:url('money_info')}">
+              <div></div>
+              <p>米币</p>
+            </a>
+          </div>
+          <div class="">
+            <a href="{:url('grade')}">
+              <div></div>
+              <p>用户组</p>
+            </a>
+          </div>
+          <div class="">
+            <a href="{:url('password')}">
+              <div></div>
+              <p>密码安全</p>
+            </a>
+          </div>
+          <div class="">
+            <a href="{:url('cooperation')}">
+              <div></div>
+              <p>商务合作</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-right">
+          <div class="point-info">
+
+              <div class="set-tab">
+                <div class="set-tab-top">
+                  <span class="tab-seclet">我的积分</span>
+                  <span>积分获取规则</span>
+                </div>
+    
+                <div class="set-tab-content">
+                  <!-- 第一个选项卡 -->
+                  <div class="tab-content-show">
+                    <div class="point-title">
+                        <i></i>
+                        我的积分：<span>{$user_data.point??0}</span>
+                    </div>
+                    <table class="layui-table" lay-skin="line" >
+                        <thead>
+                        <tr>
+                            <th>积分变更</th>
+                            <th>详情</th>
+                            <th>时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $dataList as $val}
+                        <tr>
+                            <td><span class="ColorRed">{if condition="$val.is_reduce"}-{else/}+{/if}{$val.point}</span>积分</td>
+                            <td>{$val.comment}</td>
+                            <td>{$val.create_time|date="Y/m/d H:i",###}</td>
+                        </tr>
+                        {/foreach}
+                        <!--<tr>-->
+                            <!--<td><span class="ColorRed">+</span>2积分</td>-->
+                            <!--<td>完成签到奖励</td>-->
+                            <!--<td>2018/10/23  10:53</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td><span class="ColorRed">+</span>2积分</td>-->
+                            <!--<td>完成签到奖励</td>-->
+                            <!--<td>2018/10/23  10:53</td>-->
+                        <!--</tr>-->
+                        </tbody>
+                    </table>
+                    <div class="paginationCon">
+                        <div class="m-style M-box2">{$dataList->render()}</div>
+                    </div>
+                  </div>
+    
+
+                  <!-- 第二个选项卡 -->
+                  <div>
+                    <div class="get-point-rule">
+                        进行以下事件动作，会得到积分奖励。不过，在一个周期内，您最多得到的奖励次数有限制
+                    </div>
+                    <table class="layui-table" lay-skin="line" >
+                        <thead>
+                        <tr>
+                            <th>动作名称</th>
+                            <th>周期范围</th>
+                            <th>最多获得奖励次数</th>
+                            <th>可获得积分</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $task_point_list as $val}
+                        <tr>
+                            <td>{$val.task_name}</td>
+                            {switch name="$val.task_type"}
+                            {case value="1"}<td>每天</td><td>1次</td>{/case}
+                            {case value="2"}<td>一次性</td><td>1次</td>{/case}
+                            {case value="3"}<td>每天</td><td>无限制</td>{/case}
+                            {default /}
+                            {/switch}
+                            <td>+{$val.task_point}积分</td>
+                        </tr>
+                        {/foreach}
+                        <!--<tr>-->
+                            <!--<td>每日签到</td>-->
+                            <!--<td>每天</td>-->
+                            <!--<td>1次</td>-->
+                            <!--<td>+5积分</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>每日签到</td>-->
+                            <!--<td>每天</td>-->
+                            <!--<td>1次</td>-->
+                            <!--<td>+5积分</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>每日签到</td>-->
+                            <!--<td>每天</td>-->
+                            <!--<td>1次</td>-->
+                            <!--<td>+5积分</td>-->
+                        <!--</tr>-->
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+      </div>
+
+
+
+
+      
+    </div>
+
+
+  </div>
+</body>
+
+</html>
+
+<script src="__PUBLIC__forum/js/tab.js"></script>
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+
+<script type="text/javascript">
+tabSelect()
+  // $(function () {
+  //   $('.M-box2').pagination({
+  //     totalData: 100,
+  //     showData: 5,
+  //     coping: true,
+  //     homePage: '首页',
+  //     prevContent: '上一页',
+  //     nextContent: "下一页",
+  //     endPage: '末页',
+  //     keepShowPN: true,
+  //     count: 1
+  //   });
+  // })
+</script>
+<script>
+
+
+
+</script>
+{/block}

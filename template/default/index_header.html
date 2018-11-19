@@ -1,0 +1,178 @@
+<head>
+    <meta charset="utf-8" />
+    <title>一米社区</title>
+	<meta name=”description” content=”{dede:global.cfg_description/}” />
+	<meta name=”keywords” content=”{dede:global.cfg_keywords/}” />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/swiper/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/bootstrap-3.3.7/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/verify/verify.css"/>
+	<link rel="shortcut icon" href="__PUBLIC__forum/img/index/favicon.ICO" type="image/x-icon" />
+	<link rel="stylesheet" href="__PUBLIC__forum/css/jigsaw.css">
+</head>
+<style>
+	.optionBtn .optionA:hover{
+		color: red !important;
+	}
+	.optionBtn .optionA{
+		color: #333 ;
+	}
+</style>
+<div class="header">
+    <div class="mainTop">
+        <a href="/">
+            <div class="logo">
+                <img class="logo" src="__PUBLIC__forum/img/index/logo.png"/>
+            </div>
+        </a>
+        <div class="slogan"></div>
+    </div>
+    <div class="mainBtm clearfix">
+		<div class="optionBot_" style="display:block;"></div>
+        <div>
+        {volist name="top" id="top_nav"}
+            <div class="optionBtn {notempty name="$top_nav['second']"}{/notempty}" onclick="goPage(this)" >
+                {empty name="$top_nav['second']"}
+                    {if condition="$top_nav.forumcate_id==0"}
+                        <a href="{$top_nav.top_link}" class="optionA">{$top_nav['top_nav']}</a>
+                    {else /}
+                        <a href="javascript:void(0);" style="text-decoration: none;z-index: -2;" class="optionA">{$top_nav['top_nav']}</a>
+                    {/if}
+                {else /}
+                    <a href="javascript:void(0);" style="text-decoration: none;z-index: -2;" class="optionA">{$top_nav['top_nav']}</a>
+                {/empty}
+                <div class="commDown">
+		            <ul class="commDownUl">
+		                {notempty name="$top_nav['second']"}
+		                    {volist name="$top_nav['second']" id="nav_list"}
+		                        <li><a href="{$nav_list.second_link}" >{$nav_list['second_nav']}</a></li>
+		                    {/volist}
+		                {/notempty}
+		            </ul>
+		        </div>
+            </div>
+        {/volist}
+        {if condition="$Think.session.userid neq ''"}
+        <!-- 登入后的状态 -->
+        <div class="optionBtnRight" onclick="goPage(this,'user/home.html',1200)" onmouseover="showdiv();">
+            <a href='{:url("user/index",["id"=>$user_data["id"]])}' target="_blank"><img src="{$user_data['userhead']}" style="width:50px;height:50px;border-radius: 50%;" /></a>
+        	<div class="faceDown">
+	            <div class="faceDownTop">
+	                <span>{$user_data.username}</span>
+	                <div class="">
+	                    <span class="a">米币：<span>{$user_data.money}</span></span>
+	                    <span class="a r">积分：<span>{$user_data.point}</span></span>
+	                </div>
+	                <div class="">
+	                    <span class="a">用户组：<span>{$user_data.grade_name}</span></span>
+	                    <span class="a r">帖子：<span>{$user_data.forum_count}</span></span>
+	                </div>
+	            </div>
+	            <div class="faceDownDown">
+					<a href="{:url('user/money_record')}" target="_blank">
+						<div class="faceDownDownItem">
+							<img src="__PUBLIC__forum/img/index/money.png"/>米币
+						</div>
+					</a>
+					<a href="{:url('user/point_record')}" target="_blank">
+						<div class="faceDownDownItem">
+							<img src="__PUBLIC__forum/img/index/integral.png"/>积分
+						</div>
+					</a>
+
+	                <a href='{:url("user/message",["id"=>$user_data["id"]])}' target="_blank" style="color:#000">
+	                    <div class="faceDownDownItem">
+	                        <img src="__PUBLIC__forum/img/index/message.png"/>消息
+	                        {notempty name="$user_data['msg_count']"}
+	                        <span class="layui-badge badgeInfo">{$user_data['msg_count']}</span>
+	                        {/notempty}
+	                    </div>
+	                </a>
+	                <a href='{:url("index/user/index",["id"=>$user_data["id"]])}' target="_blank" style="color:#000">
+	                    <div class="faceDownDownItem">
+	                        <img src="__PUBLIC__forum/img/index/book.png" style="padding: 0 3px;"/>帖子
+	                    </div>
+	                </a>
+	                <a href='{:url("index/user/set",["id"=>$user_data["id"]])}' target="_blank" style="color:#000">
+	                    <div class="faceDownDownItem">
+	                        <img src="__PUBLIC__forum/img/index/setting.png"/>设置
+	                    </div>
+	                </a>
+	                <div class="faceDownDownItem" onclick="quit()">
+	                    <img src="__PUBLIC__forum/img/index/quit.png"/>退出
+	                </div>
+	            </div>
+	        </div>
+        </div>
+
+
+        <!-- 登入后的状态 end -->
+        {else /}
+
+		<div class="optionBtnRight" onclick="goToLogin()">
+			<!--<img src="__PUBLIC__forum/img/index/fase2.png" style="width:50px;height:50px;border-radius: 50%;" />-->
+			登录 | 注册
+		</div>
+
+		{/if}
+
+        <!--<div class="optionBtnRight unopen">
+            <img src="__PUBLIC__forum/img/index/search.png"/>
+            <span id="">搜索</span>
+        </div>
+        <div class="optionBtnRight unopen" >
+            <img src="__PUBLIC__forum/img/index/phone.png"/>
+            <span id="">移动端</span>
+        </div>-->
+
+    </div>
+</div>
+</div>
+<script src="__PUBLIC__forum/js/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__forum/layui/layui.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+<script>
+
+	// function showdiv(){
+	// 	$(".faceDown").show();
+	// 	console.log("aaaaaaaaaaaaaaaa");
+    //     $(document).one("mouseover",
+    //         function() { //对document绑定一个影藏Div方法
+	// 		$(".faceDown").hide();	
+    //     });
+    //      event.stopPropagation();//阻止事件向上冒泡
+    // }
+ 	// $(".faceDown").click(function(event) {
+    //     event.stopPropagation(); //阻止事件向上冒泡
+    // });
+//  //选中
+//  var main2L = $('.mainBtm').offset().left;
+//	var first = $('.optionBtn:nth-of-type(1)').offset().left;
+//	var firstPaddL = parseInt($('.optionBtn:nth-of-type(1)').css('padding-left'));
+//	var firstWidth = ($('.optionBtn:nth-of-type(1)').width())/2;
+//	$('.optionBot_').css('left',(first-main2L+firstPaddL+firstWidth) + 'px')
+//
+//	 $('.mainBtm .optionBtn a').mouseover(function(){
+//	 	$(this).css('color','red').parent().siblings().find('a').css('color','black')
+//
+//	 })
+//  $('.mainBtm .optionBtn').mouseover(function(){
+//
+//		var mainL = $('.mainBtm').offset().left;
+//		var thisL = $(this).offset().left;
+//		var optionBtnPaddL = parseInt($(this).css('padding-left'));
+//		var optionBtnWidth = ($(this).width())/2;
+//		$('.optionBot_').css('left',(thisL-mainL+optionBtnPaddL+optionBtnWidth) + 'px')
+//  })
+//
+//  $('.mainBtm').mouseout(function(){
+//  	$('.optionBot_').css('left',(first-main2L+firstPaddL+firstWidth) + 'px')
+//  	$('.mainBtm .optionBtn:nth-of-type(1)').find('a').css('color','red').parent().siblings().find('a').css('color','black')
+//  })
+
+</script>
+
+

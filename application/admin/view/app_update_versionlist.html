@@ -1,0 +1,140 @@
+{extend name="base" /}
+{block name="css"}
+<link rel="stylesheet" href="__ADMIN__/css/form.css">
+{/block}
+{block name="body"}
+<div class="admin-main layui-form">
+    <div class="layui-field-box">
+        <div class="layui-box-searchber">
+            <!--<button class="layui-btn layui-btn-small" data-url="{:url('admin/forum/alldelete')}"  lay-submit lay-filter="alldelete">删除选中</button>-->
+            <form class=" layui-form-pane" action="{:url('admin/AppUpdate/updateList')}" method="get">
+                <div class="layui-inline">
+                    <label class="layui-form-label">关键词</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="keyword" value="{:session('forumkeyword')}" placeholder="请输入关键词"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn  layui-btn-small">搜索</button>
+                </div>
+            </form>
+        </div>
+        <hr>
+        <table class="layui-table admin-table">
+            <thead>
+            <tr>
+                <!--<th width="5%" style="text-align: center"><input type="checkbox"  name="checkAll" lay-filter="checkAll"></th>-->
+                <th width="5%" style="text-align: center">ID</th>
+                <th width="20%" style="text-align: center">渠道</th>
+                <th width="10%" style="text-align: center">版本</th>
+                <th style="text-align: center">更新描述</th>
+                <th style="text-align: center">马甲包</th>
+                <th style="text-align: center">更新模式</th>
+                <th width="10%" style="text-align: center">发布时间</th>
+                <th width="10%" style="text-align: center">操作</th>
+            </tr>
+            </thead>
+            <tbody id="content">
+            {volist name="dataList" id="vo"}
+            <tr>
+                <!--<td align="center"><input type="checkbox"  name="ids[{$vo.id}]" lay-filter="checkOne" value="{$vo.id}"></td>-->
+                <td align="center">{$vo.id}</td>
+                <td style="padding-left: 20px;text-align: center">{$vo.name}</td>
+                <td align="center">{$vo.version}</td>
+                <td align="center">{$vo.push_content}</td>
+                <td style="text-align: center">
+                    <input type="checkbox" name="is_packaging" lay-skin="switch" lay-text="开启|关闭"
+                           lay-filter="is_packaging" value="{$vo['id']}" {php}echo $vo['is_packaging']==1 ? 'checked'
+                    : '';{/php}>
+                </td>
+                <td style="text-align: center">
+                    <input type="checkbox" name="is_forced" lay-skin="switch" lay-text="强制|选择" lay-filter="is_forced"
+                           value="{$vo['id']}" {php}echo $vo['is_forced']==1 ? 'checked' : '';{/php}>
+                </td>
+                <td align="center">{$vo.create_time|date="Y-m-d H:i:s",###}</td>
+                <td align="center">
+                    <a class="layui-btn layui-btn-normal layui-btn-mini"
+                       href="{:url('admin/AppUpdate/versionEdit',array('id'=>$vo['id']))}">修改</a>
+                    <!--<a class="elementdel layui-btn layui-btn-danger layui-btn-mini" href="javascript:;" data-id="{$vo.id}" data-url="{:url('admin/forum/delete',array('id'=>$vo['id']))}"  title="撤销" >撤销</a>-->
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</div>
+{/block}
+{block name="page"}
+<div class="btable-paged">
+    <div class="layui-main">
+        {$dataList->render()}
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+{/block}
+{block name="script"}
+<script>
+    layui.use(['form'],function(){
+        var form = layui.form()
+            ,jq = layui.jquery;
+
+        //jq('.btable-paged').eq(1).hide();
+        form.on('switch(is_packaging)', function(data){
+            loading = layer.load(2, {
+                shade: [0.2,'#000']
+            });
+            if(data.elem.checked){
+                status=1;
+            }else{
+                status=0;
+            }
+
+            var url="{:url('admin/app_update/updatePackaging')}";
+
+            jq.post(url,{id:data.value,status:status},function(data){
+                if(data.code == 200){
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        //  location.reload();
+                    });
+                }else{
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+            return false;
+        });
+
+        form.on('switch(is_forced)', function(data){
+            loading = layer.load(2, {
+                shade: [0.2,'#000']
+            });
+            if(data.elem.checked){
+                status=1;
+            }else{
+                status=0;
+            }
+
+            var url="{:url('admin/app_update/updateForced')}";
+
+            jq.post(url,{id:data.value,status:status},function(data){
+                if(data.code == 200){
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+                        //  location.reload();
+                    });
+                }else{
+                    layer.close(loading);
+                    layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+                }
+            });
+            return false;
+        });
+
+    })
+</script>
+{/block}

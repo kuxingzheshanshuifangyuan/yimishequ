@@ -1,0 +1,272 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>一米社区-米币</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo_1.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+
+    <style>
+        .select-this > a > div {
+            background-position:-173px -13px !important;
+        }
+
+        .point-title i {
+            width: 28px !important;
+            height: 32px !important;
+            background-position: -47px -78px !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="contentWrap clearfix">
+
+
+    <div class="user-content">
+        <p class="crumbs">
+            <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+            <a href="#">设置</a> > <a href="#">米币</a>
+        </p>
+
+        <div class="user-left">
+            <div>
+                <div class="">
+                    <a href="{:url('edit_head')}">
+                        <div></div>
+                        <p>修改头像</p>
+                    </a>
+                </div>
+
+                <div class="">
+                    <a href="{:url('edit')}">
+                        <div></div>
+                        <p>个人资料</p>
+                    </a>
+                </div>
+
+                <div class="">
+                    <a href="{:url('point_info')}">
+                        <div></div>
+                        <p>积分</p>
+                    </a>
+                </div>
+
+                <div class="select-this">
+                    <a href="javascript:void(0)">
+                        <div></div>
+                        <p>米币</p>
+                    </a>
+                </div>
+                <div class="">
+                    <a href="{:url('grade')}">
+                        <div></div>
+                        <p>用户组</p>
+                    </a>
+                </div>
+                <div class="">
+                    <a href="{:url('password')}">
+                        <div></div>
+                        <p>密码安全</p>
+                    </a>
+                </div>
+                <div class="">
+                    <a href="{:url('cooperation')}">
+                        <div></div>
+                        <p>商务合作</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="user-right">
+            <div class="money-info point-info">
+
+                <div class="set-tab">
+                    <div class="set-tab-top">
+                        <span class="tab-seclet">我的米币</span>
+                        <!--<span>米币充值</span>-->
+                        <span>米币获取规则</span>
+                    </div>
+
+                    <div class="set-tab-content">
+                        <!-- 第一个选项卡 -->
+                        <div class="tab-content-show">
+                            <div class="point-title">
+                                <i></i>
+                                我的米币：<span>{$user_data.money}</span>
+                            </div>
+                            <table class="layui-table" lay-skin="line">
+                                <thead>
+                                <tr>
+                                    <th>米币变更</th>
+                                    <th>详情</th>
+                                    <th>时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {foreach $dataList as $val}
+                                <tr>
+                                    <td><span
+                                            class="ColorRed">{if condition="$val.is_reduce"}-{else/}+{/if}{$val.money}</span>积分
+                                    </td>
+                                    <td>{$val.comment}</td>
+                                    <td>{$val.create_time|date="Y/m/d H:i",###}</td>
+                                </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                            <!-- 分页 -->
+                            <div class="paginationCon">
+                                <div class="m-style M-box2">{$dataList->render()}</div>
+                            </div>
+                        </div>
+                        <!-- 第二个选项卡 -->
+                        <!--<div class="">-->
+                            <!--<div class="point-title">-->
+                                <!--<i></i>-->
+                                <!--我的米币：<span>{$user_data.money}</span>-->
+                            <!--</div>-->
+                            <!--<div class="mbCharge">-->
+
+                                <!--<div class="charge-selected">-->
+                                    <!--<div><span>5000</span><span>米币</span></div>-->
+                                    <!--<div>50元</div>-->
+                                <!--</div>-->
+
+                                <!--<div class="">-->
+                                    <!--<div><span>5000</span><span>米币</span></div>-->
+                                    <!--<div>50元</div>-->
+                                <!--</div>-->
+                                <!--<div class="">-->
+                                    <!--<div><span>5000</span><span>米币</span></div>-->
+                                    <!--<div>50元</div>-->
+                                <!--</div>-->
+                                <!--<div class="">-->
+                                    <!--<div>-->
+                                        <!--<input class="custom-money" type="tel">-->
+                                        <!--<span>米币</span>-->
+                                    <!--</div>-->
+                                    <!--<div><span class="custom-money-info"></span> 元</div>-->
+                                <!--</div>-->
+                        <!---->
+                            <!--</div>-->
+
+                            <!--<div class="pay-info">-->
+                                <!--应付金额<span>1元</span>-->
+                            <!--</div>-->
+
+                            <!--<div class="charge-type">-->
+                                <!--<div data-type="1"><i></i>微信充值</div>-->
+                                <!--<div data-type="2"><i></i>支付宝充值</div>-->
+                            <!--</div>-->
+
+                            <!--<div class="charge-code">-->
+                                <!--<img src="__PUBLIC__forum/img/userInfo/code.png" alt="支付二维码">-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!-- 第三个选项卡 -->
+                        <div class="money-rule">
+                            <p class="rule-title"><i></i> 最多获得奖励次数</p>
+                            <div class="rule-info">
+                                <div>
+                                    <div class="info-title">&#9670 充值米币</div>
+                                    <p>前往“设置—米币—米币充值”可以使用微信、支付宝充值米币。</p>
+                                </div>
+
+                                <div>
+                                    <div class="info-title">&#9670 米友打赏</div>
+                                    <p>发图文贴并且帮助到米友，就可以获得米友打赏的米币哦！</p>
+                                </div>
+
+                                <div>
+                                    <div class="info-title">&#9670 每日任务</div>
+                                    <p>完成每日任务也是可以获得米币的。</p>
+                                </div>
+
+                                <div>
+                                    <div class="info-title">&#9670 每月签到</div>
+                                    <p>坚持完成每月签到活动可以获得米币。</p>
+                                </div>
+                            </div>
+
+
+                            <p class="rule-title rule-title2"><i></i> 米币使用规则</p>
+                            <div class="rule-info">
+                                <div>
+                                    <div class="info-title">&#9670 打赏好友</div>
+                                    <p>打赏是对米友最大的鼓励</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- <div class="paginationCon">
+        <div class="m-style M-box2"></div>
+    </div> -->
+</div>
+
+
+</div>
+</body>
+
+</html>
+<script src="__PUBLIC__forum/js/tab.js"></script>
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+
+<script type="text/javascript">
+    tabSelect()
+    $('.mbCharge >div').click(function () {
+        $(this).addClass('charge-selected').siblings().removeClass('charge-selected');
+    })
+
+    $('.custom-money').bind('input porpertychange', function (e) {
+        $('.custom-money-info').text(parseInt($(this).val()) / 100)
+
+    });
+
+    $('.charge-type >div:eq(0)').click(function () {
+        $(this).css('background', 'url(__PUBLIC__forum/img/userInfo/01.png) no-repeat right 0%').addClass('select-pay-type1').siblings().css('background', 'none').removeClass('select-pay-type2')
+        console.log($(this).attr('data-type'));
+    })
+    $('.charge-type >div:eq(1)').click(function () {
+        $(this).css('background', 'url(__PUBLIC__forum/img/userInfo/02.png) no-repeat right 0%').addClass('select-pay-type2').siblings().css('background', 'none').removeClass('select-pay-type1')
+        console.log($(this).attr('data-type'));
+    })
+    
+    // $(function () {
+    //   $('.M-box2').pagination({
+    //     totalData: 100,
+    //     showData: 5,
+    //     coping: true,
+    //     homePage: '首页',
+    //     prevContent: '上一页',
+    //     nextContent: "下一页",
+    //     endPage: '末页',
+    //     keepShowPN: true,
+    //     count: 1
+    //   });
+    // })
+</script>
+<script>
+
+
+</script>
+{/block}

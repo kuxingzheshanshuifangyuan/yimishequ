@@ -1,0 +1,269 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>一米社区-我的粉丝</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/userInfo_1.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/my_follow/my_fans.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/my_follow/common.css"/>
+    <style>
+        .select-this > a > div {
+            background-position: -132px 0px !important;
+        }
+
+        .point-title i {
+            width: 28px !important;
+            height: 32px !important;
+            background-position: -47px -78px !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="contentWrap clearfix">
+
+
+    <div class="user-content">
+        <p class="crumbs">
+            <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+            <a href="#">好友</a> > <a href="#">我的粉丝</a>
+        </p>
+        <!-- 左边 -->
+        <div class="user-left">
+            <div>
+                <div class="">
+                    <a href="{:url('my_attention')}">
+                        <div id="lxr-icon-1"></div>
+                        <p>我的关注</p>
+                    </a>
+                </div>
+
+                <div class="select-this">
+                    <a href="javascript:void(0)">
+                        <div id="lxr-icon-2"></div>
+                        <p>我的粉丝</p>
+                    </a>
+                </div>
+
+                <!-- <div class="">
+                    <a href="{:url('invite_friends')}">
+                        <div id="lxr-icon-3"></div>
+                        <p>邀请好友</p>
+                    </a>
+                </div> -->
+
+                <div class="">
+                    <a href="{:url('blacklist')}">
+                        <div id="lxr-icon-4"></div>
+                        <p>黑名单</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- 右边 -->
+        <div class="user-right">
+            <div class="money-info point-info">
+
+                <div class="set-tab">
+                    <!-- 关注头部 -->
+                    <div class="lyl_follow">当前共有{$data_list->total()}个粉丝</div>
+
+                    <!-- 关注列表 -->
+                    <ul class="lyl_follow_list">
+                        {foreach $data_list as $val}
+                        <li class="clearfix">
+                            <!-- 头像、名称、大米师 -->
+                            <div class="lyl_infor fl clearfix">
+                                <div class="lyl_head fl">
+                                    <img src="{$val.userhead}" alt="头像">
+                                </div>
+                                <div class="lyl_name fl">{$val.username}</div>
+                                <div class="lyl_money fr">{$val.grade_name}</div>
+                            </div>
+                            <!-- 签名、菜单 -->
+                            <div class="lyl_autograph fr clearfix">
+                                <p>{if condition="$val.description"}{$val.description}{else/}懒得签名了懒得签名了懒得签名了...{/if}</p>
+                                <div class="lyl_menu_box">
+                                    <span>菜单</span>
+                                    <ol class="lyl_menu" uid="{$val.fans_uid}">
+                                        <li class="gl-fans-message" onclick="sendMsg()">私信</li>
+                                        <li class="gl-fans-cancel" onclick="removeBlack()">取消关注</li>
+                                        <li class="gl-fans-blacklist">移入黑名单</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </li>
+                        {/foreach}
+
+                        <!--<li class="clearfix">-->
+                            <!--&lt;!&ndash; 头像、名称、大米师 &ndash;&gt;-->
+                            <!--<div class="lyl_infor fl clearfix">-->
+                                <!--<div class="lyl_head fl">-->
+                                    <!--<img src="__PUBLIC__forum/img/userInfo/22222.png" alt="头像">-->
+                                <!--</div>-->
+                                <!--<div class="lyl_name fl">昵称昵称昵称</div>-->
+                                <!--<div class="lyl_money fr">大师米</div>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash; 签名、菜单 &ndash;&gt;-->
+                            <!--<div class="lyl_autograph fr clearfix">-->
+                                <!--<p>懒得签名了懒得签名了懒得签名了...</p>-->
+                                <!--<div class="lyl_menu_box">-->
+                                    <!--<span>菜单</span>-->
+                                    <!--<ol class="lyl_menu">-->
+                                        <!--<li>私信</li>-->
+                                        <!--<li>取消关注</li>-->
+                                        <!--<li>移入黑名单</li>-->
+                                    <!--</ol>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                    </ul>
+                    <div class="paginationCon">
+                        <div class="m-style M-box2">{$data_list->render()}</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- <div class="paginationCon">
+        <div class="m-style M-box2"></div>
+    </div> -->
+</div>
+
+<!-- 私信弹出框 -->
+<div class="sendMsg-container" style="display:none;">
+    <p>发送私信</p>
+    <div class="">
+        <textarea name="" id="personalMsg" rows="5" placeholder="私信内容" style="resize:none;"></textarea>
+        <button class="sendMsg-confirm" onclick="sendMsgBtn()">发送</button>
+    </div>
+</div>
+
+
+</body>
+
+</html>
+<script src="__PUBLIC__forum/js/tab.js"></script>
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/pagination/highlight.min.js"></script>
+<script src="__PUBLIC__forum/pagination/jquery.pagination.js"></script>
+
+<script type="text/javascript">
+    tabSelect()
+    $('.mbCharge >div').click(function () {
+        $(this).addClass('charge-selected').siblings().removeClass('charge-selected');
+    })
+
+    $('.custom-money').bind('input porpertychange', function (e) {
+        $('.custom-money-info').text(parseInt($(this).val()) / 100)
+
+    });
+
+    $('.charge-type >div:eq(0)').click(function () {
+        $(this).css('background', 'url(__PUBLIC__forum/img/userInfo/01.png) no-repeat right 0%').addClass('select-pay-type1').siblings().css('background', 'none').removeClass('select-pay-type2')
+        console.log($(this).attr('data-type'));
+    })
+    $('.charge-type >div:eq(1)').click(function () {
+        $(this).css('background', 'url(__PUBLIC__forum/img/userInfo/02.png) no-repeat right 0%').addClass('select-pay-type2').siblings().css('background', 'none').removeClass('select-pay-type1')
+        console.log($(this).attr('data-type'));
+    })
+    // $(function () {
+    //   $('.M-box2').pagination({
+    //     totalData: 100,
+    //     showData: 5,
+    //     coping: true,
+    //     homePage: '首页',
+    //     prevContent: '上一页',
+    //     nextContent: "下一页",
+    //     endPage: '末页',
+    //     keepShowPN: true,
+    //     count: 1
+    //   });
+    // })
+</script>
+<script>
+    $('.lyl_menu_box').hover(function(){
+        $(this).find('ol').show()
+    },function(){
+        $(this).find('ol').hide()
+    })
+
+    $('.gl-fans-message').on('click',function () {
+
+        if(!$(this).parent().attr('uid')){
+            return false;
+        }
+
+
+        alert($(this).parent().attr('uid'));
+    })
+
+    $('.gl-fans-cancel').on('click',function () {
+
+        if(!$(this).parent().attr('uid')){
+            return false;
+        }
+
+    })
+    // 私信方法
+    function sendMsg() {
+        layer.close(layer.index);
+        layer.open({
+            type:1,
+            skin:'searchWHsucc',
+            title:false,
+            shadeClose: true,
+            scrollbar: false,
+            area: ['340px', '263px'],
+            closeBtn: 0,
+            resize: false,
+            content:$(".sendMsg-container"),
+            cancel: function(index, layero){
+                $(".sendMsg-container").hide()
+            }
+        })
+    }
+    // 私信成功
+    function sendMsgBtn() {
+        let message = $('#personalMsg').val();//私信内容
+
+        if(message){
+            $('#personalMsg').val('')
+            layer.msg('发送成功！', {icon: 1});
+            layer.closeAll('page');
+        }else{
+            layer.msg('请输入私信内容！', {icon: 5});
+        }
+    }
+    // 取消关注弹框
+    function removeBlack() {
+        layer.open({
+            shadeClose: true,
+            closeBtn: 0,
+            area: ['460px', '251px'],
+            skin: 'lxr-demo',
+            title: ['提示', 'font-size:20px;color:#424242;text-align:center'],
+            content: '确定把该好友移出黑名单',
+            btn: ['确认', '取消'],
+            btnAlign: 'c',
+            btn1:function (index) {
+                console.log(index)
+                layer.close(index)
+            },
+            btn2:function () {
+                console.log(3)
+            }
+        })
+    }
+</script>
+{/block}

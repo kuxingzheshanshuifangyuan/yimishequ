@@ -1,0 +1,401 @@
+{extend name="base" /}
+{block name="body"}
+<style type="text/css">
+.tpt_sels a{padding-right:15px;position:relative}
+.tpt_sels a{padding:0 20px 0 8px;color:#3B6268;background:#FFFFBA;border:1px #F8E06E solid;margin-right:5px;margin-bottom:5px;font-size:14px;height:26px;line-height:26px;display:block;float:left}
+.tpt_sels a em{width: 12px;height: 12px;font-style: normal;display: block;position: absolute;top: 7px;right: 4px;z-index: 2;background: url(__ADMIN__/images/sx.png) no-repeat 0 0;}
+</style>
+    <!--tab标签-->
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">基本配置</li>
+            <li >用户配置</li>
+            <li >邮箱配置</li>
+           <!-- <li >积分规则配置</li>
+            <li>金币规则配置</li>
+            <li >其它配置</li>-->
+        </ul>
+        <form class="layui-form form-container layui-tab-content" data-url="{:url('admin/system/updateSiteConfig')}"  localtion-url="{:url('admin/system/siteConfig')}" >
+            <div class="layui-tab-item layui-show">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">网站标题</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="site_config[site_title]" value="{$site_config.site_title|default=''}" required  lay-verify="required" placeholder="请输入网站标题" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">SEO标题</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="site_config[seo_title]" value="{$site_config.seo_title|default=''}" placeholder="请输入SEO标题" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">SEO关键字</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="site_config[seo_keyword]" value="{$site_config.seo_keyword|default=''}" placeholder="请输入SEO关键字" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">SEO说明</label>
+                    <div class="layui-input-block">
+                        <textarea name="site_config[seo_description]" placeholder="请输入SEO说明" class="layui-textarea">{$site_config.seo_description|default=''}</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">前台模板</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="site_config[site_tpl]" value="{$site_config.site_tpl|default='default'}" required  lay-verify="required" placeholder="请输入网站标题" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">前台横屏</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="site_config[tplh]" value="1" title="开启" {if condition="$site_config.tplh eq 1"}checked{/if}>
+                        <input type="radio" name="site_config[tplh]" value="0" title="关闭" {if condition="$site_config.tplh eq 0"}checked{/if}>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">会员注册</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="site_config[user_reg]" value="1" title="开启" {if condition="$site_config.user_reg eq 1"}checked{/if}>
+                        <input type="radio" name="site_config[user_reg]" value="0" title="关闭" {if condition="$site_config.user_reg eq 0"}checked{/if}>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">发帖审核</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="site_config[forum_sh]" value="0" title="开启" {if condition="$site_config.forum_sh eq 0"}checked{/if}>
+                        <input type="radio" name="site_config[forum_sh]" value="1" title="关闭" {if condition="$site_config.forum_sh eq 1"}checked{/if}>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div>
+                        <label class="layui-form-label">邮箱验证</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="site_config[email_sh]" value="0" title="开启" {if condition="$site_config.email_sh eq 0"}checked{/if}>
+                            <input type="radio" name="site_config[email_sh]" value="1" title="关闭" {if condition="$site_config.email_sh eq 1"}checked{/if}>
+                        </div>
+                    </div>
+                    <div class="label-tint">开启邮箱验证后，未激活邮箱的用户无法发帖和评论</div>
+                </div>
+                <div class="layui-form-item">
+                    <div>
+                        <label class="layui-form-label">验证码场景</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="site_config[site_yzm]" value="{$site_config.site_yzm|default=''}" required  lay-verify="required" placeholder="验证码场景" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="label-tint">1\注册2\登录3\忘记密码4\后台登录[填写数字时用半角括号隔开，否则无效。如1,2]</div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">开启路由</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="site_config[site_wjt]" value="1" title="开启" {if condition="$site_config.site_wjt eq 1"}checked{/if}>
+                        <input type="radio" name="site_config[site_wjt]" value="0" title="关闭" {if condition="$site_config.site_wjt eq 0"}checked{/if}>
+                    </div>
+                </div>
+                <div class="tpt_item">
+                    <input type="hidden" id="sitekeyword" name="site_config[site_keyword]" value="{$site_config.site_keyword}">
+                    <div id="tpt_sel" class="tpt_sels" style="margin-top: 20px;">
+                        <span style="margin-bottom: 5px;float: left;margin-left: 110px;">
+                            {if condition="$site_config['site_keyword'] neq ''"}<?php $arr=explode(',', $site_config['site_keyword']);foreach ($arr as $k=>$v){echo "<a href='javascript:;' >$v<em></em></a>";}?>{/if}
+                        </span>
+                        <div class="layui-form-item" style="margin-bottom: 20px;">
+                            <label class="layui-form-label">标签</label>
+                            <div class="layui-input-block">
+                                <input id="tpt_input" type="text" value="" autocomplete="off" class="layui-input" style="width: 400px;float: left;margin-right: 20px;">
+                                <button class="layui-btn" id="tpt_btn" type="button" style="background: #FF5722;">添加标签</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">版权信息</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="site_config[site_copyright]" value="{$site_config.site_copyright|default=''}" placeholder="请输入版权信息" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">ICP备案号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="site_config[site_icp]" value="{$site_config.site_icp|default=''}" placeholder="请输入版权信息" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">统计代码</label>
+                    <div class="layui-input-block">
+                        <textarea name="site_config[site_tongji]" placeholder="请输入统计代码" class="layui-textarea">{$site_config.site_tongji|default=''}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <div>
+                        <label class="layui-form-label">用户名保留</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="site_config[baoliu]" value="{$site_config.baoliu|default=''}" placeholder="不允许注册用户名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="label-tint">可设置多个用户不允许注册的昵称，填写时用半角括号隔开</div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">SMTP 服务器</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="site_config[smtp_server]" value="{$site_config.smtp_server|default=''}" placeholder="SMTP 服务器" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">SMTP服务器的端口号</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[smtp_port]" value="{$site_config.smtp_port|default=''}" placeholder="SMTP服务器的端口号" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"> SMTP服务器用户名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="site_config[smtp_user]" value="{$site_config.smtp_user|default=''}" placeholder="SMTP服务器用户名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">SMTP服务器密码</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="site_config[smtp_pass]" value="{$site_config.smtp_pass|default=''}" placeholder="SMTP服务器密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">测试地址</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="J_email" name="site_config[smtp_cs]" value="{$site_config.smtp_cs|default=''}" placeholder="邮件地址为空时，默认使用后台默认邮件测试地址" autocomplete="off" class="layui-input">
+                    </div>
+                    <input type="button" id="J_mail_test" value="发送测试邮件" class="layui-btn layui-btn-small">
+                </div>
+            </div>
+            <!--<div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">积分名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="site_config[jifen_name]" value="{$site_config.jifen_name|default='积分'}" placeholder="请填写积分的别名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">签到</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="number" name="site_config[sign_min]" placeholder="￥" autocomplete="off" class="layui-input" value="{$site_config.sign_min|default='0'}">
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="number" name="site_config[sign_max]" placeholder="￥" autocomplete="off" class="layui-input" value="{$site_config.sign_max|default='0'}">
+                        </div>
+                    </div>
+                </div>
+               &lt;!&ndash; <div class="layui-form-item">
+                    <label class="layui-form-label">邮箱验证</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[jifen_email]" value="{$site_config.jifen_email|default='0'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                    </div>
+                </div>&ndash;&gt;
+                <div class="layui-form-item">
+                    <label class="layui-form-label">注册</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[jifen_reg]" value="{$site_config.jifen_reg|default='0'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">登录</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[jifen_login]" value="{$site_config.jifen_login|default='0'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">发布帖子</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[jifen_add]" value="{$site_config.jifen_add|default='0'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回复帖子</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[jifen_comment]" value="{$site_config.jifen_comment|default='0'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">金币名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="site_config[jinbi_name]" value="{$site_config.jinbi_name|default='金币'}" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">签到</label>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" name="site_config[sign_jinbi_min]" placeholder="￥" autocomplete="off" class="layui-input" value="{$site_config.sign_jinbi_min|default='0'}">
+                            </div>
+                            <div class="layui-form-mid">-</div>
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" name="site_config[sign_jinbi_max]" placeholder="￥" autocomplete="off" class="layui-input" value="{$site_config.sign_jinbi_max|default='0'}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                &lt;!&ndash; <div class="layui-form-item">
+                <label class="layui-form-label">邮箱验证</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="site_config[_email]" value="{$site_config.jifen_email|default='0'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                </div>
+                </div>&ndash;&gt;
+                <div class="layui-form-item">
+                    <label class="layui-form-label">注册</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[jinbi_reg]" value="{$site_config.jinbi_reg|default='0'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">登录</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[jinbi_login]" value="{$site_config.jinbi_login|default='0'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">发布帖子</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[jinbi_add]" value="{$site_config.jinbi_add|default='0'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回复帖子</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[jinbi_comment]" value="{$site_config.jinbi_comment|default='0'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">帖子点击量</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[forum_view]" value="{$site_config.forum_view|default='1'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">帖子点赞数</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="site_config[forum_praise]" value="{$site_config.forum_praise|default='0'}" placeholder="请填写整数" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>-->
+            <div class="btable-paged" >
+                 <div class="layui-main">
+                    <div class="formbtngroup">
+                        <button  class="layui-btn layui-btn-small" lay-submit="" lay-filter="formadd">提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary layui-btn-small">重置</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{/block}
+{block name="script"}
+<script>
+				layui.use(['element','jquery'], function() {
+					var ajax_mail_test= "{:url('system/ajax_mail_test')}";
+					var element = layui.element()
+					
+					,$ = layui.jquery;//导航的hover效果、二级菜单等功能，需要依赖element模块
+					$('#tpt_input').keydown(function(e) {
+						if (e.which === 13) {
+							$("#tpt_btn").click();
+							e.preventDefault();
+							return false;
+						}
+					});
+					$('#J_mail_test').click(function() {
+				        var email = $('#J_email').val();
+				       
+				        if(email == ''){
+				        	 layer.msg('邮箱为空', {icon: 2, time: 1000}, function(){
+				   	         
+				   	        });
+				            
+				          //  return false;
+				        }
+				        $.post(ajax_mail_test, {email:email}, function(result){
+				        	
+				            if(result.code == 1){
+				             
+				            	 layer.msg(result.msg, {icon: 1, time: 1000}, function(){
+						   	         
+						   	        });
+				            }else{
+				            	 layer.msg(result.msg, {icon: 2, time: 1000}, function(){
+						   	         
+						   	        });
+				            }
+				        });
+					});
+					
+					
+					$("#tpt_sel").on('click', 'a>em', function() {
+						var name = "WEB_TAG";
+						var tag = $(this).parent().text();
+						$(this).parent().remove();
+						var tags = new Array();
+						$("#tpt_sel").find('a').each(function() {
+							tags.push($(this).text());
+						});
+						$("#sitekeyword").val(tags.join(","));
+						$("#tpt_pre a:contains('" + tag + "')").removeClass("selected");
+					});
+					$("#tpt_btn").click(function() {
+						var name = "WEB_TAG";
+						var tags = $.trim($("#sitekeyword").val());
+						if (tags !== "") {
+							tags = tags.split(",");
+						} else {
+							tags = new Array();
+						}
+						var tag = $.trim($("#tpt_input").val());
+						if (tag !== '' && $.inArray(tag, tags) === -1) {
+							tags.push(tag);
+							$("#tpt_pre a:contains('" + tag + "')").addClass("selected");
+						}
+						$("#tpt_sel").children('span').empty();
+						$.each(tags, function(k, v) {
+							$("#tpt_sel").children('span').append('<a href="javascript:;">' + v + '<em></em></a>');
+						});
+						$("#sitekeyword").val(tags.join(","));
+						$("#tpt_input").val('');
+					});
+					$("#tpt_pre").on('click', 'a:not(.selected)', function() {
+						var name = "WEB_TAG";
+						var tags = $.trim($("#sitekeyword").val());
+						if (tags !== "") {
+							tags = tags.split(",");
+						} else {
+							tags = new Array();
+						}
+						var tag = $.trim($(this).text());
+						if (tag !== '' && $.inArray(tag, tags) === -1) {
+							tags.push(tag);
+						}
+						$("#tpt_sel").children('span').empty();
+						$.each(tags, function(k, v) {
+							$("#tpt_sel").children('span').append('<a href="javascript:;">' + v + '<em></em></a>');
+						});
+						$("#sitekeyword").val(tags.join(","));
+						$(this).addClass('selected');
+					});
+
+				});
+
+
+			</script>
+			
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/formadd.js"></script>
+{/block}

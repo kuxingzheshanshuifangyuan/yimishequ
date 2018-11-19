@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+	</head>
+
+	<body class="taskbody">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">任务</h1>
+		</header>
+		<div class="taskbodyback" >
+			
+			<div class="" id="user-info">
+				<img :src="usuerHead" class="taskjd" />
+				<p class="nickName">{{userInfo.username}}</p>
+				<div class="taskMb-con">
+					<p class="taskMb">当前米币 <span class="usermoney"> {{userInfo.money}}</span></p>
+					
+					<p class="taskMb">当前积分 <span class="usermoney"> {{userInfo.point}}</span></p>
+				</div>
+			</div>
+			
+			
+			
+			<div class="mui-row Xsrw" id="task-con">
+				<h4>每日任务 </h4>
+				<!--<span>今日已完成 1/8</span>-->
+				<div class="Xsrw_cont">
+					
+		            
+		            <li class="mui-table-view-cell task-item">
+						<div class="task-item-left">
+							<div class="item-top">
+								签到 <img src="../images/2.0/coin.png" /> <span>+1积分</span>
+							</div>
+							
+							<div class="item-bot">
+								<div class="line">
+									<div class="innerLine signInnerLine"></div>
+								</div>
+								
+								<span class="complete"><span id="">1</span>/1</span>
+								
+							</div>
+						</div>
+						<div class="action">
+							<input v-if="!signEexist" type="button" class="action-btn signinBtn" value="签到" />
+							<input v-if="signEexist" type="button" class="action-btn actiontive signinBtn" value="已签到" />
+						</div>
+		            </li>
+		            
+		            <template v-for="(item,index) in tasks">
+		            	
+						<li class="mui-table-view-cell task-item">
+							<div class="task-item-left">
+								<div class="item-top">
+									{{item.task_name}} <img src="../images/2.0/coin.png" /> <span>+{{item.task_money}}积分</span>
+								</div>
+								
+								<div class="item-bot">
+									<div class="line">
+										<div class="innerLine" v-bind:style="{width: comleDes[index]}"></div>
+									</div>
+									<!--v-bind:style="{width: comleDes[index]}"-->
+									<span class="complete"><span id="">{{item.taskNumber}}</span>/{{item.task_per}}</span>
+									
+								</div>
+							</div>
+							<div class="action">
+								<input v-if="!item.taskStatus" type="button" class="action-btn" :value="item.task_name" />
+								<input v-if="item.taskStatus" type="button" class="action-btn actiontive " value="已完成" />
+							</div>
+			            </li>
+					
+					</template>
+					
+					<p class="task-tip">完成全部任务可获地<span>10米币</span></p>
+		            
+	            </div>
+			</div>
+			
+			<div class="mui-row Xsrw Xs">
+				<h4>额外任务</h4>
+	            <li class="mui-table-view-cell task-item">
+					<div class="task-item-left">
+						<div class="item-top">
+							原创帖子加精 <img src="../images/2.0/coin.png" /> <span>+3积分</span>
+						</div>
+						
+						<div class="item-bot">
+							<div class="line">
+								<div class="innerLine" v-bind:style="{width: comleDes[index]}"></div>
+							</div>
+							<span class="complete"><span id="">0</span>/1</span>
+						</div>
+					</div>
+					<div class="action">
+						<input v-if="!item.taskStatus" type="button" class="action-btn" value="发帖" />
+						<!--<input v-if="item.taskStatus" type="button" class="action-btn actiontive " value="已完成" />-->
+					</div>
+	            </li>
+	             <li class="mui-table-view-cell task-item">
+					<div class="task-item-left">
+						<div class="item-top">
+							原创帖子置顶 <img src="../images/2.0/coin.png" /> <span>+3积分</span>
+						</div>
+						
+						<div class="item-bot">
+							<div class="line">
+								<div class="innerLine" v-bind:style="{width: comleDes[index]}"></div>
+							</div>
+							<span class="complete"><span id="">0</span>/1</span>
+						</div>
+					</div>
+					<div class="action">
+						<input v-if="!item.taskStatus" type="button" class="action-btn" value="发帖" />
+						<!--<input v-if="item.taskStatus" type="button" class="action-btn actiontive " value="已完成" />-->
+					</div>
+	            </li>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/lib/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/setting.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/task.js"></script>
+	</body>
+
+</html>

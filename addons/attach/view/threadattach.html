@@ -1,0 +1,94 @@
+
+			 <script>
+			 layui.use(['form', 'upload', 'element'],function(){
+				  var form = layui.form()
+				  ,jq = layui.jquery;
+
+				  jq('.attach').each(function(){
+					  
+					  var html=jq(this).html();
+					
+					  var score=jq(this).attr('score');
+					  var md5=jq(this).attr('id');
+					  var zuid="{$t.userid}";
+					  var uid="{:session('userid')}";
+					  var jifenname="{$site_config['jifen_name']}";
+					var obj=this;
+					       var infourl="{:addons_url('attach://Attach/info',array(),true)}";
+					       jq.post(infourl,{md5:md5},function(data){
+					    	  
+					    	  html+="<p style='font-size:12px;color:gray'>[售价:"+data.info.score+jifenname+",大小:"+data.info.size+",下载次数:"+data.info.download+"]</p>";
+					    	  score=data.info.score;
+					    	  jq(obj).html(html);
+					       }); 
+					      
+					
+						var url="{:addons_url('attach://Attach/download',array(),true)}";
+						  jq(this).click(function(){
+
+							  if(uid>0){
+								  
+								  if(uid==zuid){
+									     jq.post(url,{score:score,md5:md5,uid:uid,zuid:zuid},function(data){
+										     	
+									         if(data.code == 200){
+									        	if(data.local==1){
+									        		 var downurl="{:url('index/download')}?url="+data.path+"&name="+data.name+"&local="+data.local;
+									        	}else{
+									        		//var downurl="{:url('index/download')}?url="+data.path+"&name="+data.name+"&local="+data.local;
+									        		var downurl=data.path;
+									        	}
+									        	
+									        	 location.href=downurl;
+									        	
+									           layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+									           
+									           });
+									         }else{
+									          
+									           layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+									         }
+									       }); 
+								  }else{
+									  layer.confirm('下载需要扣除您'+score+jifenname+',[已下载过该附件用户不再重复扣费]?', {icon: 3, title:'提示'}, function(index){
+										     jq.post(url,{score:score,md5:md5,uid:uid,zuid:zuid},function(data){
+											     	
+										         if(data.code == 200){
+										        	if(data.local==1){
+										        		 var downurl="{:url('index/download')}?url="+data.path+"&name="+data.name+"&local="+data.local;
+										        	}else{
+										        		//var downurl="{:url('index/download')}?url="+data.path+"&name="+data.name+"&local="+data.local;
+										        		var downurl=data.path;
+										        	}
+										        	
+										        	 location.href=downurl;
+										        	
+										           layer.msg(data.msg, {icon: 1, time: 1000}, function(){
+										           
+										           });
+										         }else{
+										          
+										           layer.msg(data.msg, {icon: 2, anim: 6, time: 1000});
+										         }
+										       }); 
+										  
+										  layer.close(index);
+										});
+								  }
+								  
+								
+					
+							  }else{
+									layer.msg('请先登录', {icon: 2, anim: 6, time: 1000});  
+								} 
+							       
+							  
+						  });
+					      
+					
+	
+					
+				  });
+				  
+			  }); 
+			 </script>

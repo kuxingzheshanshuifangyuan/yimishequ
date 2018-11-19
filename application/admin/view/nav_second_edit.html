@@ -1,0 +1,116 @@
+{extend name="base" /}
+{block name="body"}
+<div class="layui-tab-brief">
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form form-container" action="{:url('nav/second_update')}" method="post">
+                <input type="hidden" name="id" value="{$nav['id']}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">一级导航</label>
+                    <div class="layui-input-inline">
+                        <select name="nav_id" id="">
+                            {volist name="top_nav" id="nav_list"}
+                                {if condition="$nav_list['id']==$nav['nav_id']"}
+                                    <option value="{$nav_list['id']}" selected>{$nav_list['name']}</option>
+                                {else /}
+                                    <option value="{$nav_list['id']}">{$nav_list['name']}</option>
+                                {/if}
+                            {/volist}
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">导航名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="second_name" value="{$nav['name']}" required lay-verify="required" placeholder="请输入导航名称" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">别名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="alias" value="{$nav['alias']}" placeholder="（选填）请输入导航别名" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">链接</label>
+                    <div> <div class="layui-input-inline">
+                        <input type="text" name="link" value="{$nav['link']}" placeholder="" class="layui-input"></div>  </div>
+                    <div class="label-tint">带参数的本地连接用半角逗号隔开,如版块id为1，则访问版块输入index/view,id,1</div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">链接属性</label>
+                    <div class="layui-input-inline">
+                        {if condition="$nav['sid']==1"}
+                            <input type="radio" name="sid" value="1" title="内部" checked="checked">
+                            <input type="radio" name="sid" value="0" title="外部">
+                        {else /}
+                            <input type="radio" name="sid" value="1" title="内部">
+                            <input type="radio" name="sid" value="0" title="外部" checkde="checked">
+                        {/if}
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">图标</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="icon" value="{$nav['icon']}" placeholder="（选填）如：fa fa-home" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">导航位置</label>
+                    <div class="layui-input-inline">
+                        {if condition="$nav['pid']==1"}
+                            <input type="radio" name="pid" value="1" title="顶部" checked="checked">
+                            <input type="radio" name="pid" value="0" title="底部">
+                        {else /}
+                            <input type="radio" name="pid" value="1" title="顶部">
+                            <input type="radio" name="pid" value="0" title="底部" checked="checked">
+                        {/if}
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">状态</label>
+                    <div class="layui-input-inline">
+                        {if condition="$nav['status']==1"}
+                            <input type="radio" name="status" value="1" title="显示" checked="checked">
+                            <input type="radio" name="status" value="0" title="隐藏">
+                        {else /}
+                            <input type="radio" name="status" value="1" title="显示">
+                            <input type="radio" name="status" value="0" title="隐藏" checked="checked">
+                        {/if}
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">打开方式</label>
+                    <div class="layui-input-inline">
+                        {if condition="$nav['target']=='_self'"}
+                            <input type="radio" name="target" value="_self" title="默认" checked="checked">
+                            <input type="radio" name="target" value="_blank" title="新窗口">
+                        {else /}
+                            <input type="radio" name="target" value="_self" title="默认">
+                            <input type="radio" name="target" value="_blank" title="新窗口" checked="checked">
+                        {/if}
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">排序</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="sort" value="{$nav['sort']}" required lay-verify="required" class="layui-input">
+                    </div>
+                </div>
+                <div class="btable-paged" >
+                    <div class="layui-main">
+                        <div class="formbtngroup">
+                            <input type="submit" class="layui-btn layui-btn-small" value="修改" />
+                            <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/formadd.js"></script>
+{/block}

@@ -1,0 +1,41 @@
+{extend name="base" /}
+{block name="css"}
+<link rel="stylesheet" href="__ADMIN__/css/form.css">
+{/block}
+{block name="body"}
+<div class="layui-tab-brief">
+
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form form-container" method="post" action="">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">推送内容</label>
+                    <div class="layui-input-block">
+                        <textarea name="push_content" class="layui-textarea">{$data.push_content}</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">下载地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="download_url" value="{$data.download_url}" class="layui-input">
+                    </div>
+                </div>
+                <input type="hidden" name="id" value="{$data.id}">
+                <div class="btable-paged" >
+                    <div class="layui-main">
+                        <div class="formbtngroup">
+                            <input type="submit" class="layui-btn layui-btn-small" lay-submit="" lay-filter="formadd" value="添加">
+                            <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/jquery-3.2.1.min.js"></script>
+{/block}

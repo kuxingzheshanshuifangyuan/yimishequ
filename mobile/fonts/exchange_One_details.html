@@ -1,0 +1,266 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/webiaoqing.css" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/postInfo.css"/>
+
+	</head>
+
+	<body class="detailsBody"  >
+		<header class="mui-bar mui-bar-nav ">
+			<a href="javascript:;" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="history"></a>
+			<h1 id="title" class="mui-title">详情</h1>
+			<a href="#share" class="mui-icon  mui-pull-right   mui-icon-more-filled"></a>
+		</header>
+		
+		<div class="post-detail">
+			
+			<!--帖子信息-->
+			<div class="mui-content mui-scroll-wrapper" id="pullrefresh">
+				<div class="mui-scroll" >
+	
+					<ul class="mui-table-view homeNewest HomeListOne MarginTop45">
+						
+						<div class="author-info">
+							<img  :src="'http://www.1miclub.com'+post.userhead"/>
+							<div class="author">
+								<div class="">
+									<span>{{post.username}}</span><span class="au-level">大师米</span>
+								</div>
+								<div class="">
+									<p>{{create_time}}</p>
+								</div>
+							</div>
+						</div>
+						
+						<div class="post-info" :usertieziid = "post.id" tieziid="1">
+							<p class="post-title">{{post.title}}</p>
+							<div class="post-tip">
+								<span class="syboml" style="display: ;">[置顶]</span>
+								<span>
+									<span class="post-tip-item view-num"> {{post.view + 1}}</span>
+									<span class="post-tip-item praise-num">{{post.praise}}</span>
+									<span class="post-tip-item reply-num">{{post.reply}}</span>
+								</span>
+								<span class="post-type">
+									信用卡贷款
+								</span>
+							</div>
+							
+							<div class="post-content">
+								<p v-html="postContent"></p>
+							</div>
+							
+							<p class="post-intro">本主题由 <span>{{post.username}}</span> 于 <span>{{create_time}}</span> 分享</p>
+							
+							<div class="reward reward-btn">打赏</div>
+							<p class="reward-num">共<span>{{post.reward_sum}}</span>人打赏</p>
+							
+							<div class="post-action">
+								<a href="#share_">
+									<div class="forward">
+										转发 <span>11111</span>
+									</div>
+								</a>
+								<a>
+									<div class="">
+										收藏 <span>11111</span>
+									</div>
+								</a>
+								<a>
+									<div class="praise" zanid="1">
+										点赞 <span>{{post.praise}}</span>
+									</div>
+								</a>
+							</div>
+						</div>
+						
+					</ul>
+	
+	
+	
+	
+					<!--<ul class="mui-table-view homeNewest" >
+					    <li class="mui-table-view-cell" >
+					        <a class="mui-navigate">
+					        	<span class="homeNewest_zuixin"><span>0</span>条评论</span>
+					        </a>
+					    </li>
+					    <div class="PlList" >
+	
+				    	</div>
+					</ul>-->
+					
+					<div class="comment-content">
+						<!--热门评论-->
+						<div class="comment-hot">
+							<p class="comment-title">热门评论</p>
+							<p class="comment-line"></p>
+							
+							<div class="comment-item">
+								<div class="comment-top">
+									<img src="../images/by.png"/>
+									<div class="comment-autor">
+										<p>关云长 <span class="master">宗师米</span></p>
+										<p class="comment-time">2018-08-09</p>
+									</div>
+									<div class="comment-parse">
+										100
+									</div>
+								</div>
+								<div class="comment-text">
+									<span class="comment-floor comment-sofa">沙发</span>
+									<p class="comment-con">这是个轮回，马云因为不想受约束，从体制内的老师跳出来从商，现在商业做这么大了，发现不管你的想法多么优秀还是要受</p>
+								</div>
+								<p class="comment-line"></p>
+							</div>
+						</div>
+						
+						<!--全部评论-->
+						<div class="comment-all">
+							<p class="comment-title">全部评论</p>
+							<p class="comment-line"></p>
+							<template v-for="(item,index) in comments">
+							
+								<div class="comment-item">
+									<div class="comment-top">
+										<img :src="'http://www.1miclub.com/'+item.userhead"/>
+										<div class="comment-autor">
+											<p>{{item.username}} <span class="master">宗师米</span></p>
+											<p class="comment-time">{{time[index]}}</p>
+										</div>
+										<div class="comment-parse">
+											{{item.praise}}
+										</div>
+									</div>
+									<div class="comment-text">
+										<span class="comment-floor" :class="{'comment-sofa':index == 0,'comment-bench':index == 1,'comment-fl':index == 2}">{{item.level}}{{sofa}}</span>
+										<p v-html="contents[index]" class="comment-con"></p>
+									</div>
+									<p class="comment-line"></p>
+								</div>
+							</template>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--回复帖子-->
+			<div class="PinLun">
+				<div class="mui-clearfix">
+					<article class="PLtext placeholder" id="form_article" contenteditable="true" onkeydown="myInput.listen(this, event);">
+						
+					</article>
+					<img src="../images/face.png" class="emojiBq" onclick="emoji()"/>
+					<span class="PL-Left PL-FB">发布</span>
+				</div>
+				<div class="page_emotion box_swipe" id="page_emotion">
+					<dl id="list_emotion" class="list_emotion pt_10"></dl><!-- 表情框 -->
+					<dt><ol id="nav_emotion" class="nav_emotion"></ol></dt><!-- 分页提示点 -->
+				</div>
+			</div>
+			
+			<!--打赏信息-->
+			<div class="reward-back" style="display: none;">
+				<div class="reward-content">
+					<div class="reward-top">
+						<img :src="'http://www.1miclub.com'+post.userhead"/>
+						<p class="reward-username">{{post.username}}</p>
+						<p>懒得签名，也是一种个性懒得签名，也是一种个性懒得签名，也是一种个性懒得签名，也是一种个性。</p>
+					</div>
+					
+					<p class="reward-my">我的米币：<span class="my-money">100</span> 米币</p>
+					<p class="reward-my">打赏金额：<span class="reward-money">0</span> 米币</p>
+					<div class="reward-container">
+						<!--打赏金额-->
+						<template v-for="item in rewards">
+							<div class="reward-item" onclick="checkMoney(this)">
+								<span>{{item.money}}米币</span>
+							</div>
+						</template>
+						<div class="reward-item reward-item-custom" onclick="rewardCustom()">
+							自定义
+						</div>
+					</div>
+					
+					<div class="reward-sub" onclick="rewardSub()">打赏</div>
+					<p class="reward-hint">打赏，其实是超越赞的一种表达方式</p>
+					<div class="reward-close" onclick="closeReward()"></div>
+				</div>
+				
+			</div>
+			
+			<!--<div class="DsMark DisNone">
+				<div class="DsMark_cont" id="test">
+					<div class="DsMark_cont_top mui-clearfix">
+						<img :src="'http://www.1miclub.com'+post.userhead"/>
+						<div class="DsMark_cont_top_FloftLeft">
+							<p>{{post.username}}</p>
+							<p>感谢分享，互相帮助</p>
+						</div>
+					</div>
+					<p class="Gold MyGold">我的金币：<span></span> 米币</p>
+					<p class="Gold RewardGold">打赏金币：<span id="dasmoney">0</span> 米币</p>
+					<div class="MiMi mui-clearfix" id="reward">
+					</div>
+					<input type="button" value="打赏作者" class="DsMark_cont_Btn" id="DsMark_cont_Btn" />
+					<p class="hint">打赏，其实是超越赞的一种表达方式</p>
+				</div>
+			</div>-->
+			<!--分享弹出框-->
+			<div id="share" class="mui-popover mui-popover-action mui-popover-bottom">
+				<div class="share-content">
+					<div class="share-item"><i class="iconfont weixin"></i><p>微信</p></div>
+					<div class="share-item"><i class="iconfont qq"></i><p>QQ</p></div>
+					<div class="share-item"><i class="iconfont friendnews"></i><p>朋友圈</p></div>
+					<div class="share-item"><i class="iconfont qqkongjian"></i><p>QQ空间</p></div>
+					
+					<div class="share-item"><i class="iconfont shoucang"></i><p>收藏</p></div>
+					<div class="share-item copyUrl"><i class="iconfont lianjie1"></i><p>复制链接</p></div>
+					<div class="share-item" id="report"><i class="iconfont jubao"></i><p>举报</p></div>
+					<div style="display: none;" class="share-item" id="del-forum"><i class="iconfont lajitong"></i><p>删除</p></div>
+				</div>
+				
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#picture"><b>取消</b></a>
+					</li>
+				</ul>
+			</div>
+			<div id="share_" class="mui-popover mui-popover-action mui-popover-bottom">
+				<div class="share-content">
+					<div class="share-item_"><i class="iconfont weixin"></i><p>微信</p></div>
+					<div class="share-item_"><i class="iconfont qq"></i><p>QQ</p></div>
+					<div class="share-item_"><i class="iconfont friendnews"></i><p>朋友圈</p></div>
+					<div class="share-item_"><i class="iconfont qqkongjian"></i><p>QQ空间</p></div>
+				</div>
+				
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#picture"><b>取消</b></a>
+					</li>
+				</ul>
+			</div>
+		
+		</div>
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="../js/webiaoqing.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lib/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/exchange_One_details.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="../js/demo.js" type="text/javascript" charset="utf-8"></script>-->
+
+
+	</body>
+
+</html>
+

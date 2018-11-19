@@ -1,0 +1,83 @@
+{extend name="base" /}
+{block name="body"}
+
+<!--tab标签-->
+<div class="layui-tab-brief">
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <form class="layui-form form-container"  method="post" action="{:url('app/save')}" enctype="multipart/form-data">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">序号</label>
+                    <div class="layui-input-inline">
+                        <input type="number" name="order" placeholder="仅限整数" autocomplete="off" class="layui-input" value="1">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">App图片</label>
+                    <div class="layui-input-block">
+                        <input type="file" name="file" class="file" style="margin-top:10px;" />
+                        <span style="color:#666">建议尺寸41*47，支持jpg、png、gif</span>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">图片链接</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="url" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">App描述</label>
+                    <div class="layui-input-block">
+                        <textarea name="dec" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="btable-paged" >
+                    <div class="layui-main">
+                        <div class="formbtngroup">
+                            <input type="submit" class="layui-btn layui-btn-small" lay-submit="" lay-filter="formadd" value="添加">
+                            <button onclick="history.go(-1);" class="layui-btn layui-btn-primary layui-btn-small">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{/block}
+
+{block name="js"}
+<script type="text/javascript" src="__ADMIN__/js/delelement.js.js"></script>
+{/block}
+{block name="script"}
+
+<script type="text/javascript">
+
+    $(".btn").click(function(){
+
+        var order =$(".order").val();
+        if(!order){
+            layer.tips('序号不能为空','.order',{tips:3});
+            return false;
+        }
+
+        var file =$(".file").val();
+        if(!file){
+            layer.tips('请选择图片','.file',{tips:3});
+            return false;
+        }
+
+        var url =$(".url").val();
+
+        if(!url){
+            layer.tips('图片链接不能为空','.url',{tips:3});
+            return false;
+        }
+        var dec =$(".dec").val();
+        if(!dec){
+            layer.tips('描述不能为空','.dec',{tips:3});
+            return false;
+        }
+    })
+    </script>
+{/block}

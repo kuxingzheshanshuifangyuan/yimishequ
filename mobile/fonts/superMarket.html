@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/style.css" />
+		<style>
+			html,body {
+				background-color: #efeff4;
+			}
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+			.mui-pull-bottom-pocket{
+				margin-bottom: 50px;
+				margin-top: -40px;
+			}
+		</style>
+	</head>
+
+	<body class="marketbody">
+		<header class="mui-bar mui-bar-nav ">
+			<a href="javascript:;" class="mui-pull-left" ></a>
+			<h1 id="title" class="mui-title">超市</h1>
+		</header>
+		<!--<div class="SelectTop">
+			<div class="SelectTop_children">
+				综合排序<i class="mui-icon mui-icon-arrowdown"></i>
+			</div>
+			<div class="SelectTop_children">
+				额度<i class="mui-icon mui-icon-arrowdown"></i>
+			</div>
+			<div class="SelectTop_children">
+				期限<i class="mui-icon mui-icon-arrowdown"></i>
+			</div>
+			<div class="SelectTop_children">
+				更多条件<i class="mui-icon mui-icon-arrowdown"></i>
+			</div>
+		</div>-->
+		<div  id="pullrefresh" class="mui-scroll-wrapper">
+			<div class="mui-scroll" >
+				<div class="Cont" >
+					<!--贷超产品-->
+				</div>
+			</div>
+		</div>
+		<nav class="mui-bar mui-bar-tab rpfNav" >
+			<a class="mui-tab-item home">
+				<span class=""><img src="../images/tab1hei.png" alt="" /></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item exchange" id="exchange">
+				<span class=""><img src="../images/tab2hei.png" alt="" /></span>
+				<span class="mui-tab-label">交流区</span>
+			</a>
+			<a id="defaultTab" class="mui-tab-item mui-active superMarket" >
+				<span class=""><img src="../images/tab3.png" alt="" /></span>
+				<span class="mui-tab-label">超市</span>
+			</a>
+			<a class="mui-tab-item my" >
+				<span class=""><img src="../images/tab4hei.png" alt="" /></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+	</body>
+	<script src="../js/jquery-3.2.1.min.js"></script>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/app.js"></script>
+	<script>
+		
+//		上拉加载更多
+		mui.init({
+		  pullRefresh : {
+		    container:'#pullrefresh',
+		    up : {
+		      height:50,
+		      contentrefresh : "正在加载中...",
+		      contentnomore:'没有更多产品了',
+		      callback :pullupRefresh
+		    }
+		  }
+		});
+		
+		var page = 0;
+		function pullupRefresh(){
+			var this_ = this;
+			page = page + 1;
+			var DcListHtml = '';
+			mui.ajax('http://www.1miclub.com/api/Forum/supermarketList',{
+			    data: {page:page},
+			    dataType: 'jsonp',
+			    type: 'post',
+			    success: function(data) {
+			    	data = JSON.parse(data);
+			    	if(data.data.msg == "1"){
+			    		this_.endPullupToRefresh(true);
+			    	}else{
+				    	for(var i=0;i<data.data.data.length;i++){
+				    		DcListHtml +=' <div class="Cont_cont" DcListid="'+data.data.data[i].id+'">'+
+												'<div class="ContTop mui-clearfix">'+
+													'<img src="'+data.data.data[i].logo+'" class="ContTop_img"/>'+
+													'<div class="ContTop_title">'+
+														'<p>'+data.data.data[i].name+'<span>'+data.data.data[i].loan_min+'~'+data.data.data[i].loan_max+'</span></p>'+
+														'<p>'+data.data.data[i].describe+'</p>'+
+													'</div>'+
+												'</div>'+
+												'<div class="ContBottom">'+
+													'<span>'+data.data.data[i].audit_time+'分钟放款</span>'+
+													'<span>期限'+data.data.data[i].deadline_min+'~'+data.data.data[i].deadline_max+'天</span>'+
+												'</div>'+
+											'</div>'
+				    	}
+				    	$('.Cont').append(DcListHtml);
+				    	this_.endPullupToRefresh(false);
+			    	}
+					
+			    },
+			    error: function() {
+			        mui.toast('失败');
+			    }
+			});
+		}
+		
+//		将页面滚动距离保存起来
+		function superPageToTop(){
+			if($(document).scrollTop() != 0) {
+		   		sessionStorage.setItem("superPageScroll", $(window).scrollTop());
+		    }else{
+		    	sessionStorage.setItem("superPageScroll", 0);
+		    }
+		}
+		
+		mui.init({
+//			swipeBack:true //启用右滑关闭功能
+		});
+// ==========================my====修改js=======开始========================================
+		// 点击tapbar导航交流区带参跳转
+		mui("body").on('tap','#exchange',function(){
+			window.location.href = "exchange.html?tabbtnid=27"
+			window.localStorage.setItem("forumID",'27')
+		})
+// ==========================my====修改js=======结束========================================
+		var DcListHtml = '';
+		mui.ajax('http://www.1miclub.com/api/Forum/supermarketList',{
+		    data: {},
+		    dataType: 'jsonp',
+		    type: 'post',
+		    success: function(data) {
+		    	data = JSON.parse(data);
+		    	for(var i=0;i<data.data.data.length;i++){
+		    		DcListHtml +=' <div class="Cont_cont" DcListid="'+data.data.data[i].id+'">'+
+										'<div class="ContTop mui-clearfix">'+
+											'<img src="'+data.data.data[i].logo+'" class="ContTop_img"/>'+
+											'<div class="ContTop_title">'+
+												'<p>'+data.data.data[i].name+'<span>'+data.data.data[i].loan_min+'~'+data.data.data[i].loan_max+'</span></p>'+
+												'<p>'+data.data.data[i].describe+'</p>'+
+											'</div>'+
+										'</div>'+
+										'<div class="ContBottom">'+
+											'<span>'+data.data.data[i].audit_time+'分钟放款</span>'+
+											'<span>期限'+data.data.data[i].deadline_min+'~'+data.data.data[i].deadline_max+'天</span>'+
+										'</div>'+
+									'</div>'
+		    	}
+		    	
+		    	$('.Cont').html(DcListHtml);
+//		    	$('.Cont').append(data.data.listpage);
+		    	
+		    	var _offset = sessionStorage.getItem("superPageScroll");　　
+       			$(document).scrollTop(_offset);
+		    },
+		    error: function() {
+		        mui.toast('失败');
+		    }
+		});
+		
+//		跳转至贷超产品详情页
+	mui(".marketbody").on('tap','.Cont_cont',function(){
+		var DcListid = $(this).attr('DcListid');
+	//	新的页面跳转方式，并将id带到新的页面，使用这个
+		window.location.href = 'market_details.html?DcListid='+DcListid;
+		superPageToTop();
+	})
+	</script>
+</html>

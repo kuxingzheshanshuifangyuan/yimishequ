@@ -1,0 +1,153 @@
+{extend name="index_base" /}
+{block name="body"}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>一米社区-个人消息</title>
+   
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/reset.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/highlight.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/common.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/pagination/pagination.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__forum/css/jianyonguserSystem_messages.css"/>
+    <style>
+        .select-this > a > div {
+            background-position: -50px 0px !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="contentWrap clearfix">
+
+
+    <div class="user-content">
+        <p class="crumbs">
+            <a href="#"><img src="__PUBLIC__forum/img/home/home.png" alt="home"></a> >
+            <a href="#"> 消息</a> > <a href="#">个人消息</a> > <a href="#">全部消息</a>
+        </p>
+        <div class="user-left">
+                <div>
+                  <div class="select-this">
+                    <a href="{:url('personal_messages')}">
+                      <div id="sh-icon1"></div>
+                      <p>个人消息</p>
+                    </a>
+                  </div>
+        
+                  <div class="">
+                    <a href="{:url('system_messages')}">
+                      <div id="sh-icon2"></div>
+                      <p>系统提醒</p>
+                    </a>
+                  </div>
+        
+                  <div class="">
+                    <a href="{:url('messages')}">
+                      <div id="sh-icon3"></div>
+                      <p>站内信</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+        <div class="user-right">
+            <div class="user-info">
+                <div class="set-tab">
+                    <div class="set-tab-top">
+                        <span class="tab-seclet">全部消息</span>
+                        <!--<span>评论我的</span>-->
+                        <!--<span>回复</span>-->
+                    </div>
+                    <div class="set_tab_content">
+                       <ul>
+                           {foreach $data_list as $val}
+                             <li>
+                                {if condition="$val.is_read"}<div class="set_tab_content_select"></div>{else/}<div class="set_tab_content_select"></div>{/if}
+                               <div class="set_tab_content_header"><img src="" alt=""></div>
+                               <div class="set_tab_content_Info">
+                                   <div class="name">用户{$val.username}<span class="name_text">回复了您的帖子：</span></div>
+                                   <div class="set_tab_subcontent">{$val.content|html_entity_decode|strip_tags}</div>
+                                   <div class="set_tab_date">
+                                       <span class="sub_date">{$val.time|date="Y/m/d H:i",###}</span>
+                                       <!--<a >回复</a>-->
+                                       <a>查看</a>
+                                       <!--<a>删除</a>-->
+                                   </div>
+                               </div>
+                            </li>
+<<<<<<< .mine
+                            <li class="event">
+                                   <div class="set_tab_content_select"></div>
+                                   <div class="set_tab_content_header"><img src="" alt=""></div>
+                                   <div class="set_tab_content_Info">
+                                       <div class="name">用户<span class="name_text">回复了您的帖子：</span></div>
+                                       <div class="set_tab_subcontent">您好您好您好您好您好您好您好您好您好您好您好您好您好</div>
+                                       <div class="set_tab_date">
+                                           <span class="sub_date">2018/06/26  15:39</span>
+                                           <a >回复</a><a>查看</a><a>删除</a>
+                                       </div>
+                                   </div>
+                                </li>
+||||||| .r872
+                            <li>
+                                   <div class="set_tab_content_select"></div>
+                                   <div class="set_tab_content_header"></div>
+                                   <div class="set_tab_content_Info">
+                                       <div class="name">用户<span class="name_text">回复了您的帖子：</span></div>
+                                       <div class="set_tab_subcontent">您好您好您好您好您好您好您好您好您好您好您好您好您好</div>
+                                       <div class="set_tab_date">
+                                           <span class="sub_date">2018/06/26  15:39</span>
+                                           <a >回复</a><a>查看</a><a>删除</a>
+                                       </div>
+                                   </div>
+                                </li>
+=======
+                           {/foreach}
+                            <!--<li>-->
+                                   <!--<div class="set_tab_content_select"></div>-->
+                                   <!--<div class="set_tab_content_header"></div>-->
+                                   <!--<div class="set_tab_content_Info">-->
+                                       <!--<div class="name">用户<span class="name_text">回复了您的帖子：</span></div>-->
+                                       <!--<div class="set_tab_subcontent">您好您好您好您好您好您好您好您好您好您好您好您好您好</div>-->
+                                       <!--<div class="set_tab_date">-->
+                                           <!--<span class="sub_date">2018/06/26  15:39</span>-->
+                                           <!--<a >回复</a><a>查看</a><a>删除</a>-->
+                                       <!--</div>-->
+                                   <!--</div>-->
+                                <!--</li>-->
+>>>>>>> .r880
+                       </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+
+</html>
+<script src="__PUBLIC__forum/js/tab.js"></script>
+<script src="__PUBLIC__forum/layui/layui.js"></script>
+<script src="__PUBLIC__forum/js/tab.js"></script>
+<script src="__PUBLIC__forum/filter/jquery-1.7.2.min.js"></script>
+<script src="__PUBLIC__forum/pickArea/data.js"></script>
+<script src="__PUBLIC__forum/pickArea/province.js"></script>
+<script type="text/javascript">
+   let index;
+  var d= $('.set-tab .set-tab-top span')
+   console.log(d)
+  $('.set-tab .set-tab-top span').click(function(){
+    $(this).addClass('tab-seclet').siblings().removeClass('tab-seclet')
+    index = $(this).index();
+  //  $('.set-tab-content >div:eq('+index+')').addClass('tab-content-show').siblings().removeClass('tab-content-show')
+  })
+</script>
+<script>
+
+</script>
+{/block}
